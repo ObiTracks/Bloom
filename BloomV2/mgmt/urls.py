@@ -19,5 +19,6 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.dashboard, name="dashboard"),
+    path('', views.dashboard_view, name="dashboard"),
+    path('amenities', views.amenityhub_view, name="amenityhub"),
 ]

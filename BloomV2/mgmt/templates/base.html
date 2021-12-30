@@ -18,9 +18,18 @@
 <body>
   
     <div class="platform-base">
+        <div class="side-container">
+            <div class="navbar">
+                <img class="navbar__logo" src="{% static 'images/Bloom-Logo-Transparent-BG.png' %}" alt="">
+                <a href=""><div class="navbar__icon"></div></a>
+                <a href=""><div class="navbar__icon"></div></a>
+                <a href=""><div class="navbar__icon"></div></a>
+                <a href=""><div class="navbar__icon"></div></a>
+            </div>
+        </div>
+        
         <div class="main-container">
-
-            <div class="main-container__page-title">
+            <div class="main-container__header">
                 {% block pageheader %}
                 {% endblock pageheader %}
             </div>
@@ -29,10 +38,10 @@
                 {% block grid %}
                 {% endblock grid %}
             </div>
-
         </div>
-    </div>
 
+        <div class="side-container">Side Container</div>
+    </div>
 </body>
 
 </html>

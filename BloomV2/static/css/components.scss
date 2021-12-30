@@ -40,6 +40,28 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
     font: 300 18px $poppins;
 }
 
+.navbar {
+    position: sticky;
+    top: 7rem;
+    left: 0;
+    width: fit-content;
+    height: fit-content;
+    // height: 100vh;
+    // background: maroon;
+
+    .navbar__logo {
+        width: 50px;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .navbar__icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 20px;
+        background-color: $blue;
+    }
+}
 
 .button {
     text-decoration: none !important;

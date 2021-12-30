@@ -21,4 +21,5 @@ from . import views
 urlpatterns = [
     path('', views.dashboard_view, name="dashboard"),
     path('amenities', views.amenityhub_view, name="amenityhub"),
+    path('amenities/amenity', views.amenityobject_view, name="amenity"),
 ]

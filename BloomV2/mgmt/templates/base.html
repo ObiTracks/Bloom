@@ -19,50 +19,17 @@
   
     <div class="platform-base">
         <div class="main-container">
-            <div class="main-container__page-title">
-                <div class="header3">Subtitle</div>
-                <div class="header1">Page Title</div>
-            </div>
-            <div class="main-container__grid-container">
-                Grid 1
-                <div class="grid grid-style3x1">
-                    <div class="card card--grey">
-                        <div class="header2">Section Title</div>
-                    </div>
-                    <div class="card card--grey">
-                        <div class="header2">Section Title</div>
-                    </div>
-                    <div class="card card--grey">
-                        <div class="header2">Section Title</div>
-                    </div>
-                </div>
-                Grid 2
-                <div class="grid grid-style3x2">
-                    <div class="card card--grey">
-                        <div class="header2">Section Title</div>
-                    </div>
-                    <div class="card card--grey">
-                        <div class="header2">Section Title</div>
-                    </div>
-                    <div class="card card--grey">
-                        <div class="header2">Section Title</div>
-                    </div>
-                    
-                </div>
-                Grid 3
-                <div class="grid grid-style2x1-1">
-                    <div class="card card--grey">
-                        <div class="header2">Section Title</div>
-                    </div>
-                    <div class="card card--grey">
-                        <div class="header2">Section Title</div>
-                    </div>
-                    <div class="card card--grey">
-                        <div class="header2">Section Title</div>
-                    </div>
-                </div>
 
+            <div class="main-container__page-title">
+                {% block pageheader %}
+                {% endblock pageheader %}
             </div>
+
+            <div class="main-container__grid-container">
+                {% block grid %}
+                {% endblock grid %}
+            </div>
+
         </div>
     </div>
 

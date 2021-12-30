@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 
 def dashboard(request):
-    template_name = '../templates/base.html'
-    context = {}
+    page_title = "Main Dashboard"
+    context = {'page_title': page_title}
+    template_name = '../templates/pages/dashboard.html'
     return render(request, template_name, context)

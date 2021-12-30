@@ -4,7 +4,7 @@ $green: #0DCE83;
 $turquoise: #10E5D9;
 $brightred: #F03D10;
 $grey: #787878;
-$softgrey: #ECECEC;
+$softgrey: #F2F2F2;
 
 $poppins: 'Poppins',
 sans-serif;
@@ -24,99 +24,129 @@ body {
     padding: 0;
 }
 
-.main-grid {
-    // background: green;
+.platform-base {
+    width: 100%;
+    height: fit-content;
     min-height: 100vh;
+    // background: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container {
+    width: 70%;
     height: fit-content;
-    grid-gap: 30px;
-    display: grid;
-    // grid-template-rows: repeat(3, fit-content);
-    grid-template-columns: 60px repeat(3, 1fr);
-    grid-template-rows: 60px repeat(3, fit-content);
-    grid-template-areas:
-        "menu pagetitle pagetitle pagetitle"
-        "menu one one three"
-        "menu two two four"
-        "menu five five five"
-    ;
+    min-height: 100vh;
+    background: rgb(59, 59, 59);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.main-grid__section {
-    min-height: 100%;
-    height: fit-content;
-    // background: red;
-
-    .main-grid__section-title {
-        width: 100%;
-        // background: pink;
-    }
-
-    .main-grid__section-content {
-        display: flex;
-    }
+.main-container__page-title {
+    width: 100%;
+    padding: 100px 0 30px 0;
+    background: rgb(116, 40, 40);
 }
 
-.main-grid__page-title {
-    grid-area: pagetitle;
-    // background: blue;
-}
+.main-container__grid-container {
+    height: 100%;
+    min-height: 70vh;
+    width: 100%;
 
-#main-grid__section-1 {
-    grid-area: one;
-}
-
-#main-grid__section-2 {
-    grid-area: two;
-}
-
-#main-grid__section-3 {
-    grid-area: three;
-    background: green;
-
-    .section-content {
-        display: grid;
-        // grid-template-columns: 100px 100px;
-        grid-gap: 20px;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        // grid-template-rows: repeat(auto-fill, 1fr);
-        // justify-items: center;
-    }
-
-}
-
-#main-grid__section-4 {
-    grid-area: four;
+    background: rgb(85, 21, 122);
 }
 
 .grid {
-    // position: relative;
-    height: fit-content;
-    width: 100%;
-    // background: blue;
     display: grid;
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    background: green;
 
-    // grid-auto-rows: 500px;
-    &-autofill {
-        grid-gap: 40px;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    }
-
-    &-stats {
-        // background: purple;
-        display: grid;
-        grid-gap: 40px;
-        grid-template-rows: fit-content minmax(200px, fit-content);
-
-        .grid-stats__badges {
-            display: grid;
-            grid-gap: 20px;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            justify-items: center;
-            // background: green;
-        }
-
-        .grid-stats__cards {
-            display: grid;
-        }
+    >div {
+        min-height: 100px;
+        width: 100%;
+        background: chocolate;
     }
 }
+
+.grid-style3x1 {
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    justify-items: center;
+    grid-template-areas:
+        "one two three"
+        "one two three"
+    ;
+
+    >div:nth-child(1) {
+        grid-area: one;
+    }
+
+    >div:nth-child(2) {
+        grid-area: two;
+    }
+
+    >div:nth-child(3) {
+        grid-area: three;
+    }
+
+}
+
+.grid-style3x2 {
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    grid-template-rows: fit-content fit-content;
+    justify-items: center;
+    grid-template-areas:
+        "one one two"
+        "three three two"
+    ;
+
+    >div:nth-child(1) {
+        grid-area: one;
+    }
+
+    >div:nth-child(2) {
+        grid-area: two;
+    }
+
+    >div:nth-child(3) {
+        grid-area: three;
+    }
+}
+
+.grid-style2x1-1 {
+    grid-gap: 10px;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-rows: fit-content fit-content;
+    justify-items: center;
+    grid-template-areas:
+        "one two"
+        "three three"
+    ;
+
+    >div:nth-child(1) {
+        grid-area: one;
+    }
+
+    >div:nth-child(2) {
+        grid-area: two;
+    }
+
+    >div:nth-child(3) {
+        grid-area: three;
+    }
+}
+
+
+
+.card {}
+
+.card--dark {}
+
+.card__title {}
+
+.card__paragraph {}

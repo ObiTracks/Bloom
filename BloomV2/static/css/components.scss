@@ -46,20 +46,31 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
     left: 0;
     width: fit-content;
     height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     // height: 100vh;
     // background: maroon;
 
     .navbar__logo {
         width: 50px;
         height: auto;
-        margin-bottom: 20px;
+        margin-bottom: 50px;
     }
 
     .navbar__icon {
         width: 40px;
-        height: 40px;
-        margin-bottom: 20px;
-        background-color: $blue;
+        height: auto;
+        margin-bottom: 30px;
+
+        -webkit-filter: brightness(30%);
+        opacity: 10%;
+        transition: all 0.05s ease-in;
+
+        &:hover {
+            -webkit-filter: brightness(100%);
+            opacity: 100%;
+        }
     }
 }
 

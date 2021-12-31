@@ -3,10 +3,25 @@
 <div class="navbar">
     
     <a href="{% url 'dashboard' %}">
-        <img class="navbar__logo" src="{% static 'images/Bloom Logo-Transparent-Darker-Blue.png' %}" alt="">
+        <img src="{% static 'images/Bloom Logo-Transparent-Darker-Blue.png' %}" alt="" class="navbar__logo">
     </a>
-    <a href="{% url 'amenityhub' %}"><div class="navbar__icon"></div></a>
-    <a href=""><div class="navbar__icon"></div></a>
-    <a href=""><div class="navbar__icon"></div></a>
-    <a href=""><div class="navbar__icon"></div></a>
+
+    {% comment %} <a href="{% url 'dashboard' %}">
+        <img src="{% static 'images/DashboardIcon-V1.png' %}" alt="" class="navbar__icon">
+    </a> {% endcomment %}
+
+    <a href="{% url 'dashboard' %}">
+        <img src="{% static 'images/DashboardIcon-V3.png'  %}" alt="" class="navbar__icon">
+    </a>
+
+    <a href="{% url 'amenityhub' %}">
+        <img src="{% static 'images/DashboardIcon-V2.png'  %}" alt="" class="navbar__icon">
+    </a>
+
+    <a href="">
+        <img src="{% static 'images/MemberIcon-V1.png'  %}" alt="" class="navbar__icon">
+    </a>
+
+    <a href="">
+        <img src="{% static 'images/ProfileIcon-V1.png'  %}" alt="" class="navbar__icon"></a>
 </div>

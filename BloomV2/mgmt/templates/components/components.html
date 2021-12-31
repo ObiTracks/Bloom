@@ -5,15 +5,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="components.css" rel="stylesheet"> -->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/components.css' %}">
+    <link href="/BloomV2/static/css/components.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components.css' %}"> -->
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins&family=Montserrat&family=Oxygen&family=Nunito&family=Open+Sans&display=swap"
         rel="stylesheet">
+    
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Outfit&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,800&display=swap" rel="stylesheet">
+    
+        
 </head>
 
 <body>
+
+    <div class="memberstrip">
+        <div class="memberstrip__name body">Member Name</div>
+        <div class="memberstrip_actions">
+            <a class="button">
+                <div class="button__text">Manage</div>
+            </a>
+            <div class="tinybadge">12</div>
+        </div>
+    </div>
+
+
     <div class="header1">Page Title</div>
 
     <div class="header2">Section Title</div>
@@ -29,7 +46,6 @@
     <a href="" class="button">
         <div class="button__text button__text--light">Button Text</div>
     </a>
-
 
     <div class="badge">
         <div class="badge__value">4330</div>
@@ -70,20 +86,9 @@
         <div class="profileicon__name">Name of Person</div>
     </div>
 
-    <!-- <div class="card-groupcard">
-        <div class="card-groupcard__title">Group Title</div>
-        <div class="card-groupcard__content">
-            
-        </div>
-    </div> -->
-
     <div class="card card--grey">
         <div class="header2">Header 2</div>
         <div class="card__content">
-            <div class="card">
-                <div class="header3">Header 3</div>
-                <div class="card__content">sdfs</div>
-            </div>
         </div>
     </div>
 
@@ -101,6 +106,7 @@
         </div>
     </div>
 
+    
 </body>
 
 </html>

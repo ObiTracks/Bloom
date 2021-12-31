@@ -7,16 +7,36 @@
 {% endblock pageheader %}
 
 {% block cell1 %}
-
-{% comment %} <div class="header2">Member Snapshot</div> {% endcomment %}
+<div class="header2">Member Access List</div>
+<div class="card">
+    <div class="body">
+        {% include 'components/memberstrip.html' %}
+        {% include 'components/memberstrip.html' %}
+        
+    </div>
+</div>
 {% endblock cell1 %}
 
 
 {% block cell2 %}
-{% comment %} <div class="header2">Join Requests</div> {% endcomment %}
+<div class="header2">Statistics</div>
+<div class="card">
+        <div class="grid grid-style-evensquaregrid">
+            {% include 'components/badge.html' %}
+            {% include 'components/badge.html' %}
+            {% include 'components/badge.html' %}
+            {% include 'components/badge.html' %}
+        </div>
+</div>
 {% endblock cell2 %}
 
 
 {% block cell3 %}
-{% comment %} <div class="header2">Amenity Snapshot</div> {% endcomment %}
+<div class="header2">Info and Gallery</div>
+<div class="card">
+    <div class="body">
+        {% include 'components/memberstrip.html' %}
+        
+    </div>
+</div>
 {% endblock cell3 %}

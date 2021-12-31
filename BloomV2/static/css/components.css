@@ -4,23 +4,23 @@
 }
 
 .header1 {
-  font: 600 36px "Poppins", sans-serif;
+  font: 500 36px "Poppins", sans-serif;
   color: black;
 }
 
 .header2 {
-  font: 600 25px "Poppins", sans-serif;
+  font: 500 25px "Poppins", sans-serif;
   padding: 0 0 10px 0;
   color: #A0A0A0;
 }
 
 .header3 {
-  font: 600 18px "Poppins", sans-serif;
+  font: 500 18px "Poppins", sans-serif;
   color: #A0A0A0;
 }
 
 .body {
-  font: 300 18px "Poppins", sans-serif;
+  font: 300 18px "Open Sans", sans-serif;
 }
 
 .navbar {
@@ -78,16 +78,29 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 12px 15px;
-  font-family: "Montserrat", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 5px 10px;
+  font: 500 10px "Open Sans", sans-serif;
   background: #2457E4;
   color: white;
   border-radius: 7px;
 }
 
-.button .button__text.button__text--light {
+.button .button__text.button__text--white {
+  -webkit-box-shadow: rgba(126, 126, 126, 0.144) 0px 0px 10px;
+          box-shadow: rgba(126, 126, 126, 0.144) 0px 0px 10px;
+  background: white;
+  color: #2457E4;
+}
+
+.button .button__text.button__text--grey {
+  -webkit-box-shadow: rgba(126, 126, 126, 0.144) 0px 0px 10px;
+          box-shadow: rgba(126, 126, 126, 0.144) 0px 0px 10px;
+  background: #E0E0E0;
+  color: #A0A0A0;
+  text-transform: lowercase;
+}
+
+.button .button__text.button__text--small {
   -webkit-box-shadow: rgba(126, 126, 126, 0.144) 0px 0px 10px;
           box-shadow: rgba(126, 126, 126, 0.144) 0px 0px 10px;
   background: white;
@@ -133,7 +146,7 @@
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  font: 700 30px "Poppins", sans-serif;
+  font: 700 25px "Montserrat", sans-serif;
   color: #A0A0A0;
 }
 
@@ -151,8 +164,8 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font: 700 18px "Montserrat", sans-serif;
-  color: #D6D6D6;
+  font: 500 15px "Poppins", sans-serif;
+  color: #A0A0A0;
 }
 
 .strip {
@@ -330,5 +343,68 @@
   min-height: -moz-fit-content;
   min-height: fit-content;
   height: 100%;
+}
+
+.memberstrip {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-radius: 8px;
+  background: -webkit-gradient(linear, left top, right top, color-stop(10%, #F1F9FF), to(#ffffff));
+  background: linear-gradient(to right, #F1F9FF 10%, #ffffff);
+  padding: 5px 20px 5px 20px;
+  margin-bottom: 4px;
+}
+
+.memberstrip .memberstrip__name {
+  color: #A0A0A0;
+  font: 600 10px "Open Sans", sans-serif;
+}
+
+.memberstrip .memberstrip_actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.memberstrip .memberstrip_actions > div {
+  margin-left: 8px;
+}
+
+.memberstrip .tinybadge {
+  padding: 4px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 5px;
+  background: #E0E0E0;
+  color: #A0A0A0;
+  font: 700 8px "Open Sans", sans-serif;
 }
 /*# sourceMappingURL=components.css.map */

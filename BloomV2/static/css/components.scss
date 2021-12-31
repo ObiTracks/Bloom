@@ -4,9 +4,12 @@ $green: #0DCE83;
 $turquoise: #10E5D9;
 $brightred: #F03D10;
 $darkgrey: #A0A0A0;
+$grey: #E0E0E0;
 $lightgrey: #F2F2F2;
 
 $poppins: 'Poppins',
+sans-serif;
+$open-sans: 'Open Sans',
 sans-serif;
 $montserrat: 'Montserrat',
 sans-serif;
@@ -21,23 +24,23 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
 }
 
 .header1 {
-    font: 600 36px $poppins;
+    font: 500 36px $poppins;
     color: black;
 }
 
 .header2 {
-    font: 600 25px $poppins;
+    font: 500 25px $poppins;
     padding: 0 0 10px 0;
     color: $darkgrey;
 }
 
 .header3 {
-    font: 600 18px $poppins;
+    font: 500 18px $poppins;
     color: $darkgrey;
 }
 
 .body {
-    font: 300 18px $poppins;
+    font: 300 18px $open-sans;
 }
 
 .navbar {
@@ -80,15 +83,26 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
     .button__text {
         height: fit-content;
         width: fit-content;
-        padding: 12px 15px;
-        font-family: $montserrat;
-        font-size: 14px;
-        font-weight: 600;
+        padding: 5px 10px;
+        font: 500 10px $open-sans;
         background: $blue;
         color: white;
         border-radius: 7px;
 
-        &.button__text--light {
+        &.button__text--white {
+            box-shadow: $box-shadow--light;
+            background: white;
+            color: $blue;
+        }
+
+        &.button__text--grey {
+            box-shadow: $box-shadow--light;
+            background: $grey;
+            color: $darkgrey;
+            text-transform: lowercase;
+        }
+
+        &.button__text--small {
             box-shadow: $box-shadow--light;
             background: white;
             color: $blue;
@@ -120,8 +134,8 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        font: 700 30px $poppins;
-        color: #A0A0A0;
+        font: 700 25px $montserrat;
+        color: $darkgrey;
     }
 
     .badge__title {
@@ -130,8 +144,8 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
         display: flex;
         justify-content: center;
         align-items: center;
-        font: 700 18px $montserrat;
-        color: #D6D6D6;
+        font: 500 15px $poppins;
+        color: $darkgrey;
     }
 }
 
@@ -286,4 +300,45 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
 
 .progressbar__bar {
     .progressbar__bar__slider {}
+}
+
+.memberstrip {
+    position: relative;
+    // height: 40px;
+    width: 100%;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+    background: linear-gradient(to right, #F1F9FF 10%, #ffffff);
+    padding: 5px 20px 5px 20px;
+    margin-bottom: 4px;
+
+    .memberstrip__name {
+        color: $darkgrey;
+        font: 600 10px $open-sans;
+    }
+
+    .memberstrip_actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        >div {
+            margin-left: 8px;
+        }
+    }
+
+    .tinybadge {
+        padding: 4px;
+        height: fit-content;
+        width: fit-content;
+        border-radius: 5px;
+        background: $grey;
+        color: $darkgrey;
+        font: 700 8px $open-sans;
+    }
 }

@@ -12,7 +12,9 @@ def dashboard_view(request):
 
 def amenityhub_view(request):
     page_title = "Amenity Hub"
-    context = {'page_title': page_title}
+    objects = ("0", "1", "2", "3")
+    object_context = {'objects': objects}
+    context = {'page_title': page_title, 'object_context': object_context}
     template_name = '../templates/pages/amenityhub.html'
     return render(request, template_name, context)
 

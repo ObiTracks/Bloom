@@ -5,17 +5,10 @@
 <div class="header1">{{page_title}}</div>
 {% endblock pageheader %}
 
+
 {% block cell1 %}
-
-{% comment %} <div class="header2">Member Snapshot</div> {% endcomment %}
+    {% for object in object_context.objects %}
+        {% include 'components/card.html' with title=object.title%}
+        {% comment %} <div class="card">{{object}}</div> {% endcomment %}
+    {% endfor %}
 {% endblock cell1 %}
-
-
-{% block cell2 %}
-{% comment %} <div class="header2">Join Requests</div> {% endcomment %}
-{% endblock cell2 %}
-
-
-{% block cell3 %}
-{% comment %} <div class="header2">Amenity Snapshot</div> {% endcomment %}
-{% endblock cell3 %}

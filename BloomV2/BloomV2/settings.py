@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'mgmt',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +57,7 @@ ROOT_URLCONF = 'BloomV2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR.joinpath('templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,3 +132,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_assets')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Setting the CustomUser Model as the auth model to avoid conflicting errors
+# Withouth this line of code, the default AUTH_USER_MODEL will be the default User model.
+AUTH_USER_MODEL = 'mgmt.CustomUser'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.RemoteUserBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# Changing the default user login behaviour and specifying a project level
+# templates folder

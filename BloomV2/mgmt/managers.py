@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email=None, username=None, first_name=None, last_name=None, password=None):
+    def create_user(self, email=None, username=None, first_name=None, last_name=None, password=None, alias=None):
         """
         Creates and saves a User with the given username, email and password.
         Additionally creates a profile for them and associates them together.
@@ -21,23 +21,27 @@ class CustomUserManager(BaseUserManager):
 
         if not last_name:
             raise ValueError('Users must have a last name')
+        
+        if not alias:
+            alias = username
 
         user = self.model(
-            username=username,
             email=self.normalize_email(email),
+            username=username,
             first_name=first_name,
-            last_name=last_name
+            last_name=last_name,
+            alias=alias
         )
-
         user.set_password(password)
         user.save()
 
         from .models import Profile
         Profile.objects.create(
             user=user)
+
         return user
 
-    def create_superuser(self, email, username, first_name, last_name,  password):
+    def create_superuser(self, email, username, first_name, last_name,  password, alias=None):
         """
         Creates and saves a superuser with the given username, email and password.
         """
@@ -47,14 +51,16 @@ class CustomUserManager(BaseUserManager):
             first_name=first_name,
             last_name=last_name,
             password=password,
+            alias=alias
         )
 
         user.is_staff = True
         user.is_active = True
         user.is_superuser = True
+        user.save()
 
-        print(user, "is_superuser:", user.is_superuser)
-        print(user, "is_staff:", user.is_staff)
-        print(user, "is_active", user.is_active)
+        # print(user, "is_superuser:", user.is_superuser)
+        # print(user, "is_staff:", user.is_staff)
+        # print(user, "is_active:", user.is_active)
 
         return user

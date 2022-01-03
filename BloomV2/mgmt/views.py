@@ -25,29 +25,47 @@ from .models import *
 
 def dashboard_view(request):
     page_title = "Main Dashboard"
+
     context = {'page_title': page_title}
     template_name = '../templates/pages/dashboard.html'
     return render(request, template_name, context)
 
 
 def amenityhub_view(request):
+    # Object data
     page_title = "Amenity Hub"
-    amenity_relationships = AmenityProfileRelationship.objects.filter(
-        profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
-    amenities = [i.amenity for i in amenity_relationships]
+    try:
+        amenity_relationships = AmenityProfileRelationship.objects.filter(
+            profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
+        amenities = [i.amenity for i in amenity_relationships]
+    except:
+        amenities = None
 
-    objects = ("0", "1", "2", "3")
-    object_context = {'objects': objects}
+    # Form Interaction
+    form = AmenityForm(request.user)
+    if request.method == 'POST':
+        form = AmenityForm(request.user, request.POST, request.FILES)
+
+        if form.is_valid():
+            amenity = form.save()
+            amenityprofile_relationship = AmenityProfileRelationship.objects.create(
+                amenity=amenity, profile=request.user.profile, profile_type="3")
+            amenityprofile_relationship.save()
+
+            return redirect('amenityhub')
+        else:
+            messages.error(request, "Form is invalid")
+
     context = {
         'page_title': page_title,
+        'form': form,
         'amenities': amenities,
-        'object_context': object_context
     }
     template_name = '../templates/pages/amenityhub.html'
     return render(request, template_name, context)
 
 
-def amenityobject_view(request, pk):
+def amenityobject_view(request):
     page_title = "Amenity Name"
     page_subtitle = "Amenities"
     context = {'page_title': page_title, 'page_subtitle': page_subtitle}

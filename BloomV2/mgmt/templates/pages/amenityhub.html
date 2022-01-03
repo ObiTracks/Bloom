@@ -5,10 +5,21 @@
 <div class="header1">{{page_title}}</div>
 {% endblock pageheader %}
 
-
 {% block cell1 %}
-    {% for object in object_context.objects %}
-        {% include 'components/card.html' with title=object.title%}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>Submit</button>
+    </form>
+{% endblock cell1 %}
+
+{% block cell2 %}
+    {% for amenity in amenities %}
+        {% include 'components/card.html' with title=amenity.name %}
         {% comment %} <div class="card">{{object}}</div> {% endcomment %}
     {% endfor %}
-{% endblock cell1 %}
+{% endblock cell2 %}
+
+
+
+

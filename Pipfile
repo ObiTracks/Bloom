@@ -9,6 +9,7 @@ psycopg2 = "*"
 django-phonenumber-field = "*"
 phonenumbers = "*"
 pillow = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 

@@ -39,7 +39,7 @@ class CustomUser(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, null=False, on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL, null=False, on_delete=models.CASCADE, related_name="profile")
     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
     bio = models.TextField(max_length=200, blank=True)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
@@ -109,9 +109,9 @@ class Reservation(models.Model):
 # RELATIONAL MODELS
 class AmenityProfileRelationship(models.Model):
     amenity = models.ForeignKey("mgmt.Amenity", verbose_name=(
-        "Amenity in the relationship"), on_delete=models.CASCADE)
+        "Amenity in the relationship"), on_delete=models.CASCADE, related_name="amenity_of")
     profile = models.ForeignKey("mgmt.Profile", verbose_name=(
-        "Profile in the relationship"), on_delete=models.CASCADE)
+        "Profile in the relationship"), on_delete=models.CASCADE, related_name="amenity_profile_of")
 
     PROFILE_TYPES = (('0', 'Owner'), ('1', 'Manager'), ('2', 'Supervisor'),
                      ('3', 'Staff'), ('4', 'Authorized User'), ('5', 'Member'))
@@ -127,10 +127,10 @@ class AmenityProfileRelationship(models.Model):
 
 
 class PlaceProfileRelationship(models.Model):
-    place = models.ForeignKey("mgmt.Amenity", verbose_name=(
-        "Place in the relationship"), on_delete=models.CASCADE)
+    place = models.ForeignKey("mgmt.Place", verbose_name=(
+        "Place in the relationship"), on_delete=models.CASCADE, related_name="place_of")
     profile = models.ForeignKey("mgmt.Profile", verbose_name=(
-        "Profile in the relationship"), on_delete=models.CASCADE)
+        "Profile in the relationship"), on_delete=models.CASCADE, related_name="place_profile_of")
 
     PROFILE_TYPES = (('Owner', 'Owner'), ('Manager', 'Manager'), ('Supervisor', 'Supervisor'),
                      ('Staff', 'Staff'), ('Authorized User', 'Authorized User'), ('Member', 'Member'))

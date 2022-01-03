@@ -132,3 +132,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_assets')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Setting the CustomUser Model as the auth model to avoid conflicting errors
+# Withouth this line of code, the default AUTH_USER_MODEL will be the default User model.
+AUTH_USER_MODEL = 'mgmt.CustomUser'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.RemoteUserBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)

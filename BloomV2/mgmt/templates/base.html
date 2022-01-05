@@ -16,10 +16,17 @@
 </head>
 
 <body>
-  
     <div class="platform-base">
+        {% include 'components/button-logout.html' with link='logout' text='logout' %}
+        
+        {% comment %} <a href="" class="button">
+            <div class="logout"><a href="{% url 'logout' %}">Logout</a></div>
+        </a> {% endcomment %}
         <div class="side-container">
-            {% include 'components/navbar.html' %}
+            {% if request.path != "/login" %}
+                {% include 'components/navbar.html' %}
+            {% endif %}
+            {% comment %} {{ request.path }} {% endcomment %}
         </div>
         
         <div class="main-container">
@@ -35,7 +42,7 @@
         </div>
 
         <div class="side-container">
-            {% include 'components/badge.html' with value='222' title='title' %}
+            {% comment %} {% include 'components/badge.html' with value='222' title='title' %} {% endcomment %}
         </div>
     </div>
 </body>

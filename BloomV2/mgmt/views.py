@@ -76,6 +76,8 @@ def amenityobject_view(request):
 # LOGIN LOGOUT AND SIGNUP VIEWS
 
 def login_view(request):
+    page_title = "Login"
+
     if request.user.is_authenticated:
         print("User is already logged in")
         return redirect('dashboard')
@@ -92,7 +94,7 @@ def login_view(request):
         else:
             messages.info(request, 'Username OR password is incorrect')
 
-    context = {}
+    context = {'page_title': page_title}
     return render(request, '../templates/login.html', context)
 
 

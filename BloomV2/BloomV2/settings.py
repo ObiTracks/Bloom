@@ -150,3 +150,4 @@ AUTHENTICATION_BACKENDS = (
 
 # Changing the default user login behaviour and specifying a project level
 # templates folder
+LOGIN_REDIRECT_URL = 'dashboard'

@@ -107,6 +107,17 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
             background: white;
             color: $blue;
         }
+
+        &.button__text--logout {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 15px;
+            box-shadow: none;
+            background: none;
+            font-family: $poppins;
+            color: rgb(3, 151, 151);
+        }
     }
 
 

@@ -1,0 +1,20 @@
+{% extends 'grids/grid-style2x1-1.html' %}
+{% load static %}
+
+{% block pageheader %}
+<div class="header1">{{page_title}}</div>
+{% endblock pageheader %}
+
+{% block cell1 %}
+<div class="header2">Login</div>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+{% endblock cell1 %}
+
+
+{% block cell2 %}
+<div class="header2">Signup</div>
+{% endblock cell2 %}

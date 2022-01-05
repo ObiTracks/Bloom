@@ -107,6 +107,18 @@
   color: #2457E4;
 }
 
+.button .button__text.button__text--logout {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 15px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: none;
+  font-family: "Poppins", sans-serif;
+  color: #039797;
+}
+
 .badge {
   position: relative;
   width: 150px;

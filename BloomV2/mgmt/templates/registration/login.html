@@ -1,0 +1,33 @@
+{% extends 'grids/grid-style2x1-1.html' %}
+{% load static %}
+
+{% block pageheader %}
+<div class="header1">{{page_title}}</div>
+{% endblock pageheader %}
+
+{% block cell1 %}
+<div class="header2">Login</div>
+<form method="POST" action="{% url 'login_request' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ login_form.as_p }}
+  <button class="">Login</button>
+  {% if messages %}
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  {% endif %}
+</form>
+{% endblock cell1 %}
+
+
+{% block cell2 %}
+<div class="header2">Signup</div>
+<form method="POST" action="{% url 'signup_request' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{register_form.as_p}}
+  <input type="hidden" name="form_type" value="club_event">
+  {% comment %} <input type="text" placeholder="placeholder" class="paragraph_font"> {% endcomment %}
+
+  <button class="">Sign Up</button>
+</form>
+{% endblock cell2 %}

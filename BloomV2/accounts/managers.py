@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
+from mgmt.models import Profile
 
 
 class CustomUserManager(BaseUserManager):
@@ -21,7 +22,7 @@ class CustomUserManager(BaseUserManager):
 
         if not last_name:
             raise ValueError('Users must have a last name')
-        
+
         if not alias:
             alias = username
 
@@ -32,10 +33,11 @@ class CustomUserManager(BaseUserManager):
             last_name=last_name,
             alias=alias
         )
+        print("User almost saved in database")
         user.set_password(password)
         user.save()
+        print("User saved in database")
 
-        from .models import Profile
         Profile.objects.create(
             user=user)
 
@@ -64,3 +66,10 @@ class CustomUserManager(BaseUserManager):
         # print(user, "is_active:", user.is_active)
 
         return user
+
+    def make_random_password(self, length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789!@#$%^&*()-_'):
+        "Generates a random password with the given length and given allowed_chars"
+        # Note that default value of allowed_chars does not have "I" or letters
+        # that look like it -- just to avoid confusion.
+        from random import choice
+        return ''.join([choice(allowed_chars) for i in range(length)])

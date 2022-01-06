@@ -17,9 +17,12 @@
         {% endblock cell2 %}
     </div>
     
+    
+    {% if request.path != "/login" %}
     <div class="card card--grey">
         {% block cell3 %}
         {% endblock cell3 %}
     </div>
+    {% endif %}
 </div>
 {% endblock grid %}

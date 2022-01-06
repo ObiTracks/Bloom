@@ -1,8 +1,9 @@
 # Python packages
 from datetime import date
-from django.contrib.admin.views.decorators import staff_member_required
+import json
 
 # Imports for Django views
+from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render
 from django.http import Http404
 from django.http.response import HttpResponseRedirect
@@ -15,6 +16,7 @@ from django.contrib.auth.forms import UserCreationForm
 # Django authentication and messaging features
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 
@@ -25,8 +27,25 @@ from .models import *
 
 def dashboard_view(request):
     page_title = "Main Dashboard"
+    # AMENITIES
+    amenity_relationships = AmenityProfileRelationship.objects.filter(
+        profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
+    amenities = [i.amenity for i in amenity_relationships]
 
-    context = {'page_title': page_title}
+    # Grouping Amenities by Place
+    amenity_groupings = {}
+    for amenity in amenities:
+        if amenity.place not in amenity_groupings:
+            amenity_groupings[amenity.place] = [amenity]
+        else:
+            amenity_groupings[amenity.place].append(amenity)
+
+    print(amenity_groupings)
+
+    # MEMBERS
+    members = [i.member_set for i in amenities]
+
+    context = {'page_title': page_title, 'amenity_groupings':amenity_groupings}
     template_name = '../templates/pages/dashboard.html'
     return render(request, template_name, context)
 
@@ -73,53 +92,25 @@ def amenityobject_view(request):
     return render(request, template_name, context)
 
 
-# LOGIN LOGOUT AND SIGNUP VIEWS
+# def signup_view(request):
+#     register_form = CustomUserCreationForm()
+#     if request.method == 'POST':
+#         register_form = CustomUserCreationForm(request.POST)
+#         if register_form.is_valid():
+#             register_form.save()
+#             messages.success(
+#                 request, f'Welcome to Bloom')
+#             print("New user created")
 
-def login_view(request):
-    if request.user.is_authenticated:
-        print("User is already logged in")
-        return redirect('dashboard')
+#             username = register_form.cleaned_data.get('username')
+#             password = register_form.cleaned_data.get("password1")
+#             user = authenticate(request, username=username, password=password)
 
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            print("User logged In")
-            return redirect('dashboard')
-        else:
-            messages.info(request, 'Username OR password is incorrect')
-
-    context = {}
-    return render(request, '../templates/login.html', context)
+#             if user is not None:
+#                 login(request, user)
+#                 return redirect('home')
 
 
-def logout_view(request):
-    logout(request)
-    return redirect('landingpage')
+#     context = {'register_form': register_form}
 
-
-def signup_view(request):
-    if request.method == 'POST':
-        register_form = UserRegisterForm(request.POST)
-        if register_form.is_valid():
-            register_form.save()
-            messages.success(
-                request, f'Welcome to Bloom')
-            print("New user created")
-
-            username = register_form.cleaned_data.get('username')
-            password = register_form.cleaned_data.get("password1")
-            user = authenticate(request, username=username, password=password)
-
-            if user is not None:
-                login(request, user)
-                return redirect('home')
-    else:
-        register_form = UserRegisterForm()
-
-    context = {'register_form': register_form}
-
-    return render(request, '../templates/signup.html', context)
+#     return render(request, '../templates/signup.html', context)

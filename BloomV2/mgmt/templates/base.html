@@ -42,6 +42,12 @@
         </div>
 
         <div class="side-container">
+<<<<<<< HEAD
+            {% if request.path != "/login" %}
+                {{request.user.first_name}}
+            {% endif %}
+=======
+>>>>>>> main
             {% comment %} {% include 'components/badge.html' with value='222' title='title' %} {% endcomment %}
         </div>
     </div>

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'mgmt',
+    'accounts',
     'phonenumber_field',
     'debug_toolbar',
 
@@ -142,7 +143,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Setting the CustomUser Model as the auth model to avoid conflicting errors
 # Withouth this line of code, the default AUTH_USER_MODEL will be the default User model.
-AUTH_USER_MODEL = 'mgmt.CustomUser'
+AUTH_USER_MODEL = 'accounts.CustomUser'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.RemoteUserBackend',
     'django.contrib.auth.backends.ModelBackend',

@@ -3,20 +3,6 @@ from django.contrib.auth import get_user_model  # add this
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 import mgmt.models as models
-# CustomUser Forms
-
-
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = get_user_model()
-        fields = ('username', 'email', 'first_name', 'last_name')
-
-
-class CustomUserChangeForm(UserChangeForm):
-    class Meta:
-        model = get_user_model()
-        fields = ('username', 'email', 'first_name', 'last_name')
-
 
 # Fundamental Model Forms
 

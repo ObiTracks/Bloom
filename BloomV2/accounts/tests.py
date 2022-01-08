@@ -1,28 +1,42 @@
 from django.test import TestCase
 from django.test.client import Client
-from mgmt.models import *
+from django.contrib.auth import get_user_model
+from accounts.models import *
+from django.urls import reverse
 
 
-class CreateSuperUser_and_Profile_TestCase(TestCase):
+class LogInTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.email = "admin@admin.com"
-        self.username = "admin"
-        self.first_name = "admin"
-        self.last_name = "admin"
-        self.password = CustomUser.objects.make_random_password()
-        superuser = CustomUser.objects.create_superuser(
-            email=self.email, username=self.username, first_name=self.first_name, last_name=self.last_name, password=self.password
-        )
+        self.credentials = {
+            'email': "admin@admin.com",
+            'username': "admin",
+            'first_name': "admin",
+            'last_name': "admin",
+            'password': CustomUser.objects.make_random_password(),
 
-        print(superuser, "is_superuser:", superuser.is_superuser)
-        print(superuser, "is_staff:", superuser.is_staff)
-        print(superuser, "is_active:", superuser.is_active)
+        }
 
-    def test_superuser_was_created_with_profile(self):
-        superuser = CustomUser.objects.get(email="admin@admin.com")
-        profile = superuser.profile
-        assert superuser == profile.user
-        assert superuser is not None
-        assert profile is not None
-        print(superuser, "User Belongs to Profile:", superuser == profile.user)
+        self.user = CustomUser.objects.create_user(**self.credentials)
+
+    # def test_signup_page_url(self):
+    #     response = self.client.get("http://127.0.0.1:8000/auth/signup_request")
+    #     self.assertEqual(response.status_code, 302)
+
+    # def test_signup_page_view_name(self):
+    #     response = self.client.get(reverse('signup_request'))
+    #     self.assertEqual(response.status_code, 200)
+        
+
+    # def test_signup_form(self):
+    #     response = self.client.post(reverse('signup_request'), data={
+    #         'email': "admin@admin.com",
+    #         'username': "admin",
+    #         'first_name': "admin",
+    #         'last_name': "admin",
+    #         'password': CustomUser.objects.make_random_password(),
+    #     })
+    #     self.assertEqual(response.status_code, 200)
+
+        # users = get_user_model().objects.all()
+        # self.assertEqual(users.count(), 1)

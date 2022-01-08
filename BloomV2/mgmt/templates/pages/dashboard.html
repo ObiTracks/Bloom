@@ -7,6 +7,7 @@
 
 {% block cell1 %}
 <div class="header2">Member Snapshot</div>
+
 {% endblock cell1 %}
 
 
@@ -17,4 +18,13 @@
 
 {% block cell3 %}
 <div class="header2">Amenity Snapshot</div>
+{% for place, amenities in amenity_groupings.items %}
+    <div class="header3">{{place}}</div>
+
+    {% for amenity in amenities %}
+        {% include 'components/card.html' with title=amenity.name %}
+        {% comment %} {{amenity}} {% endcomment %}
+    {% endfor %}
+
+{% endfor %}
 {% endblock cell3 %}

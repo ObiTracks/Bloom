@@ -35,7 +35,7 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
 }
 
 .header3 {
-    font: 500 18px $poppins;
+    font: 700 18px $poppins;
     color: $darkgrey;
 }
 
@@ -79,6 +79,10 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
 
 .button {
     text-decoration: none !important;
+
+    &:hover {
+        cursor: pointer;
+    }
 
     .button__text {
         height: fit-content;
@@ -313,7 +317,7 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
     .progressbar__bar__slider {}
 }
 
-.memberstrip {
+.rowstrip {
     position: relative;
     // height: 40px;
     width: 100%;
@@ -327,12 +331,12 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
     padding: 5px 20px 5px 20px;
     margin-bottom: 4px;
 
-    .memberstrip__name {
+    .rowstrip__name {
         color: $darkgrey;
-        font: 600 10px $open-sans;
+        font: 600 13px $open-sans;
     }
 
-    .memberstrip_actions {
+    .rowstrip_actions {
         display: flex;
         flex-direction: row;
         justify-content: space-between;

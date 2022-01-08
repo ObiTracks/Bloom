@@ -173,7 +173,7 @@ body {
   grid-area: three;
 }
 
-.grid-style3x3 > div:nth-child(3) {
+.grid-style3x3 > div:nth-child(4) {
   -ms-grid-row: 3;
   -ms-grid-column: 1;
   -ms-grid-column-span: 3;

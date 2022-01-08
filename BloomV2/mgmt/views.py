@@ -54,6 +54,7 @@ def dashboard_view(request):
 def amenityhub_view(request):
     # Object data
     page_title = "Amenity Hub"
+    page_subtitle = "Places and Amenities"
     try:
         amenity_relationships = AmenityProfileRelationship.objects.filter(
             profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
@@ -93,39 +94,51 @@ def amenityobject_view(request):
     return render(request, template_name, context)
 
 
-# def signup_view(request):
-#     register_form = CustomUserCreationForm()
-#     if request.method == 'POST':
-#         register_form = CustomUserCreationForm(request.POST)
-#         if register_form.is_valid():
-#             register_form.save()
-#             messages.success(
-#                 request, f'Welcome to Bloom')
-#             print("New user created")
+def memberhub_view(request):
+    page_title = "Member Hub"
+    page_subtitle = "Members"
 
-def login_view(request):
-    page_title = "Login"
+    # MEMBERS AND PLACES
+    try:
+        place_relationships = PlaceProfileRelationship.objects.filter(
+            profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
+        places_managed = [i.place for i in place_relationships]
+    except:
+        places_managed = None
 
-    if request.user.is_authenticated:
-        print("User is already logged in")
-        return redirect('dashboard')
+    member_groupings = {}
+    for place in places_managed:
+        place_member_relationships = PlaceProfileRelationship.objects.filter(
+            place=place, profile_type__in=['5'])
+        members = [i.profile for i in place_member_relationships]
+        if place not in member_groupings:
+            member_groupings[place] = members
+        # else:
+        #     member_groupings[place]
 
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+    print(member_groupings)
 
-        if user is not None:
-            login(request, user)
-            print("User logged In")
-            return redirect('dashboard')
-        else:
-            messages.info(request, 'Username OR password is incorrect')
+    # RESERVATIONS
+    reservations = []
+    for place in places_managed:
+        place_reservations = place.reservation_set
+        print(place_reservations)
+        reservations.append(place_reservations)
 
-    context = {'page_title': page_title}
-    return render(request, '../templates/login.html', context)
+    context = {
+        'page_title': page_title,
+        'page_subtitle': page_subtitle,
+        'place_relationships': place_relationships,
+        'member_groupings': member_groupings,
+        'reservations': reservations,
+    }
+    template_name = '../templates/pages/memberhub.html'
+    return render(request, template_name, context)
 
 
-#     context = {'register_form': register_form}
-
-#     return render(request, '../templates/signup.html', context)
+def memberobject_view(request):
+    page_title = "Amenity Name"
+    page_subtitle = "Amenities"
+    context = {'page_title': page_title, 'page_subtitle': page_subtitle}
+    template_name = '../templates/pages/memberobject.html'
+    return render(request, template_name, context)

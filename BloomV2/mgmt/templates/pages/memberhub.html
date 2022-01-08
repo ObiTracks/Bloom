@@ -1,4 +1,4 @@
-{% extends 'grids/grid-style3x1.html' %}
+{% extends 'grids/grid-style3x3.html' %}
 {% load static %}
 
 {% block pageheader %}
@@ -7,6 +7,18 @@
 
 {% block cell1 %}
 <div class="header2">All Members</div>
+
+<div class="card">
+    {% for place, members in member_groupings.items %}
+        {% if members %}
+            <div class="body">{{place.name}}</div>
+        
+            {% for member in members %}
+                {% include 'components/rowstrip.html' with name=member button_text="Manage" value="12" %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+</div>
 {% endblock cell1 %}
 
 {% block cell2 %}
@@ -18,7 +30,12 @@
 {% endblock cell3 %}
 
 {% block cell4 %}
-<div class="header2">{{page_title}}</div>
+<div class="header2">Recent Reservations</div>
+<div class="card">
+    {% for reservation in reservations %}
+        {% include 'components/rowstrip.html' with name=reservation button_text="Manage" value="12" %}
+    {% endfor %}
+</div>
 {% endblock cell4 %}
 
 

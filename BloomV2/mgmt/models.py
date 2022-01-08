@@ -70,6 +70,8 @@ class Reservation(models.Model):
         "mgmt.Profile", verbose_name=("Profile for Reservation"), on_delete=models.CASCADE)
     amenity = models.ForeignKey(
         "mgmt.Amenity", verbose_name=("Amenity for Reservation"), on_delete=models.DO_NOTHING)
+    place = models.ForeignKey(
+        "mgmt.Place", null=True, related_name="reservation_set", on_delete=models.CASCADE)
     # timeslot = models.JSONField(default=int)
     # timeslot = ArrayField(
     #     base_field=models.TimeField(null=False, blank=True), size=2, null=True)
@@ -106,8 +108,8 @@ class PlaceProfileRelationship(models.Model):
     profile = models.ForeignKey("mgmt.Profile", verbose_name=(
         "Profile in the relationship"), on_delete=models.CASCADE, related_name="place_profile_of")
 
-    PROFILE_TYPES = (('Owner', 'Owner'), ('Manager', 'Manager'), ('Supervisor', 'Supervisor'),
-                     ('Staff', 'Staff'), ('Authorized User', 'Authorized User'), ('Member', 'Member'))
+    PROFILE_TYPES = (('0', 'Owner'), ('1', 'Manager'), ('2', 'Supervisor'),
+                     ('3', 'Staff'), ('4', 'Authorized User'), ('5', 'Member'))
     profile_type = models.CharField(
         max_length=100, choices=PROFILE_TYPES, default='Member')
 

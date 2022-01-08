@@ -15,7 +15,7 @@
 }
 
 .header3 {
-  font: 500 18px "Poppins", sans-serif;
+  font: 700 18px "Poppins", sans-serif;
   color: #A0A0A0;
 }
 
@@ -69,6 +69,10 @@
 
 .button {
   text-decoration: none !important;
+}
+
+.button:hover {
+  cursor: pointer;
 }
 
 .button .button__text {
@@ -357,7 +361,7 @@
   height: 100%;
 }
 
-.memberstrip {
+.rowstrip {
   position: relative;
   width: 100%;
   border-radius: 12px;
@@ -381,12 +385,12 @@
   margin-bottom: 4px;
 }
 
-.memberstrip .memberstrip__name {
+.rowstrip .rowstrip__name {
   color: #A0A0A0;
-  font: 600 10px "Open Sans", sans-serif;
+  font: 600 13px "Open Sans", sans-serif;
 }
 
-.memberstrip .memberstrip_actions {
+.rowstrip .rowstrip_actions {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -402,11 +406,11 @@
           align-items: center;
 }
 
-.memberstrip .memberstrip_actions > div {
+.rowstrip .rowstrip_actions > div {
   margin-left: 8px;
 }
 
-.memberstrip .tinybadge {
+.rowstrip .tinybadge {
   padding: 4px;
   height: -webkit-fit-content;
   height: -moz-fit-content;

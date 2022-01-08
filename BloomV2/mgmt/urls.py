@@ -21,8 +21,6 @@ from . import views
 
 urlpatterns = [
     path('', views.dashboard_view, name="dashboard"),
-    path('login', auth_views.LoginView.as_view(), name="login"),
-    path('logout', auth_views.LoginView.as_view(), name="logout"),
     path('amenities', views.amenityhub_view, name="amenityhub"),
     path('amenities/amenity', views.amenityobject_view, name="amenity"),
 ]

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block pageheader %}
+{% endblock pageheader %}
+
+{% block grid %}
+<div class="grid grid-style3x2">
+    <div class="card card--grey">
+        {% block cell1 %}
+        {% endblock cell1 %}
+    </div>
+
+    <div class="card card--grey">
+        {% block cell2 %}
+        {% endblock cell2 %}
+    </div>
+
+    <div class="card card--grey">
+        {% block cell3 %}
+        {% endblock cell3 %}
+    </div>
+
+    <div class="card card--grey">
+        {% block cell4 %}
+        {% endblock cell4 %}
+    </div>
+</div>
+{% endblock grid %}

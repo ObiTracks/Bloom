@@ -43,9 +43,10 @@ def dashboard_view(request):
     print(amenity_groupings)
 
     # MEMBERS
-    members = [i.member_set for i in amenities]
+    # members = [i.member_set for i in amenities]
 
-    context = {'page_title': page_title, 'amenity_groupings':amenity_groupings}
+    context = {'page_title': page_title,
+               'amenity_groupings': amenity_groupings}
     template_name = '../templates/pages/dashboard.html'
     return render(request, template_name, context)
 

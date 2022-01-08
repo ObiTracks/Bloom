@@ -129,6 +129,34 @@ body {
     }
 }
 
+.grid-style3x3 {
+    grid-gap: 10px;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    grid-template-rows: fit-content fit-content fit-content;
+    justify-items: center;
+    grid-template-areas:
+        "one one two"
+        "one one three"
+        "four four four"
+    ;
+
+    >div:nth-child(1) {
+        grid-area: one;
+    }
+
+    >div:nth-child(2) {
+        grid-area: two;
+    }
+
+    >div:nth-child(3) {
+        grid-area: three;
+    }
+
+    >div:nth-child(3) {
+        grid-area: four;
+    }
+}
+
 .grid-style2x1-1 {
     grid-gap: 10px;
     grid-template-columns: repeat(2, minmax(200px, 1fr));

@@ -43,9 +43,10 @@ def dashboard_view(request):
     print(amenity_groupings)
 
     # MEMBERS
-    members = [i.member_set for i in amenities]
+    # members = [i.member_set for i in amenities]
 
-    context = {'page_title': page_title, 'amenity_groupings':amenity_groupings}
+    context = {'page_title': page_title,
+               'amenity_groupings': amenity_groupings}
     template_name = '../templates/pages/dashboard.html'
     return render(request, template_name, context)
 
@@ -102,13 +103,27 @@ def amenityobject_view(request):
 #                 request, f'Welcome to Bloom')
 #             print("New user created")
 
-#             username = register_form.cleaned_data.get('username')
-#             password = register_form.cleaned_data.get("password1")
-#             user = authenticate(request, username=username, password=password)
+def login_view(request):
+    page_title = "Login"
 
-#             if user is not None:
-#                 login(request, user)
-#                 return redirect('home')
+    if request.user.is_authenticated:
+        print("User is already logged in")
+        return redirect('dashboard')
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            print("User logged In")
+            return redirect('dashboard')
+        else:
+            messages.info(request, 'Username OR password is incorrect')
+
+    context = {'page_title': page_title}
+    return render(request, '../templates/login.html', context)
 
 
 #     context = {'register_form': register_form}

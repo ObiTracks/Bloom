@@ -143,6 +143,43 @@ body {
   grid-area: three;
 }
 
+.grid-style3x3 {
+  grid-gap: 10px;
+  -ms-grid-columns: (minmax(200px, 1fr))[3];
+      grid-template-columns: repeat(3, minmax(200px, 1fr));
+  -ms-grid-rows: fit-content fit-content fit-content;
+      grid-template-rows: -webkit-fit-content -webkit-fit-content -webkit-fit-content;
+      grid-template-rows: fit-content fit-content fit-content;
+  justify-items: center;
+      grid-template-areas: "one one two" "one one three" "four four four";
+}
+
+.grid-style3x3 > div:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: one;
+}
+
+.grid-style3x3 > div:nth-child(2) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: two;
+}
+
+.grid-style3x3 > div:nth-child(3) {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: three;
+}
+
+.grid-style3x3 > div:nth-child(3) {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 3;
+  grid-area: four;
+}
+
 .grid-style2x1-1 {
   grid-gap: 10px;
   -ms-grid-columns: (minmax(200px, 1fr))[2];

@@ -25,4 +25,9 @@ urlpatterns = [
     path('amenities/amenity', views.amenityobject_view, name="amenity"),
     path('members', views.memberhub_view, name="memberhub"),
     path('members/member', views.memberobject_view, name="member"),
+
+    # Form views
+    path('newamenity', views.new_amenity, name="amenityform"),
+    path('newplace', views.new_place, name="placeform"),
+
 ]

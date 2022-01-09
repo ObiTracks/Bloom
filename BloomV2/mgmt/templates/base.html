@@ -45,6 +45,8 @@
             {% if request.path != "/login" %}
                 {{request.user.first_name}}
             {% endif %}
+            {% block sidecontainer %}
+            {% endblock sidecontainer %}
             {% comment %} {% include 'components/badge.html' with value='222' title='title' %} {% endcomment %}
         </div>
     </div>

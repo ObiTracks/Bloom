@@ -60,35 +60,75 @@ def amenityhub_view(request):
     # Object data
     page_title = "Amenity Hub"
     page_subtitle = "Places and Amenities"
+
+    # PLACES MANAGED
     try:
-        amenity_relationships = AmenityProfileRelationship.objects.filter(
+        place_relationships = PlaceProfileRelationship.objects.filter(
             profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
-        amenities = [i.amenity for i in amenity_relationships]
+        places_managed = [i.place for i in place_relationships]
     except:
-        amenities = None
+        places_managed = None
 
-    # Form Interaction
-    form = AmenityForm(request.user)
+    amenity_groupings = {}
+    for place in places_managed:
+        amenities = Amenity.objects.filter(
+            place=place)
+        if place not in amenity_groupings:
+            amenity_groupings[place] = amenities
+
+    # Forms & Interactions
+    amenity_form = AmenityForm(request.user)
+    new_amenity(request)
+
+    place_form = PlaceForm()
+    new_place(request)
+
+    context = {
+        'page_title': page_title,
+        'amenity_form': amenity_form,
+        'place_form': place_form,
+        'amenity_groupings': amenity_groupings,
+    }
+    template_name = '../templates/pages/amenityhub.html'
+    return render(request, template_name, context)
+
+# Amenity Form Handler
+
+
+def new_amenity(request):
     if request.method == 'POST':
-        form = AmenityForm(request.user, request.POST, request.FILES)
+        amenity_form = AmenityForm(request.user, request.POST, request.FILES)
 
-        if form.is_valid():
-            amenity = form.save()
+        if amenity_form.is_valid():
+            amenity = amenity_form.save()
             amenityprofile_relationship = AmenityProfileRelationship.objects.create(
                 amenity=amenity, profile=request.user.profile, profile_type="3")
             amenityprofile_relationship.save()
 
             return redirect('amenityhub')
         else:
-            messages.error(request, "Form is invalid")
+            messages.error(request, "Amenity Form is invalid")
 
-    context = {
-        'page_title': page_title,
-        'form': form,
-        'amenities': amenities,
-    }
-    template_name = '../templates/pages/amenityhub.html'
-    return render(request, template_name, context)
+    return
+
+# Place Form Handler
+
+
+def new_place(request):
+    if request.method == 'POST':
+        place_form = PlaceForm(request.POST, request.FILES)
+
+        if place_form.is_valid():
+            place = place_form.save()
+            placeprofile_relationship = PlaceProfileRelationship.objects.create(
+                place=place, profile=request.user.profile, profile_type="0")
+            placeprofile_relationship.save()
+
+            return redirect('amenityhub')
+        else:
+            messages.error(request, "Place Form is invalid")
+
+    return
 
 
 def amenityobject_view(request):

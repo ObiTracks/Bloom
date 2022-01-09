@@ -15,8 +15,8 @@
 }
 
 .header3 {
-  font: small-caps 500 18px "Poppins", sans-serif;
-  color: #A0A0A0;
+  font: 500 18px "Poppins", sans-serif;
+  color: #E0E0E0;
 }
 
 .body {
@@ -41,6 +41,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -125,8 +128,11 @@
 
 .badge {
   position: relative;
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  min-height: 120px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   background: #FCFCFC;
   -webkit-box-shadow: rgba(126, 126, 126, 0.144) 0px 0px 10px;
           box-shadow: rgba(126, 126, 126, 0.144) 0px 0px 10px;
@@ -162,7 +168,7 @@
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  font: 700 25px "Montserrat", sans-serif;
+  font: 600 25px "Poppins", sans-serif;
   color: #A0A0A0;
 }
 
@@ -180,7 +186,8 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font: 500 15px "Poppins", sans-serif;
+  font: 700 12px "Poppins", sans-serif;
+  text-align: center;
   color: #A0A0A0;
 }
 
@@ -294,8 +301,12 @@
 }
 
 .table .table__tr {
-  height: 32px;
-  font-family: "Montserrat", sans-serif;
+  position: relative;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .table .table__th {
@@ -304,9 +315,7 @@
 }
 
 .table .table__td {
-  padding: 0 10px;
-  color: #A0A0A0;
-  border: solid #F2F2F2 1px;
+  padding-bottom: 3px;
 }
 
 .profileicon {
@@ -361,8 +370,17 @@
   height: 100%;
 }
 
+.card.card--outline {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background: none;
+  border: solid #E0E0E0 4px;
+  border-radius: 10px;
+}
+
 .rowstrip {
   position: relative;
+  height: 40px;
   width: 100%;
   border-radius: 12px;
   display: -webkit-box;
@@ -378,11 +396,18 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  border-radius: 8px;
-  background: -webkit-gradient(linear, left top, right top, color-stop(10%, #F1F9FF), to(#ffffff));
-  background: linear-gradient(to right, #F1F9FF 10%, #ffffff);
+  border-radius: 10px;
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(10%, #F1F9FF), to(#ffffff));
+  background: linear-gradient(to bottom right, #F1F9FF 10%, #ffffff);
   padding: 5px 20px 5px 20px;
-  margin-bottom: 4px;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+}
+
+.rowstrip:hover {
+  background: -webkit-gradient(linear, left top, right top, color-stop(10%, #a1d6ff), to(#ffffff));
+  background: linear-gradient(to right, #a1d6ff 10%, #ffffff);
+  cursor: pointer;
 }
 
 .rowstrip .rowstrip__name {

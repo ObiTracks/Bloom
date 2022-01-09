@@ -24,8 +24,7 @@ class Profile(models.Model):
 
 class Amenity(models.Model):
     name = models.CharField(max_length=200, blank=False)
-    place = models.ForeignKey("mgmt.Place", null=True,
-                              blank=True, on_delete=models.CASCADE)
+    place = models.ForeignKey("mgmt.Place", blank=False, on_delete=models.CASCADE)
     subtitle = models.CharField(max_length=200, blank=True)
     description = models.CharField(max_length=200, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -82,10 +81,8 @@ class Address(models.Model):
 
 
 class Reservation(models.Model):
-    profile = models.ForeignKey(
-        "mgmt.Profile", verbose_name=("Profile for Reservation"), blank=False, on_delete=models.CASCADE)
-    amenity = models.ForeignKey(
-        "mgmt.Amenity", verbose_name=("Amenity for Reservation"), blank=False, on_delete=models.DO_NOTHING)
+    amenity_profile_relationship = models.ForeignKey(
+        "mgmt.AmenityProfileRelationship", verbose_name=("AmenityRelationship for the Reservation"), blank=False, on_delete=models.CASCADE)
     place = models.ForeignKey(
         "mgmt.Place", blank=False, null=True, related_name="reservation_set", on_delete=models.CASCADE)
     # timeslot = models.JSONField(default=int)

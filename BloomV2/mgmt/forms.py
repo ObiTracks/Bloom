@@ -6,6 +6,7 @@ import mgmt.models as models
 
 # Fundamental Model Forms
 
+
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = models.Profile

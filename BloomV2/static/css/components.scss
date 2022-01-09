@@ -36,7 +36,8 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
 
 .header3 {
     font: 500 18px $poppins;
-    color: $darkgrey;
+
+    color: $grey;
 }
 
 .body {
@@ -51,7 +52,9 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
     height: fit-content;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    // background-color: red;
     // height: 100vh;
     // background: maroon;
 
@@ -79,6 +82,10 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
 
 .button {
     text-decoration: none !important;
+
+    &:hover {
+        cursor: pointer;
+    }
 
     .button__text {
         height: fit-content;
@@ -127,8 +134,9 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
 
 .badge {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    min-height: 120px;
+    height: fit-content;
     background: #FCFCFC;
     box-shadow: $box-shadow--light;
     padding: 25px;
@@ -145,7 +153,7 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
         display: flex;
         justify-content: center;
         align-items: flex-end;
-        font: 700 25px $montserrat;
+        font: 600 25px $poppins;
         color: $darkgrey;
     }
 
@@ -155,7 +163,8 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
         display: flex;
         justify-content: center;
         align-items: center;
-        font: 500 15px $poppins;
+        font: 700 12px $poppins;
+        text-align: center;
         color: $darkgrey;
     }
 }
@@ -241,8 +250,9 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
 
 
     .table__tr {
-        height: 32px;
-        font-family: $montserrat;
+        position: relative;
+        transform: scale(1); //allows position relative to work
+        height: fit-content;
     }
 
     .table__th {
@@ -251,9 +261,11 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
     }
 
     .table__td {
-        padding: 0 10px;
-        color: $darkgrey;
-        border: solid $lightgrey 1px;
+        // height: fit-content;
+        // padding: 0 10px;
+        // color: $darkgrey;
+        // border: solid $lightgrey 1px;
+        padding-bottom: 3px;
     }
 }
 
@@ -300,6 +312,13 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
         height: 100%;
     }
 
+    &.card--outline {
+        box-shadow: none;
+        background: none;
+        border: solid $grey 4px;
+        border-radius: 10px;
+
+    }
 }
 
 
@@ -313,26 +332,32 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
     .progressbar__bar__slider {}
 }
 
-.memberstrip {
+.rowstrip {
     position: relative;
-    // height: 40px;
+    height: 40px;
     width: 100%;
     border-radius: 12px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-radius: 8px;
-    background: linear-gradient(to right, #F1F9FF 10%, #ffffff);
+    border-radius: 10px;
+    background: linear-gradient(to bottom right, #F1F9FF 10%, #ffffff);
     padding: 5px 20px 5px 20px;
-    margin-bottom: 4px;
+    // margin-bottom: 4px;
+    transition: all 0.1s;
 
-    .memberstrip__name {
-        color: $darkgrey;
-        font: 600 10px $open-sans;
+    &:hover {
+        background: linear-gradient(to right, #a1d6ff 10%, #ffffff);
+        cursor: pointer;
     }
 
-    .memberstrip_actions {
+    .rowstrip__name {
+        color: $darkgrey;
+        font: 600 13px $open-sans;
+    }
+
+    .rowstrip_actions {
         display: flex;
         flex-direction: row;
         justify-content: space-between;

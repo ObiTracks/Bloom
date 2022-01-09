@@ -39,14 +39,19 @@ body {
     flex: 1;
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
     padding: 100px 0 30px 0;
     // background: green;
+
+    >div {
+        margin-bottom: 10px;
+    }
 }
 
 .main-container {
-    flex: 4;
+    flex: 6;
     height: fit-content;
     min-height: 200vh;
     // background: rgb(59, 59, 59);
@@ -152,7 +157,7 @@ body {
         grid-area: three;
     }
 
-    >div:nth-child(3) {
+    >div:nth-child(4) {
         grid-area: four;
     }
 }
@@ -180,7 +185,7 @@ body {
     }
 }
 
-.grid-style-evensquaregrid {
+.grid-style-squaregrid {
     grid-gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
@@ -195,7 +200,22 @@ body {
 
 }
 
+.flex {
+    display: flex;
+    width: 100%;
+    background-color: red;
 
+    .simple-grouping {
+        // justify-content: center;
+        // align-items: flex-start;
+        flex-wrap: wrap;
+        overflow: scroll;
+
+        // > {
+        //     margin: 5px;
+        // }
+    }
+}
 
 .card {}
 

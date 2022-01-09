@@ -1,13 +1,25 @@
 {% load static %}
 <table class="table">
-    <tr class="table__tr table__tr--header">
-        <th class="table__th">{{header1}}</th>
-        <th class="table__th">{{header2}}</th>
-        <th class="table__th">{{header3}}</th>
-    </tr>
-    <tr class="table__tr">
-        <td class="table__td">Line 1</td>
-        <td class="table__td">Line 1</td>
-        <td class="table__td">Line 1</td>
-    </tr>
+    {% for key, values in dictionary.items %}
+    {% if values %}
+        <tr class="table__tr table__tr--header">
+            <td>
+                <div class="header3">{{key}}</div>
+            </td>
+        </tr>
+        {% comment %} 
+        // Tables are implemented this way because its easier to list the items
+        // just as a list instead of as table items. Styling difficulties means
+        // This is the best solution 
+        {% endcomment %}
+
+        {% for item in values %}
+        <tr class="table__tr">
+            <td class="table__td">
+                {% include 'components/rowstrip.html' with name=item %}
+            </td>
+        </tr>
+        {% endfor %}
+    {% endif %}
+    {% endfor %}
 </table>

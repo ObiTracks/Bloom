@@ -33,19 +33,27 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding: 100px 0 30px 0;
 }
 
+.side-container > div {
+  margin-bottom: 10px;
+}
+
 .main-container {
-  -webkit-box-flex: 4;
-      -ms-flex: 4;
-          flex: 4;
+  -webkit-box-flex: 6;
+      -ms-flex: 6;
+          flex: 6;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -173,7 +181,7 @@ body {
   grid-area: three;
 }
 
-.grid-style3x3 > div:nth-child(3) {
+.grid-style3x3 > div:nth-child(4) {
   -ms-grid-row: 3;
   -ms-grid-column: 1;
   -ms-grid-column-span: 3;
@@ -210,7 +218,7 @@ body {
   grid-area: three;
 }
 
-.grid-style-evensquaregrid {
+.grid-style-squaregrid {
   grid-gap: 10px;
   -ms-grid-columns: (minmax(150px, 1fr))[auto-fill];
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -219,10 +227,24 @@ body {
   justify-items: center;
 }
 
-.grid-style-evensquaregrid > div {
+.grid-style-squaregrid > div {
   min-height: -webkit-fit-content;
   min-height: -moz-fit-content;
   min-height: fit-content;
   width: 100%;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  background-color: red;
+}
+
+.flex .simple-grouping {
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  overflow: scroll;
 }
 /*# sourceMappingURL=main.css.map */

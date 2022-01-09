@@ -6,18 +6,44 @@
 {% endblock pageheader %}
 
 {% block cell1 %}
-    <form action="" method="POST">
+<div class="card">
+    <div class="header2">Place Form</div>
+    <form action="{% url 'placeform' %}" method="POST">
         {% csrf_token %}
-        {{form.as_p}}
+        {{place_form.as_p}}
         <button>Submit</button>
     </form>
+</div>
+
+<div class="card">
+    <div class="header2">Amenity Form</div>
+    <form action="{% url 'amenityform' %}" method="POST">
+        {% csrf_token %}
+        {{amenity_form.as_p}}
+        <button>Submit</button>
+    </form>
+</div>
+
+
+    
 {% endblock cell1 %}
 
 {% block cell2 %}
-    {% for amenity in amenities %}
-        {% include 'components/card.html' with title=amenity.name %}
-        {% comment %} <div class="card">{{object}}</div> {% endcomment %}
+<div class="card">
+    <div class="header2">Places</div>
+    {% if amenity_groupings %}
+    {% for place, amenities in amenity_groupings.items %}
+        <div class="header1">Places{{place}}</div>
+        <div class="card card--outline">
+        {% for amenity in amenities %}
+            {% include 'components/card.html' with title=amenity.name %}
+        {% endfor %}
+        </div>
     {% endfor %}
+    {% else %}
+    <div class="header2">You have no places or amenities yet!</div>
+    {% endif %}
+</div>
 {% endblock cell2 %}
 
 

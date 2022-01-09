@@ -1,5 +1,7 @@
 # Python packages
-from datetime import date
+# import datetime as dt
+from datetime import date, datetime, timedelta
+
 import json
 
 # Imports for Django views
@@ -12,6 +14,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 # Imports for django forms
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
+
+# Imports for django models
+from django.db.models import Count
 
 # Django authentication and messaging features
 from django.contrib.auth import authenticate, login, logout
@@ -54,35 +59,76 @@ def dashboard_view(request):
 def amenityhub_view(request):
     # Object data
     page_title = "Amenity Hub"
+    page_subtitle = "Places and Amenities"
+
+    # PLACES MANAGED
     try:
-        amenity_relationships = AmenityProfileRelationship.objects.filter(
+        place_relationships = PlaceProfileRelationship.objects.filter(
             profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
-        amenities = [i.amenity for i in amenity_relationships]
+        places_managed = [i.place for i in place_relationships]
     except:
-        amenities = None
+        places_managed = None
 
-    # Form Interaction
-    form = AmenityForm(request.user)
+    amenity_groupings = {}
+    for place in places_managed:
+        amenities = Amenity.objects.filter(
+            place=place)
+        if place not in amenity_groupings:
+            amenity_groupings[place] = amenities
+
+    # Forms & Interactions
+    amenity_form = AmenityForm(request.user)
+    new_amenity(request)
+
+    place_form = PlaceForm()
+    new_place(request)
+
+    context = {
+        'page_title': page_title,
+        'amenity_form': amenity_form,
+        'place_form': place_form,
+        'amenity_groupings': amenity_groupings,
+    }
+    template_name = '../templates/pages/amenityhub.html'
+    return render(request, template_name, context)
+
+# Amenity Form Handler
+
+
+def new_amenity(request):
     if request.method == 'POST':
-        form = AmenityForm(request.user, request.POST, request.FILES)
+        amenity_form = AmenityForm(request.user, request.POST, request.FILES)
 
-        if form.is_valid():
-            amenity = form.save()
+        if amenity_form.is_valid():
+            amenity = amenity_form.save()
             amenityprofile_relationship = AmenityProfileRelationship.objects.create(
                 amenity=amenity, profile=request.user.profile, profile_type="3")
             amenityprofile_relationship.save()
 
             return redirect('amenityhub')
         else:
-            messages.error(request, "Form is invalid")
+            messages.error(request, "Amenity Form is invalid")
 
-    context = {
-        'page_title': page_title,
-        'form': form,
-        'amenities': amenities,
-    }
-    template_name = '../templates/pages/amenityhub.html'
-    return render(request, template_name, context)
+    return
+
+# Place Form Handler
+
+
+def new_place(request):
+    if request.method == 'POST':
+        place_form = PlaceForm(request.POST, request.FILES)
+
+        if place_form.is_valid():
+            place = place_form.save()
+            placeprofile_relationship = PlaceProfileRelationship.objects.create(
+                place=place, profile=request.user.profile, profile_type="0")
+            placeprofile_relationship.save()
+
+            return redirect('amenityhub')
+        else:
+            messages.error(request, "Place Form is invalid")
+
+    return
 
 
 def amenityobject_view(request):
@@ -93,39 +139,94 @@ def amenityobject_view(request):
     return render(request, template_name, context)
 
 
-# def signup_view(request):
-#     register_form = CustomUserCreationForm()
-#     if request.method == 'POST':
-#         register_form = CustomUserCreationForm(request.POST)
-#         if register_form.is_valid():
-#             register_form.save()
-#             messages.success(
-#                 request, f'Welcome to Bloom')
-#             print("New user created")
+def memberhub_view(request):
+    page_title = "Member Hub"
+    page_subtitle = "Members"
 
-def login_view(request):
-    page_title = "Login"
+    # MEMBERS AND PLACES
+    try:
+        place_relationships = PlaceProfileRelationship.objects.filter(
+            profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
+        places_managed = [i.place for i in place_relationships]
+    except:
+        places_managed = None
 
-    if request.user.is_authenticated:
-        print("User is already logged in")
-        return redirect('dashboard')
+    member_groupings = {}
+    for place in places_managed:
+        place_member_relationships = PlaceProfileRelationship.objects.filter(
+            place=place, profile_type__in=['5'])
+        members = [i.profile for i in place_member_relationships]
+        if place not in member_groupings:
+            member_groupings[place] = members
+        # else:
+        #     member_groupings[place]
 
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+    print("Member Groupings", member_groupings)
 
-        if user is not None:
-            login(request, user)
-            print("User logged In")
-            return redirect('dashboard')
-        else:
-            messages.info(request, 'Username OR password is incorrect')
+    # RESERVATIONS
+    reservations = []
+    for place in places_managed:
+        place_reservations = list(place.reservation_set.all())
+        print("Reservations: ", place,
+              len(place_reservations), place_reservations)
 
-    context = {'page_title': page_title}
-    return render(request, '../templates/login.html', context)
+        if place_reservations:
+
+            reservations.extend(place_reservations)
+    print(reservations)
+
+    # STATISTICS
+    UserManagedReservations = Reservation.objects \
+        .filter(place__place_of__profile_type__in=['0', '1', '2', '3', '4'],
+                place__place_of__profile=request.user.profile)\
+
+    # Statistic: total_members
+    total_members = UserManagedReservations.count()
+
+    # Statistic: reservations_today
+    reservations_today = UserManagedReservations \
+        .filter(date_created__gte=date.today())
+
+    # Statistic: no_shows_past_week
+    no_shows_past_week = UserManagedReservations.filter(
+        date_created__gte=date.today() - timedelta(days=7)).filter(no_show=True)
+
+    # Statistic: members_managed
+    members_managed = set()
+    for place in places_managed:
+        members = set(Profile.objects.filter(
+            place_profile_of__profile_type__in=['5']))
+        staged = [members_managed.add(i) for i in members]
+    members_managed = list(members_managed)
+    print(members_managed)
+
+    new_members_this_month = None
+    # new_members_this_month = [member for member in members_managed if member.date_created > (
+    #     date.today() - timedelta(days=30))]
+
+    statistics = {}
+    statistics["total_members"] = total_members
+    statistics["reservations_today"] = reservations_today
+    statistics["no_shows_past_week"] = no_shows_past_week
+    statistics["new_members_this_month"] = new_members_this_month
+
+    # print(statistics[reservations_today])
+
+    context = {
+        'statistics': statistics,
+        'page_title': page_title,
+        'page_subtitle': page_subtitle,
+        'place_relationships': place_relationships,
+        'member_groupings': member_groupings,
+        'reservations': reservations,
+    }
+    template_name = '../templates/pages/memberhub.html'
+    return render(request, template_name, context)
 
 
-#     context = {'register_form': register_form}
-
-#     return render(request, '../templates/signup.html', context)
+def memberobject_view(request):
+    page_title = "Amenity Name"
+    page_subtitle = "Amenities"
+    context = {'page_title': page_title, 'page_subtitle': page_subtitle}
+    template_name = '../templates/pages/memberobject.html'
+    return render(request, template_name, context)

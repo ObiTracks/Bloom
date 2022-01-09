@@ -53,3 +53,8 @@ class PlaceProfileRelationship(forms.ModelForm):
     class Meta:
         model = models.PlaceProfileRelationship
         fields = "__all__"
+
+class JoinRequest(forms.ModelForm):
+    class Meta:
+        model = models.JoinRequest
+        fields = "__all__"

@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.db.models.fields.related import ForeignKey
 from phonenumber_field.modelfields import PhoneNumberField
 import base64
 import datetime
@@ -24,7 +25,8 @@ class Profile(models.Model):
 
 class Amenity(models.Model):
     name = models.CharField(max_length=200, blank=False)
-    place = models.ForeignKey("mgmt.Place", blank=False, on_delete=models.CASCADE)
+    place = models.ForeignKey(
+        "mgmt.Place", blank=False, on_delete=models.CASCADE)
     subtitle = models.CharField(max_length=200, blank=True)
     description = models.CharField(max_length=200, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -140,3 +142,31 @@ class PlaceProfileRelationship(models.Model):
 
     def __str__(self):
         return "{} {} Relationship".format(self.place, self.profile)
+
+
+class JoinRequest(models.Model):
+    profile = models.ForeignKey(
+        "mgmt.Profile", null=False, blank=False, on_delete=models.CASCADE)
+    place = models.ForeignKey(
+        "mgmt.Place",  null=False, blank=False, on_delete=models.CASCADE)
+    approved = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('date_created',)
+
+    def __str__(self):
+        return "Join Request: User({}) Place({})".format(self.profile, self.profile)
+
+
+class TimeSlot(models.Model):
+    nickname = models.CharField(max_length=200, blank=False)
+    startime = models.TimeField(default=datetime.time(0, 0, 0), null=False)
+    endtime = models.TimeField(default=datetime.time(0, 0, 0), null=False)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('date_created',)
+
+    def __str__(self):
+        return "{} {}-{}".format(self.nickname, self.startime, self.endtime)

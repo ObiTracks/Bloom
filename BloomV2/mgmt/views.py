@@ -1,5 +1,7 @@
 # Python packages
-from datetime import date
+# import datetime as dt
+from datetime import date, datetime, timedelta
+
 import json
 
 # Imports for Django views
@@ -12,6 +14,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 # Imports for django forms
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
+
+# Imports for django models
+from django.db.models import Count
 
 # Django authentication and messaging features
 from django.contrib.auth import authenticate, login, logout
@@ -116,16 +121,59 @@ def memberhub_view(request):
         # else:
         #     member_groupings[place]
 
-    print(member_groupings)
+    print("Member Groupings", member_groupings)
 
     # RESERVATIONS
     reservations = []
     for place in places_managed:
-        place_reservations = place.reservation_set
-        print(place_reservations)
-        reservations.append(place_reservations)
+        place_reservations = list(place.reservation_set.all())
+        print("Reservations: ", place,
+              len(place_reservations), place_reservations)
+
+        if place_reservations:
+
+            reservations.extend(place_reservations)
+    print(reservations)
+
+    # STATISTICS
+    UserManagedReservations = Reservation.objects \
+        .filter(place__place_of__profile_type__in=['0', '1', '2', '3', '4'],
+                place__place_of__profile=request.user.profile)\
+
+    # Statistic: total_members
+    total_members = UserManagedReservations.count()
+
+    # Statistic: reservations_today
+    reservations_today = UserManagedReservations \
+        .filter(date_created__gte=date.today())
+
+    # Statistic: no_shows_past_week
+    no_shows_past_week = UserManagedReservations.filter(
+        date_created__gte=date.today() - timedelta(days=7)).filter(no_show=True)
+
+    # Statistic: members_managed
+    members_managed = set()
+    for place in places_managed:
+        members = set(Profile.objects.filter(
+            place_profile_of__profile_type__in=['5']))
+        staged = [members_managed.add(i) for i in members]
+    members_managed = list(members_managed)
+    print(members_managed)
+
+    new_members_this_month = None
+    # new_members_this_month = [member for member in members_managed if member.date_created > (
+    #     date.today() - timedelta(days=30))]
+
+    statistics = {}
+    statistics["total_members"] = total_members
+    statistics["reservations_today"] = reservations_today
+    statistics["no_shows_past_week"] = no_shows_past_week
+    statistics["new_members_this_month"] = new_members_this_month
+
+    # print(statistics[reservations_today])
 
     context = {
+        'statistics': statistics,
         'page_title': page_title,
         'page_subtitle': page_subtitle,
         'place_relationships': place_relationships,

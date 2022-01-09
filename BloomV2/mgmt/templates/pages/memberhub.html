@@ -11,7 +11,7 @@
 <div class="card">
     {% for place, members in member_groupings.items %}
         {% if members %}
-            <div class="body">{{place.name}}</div>
+            <div class="header3">{{place.name}}</div>
         
             {% for member in members %}
                 {% include 'components/rowstrip.html' with name=member button_text="Manage" value="12" %}
@@ -23,6 +23,12 @@
 
 {% block cell2 %}
 <div class="header2">Statistics</div>
+{% include 'components/badge.html' with title="Total Members" value=statistics.total_members %}
+{% include 'components/badge.html' with title="Reservations Today" value=statistics.reservations_today.count %}
+{% include 'components/badge.html' with title="Members this Month" value=statistics.new_members_this_month.count %}
+{% include 'components/badge.html' with title="No Shows this Week" value=statistics.no_shows_past_week.count %}
+
+
 {% endblock cell2 %}
 
 {% block cell3 %}
@@ -33,7 +39,7 @@
 <div class="header2">Recent Reservations</div>
 <div class="card">
     {% for reservation in reservations %}
-        {% include 'components/rowstrip.html' with name=reservation button_text="Manage" value="12" %}
+        {% include 'components/rowstrip.html' with name=reservation.profile button_text="Manage" value="12" %}
     {% endfor %}
 </div>
 {% endblock cell4 %}

@@ -52,7 +52,7 @@ def dashboard_view(request):
 
     context = {'page_title': page_title,
                'amenity_groupings': amenity_groupings}
-    template_name = '../templates/pages/dashboard.html'
+    template_name = 'pages/manager/dashboard.html'
     return render(request, template_name, context)
 
 
@@ -89,7 +89,7 @@ def amenityhub_view(request):
         'place_form': place_form,
         'amenity_groupings': amenity_groupings,
     }
-    template_name = '../templates/pages/amenityhub.html'
+    template_name = 'pages/manager/amenityhub.html'
     return render(request, template_name, context)
 
 # Amenity Form Handler
@@ -135,7 +135,7 @@ def amenityobject_view(request):
     page_title = "Amenity Name"
     page_subtitle = "Amenities"
     context = {'page_title': page_title, 'page_subtitle': page_subtitle}
-    template_name = '../templates/pages/amenityobject.html'
+    template_name = 'pages/manager/amenityobject.html'
     return render(request, template_name, context)
 
 
@@ -220,7 +220,7 @@ def memberhub_view(request):
         'member_groupings': member_groupings,
         'reservations': reservations,
     }
-    template_name = '../templates/pages/memberhub.html'
+    template_name = 'pages/manager/memberhub.html'
     return render(request, template_name, context)
 
 
@@ -228,5 +228,5 @@ def memberobject_view(request):
     page_title = "Amenity Name"
     page_subtitle = "Amenities"
     context = {'page_title': page_title, 'page_subtitle': page_subtitle}
-    template_name = '../templates/pages/memberobject.html'
+    template_name = 'pages/manager/memberobject.html'
     return render(request, template_name, context)

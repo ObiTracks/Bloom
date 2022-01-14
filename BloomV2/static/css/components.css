@@ -358,6 +358,9 @@
           box-shadow: rgba(126, 126, 126, 0.144) 0px 0px 10px;
   background: white;
   padding: 20px;
+  text-decoration: none;
+  -webkit-transition: all ease-in-out 0.2s;
+  transition: all ease-in-out 0.2s;
 }
 
 .card.card--grey {
@@ -376,6 +379,23 @@
   background: none;
   border: solid #E0E0E0 4px;
   border-radius: 10px;
+}
+
+.card.card-size-button {
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card.card-size-button:hover {
+  cursor: pointer;
 }
 
 .rowstrip {

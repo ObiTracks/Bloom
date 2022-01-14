@@ -304,6 +304,8 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
     box-shadow: $box-shadow--light;
     background: white;
     padding: 20px;
+    text-decoration: none;
+    transition: all ease-in-out 0.2s;
 
     &.card--grey {
         box-shadow: none;
@@ -317,6 +319,17 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
         background: none;
         border: solid $grey 4px;
         border-radius: 10px;
+    }
+
+    &.card-size-button {
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            cursor: pointer;
+        }
 
     }
 }

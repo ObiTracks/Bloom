@@ -61,7 +61,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'BloomV2.urls'
-
+print("\n\n\n\n\n\n\n\nBASE DIRECTORYYYYY\n\n\n\n\n\n\n",
+      BASE_DIR, "\n\n\n\n\n\n\n\nBASE DIRECTORYYYYY\n\n\n\n\n\n\n")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -121,7 +122,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 
 # Static files (CSS, JavaScript, Images)

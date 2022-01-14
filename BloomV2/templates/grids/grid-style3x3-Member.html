@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block pageheader %}
+{% endblock pageheader %}
+
+{% block grid %}
+<div class="grid grid-style3x3-Member">
+    <div class="card card--grey card-size-button">
+        {% block cell1 %}
+        {% endblock cell1 %}
+    </div>
+
+    <div class="card card--grey card-size-button">
+        {% block cell2 %}
+        {% endblock cell2 %}
+    </div>
+
+    <div class="card card--grey card-size-button">
+        {% block cell3 %}
+        {% endblock cell3 %}
+    </div>
+
+    <div class="card card--grey">
+        {% block cell4 %}
+        {% endblock cell4 %}
+    </div>
+
+    <div class="card card--grey">
+        {% block cell5 %}
+        {% endblock cell5 %}
+    </div>
+
+    <div class="card card--grey">
+        {% block cell6 %}
+        {% endblock cell6 %}
+    </div>
+</div>
+{% endblock grid %}

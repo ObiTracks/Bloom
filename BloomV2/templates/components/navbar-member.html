@@ -1,0 +1,27 @@
+{% load static %}
+
+<div class="navbar">
+    
+    <a href="{% url 'dashboard' %}">
+        <img src="{% static 'images/Bloom Logo-Transparent-Darker-Blue.png' %}" alt="" class="navbar__logo">
+    </a>
+
+    {% comment %} <a href="{% url 'dashboard' %}">
+        <img src="{% static 'images/DashboardIcon-V1.png' %}" alt="" class="navbar__icon">
+    </a> {% endcomment %}
+
+    <a href="{% url 'dashboard' %}">
+        <img src="{% static 'images/DashboardIcon-V3.png'  %}" alt="" class="navbar__icon">
+    </a>
+
+    <a href="{% url 'amenityhub' %}">
+        <img src="{% static 'images/DashboardIcon-V2.png'  %}" alt="" class="navbar__icon">
+    </a>
+
+    <a href="{% url 'memberhub' %}">
+        <img src="{% static 'images/MemberIcon-V1.png'  %}" alt="" class="navbar__icon">
+    </a>
+
+    <a href="">
+        <img src="{% static 'images/ProfileIcon-V1.png'  %}" alt="" class="navbar__icon"></a>
+</div>

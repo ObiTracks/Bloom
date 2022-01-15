@@ -51,9 +51,9 @@ body {
 }
 
 .main-container {
-  -webkit-box-flex: 6;
-      -ms-flex: 6;
-          flex: 6;
+  -webkit-box-flex: 5;
+      -ms-flex: 5;
+          flex: 5;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -86,15 +86,16 @@ body {
   display: grid;
   width: 100%;
   height: 100%;
-  min-height: 300px;
 }
 
 .grid > div {
-  min-height: 300px;
+  min-height: 200px;
+  min-height: 5vh;
   width: 100%;
 }
 
 .grid-style3x1 {
+  min-height: 300px;
   grid-gap: 10px;
   -ms-grid-columns: (minmax(200px, 1fr))[3];
       grid-template-columns: repeat(3, minmax(200px, 1fr));
@@ -121,7 +122,40 @@ body {
   grid-area: three;
 }
 
+.grid-style1x3-Member {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  grid-gap: 10px;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: 10px minmax(200px, fit-content) minmax(200px, fit-content);
+      grid-template-rows: 10px minmax(200px, -webkit-fit-content) minmax(200px, -webkit-fit-content);
+      grid-template-rows: 10px minmax(200px, fit-content) minmax(200px, fit-content);
+      grid-template-areas: "one" "two" "three";
+}
+
+.grid-style1x3-Member > div:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: one;
+}
+
+.grid-style1x3-Member > div:nth-child(2) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: two;
+}
+
+.grid-style1x3-Member > div:nth-child(3) {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: three;
+}
+
 .grid-style3x2 {
+  min-height: 300px;
   grid-gap: 10px;
   -ms-grid-columns: (minmax(200px, 1fr))[3];
       grid-template-columns: repeat(3, minmax(200px, 1fr));
@@ -152,6 +186,7 @@ body {
 }
 
 .grid-style3x3 {
+  min-height: 300px;
   grid-gap: 10px;
   -ms-grid-columns: (minmax(200px, 1fr))[3];
       grid-template-columns: repeat(3, minmax(200px, 1fr));
@@ -189,16 +224,16 @@ body {
 }
 
 .grid-style3x3-Member {
+  min-height: 300px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  min-height: 70vh;
   grid-gap: 10px;
   -ms-grid-columns: (minmax(200px, 1fr))[3];
       grid-template-columns: repeat(3, minmax(200px, 1fr));
-  -ms-grid-rows: 600px fit-content fit-content;
-      grid-template-rows: 600px -webkit-fit-content -webkit-fit-content;
-      grid-template-rows: 600px fit-content fit-content;
+  -ms-grid-rows: 200px fit-content fit-content;
+      grid-template-rows: 200px -webkit-fit-content -webkit-fit-content;
+      grid-template-rows: 200px fit-content fit-content;
   justify-items: center;
       grid-template-areas: "one two three" "four four six" "five five six";
 }
@@ -244,6 +279,7 @@ body {
 }
 
 .grid-style2x1-1 {
+  min-height: 300px;
   grid-gap: 10px;
   -ms-grid-columns: (minmax(200px, 1fr))[2];
       grid-template-columns: repeat(2, minmax(200px, 1fr));
@@ -283,6 +319,56 @@ body {
 }
 
 .grid-style-squaregrid > div {
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  width: 100%;
+}
+
+.grid-simple-grid {
+  grid-gap: 10px;
+  -ms-grid-columns: (280px)[auto-fill];
+      grid-template-columns: repeat(auto-fill, 280px);
+  -ms-grid-rows: (minmax(200px, 1fr))[auto-fill];
+      grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+  justify-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: scroll;
+  width: 100%;
+  padding: 0;
+}
+
+.grid-simple-grid > div {
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  width: 100%;
+}
+
+.grid-badge-grid {
+  grid-gap: 10px;
+  -ms-grid-columns: (110px)[auto-fill];
+      grid-template-columns: repeat(auto-fill, 110px);
+  grid-auto-rows: 110px;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  padding: 0;
+}
+
+.grid-badge-grid > div {
   min-height: -webkit-fit-content;
   min-height: -moz-fit-content;
   min-height: fit-content;

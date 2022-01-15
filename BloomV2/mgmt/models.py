@@ -98,7 +98,7 @@ class Reservation(models.Model):
         ordering = ('date_created',)
 
     def __str__(self):
-        return "{} {} Reservation".format(self.profile, self.amenity)
+        return "{} {} Reservation".format(self.amenity_profile_relationship.profile, self.amenity_profile_relationship.amenity)
 
 
 # RELATIONAL MODELS

@@ -17,6 +17,7 @@ $nunito: 'Nunito',
 sans-serif;
 
 $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
+$tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
 
 // Components
 * {
@@ -127,6 +128,25 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
         }
     }
 
+    &.button--cardsize {
+        position: relative;
+        width: 100%;
+        height: fit-content;
+        height: 200px;
+        border-radius: 20px;
+        overflow: hidden;
+        background: red;
+        padding: 20px;
+        text-decoration: none;
+        transition: all ease-in-out 0.2s;
+
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $lightgrey;
+        // background: linear-gradient(180deg, #36CAE6 0%, #3545DF 100%);
+    }
 
 
 
@@ -134,9 +154,11 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
 
 .badge {
     position: relative;
-    width: 120px;
-    min-height: 120px;
-    height: fit-content;
+    // width: 100px;
+    // min-height: 100px;
+    // height: 100px;
+    height: 100%;
+    width: 100%;
     background: #FCFCFC;
     box-shadow: $box-shadow--light;
     padding: 25px;
@@ -301,7 +323,7 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
     height: fit-content;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: $box-shadow--light;
+    // box-shadow: $box-shadow--light;
     background: white;
     padding: 20px;
     text-decoration: none;
@@ -321,16 +343,35 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
         border-radius: 10px;
     }
 
-    &.card-size-button {
-        text-decoration: none;
+    &.card--amenity {
+        position: relative;
+        height: 200px;
+        width: 100%;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        align-items: flex-end;
+        justify-content: flex-end;
+        padding: 0;
+        background: red;
+        background: $tealgradient;
+
 
         &:hover {
             cursor: pointer;
         }
 
+
+        .card--amenity__info {
+            height: fit-content;
+            width: 150px;
+            padding: 10px 20px 10px 10px;
+            border-top-left-radius: 40px;
+            background: white;
+
+            >div {
+                color: $darkgrey;
+                text-align: right;
+            }
+        }
     }
 }
 
@@ -389,5 +430,26 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
         background: $grey;
         color: $darkgrey;
         font: 700 8px $open-sans;
+    }
+}
+
+.searchbar {
+    width: 100%;
+    height: 60px;
+    background: $lightgrey;
+    border-radius: 30px;
+    padding: 4px 15px;
+    border: none;
+    outline: none;
+    text-decoration: underline;
+    margin: 0;
+
+    &:hover {
+        border: solid $grey 8px;
+    }
+
+    &:focus {
+        border: solid $grey 2px;
+        background: white;
     }
 }

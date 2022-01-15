@@ -21,7 +21,7 @@ from . import views
 
 urlpatterns = [
     path('', views.dashboard_view, name="member-dashboard"),
-    path('places', views.places_view, name="member-amenityhub"),
+    path('places', views.places_view, name="member-places"),
     path('places/amenity', views.amenity_view, name="member-amenity"),
 
     # Form views

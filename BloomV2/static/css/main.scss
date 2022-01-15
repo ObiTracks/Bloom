@@ -51,7 +51,7 @@ body {
 }
 
 .main-container {
-    flex: 6;
+    flex: 5;
     height: fit-content;
     min-height: 200vh;
     // background: rgb(59, 59, 59);
@@ -78,17 +78,18 @@ body {
     display: grid;
     width: 100%;
     height: 100%;
-    min-height: 300px;
     // background: green;
 
     >div {
-        min-height: 300px;
+        min-height: 200px;
+        min-height: 5vh;
         width: 100%;
         // background: chocolate;
     }
 }
 
 .grid-style3x1 {
+    min-height: 300px;
     grid-gap: 10px;
     grid-template-columns: repeat(3, minmax(200px, 1fr));
     justify-items: center;
@@ -111,7 +112,34 @@ body {
 
 }
 
+.grid-style1x3-Member {
+    height: fit-content;
+    // min-height: 70vh;
+    grid-gap: 10px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 10px minmax(200px, fit-content) minmax(200px, fit-content);
+    // justify-items: center;
+    grid-template-areas:
+        "one"
+        "two"
+        "three"
+    ;
+
+    >div:nth-child(1) {
+        grid-area: one;
+    }
+
+    >div:nth-child(2) {
+        grid-area: two;
+    }
+
+    >div:nth-child(3) {
+        grid-area: three;
+    }
+}
+
 .grid-style3x2 {
+    min-height: 300px;
     grid-gap: 10px;
     grid-template-columns: repeat(3, minmax(200px, 1fr));
     grid-template-rows: fit-content fit-content;
@@ -135,6 +163,7 @@ body {
 }
 
 .grid-style3x3 {
+    min-height: 300px;
     grid-gap: 10px;
     grid-template-columns: repeat(3, minmax(200px, 1fr));
     grid-template-rows: fit-content fit-content fit-content;
@@ -163,11 +192,12 @@ body {
 }
 
 .grid-style3x3-Member {
+    min-height: 300px;
     height: fit-content;
-    min-height: 70vh;
+    // min-height: 70vh;
     grid-gap: 10px;
     grid-template-columns: repeat(3, minmax(200px, 1fr));
-    grid-template-rows: 600px fit-content fit-content;
+    grid-template-rows: 200px fit-content fit-content;
     justify-items: center;
     grid-template-areas:
         "one two three"
@@ -201,6 +231,7 @@ body {
 }
 
 .grid-style2x1-1 {
+    min-height: 300px;
     grid-gap: 10px;
     grid-template-columns: repeat(2, minmax(200px, 1fr));
     grid-template-rows: fit-content fit-content;
@@ -228,6 +259,51 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
     justify-items: center;
+    // background-color: red;
+
+
+    >div {
+        min-height: fit-content;
+        width: 100%;
+    }
+
+}
+
+.grid-simple-grid {
+    // background: royalblue;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, 280px);
+    grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+    justify-items: center;
+    // justify-content: center;
+    align-content: center;
+    align-items: center;
+    overflow: scroll;
+    // justify-content: center;
+    width: 100%;
+    padding: 0;
+    // background-color: red;
+
+
+    >div {
+        min-height: fit-content;
+        width: 100%;
+    }
+
+}
+
+.grid-badge-grid {
+    // background: rgb(61, 202, 48);
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, 110px);
+    // grid-template-rows: repeat(auto-fit, 120px);
+    grid-auto-rows: 110px;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: 100%;
+    padding: 0;
     // background-color: red;
 
 

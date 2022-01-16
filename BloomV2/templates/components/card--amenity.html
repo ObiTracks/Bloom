@@ -1,7 +1,14 @@
 {% load static %}
-<a href="{{link}}" class="card card--amenity">
+{% comment %} <a href="{{link}}" class="card card--amenity" onclick="window.location='{% url "member-amenity" amenity.id %}';">
+    Card 
+    <div class="card--amenity__info">
+        <div class="header3">{{amenity.name}}</div>
+    </div>
+</a>  {% endcomment %}
+
+<a onclick="window.location='{% url "member-amenity" amenity.id %}';" class="card card--amenity">
     {% comment %} Card {% endcomment %}
     <div class="card--amenity__info">
-        <div class="header3">{{name}}</div>
+        <div class="header3">{{amenity.name}}</div>
     </div>
 </a>

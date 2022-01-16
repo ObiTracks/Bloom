@@ -88,6 +88,20 @@ body {
     }
 }
 
+.grid-style1x1 {
+    min-height: 300px;
+    grid-gap: 10px;
+    justify-items: center;
+    grid-template-areas:
+        "one"
+    ;
+
+    >div:nth-child(1) {
+        grid-area: one;
+    }
+
+}
+
 .grid-style3x1 {
     min-height: 300px;
     grid-gap: 10px;
@@ -164,6 +178,7 @@ body {
 
 .grid-style3x3 {
     min-height: 300px;
+    height: fit-content;
     grid-gap: 10px;
     grid-template-columns: repeat(3, minmax(200px, 1fr));
     grid-template-rows: fit-content fit-content fit-content;

@@ -94,6 +94,19 @@ body {
   width: 100%;
 }
 
+.grid-style1x1 {
+  min-height: 300px;
+  grid-gap: 10px;
+  justify-items: center;
+      grid-template-areas: "one";
+}
+
+.grid-style1x1 > div:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: one;
+}
+
 .grid-style3x1 {
   min-height: 300px;
   grid-gap: 10px;
@@ -187,6 +200,9 @@ body {
 
 .grid-style3x3 {
   min-height: 300px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   grid-gap: 10px;
   -ms-grid-columns: (minmax(200px, 1fr))[3];
       grid-template-columns: repeat(3, minmax(200px, 1fr));

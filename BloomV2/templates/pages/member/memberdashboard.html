@@ -42,7 +42,7 @@
 
 {% block cell5 %}
 <div class="card card--grey">
-    <div class="header2">Frequent Amenities</div>
+    <div class="header2" onclick="window.location='{% url "member-places" %}';">Frequent Amenities</div>
     <div class="grid grid-badge-grid">
         {% include "components/badge.html" %}
         {% include "components/badge.html" %}
@@ -52,15 +52,9 @@
         {% include "components/badge.html" %}
     </div>
     <div class="grid grid-simple-grid">
-        {% for amenity in amenities %}
+        {% for amenity in recent_amenities %}
+            {% include 'components/card--amenity.html' with amenity=amenity %}
         {% endfor %}
-        {% include 'components/card--amenity.html' %}
-        {% include 'components/card--amenity.html' %}
-        {% include 'components/card--amenity.html' %}
-        {% include 'components/card--amenity.html' %}
-        
-        
-        
     </div>
 </div>
 {% endblock cell5 %}
@@ -68,7 +62,7 @@
 
 {% block cell6 %}
 <div class="card card--grey">
-    <div class="header2">History</div>
+    <div class="header2" onclick="window.location='{% url "member-places" %}';">History</div>
     <div style="">
         {% include 'components/rowstrip.html' %}
         {% include 'components/rowstrip.html' %}

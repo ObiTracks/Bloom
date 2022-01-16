@@ -7,9 +7,8 @@
 {% endblock pageheader %}
 
 {% block cell1 %}
-<input class="searchbar">
+{% include "components/searchbar.html" %}
 
-</input>
 {% endblock cell1 %}
 
 
@@ -18,11 +17,9 @@
     <div class="header2">Frequent Amenities</div>
     <div class="grid grid-simple-grid">
         {% for amenity in recent_amenities %}
-            {% include 'components/card--amenity.html' with name="Gym" link="https://www.google.com/" %}
+            {% include 'components/card--amenity.html' with amenity=amenity %}
         {% endfor %}
-        {% comment %} {% include 'components/card--amenity.html' %}
-        {% include 'components/card--amenity.html' %}
-        {% include 'components/card--amenity.html' %} {% endcomment %}
+
     </div>
     
 </div>
@@ -37,9 +34,11 @@
         <div class="card" style="margin-bottom: 20px;">
             <div class="header3">{{place.name}}</div>
             <div class="grid grid-simple-grid">
+
             {% for amenity in amenities %}
-                {% include 'components/card--amenity.html' with name=amenity.name link="https://www.google.com/" %}
+                {% include 'components/card--amenity.html' with amenity=amenity %}
             {% endfor %}
+
             </div>
     </div>
     {% endfor %}

@@ -333,7 +333,7 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
         box-shadow: none;
         background: $lightgrey;
         min-height: fit-content;
-        height: 100%;
+        // height: 100%;
     }
 
     &.card--outline {
@@ -362,8 +362,11 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
 
         .card--amenity__info {
             height: fit-content;
-            width: 150px;
-            padding: 10px 20px 10px 10px;
+            min-height: 40px;
+            width: 0;
+            min-width: 0px;
+            width: fit-content;
+            padding: 10px 20px 10px 30px;
             border-top-left-radius: 40px;
             background: white;
 
@@ -436,20 +439,45 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
 .searchbar {
     width: 100%;
     height: 60px;
-    background: $lightgrey;
     border-radius: 30px;
-    padding: 4px 15px;
-    border: none;
+    padding: 4px 20px;
     outline: none;
-    text-decoration: underline;
+    border: solid $grey 2px;
+    background: $lightgrey;
+
     margin: 0;
+    font: 500 20px $poppins;
+    color: $lightgrey;
+    letter-spacing: 1px;
+
 
     &:hover {
-        border: solid $grey 8px;
+        // border: solid $grey 2px;
+        cursor: text;
     }
 
     &:focus {
         border: solid $grey 2px;
         background: white;
+        font: 300 20px $poppins;
+
+    }
+}
+
+.timeslot {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    border-radius: 50px;
+    font: 300 20px $poppins;
+    background: $grey;
+    margin-bottom: 10px;
+
+    >div:nth-child(3) {
+        color: red;
+        font: 300 20px $poppins;
     }
 }

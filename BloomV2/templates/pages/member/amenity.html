@@ -1,0 +1,20 @@
+{% extends 'grids/grid-style1x3-Member.html' %}
+{% load static %}
+
+{% block pageheader %}
+<div class="header3">{{page_subtitle}}</div>
+<div class="header1">{{page_title}}</div>
+{% endblock pageheader %}
+
+{% block cell1 %}
+<div class="card card--grey" style="height: fit-content;">
+    <div class="header2">Today</div>
+    {% include 'components/timeslot.html' %}
+    {% include 'components/timeslot.html' %}
+
+</div>
+<div class="card card--grey" style="height: fit-content;">
+    <div class="header2">Tomorrow</div>
+    
+</div>
+{% endblock cell1 %}

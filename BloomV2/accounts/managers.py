@@ -38,8 +38,6 @@ class CustomUserManager(BaseUserManager):
         user.save()
         print("User saved in database")
 
-        Profile.objects.create(
-            user=user)
 
         return user
 

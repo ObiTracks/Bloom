@@ -6,8 +6,17 @@ import base64
 import datetime
 import json
 
+# Signals
+import inspect
+import os
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+from mgmt.middleware import RequestMiddleware
 
 # BASE MODELS
+
+
 class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, null=False, on_delete=models.CASCADE, related_name="profile")
@@ -47,6 +56,17 @@ class Amenity(models.Model):
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__,
                           sort_keys=True, indent=4)
+
+
+# @receiver(post_save, sender=Amenity)
+# def create_profile(sender, instance, created, **kwargs):
+#     request = RequestMiddleware(get_response=None)
+#     request = request.thread_local.current_request
+#     user = request.user
+#     if user:
+#         if created:
+#             AmenityProfileRelationship.objects.create(
+#                 amenity=instance, profile=user.profile, profile_type='0')
 
 
 class Place(models.Model):

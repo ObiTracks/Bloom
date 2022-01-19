@@ -58,6 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    'mgmt.middleware.RequestMiddleware',
 ]
 
 ROOT_URLCONF = 'BloomV2.urls'

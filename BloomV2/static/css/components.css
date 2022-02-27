@@ -47,17 +47,28 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background-color: red;
+}
+
+.navbar:hover .header1 {
+  z-index: 20;
+  pointer-events: auto;
+  background-color: pink;
 }
 
 .navbar .navbar__logo {
   width: 50px;
   height: auto;
   margin-bottom: 50px;
+  background-color: blue;
 }
 
 .navbar .navbar__icon {
   width: 40px;
   height: auto;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   margin-bottom: 30px;
   -webkit-filter: brightness(30%);
   opacity: 10%;
@@ -68,6 +79,35 @@
 .navbar .navbar__icon:hover {
   -webkit-filter: brightness(100%);
   opacity: 100%;
+}
+
+.navbar .item {
+  position: relative;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  max-width: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: yellow;
+  border: solid black 2px;
+}
+
+.navbar .item .header3 {
+  background-color: greenyellow;
+  position: absolute;
+  top: 5%;
+  left: 50px;
+  pointer-events: none;
+  z-index: 1000;
 }
 
 .button {

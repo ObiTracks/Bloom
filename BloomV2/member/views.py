@@ -72,7 +72,8 @@ def places_view(request):
     places = [i.place for i in place_relationships]
     recent_amenities = Reservation.objects.filter(
         amenity_profile_relationship__amenity__place__in=places)[:3]
-    print(recent_amenities[0])
+    if recent_amenities:
+        print(recent_amenities[0])
 
     context = {
         'page_title': page_title,

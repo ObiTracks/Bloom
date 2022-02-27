@@ -161,7 +161,7 @@ class PlaceProfileRelationship(models.Model):
         ordering = ('date_created',)
 
     def __str__(self):
-        return "{} {} Relationship".format(self.place, self.profile)
+        return "Place: {} | Profile: {} | Type: {}".format(self.place, self.profile, self.profile_type)
 
 
 class JoinRequest(models.Model):

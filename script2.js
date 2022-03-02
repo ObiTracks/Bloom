@@ -155,7 +155,7 @@ $("#showresults").click(
             cell = $(this);
             var day = tableHeaders.eq(cell.index()).text();
             var timeslot = cell.parent().children().eq(0).text().trim();
-            var test = timeStringToFloat(timeslot)
+            var test = timeConverter(timeslot, "f")
 
             if (!timeslotsDict.has(day)) {
                 timeslotsDict.set(day, [timeslot]);
@@ -176,10 +176,10 @@ $("#showresults").click(
 
 console.log(timeslotsDict);
 
-function isGap(curr, stack) {
+function isGap(curr, stack, interval) {
     result = false;
     if (stack.length >= 1) {
-        result = (curr - stack[stack.length - 1]) > 1
+        result = (curr - stack[stack.length - 1]) > interval;
     }
 
     // console.log("Checking Gap in Stack: ", stack, stack[stack.length - 1], result);
@@ -192,22 +192,27 @@ function getSelectedTimeslotIntervals(dict) {
     dict.forEach(
 
         function (timeslots, day) { // Going through each day and its selected timeslots
+            windows = []; //Clearing the windows array since its a global value
+            stack = []; //Clearing the stack since its a global value
             var intervals = timeslots.map(function (x) {
+                x = timeConverter(x, "f");
                 // console.log("YEOOO", x);
-                return parseInt(x, 10);
+                return x;
             })
             // intervals.forEach(x => {
             //     console.log(x);
             // })
 
 
+
+            var interval = 0.25; // 15 minutes/60minutes
             var i = 0;
             var n = timeslots.length;
             var stack = [];
 
             while (i < n) {
                 var curr = intervals[i];
-                is_gap = isGap(curr, stack);
+                is_gap = isGap(curr, stack, interval);
 
                 if (is_gap) {
                     if (stack.length == 1) {
@@ -217,7 +222,7 @@ function getSelectedTimeslotIntervals(dict) {
                     stack = [];
                 }
 
-                if (i == (n - 1)) {
+                if (i == (n - 1)) { //Last index of the array
                     if (stack.length == 0) {
                         stack.push(curr);
                     }
@@ -231,7 +236,7 @@ function getSelectedTimeslotIntervals(dict) {
                 while (stack.length >= 2) {
                     stack.pop();
                 }
-
+                console.log(curr);
                 stack.push(curr);
 
 
@@ -244,9 +249,17 @@ function getSelectedTimeslotIntervals(dict) {
     return windows;
 }
 
-function timeStringToFloat(time) {
-    var hoursMinutes = time.split(/[.:]/);
-    var hours = parseInt(hoursMinutes[0], 10);
-    var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
-    return hours + minutes / 60;
+function timeConverter(time, convertTotype) {
+    if (!convertTotype || convertTotype == "f") {
+        var hoursMinutes = time.split(/[.:]/);
+        var hours = parseInt(hoursMinutes[0], 10);
+        var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+        return hours + minutes / 60;
+    } else if (convertTotype == "s") {
+        var hours = Math.floor(time);
+        hours = hours < 10 ? "0" + hours : "" + hours;
+        var minutes = "" + abs(hours - time);
+        time = hours + ":" + minutes;
+        return time
+    }
 }

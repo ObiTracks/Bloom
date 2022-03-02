@@ -36,7 +36,7 @@ $(document).ready(
                 var rowclass = (n == 0 ? "rowhour" : "");
 
                 html = `
-                <tr>
+                <tr class=${rowclass}>
                     <td class="rowheader">${hour}:${minutes}</td>
                     <td></td>
                     <td></td>
@@ -51,5 +51,5 @@ $(document).ready(
                 tableBody.append(html);
             }
         }
-        
+
     });

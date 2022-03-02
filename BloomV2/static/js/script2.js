@@ -9,7 +9,8 @@ var lastSelection = new Set(); //Used to change the
 var currentSelection = new Set();
 
 var timeslotsDict = new Map();
-var windows = [];
+// var windows = [];
+var resultsDict = {};
 
 
 function selectTo(cell) {
@@ -141,9 +142,6 @@ $(document).ready($(document).mouseup(function () {
 }));
 
 
-
-
-
 $("#showresults").click(
     function getTimeslots() {
         console.clear();
@@ -169,9 +167,9 @@ $("#showresults").click(
             }
         });
 
-        var windows = getSelectedTimeslotIntervals(timeslotsDict);
-        console.log(windows);
-        $("#results").text(windows);
+        var json = getSelectedTimeslotIntervals(timeslotsDict);
+        console.log(json);
+        $("#results").text(JSON.stringify(json));
     });
 
 console.log(timeslotsDict);
@@ -192,18 +190,13 @@ function getSelectedTimeslotIntervals(dict) {
     dict.forEach(
 
         function (timeslots, day) { // Going through each day and its selected timeslots
-            windows = []; //Clearing the windows array since its a global value
-            stack = []; //Clearing the stack since its a global value
+            var windows = []; //Initializing the windows array
+            var stack = []; //Initializing the stack
             var intervals = timeslots.map(function (x) {
                 x = timeConverter(x, "f");
                 // console.log("YEOOO", x);
                 return x;
             })
-            // intervals.forEach(x => {
-            //     console.log(x);
-            // })
-
-
 
             var interval = 0.25; // 15 minutes/60minutes
             var i = 0;
@@ -236,17 +229,47 @@ function getSelectedTimeslotIntervals(dict) {
                 while (stack.length >= 2) {
                     stack.pop();
                 }
-                console.log(curr);
+                // console.log(curr);
                 stack.push(curr);
-
 
                 i++;
             }
-            console.log("Day: ", day, " Windows: ", windows);
+
+
+            // windows.forEach(function(window){
+            //     return window.forEach(x => {
+            //         x = timeConverter(x, "s");
+            //     })
+            // })
+            resultsDict[day] = windows;
+            // console.log(resultsDict);
+            // console.log("Day: ", day, " Windows: ", windows);
             console.log("End");
         })
 
-    return windows;
+
+    for (var key in resultsDict) {
+        var day_ = key;
+        var windows_ = resultsDict[day_]
+
+        // console.log("Day: ", day_, "Windows: ", windows_);
+        for(var i = 0; i < windows_.length; i++ ){
+            window_ = windows_[i];
+            // console.log("WINDOW", window_.length);
+
+            for (var n = 0; n < window_.length; n++){
+                window_[n] = timeConverter(window_[n], "s");
+                console.log(window_[n]);
+            }
+        }
+
+
+        // for (let window in windows) {
+        //     console.log(window);
+        // }
+    }
+
+    return JSON.parse(JSON.stringify(resultsDict));
 }
 
 function timeConverter(time, convertTotype) {
@@ -258,8 +281,11 @@ function timeConverter(time, convertTotype) {
     } else if (convertTotype == "s") {
         var hours = Math.floor(time);
         hours = hours < 10 ? "0" + hours : "" + hours;
-        var minutes = "" + abs(hours - time);
+
+        var minutes = "" + Math.abs(hours - time);
+        minutes = minutes == 0 ? "00" : 60 * minutes;
         time = hours + ":" + minutes;
+
         return time
     }
 }

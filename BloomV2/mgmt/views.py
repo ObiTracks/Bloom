@@ -131,10 +131,12 @@ def new_place(request):
     return
 
 
-def amenityobject_view(request):
-    page_title = "Amenity Name"
+def amenityobject_view(request, pk):
+    amenity = Amenity.objects.get(pk=pk)
+    page_title = amenity.name
     page_subtitle = "Amenities"
-    context = {'page_title': page_title, 'page_subtitle': page_subtitle}
+
+    context = {'page_title': page_title, 'page_subtitle': page_subtitle, 'amenity':amenity}
     template_name = 'pages/manager/amenityobject.html'
     return render(request, template_name, context)
 

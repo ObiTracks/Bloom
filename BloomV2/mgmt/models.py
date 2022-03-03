@@ -39,6 +39,9 @@ class Amenity(models.Model):
     subtitle = models.CharField(max_length=200, blank=True)
     description = models.CharField(max_length=200, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
+    timeslots = models.JSONField(blank=True, null=True)
+
+
     # availability = ArrayField(
     #     base_field=models.CharField(max_length=100, blank=True), null=True)
     # images = models.JSONField(_(""), encoder=base64, decoder=)

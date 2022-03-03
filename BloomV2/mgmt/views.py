@@ -3,6 +3,7 @@
 from datetime import date, datetime, timedelta
 
 import json
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Imports for Django views
 from django.contrib.admin.views.decorators import staff_member_required
@@ -136,7 +137,28 @@ def amenityobject_view(request, pk):
     page_title = amenity.name
     page_subtitle = "Amenities"
 
-    context = {'page_title': page_title, 'page_subtitle': page_subtitle, 'amenity':amenity}
+    # amenityForm = AmenityForm()
+    if request.method == 'POST':
+        timeslotForm = TimeslotForm(request.POST, instance=amenity)
+
+        if timeslotForm.is_valid():
+            amenity = timeslotForm.save()
+            return redirect('amenityhub')
+        else:
+            messages.error(request, "Timeslot form is invalid")
+
+
+    timeslotForm = TimeslotForm(instance=amenity)
+
+    
+    context = {
+        'page_title': page_title,
+        'page_subtitle': page_subtitle,
+        'amenity': amenity,
+        # 'amenityForm': amenityForm,
+        'timeslotForm': timeslotForm,
+        'jsonTimeslots':amenity.timeslots,
+    }
     template_name = 'pages/manager/amenityobject.html'
     return render(request, template_name, context)
 

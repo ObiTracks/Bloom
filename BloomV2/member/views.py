@@ -31,7 +31,7 @@ from mgmt.models import *
 
 
 def dashboard_view(request):
-    page_title = "Dashboard"
+    page_title = "Your Personal Dashboard"
     # AMENITIES
 
     place_relationships = PlaceProfileRelationship.objects.filter(

@@ -170,6 +170,7 @@ $("#showresults").click(
         var json = getSelectedTimeslotIntervals(timeslotsDict);
         console.log(json);
         $("#results").text(JSON.stringify(json));
+        $("#id_timeslots").text(JSON.stringify(json));
     });
 
 console.log(timeslotsDict);
@@ -253,11 +254,11 @@ function getSelectedTimeslotIntervals(dict) {
         var windows_ = resultsDict[day_]
 
         // console.log("Day: ", day_, "Windows: ", windows_);
-        for(var i = 0; i < windows_.length; i++ ){
+        for (var i = 0; i < windows_.length; i++) {
             window_ = windows_[i];
             // console.log("WINDOW", window_.length);
 
-            for (var n = 0; n < window_.length; n++){
+            for (var n = 0; n < window_.length; n++) {
                 window_[n] = timeConverter(window_[n], "s");
                 console.log(window_[n]);
             }

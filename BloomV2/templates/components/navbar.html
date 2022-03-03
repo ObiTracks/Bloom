@@ -27,6 +27,11 @@
         <img src="{% static 'images/ProfileIcon-V1.png'  %}" alt="" class="navbar__icon">
         <div class="header3">Dashboard</div>
     </div>
+
+    <div class="item" onclick="window.location='{% url "member-dashboard" %}';">
+        <img src="{% static 'images/ProfileIcon-V1.png'  %}" alt="" class="navbar__icon">
+        <div class="header3" style="color: blue;">Member Dashboard</div>
+    </div>
 </div>
 {% endif %}
 

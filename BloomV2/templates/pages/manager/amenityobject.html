@@ -1,4 +1,4 @@
-{% extends 'grids/grid-style1x1.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block headers %}
@@ -6,26 +6,44 @@
 {% endblock headers %}
 
 {% block pageheader %}
-<div class="header3">{{page_subtitle}}</div>
+<div class="header3">>{{page_subtitle}}</div>
 <div class="header1">{{page_title}}</div>
 {% endblock pageheader %}
 
-{% block cell1 %}
+{% block grid %}
 
-<div class="header2">Info and Gallery</div>
+<div class="header2">Info and Gallery </div>
+
+<span>{{amenity.name}}</span>
+<span>{{amenity.place}}</span>
+<span>{{amenity.timeslot}}</span>
 
 <button type="button" id="showresults" value="Spremi" style="height: 26px; margin-top:20px; width: 200px;">Show all selected</button>
-    <span id="results"></span>
+<span id="results"></span>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{timeslotForm}}
+    <button>Submit</button>
+</form>
+
+
 <table id="table">
     <!-- table timeslots injected here -->
 </table>
 
-<script
-      src="https://code.jquery.com/jquery-3.6.0.js"
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"></script>
+<script> //Loading json timeslots from object into the page for the js to interact
+    var timeslotJson = {{ jsonTimeslots | safe }};
+    console.log(timeslotJson);
+</script>
 <script src="{% static 'js/script1.js' %}" type="text/javascript" charset="utf-8"></script>
 <script src="{% static 'js/script2.js' %}" type="text/javascript" charset="utf-8"></script>
+
+{% endblock grid %}
 {% comment %} <script src="script2.js" type="text/javascript" charset="utf-8"></script> {% endcomment %}
 {% comment %} <div class="header2">Member Access List</div>
 <div class="card card--grey">
@@ -46,5 +64,4 @@
             {% include 'components/badge.html' %}
         </div>
 </div> {% endcomment %}
-{% endblock cell1 %}
 

@@ -1,12 +1,12 @@
-{% extends 'grids/grid-style3x1.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block pageheader %}
 <div class="header1">{{page_title}}</div>
 {% endblock pageheader %}
 
-{% block cell1 %}
-<div class="card">
+
+{% comment %} <div class="card">
     <div class="header2">Place Form</div>
     <form action="{% url 'placeform' %}" method="POST">
         {% csrf_token %}
@@ -22,29 +22,27 @@
         {{amenity_form.as_p}}
         <button>Submit</button>
     </form>
-</div>
-
+</div> {% endcomment %}
 
     
-{% endblock cell1 %}
 
-{% block cell2 %}
-<div class="card">
-    <div class="header2">Places</div>
+
+{% block grid %}
     {% if amenity_groupings %}
-    {% for place, amenities in amenity_groupings.items %}
-        <div class="header1">Places{{place}}</div>
-        <div class="card card--outline">
-        {% for amenity in amenities %}
-            {% include 'components/card.html' with title=amenity.name %}
+        {% for place, amenities in amenity_groupings.items %}
+            <div class="header2">{{place}}</div>
+
+            <div class="card card--grey">
+                {% for amenity in amenities %}
+                    {% include 'components/card--amenity.html' with title=amenity.name %}
+                {% endfor %}
+            </div>
         {% endfor %}
-        </div>
-    {% endfor %}
+
     {% else %}
-    <div class="header2">You have no places or amenities yet!</div>
+        <div class="header2">You have no places or amenities yet!</div>
     {% endif %}
-</div>
-{% endblock cell2 %}
+{% endblock grid %}
 
 
 

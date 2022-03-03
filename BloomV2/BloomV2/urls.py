@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('manage/', include('mgmt.urls')),
     path('member/', include('member.urls')),
-    path('profile/', include('member.urls')),
+    # path('profile/', include('member.urls')),
     path('', include('accounts.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 

@@ -1,17 +1,17 @@
-// For preselecting the timeslot picker table with an objects saved timeslots
-//Accesses timeslotJSON variable from script tag added in the html page
+// METHOD 1 For getting dynamically added jquery dom elements
+
+$("table").ready(function () {
+    var tableBody = null;
+    var tableRows = $(this).find("tbody tr");
+    console.log("Yeo", tableRows);
+});
 
 
-$("#table").on('click','table>tbody>tr>td', function() {  });
-function loadTable() {
-    var x = $("#table tr");
-    var timeslotJson = timeslotJson;
-
-
-    console.log("Length", x);
+function preLoadTable() {
+    console.log("Table rows ", tableRows.length);
 }
 
-loadTable();
+preLoadTable();
 // $(document).ready(loadTable());
 
 

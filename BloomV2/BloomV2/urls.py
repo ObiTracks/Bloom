@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('manage/', include('mgmtApp.urls')),
-    path('member/', include('member.urls')),
+    path('member/', include('memberApp.urls')),
     # path('profile/', include('member.urls')),
     path('', include('accountsApp.urls')),
     path('__debug__/', include('debug_toolbar.urls')),

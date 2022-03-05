@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth import get_user_model
-from accounts.models import *
+from accountsApp.models import *
 from django.urls import reverse
 
 

@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'mgmt',
-    'accounts',
+    'mgmtApp',
+    'accountsApp',
     'phonenumber_field',
     'debug_toolbar',
 
@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-    'mgmt.middleware.RequestMiddleware',
+    'mgmtApp.middleware.RequestMiddleware',
 ]
 
 ROOT_URLCONF = 'BloomV2.urls'
@@ -143,7 +143,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Setting the CustomUser Model as the auth model to avoid conflicting errors
 # Withouth this line of code, the default AUTH_USER_MODEL will be the default User model.
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'accountsApp.CustomUser'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.RemoteUserBackend',
     'django.contrib.auth.backends.ModelBackend',

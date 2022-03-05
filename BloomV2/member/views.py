@@ -26,7 +26,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 
 from .forms import *
-from mgmt.models import *
+from mgmtApp.models import *
 # Create your views here.
 
 

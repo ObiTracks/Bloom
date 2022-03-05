@@ -2,10 +2,10 @@
 from django.db.models.signals import post_save
 # from django.contrib.auth.models import User
 from django.dispatch import receiver
-from accounts.models import CustomUser
+from accountsApp.models import CustomUser
 
-from mgmt.middleware import RequestMiddleware
-from mgmt.models import Amenity, AmenityProfileRelationship, Place, PlaceProfileRelationship
+from mgmtApp.middleware import RequestMiddleware
+from mgmtApp.models import Amenity, AmenityProfileRelationship, Place, PlaceProfileRelationship
 
 
 @receiver(post_save, sender=Amenity)

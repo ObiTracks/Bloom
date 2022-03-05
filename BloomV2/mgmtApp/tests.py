@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User
-from mgmt.models import *
-from accounts.models import *
+from mgmtApp.models import *
+from accountsApp.models import *
 
 
 class CreateSuperUser_and_Profile_TestCase(TestCase):

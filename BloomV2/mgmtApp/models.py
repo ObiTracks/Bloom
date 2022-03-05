@@ -12,7 +12,7 @@ import os
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from mgmt.middleware import RequestMiddleware
+from mgmtApp.middleware import RequestMiddleware
 
 # BASE MODELS
 
@@ -35,7 +35,7 @@ class Profile(models.Model):
 class Amenity(models.Model):
     name = models.CharField(max_length=200, blank=False)
     place = models.ForeignKey(
-        "mgmt.Place", blank=False, on_delete=models.CASCADE)
+        "mgmtApp.Place", blank=False, on_delete=models.CASCADE)
     subtitle = models.CharField(max_length=200, blank=True)
     description = models.CharField(max_length=200, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -76,7 +76,7 @@ class Place(models.Model):
     name = models.CharField(max_length=200, blank=False)
     email = models.CharField(max_length=200, blank=False)
     address = models.ForeignKey(
-        "mgmt.Address", null=True, blank=True, on_delete=models.DO_NOTHING)
+        "mgmtApp.Address", null=True, blank=True, on_delete=models.DO_NOTHING)
     capacity = models.IntegerField(null=True, blank=True)
     description = models.TextField(max_length=500, blank=True)
     phone_number = PhoneNumberField(null=True, blank=True, unique=False)
@@ -107,9 +107,9 @@ class Address(models.Model):
 
 class Reservation(models.Model):
     amenity_profile_relationship = models.ForeignKey(
-        "mgmt.AmenityProfileRelationship", verbose_name=("AmenityRelationship for the Reservation"), blank=False, on_delete=models.CASCADE)
+        "mgmtApp.AmenityProfileRelationship", verbose_name=("AmenityRelationship for the Reservation"), blank=False, on_delete=models.CASCADE)
     place = models.ForeignKey(
-        "mgmt.Place", blank=False, null=True, related_name="reservation_set", on_delete=models.CASCADE)
+        "mgmtApp.Place", blank=False, null=True, related_name="reservation_set", on_delete=models.CASCADE)
     # timeslot = models.JSONField(default=int)
     # timeslot = ArrayField(
     #     base_field=models.TimeField(null=False, blank=True), size=2, null=True)
@@ -126,9 +126,9 @@ class Reservation(models.Model):
 
 # RELATIONAL MODELS
 class AmenityProfileRelationship(models.Model):
-    amenity = models.ForeignKey("mgmt.Amenity", verbose_name=(
+    amenity = models.ForeignKey("mgmtApp.Amenity", verbose_name=(
         "Amenity in the relationship"), on_delete=models.CASCADE, related_name="amenity_of")
-    profile = models.ForeignKey("mgmt.Profile", verbose_name=(
+    profile = models.ForeignKey("mgmtApp.Profile", verbose_name=(
         "Profile in the relationship"), on_delete=models.CASCADE, related_name="amenity_profile_of")
 
     PROFILE_TYPES = (('0', 'Owner'), ('1', 'Manager'), ('2', 'Supervisor'),
@@ -147,9 +147,9 @@ class AmenityProfileRelationship(models.Model):
 
 
 class PlaceProfileRelationship(models.Model):
-    place = models.ForeignKey("mgmt.Place", verbose_name=(
+    place = models.ForeignKey("mgmtApp.Place", verbose_name=(
         "Place in the relationship"), on_delete=models.CASCADE, related_name="place_of")
-    profile = models.ForeignKey("mgmt.Profile", verbose_name=(
+    profile = models.ForeignKey("mgmtApp.Profile", verbose_name=(
         "Profile in the relationship"), on_delete=models.CASCADE, related_name="place_profile_of")
 
     PROFILE_TYPES = (('0', 'Owner'), ('1', 'Manager'), ('2', 'Supervisor'),
@@ -169,9 +169,9 @@ class PlaceProfileRelationship(models.Model):
 
 class JoinRequest(models.Model):
     profile = models.ForeignKey(
-        "mgmt.Profile", null=False, blank=False, on_delete=models.CASCADE)
+        "mgmtApp.Profile", null=False, blank=False, on_delete=models.CASCADE)
     place = models.ForeignKey(
-        "mgmt.Place",  null=False, blank=False, on_delete=models.CASCADE)
+        "mgmtApp.Place",  null=False, blank=False, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
     date_created = models.DateTimeField(auto_now_add=True)
 

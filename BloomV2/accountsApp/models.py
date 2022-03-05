@@ -3,7 +3,7 @@ from django.db import models
 # Signals
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from mgmt.models import Profile
+from mgmtApp.models import Profile
 
 # Custom User Management
 from django.contrib.auth.models import AbstractUser

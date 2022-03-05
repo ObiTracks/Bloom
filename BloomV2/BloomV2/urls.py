@@ -20,10 +20,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('manage/', include('mgmt.urls')),
+    path('manage/', include('mgmtApp.urls')),
     path('member/', include('member.urls')),
     # path('profile/', include('member.urls')),
-    path('', include('accounts.urls')),
+    path('', include('accountsApp.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

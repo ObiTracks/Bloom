@@ -59,24 +59,55 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
     // height: 100vh;
     // background: maroon;
 
+    &:hover {
+        .header1 {
+            z-index: 20;
+            pointer-events: auto;
+            background-color: pink;
+        }
+    }
+
     .navbar__logo {
         width: 50px;
         height: auto;
         margin-bottom: 50px;
+        // background-color: blue;
     }
 
     .navbar__icon {
         width: 40px;
         height: auto;
+        height: fit-content;
         margin-bottom: 30px;
 
-        -webkit-filter: brightness(30%);
-        opacity: 10%;
+        // -webkit-filter: brightness(60%);
+        // opacity: 50%;
         transition: all 0.05s ease-in;
 
         &:hover {
-            -webkit-filter: brightness(100%);
-            opacity: 100%;
+            cursor: pointer;
+            // -webkit-filter: brightness(100%);
+            // opacity: 100%;
+        }
+    }
+
+    .item {
+        position: relative;
+        height: fit-content;
+        max-width: 60px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        // background-color: yellow;
+        // border: solid black 2px;
+
+        .header3 {
+            // background-color: greenyellow;
+            position: absolute;
+            top: 5%;
+            left: 50px;
+            pointer-events: none;
+            z-index: 1000;
         }
     }
 }
@@ -346,7 +377,7 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
     &.card--amenity {
         position: relative;
         height: 200px;
-        width: 100%;
+        width: 300px;
         display: flex;
         align-items: flex-end;
         justify-content: flex-end;

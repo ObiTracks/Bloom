@@ -35,6 +35,14 @@ class AmenityForm(forms.ModelForm):
     class Meta:
         model = models.Amenity
         fields = "__all__"
+        exclude = ('timeslots',)
+
+
+class TimeslotForm(forms.ModelForm):
+
+    class Meta:
+        model = models.Amenity
+        fields = ["timeslots", ]
 
 
 class ReservationForm(forms.ModelForm):
@@ -53,6 +61,7 @@ class PlaceProfileRelationship(forms.ModelForm):
     class Meta:
         model = models.PlaceProfileRelationship
         fields = "__all__"
+
 
 class JoinRequest(forms.ModelForm):
     class Meta:

@@ -1,14 +1,46 @@
 {% load static %}
 
+
+{% if "/manage/" in request.path %}
 <div class="navbar">
     
-    <a href="{% url 'dashboard' %}">
+    <div class="item" onclick="window.location='{% url "member-places" %}';">
+        <img src="{% static 'images/Bloom Logo-Transparent-Darker-Blue.png' %}" alt="" class="navbar__logo">
+    </div>
+
+    <div class="item" onclick="window.location='{% url "dashboard" %}';">
+        <img src="{% static 'images/DashboardIcon-V3.png'  %}" alt="" class="navbar__icon">
+        <div class="header3">Dashboard</div>
+    </div>
+
+    <div class="item" onclick="window.location='{% url "amenityhub" %}';">
+        <img src="{% static 'images/DashboardIcon-V2.png'  %}" alt="" class="navbar__icon">
+        <div class="header3">Amenity Hub</div>
+    </div>
+
+    <div class="item" onclick="window.location='{% url "memberhub" %}';">
+        <img src="{% static 'images/MemberIcon-V1.png'  %}" alt="" class="navbar__icon">
+        <div class="header3">Member Hub</div>
+    </div>
+
+    <div class="item" onclick="window.location='{% url "dashboard" %}';">
+        <img src="{% static 'images/ProfileIcon-V1.png'  %}" alt="" class="navbar__icon">
+        <div class="header3">Dashboard</div>
+    </div>
+
+    <div class="item" onclick="window.location='{% url "member-dashboard" %}';">
+        <img src="{% static 'images/ProfileIcon-V1.png'  %}" alt="" class="navbar__icon">
+        <div class="header3" style="color: blue;">Member Dashboard</div>
+    </div>
+</div>
+{% endif %}
+
+{% if "/member/" in request.path %}
+<div class="navbar">
+    
+    <a href="">
         <img src="{% static 'images/Bloom Logo-Transparent-Darker-Blue.png' %}" alt="" class="navbar__logo">
     </a>
-
-    {% comment %} <a href="{% url 'dashboard' %}">
-        <img src="{% static 'images/DashboardIcon-V1.png' %}" alt="" class="navbar__icon">
-    </a> {% endcomment %}
 
     <a href="{% url 'dashboard' %}">
         <img src="{% static 'images/DashboardIcon-V3.png'  %}" alt="" class="navbar__icon">
@@ -25,3 +57,4 @@
     <a href="">
         <img src="{% static 'images/ProfileIcon-V1.png'  %}" alt="" class="navbar__icon"></a>
 </div>
+{% endif %}

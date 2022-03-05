@@ -1,0 +1,38 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td {
+    border: 1px solid rgb(219, 219, 219);
+    width: 80px;
+    /* border-style : hidden!important; */
+    /* height: 40px; */
+}
+
+td.selected {
+    background-color: rgb(9, 198, 255);
+}
+
+tr {
+    font-size: 10px;
+    text-align: right;
+    color: grey;
+    height: 11px;
+    /* background-color: blue; */
+    /* margin: 10px; */
+}
+
+tr.rowhour {
+    font-size: 15px;
+    color: black;
+    height: 20px;
+    background-color: rgb(194, 194, 194);
+    /* margin: 10px; */
+
+}
+
+thead {
+    font-size: 14px;
+    color: black;
+}

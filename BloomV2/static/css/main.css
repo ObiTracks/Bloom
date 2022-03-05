@@ -51,6 +51,7 @@ body {
 }
 
 .main-container {
+  z-index: 1;
   -webkit-box-flex: 5;
       -ms-flex: 5;
           flex: 5;
@@ -82,6 +83,7 @@ body {
 }
 
 .grid {
+  z-index: 1;
   display: -ms-grid;
   display: grid;
   width: 100%;

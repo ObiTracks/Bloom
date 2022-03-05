@@ -1,0 +1,38 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td {
+  border: 1px solid #dbdbdb;
+  width: 80px;
+  /* border-style : hidden!important; */
+  /* height: 40px; */
+}
+
+td.selected {
+  background-color: #09c6ff;
+}
+
+tr {
+  font-size: 10px;
+  text-align: right;
+  color: grey;
+  height: 11px;
+  /* background-color: blue; */
+  /* margin: 10px; */
+}
+
+tr.rowhour {
+  font-size: 15px;
+  color: black;
+  height: 20px;
+  background-color: #c2c2c2;
+  /* margin: 10px; */
+}
+
+thead {
+  font-size: 14px;
+  color: black;
+}
+/*# sourceMappingURL=timeslots.css.map */

@@ -5,7 +5,7 @@ from django.dispatch import receiver
 from accounts.models import CustomUser
 
 from mgmt.middleware import RequestMiddleware
-from mgmt.models import Amenity, AmenityProfileRelationship
+from mgmt.models import Amenity, AmenityProfileRelationship, Place, PlaceProfileRelationship
 
 
 @receiver(post_save, sender=Amenity)
@@ -18,4 +18,17 @@ def create_amenity(sender, instance, created, **kwargs):
             AmenityProfileRelationship.objects.create(
                 amenity=instance, profile=user.profile, profile_type='0')
 
-            print("\n\n\nYEOOO Relationship created\n\n\n")
+            print("\n\n\nYEOOO Amenity Relationship created\n\n\n")
+
+
+@receiver(post_save, sender=Place)
+def create_amenity(sender, instance, created, **kwargs):
+    request = RequestMiddleware(get_response=None)
+    request = request.thread_local.current_request
+    user = request.user
+    if user:
+        if created:
+            PlaceProfileRelationship.objects.create(
+                place=instance, profile=user.profile, profile_type='0')
+
+            print("\n\n\nYEOOO Place Relationship created\n\n\n")

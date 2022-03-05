@@ -1,9 +1,9 @@
 from django.apps import AppConfig
 
 
-class mgmtAppConfig(AppConfig):
+class mainAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'mgmtApp'
+    name = 'mainApp'
 
     def ready(self):
-        import mgmtApp.signals
+        import mainApp.signals

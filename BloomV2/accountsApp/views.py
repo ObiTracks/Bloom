@@ -70,7 +70,7 @@ def signup_request(request):
             messages.success(request, f'Welcome to Bloom')
             # print("New user {} created".format(user))
 
-            return redirect('mgmtApp:dashboard')
+            return redirect('mainApp:dashboard')
 
     return login_view(request)
 

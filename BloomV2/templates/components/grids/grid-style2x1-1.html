@@ -5,31 +5,24 @@
 {% block pageheader %}
 {% endblock pageheader %}
 
-{% block grid %}
-
-<div class="grid grid-style3x3-Member">
+{% block content %}
+<div class="grid grid-style2x1-1">
+    <div class="card card--grey">
         {% block cell1 %}
         {% endblock cell1 %}
+    </div>
 
-    
+    <div class="card card--grey">
         {% block cell2 %}
         {% endblock cell2 %}
-
+    </div>
     
+    
+    {% if request.path != "/login" %}
+    <div class="card card--grey">
         {% block cell3 %}
         {% endblock cell3 %}
-    
-
-        {% block cell4 %}
-        {% endblock cell4 %}
-    
-
-        {% block cell5 %}
-        {% endblock cell5 %}
-    
-
-        {% block cell6 %}
-        {% endblock cell6 %}
-    
+    </div>
+    {% endif %}
 </div>
-{% endblock grid %}
+{% endblock content %}

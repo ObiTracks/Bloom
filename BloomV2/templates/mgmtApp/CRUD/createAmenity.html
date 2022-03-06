@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pageheader %}
+<div class="header3">{{page_title}}</div>
+<div class="header1">Creating New Amenity...</div>
+{% endblock pageheader %}
+
+
+{% block content %}
+<div class="card card--dotted" style="margin-bottom: 20px;">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{amenity_form.as_p}}
+        <button>Create New Amenity</button>
+    </form>
+    
+</div>
+
+    
+{% endblock content %}
+

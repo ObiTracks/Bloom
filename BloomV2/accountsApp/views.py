@@ -37,7 +37,7 @@ def login_view(request):
         'login_form': login_form,
         'register_form': register_form
     }
-    return render(request, '../templates/registration/login.html', context)
+    return render(request, '../templates/accountsApp/login.html', context)
 
 
 def login_request(request):

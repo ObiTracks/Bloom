@@ -5,8 +5,8 @@
 {% block pageheader %}
 {% endblock pageheader %}
 
-{% block grid %}
-<div class="grid grid-style2x1-1">
+{% block content %}
+<div class="grid grid-style3x3">
     <div class="card card--grey">
         {% block cell1 %}
         {% endblock cell1 %}
@@ -16,13 +16,15 @@
         {% block cell2 %}
         {% endblock cell2 %}
     </div>
-    
-    
-    {% if request.path != "/login" %}
+
     <div class="card card--grey">
         {% block cell3 %}
         {% endblock cell3 %}
     </div>
-    {% endif %}
+
+    <div class="card card--grey">
+        {% block cell4 %}
+        {% endblock cell4 %}
+    </div>
 </div>
-{% endblock grid %}
+{% endblock content %}

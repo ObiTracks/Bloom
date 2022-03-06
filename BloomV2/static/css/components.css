@@ -410,17 +410,23 @@
   height: fit-content;
   border-radius: 20px;
   overflow: hidden;
-  background: white;
-  padding: 20px;
+  background: #E0E0E0;
+  padding: 10px;
   text-decoration: none;
   -webkit-transition: all ease-in-out 0.2s;
   transition: all ease-in-out 0.2s;
 }
 
-.card.card--grey {
+.card.card--dotted {
+  background: none;
+  border: solid #E0E0E0 3px;
+  border-style: dotted;
+}
+
+.card.card--white {
   -webkit-box-shadow: none;
           box-shadow: none;
-  background: #F2F2F2;
+  background: white;
   min-height: -webkit-fit-content;
   min-height: -moz-fit-content;
   min-height: fit-content;

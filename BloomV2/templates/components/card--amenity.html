@@ -6,7 +6,8 @@
     </div>
 </a>  {% endcomment %}
 
-<a class="card card--amenity" onclick="window.location='{% url "amenity" amenity.id %}';" >
+{% comment %} <a class="card card--amenity" > {% endcomment %}
+<a class="card card--amenity" onclick="window.location='{% url "amenity" amenity.id %}';">
     {% comment %} Card {% endcomment %}
     <div class="card--amenity__info">
         <div class="header3">{{amenity.name}}</div>

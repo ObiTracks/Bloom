@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pageheader %}
+<div class="header1">{{page_title}}</div>
+{% endblock pageheader %}
+
+
+{% block content %}
+<div class="header2">Create New Place +</div>
+<div class="card card--dotted" style="margin-bottom: 20px;">
+    <form action="{% url "new-place" %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{place_form.as_p}}
+        <button>Create Place</button>
+    </form>
+
+    
+</div>
+
+{% if amenity_groupings %}
+    {% for place, amenities in amenity_groupings.items %}
+        <div class="header2">{{place}}</div>
+        <a href="{% url "new-amenity" place.id %}" class="button">
+            <div class="button__text">+ New Amenity</div>
+        </a>
+
+        <div class="card">
+            {% if amenities %}
+                {% for amenity in amenities %}
+                    {% include 'components/card--amenity.html' with amenity=amenity%}
+                    {% comment %} {{amenity}} {% endcomment %}
+                {% endfor %}
+            {% else %}
+                <div class="header2">Create an amenity! 🏝</div>
+            {% endif %}
+            {% comment %} <div class="card card--white">
+                <form action="{% url "new-amenity" %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{amenity_form.as_p}}
+                    <button>Create New Amenity</button>
+                </form>
+            </div> {% endcomment %}
+        </div>
+
+    {% endfor %}
+{% else %}
+    <div class="header2">You have no places or amenities! Make one above!</div>
+
+    <div class="card">
+        <div class="header2">No Places Yet 😢 Make one ^</div>
+    </div>
+{% endif %}
+
+{% comment %} <div class="card card--grey">safds</div> {% endcomment %}
+    <!-- {% if amenity_groupings %}
+        {% for place, amenities in amenity_groupings.items %}
+            <div class="header3">{{place}}</div>
+
+            <div class="card">
+                {% for amenity in amenities %}
+                    {% include 'components/card.html' with title=amenity.name %}
+                    {% comment %} {{amenity}} {% endcomment %}
+                {% endfor %}
+            </div>
+
+        {% endfor %}
+    {% else %}
+
+    {% endif %} -->
+
+    
+{% endblock content %}
+

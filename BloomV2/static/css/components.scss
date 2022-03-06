@@ -355,14 +355,20 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
     border-radius: 20px;
     overflow: hidden;
     // box-shadow: $box-shadow--light;
-    background: white;
-    padding: 20px;
+    background: $grey;
+    padding: 10px;
     text-decoration: none;
     transition: all ease-in-out 0.2s;
 
-    &.card--grey {
+    &.card--dotted {
+        background: none;
+        border: solid $grey 3px;
+        border-style: dotted;
+    }
+
+    &.card--white {
         box-shadow: none;
-        background: $lightgrey;
+        background: white;
         min-height: fit-content;
         // height: 100%;
     }

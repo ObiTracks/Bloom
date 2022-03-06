@@ -10,7 +10,7 @@
 <div class="header1">{{page_title}}</div>
 {% endblock pageheader %}
 
-{% block grid %}
+{% block content %}
 
 <div class="header2">Info and Gallery </div>
 
@@ -18,15 +18,16 @@
 <span>{{amenity.place}}</span>
 <span>{{amenity.timeslot}}</span>
 
-<button type="button" id="showresults" value="Spremi" style="height: 26px; margin-top:20px; width: 200px;">Show all selected</button>
-<span id="results"></span>
+
 
 <form action="" method="POST">
     {% csrf_token %}
-    {{timeslotForm}}
-    <button>Submit</button>
+    {{amenity_form.as_p}}
+    
+    <button>Confirm Changes to Amenity</button>
 </form>
-
+<button type="button" id="showresults" value="Spremi" style="height: 26px; margin-top:20px; width: 200px;">Show all selected</button>
+<span id="results"></span>
 
 <table id="table">
     <!-- table timeslots injected here -->
@@ -44,7 +45,7 @@
 <script src="{% static 'js/script2.js' %}" type="text/javascript" charset="utf-8"></script>
 <script src="{% static 'js/script3.js' %}" type="text/javascript" charset="utf-8"></script>
 
-{% endblock grid %}
+{% endblock content %}
 {% comment %} <script src="script2.js" type="text/javascript" charset="utf-8"></script> {% endcomment %}
 {% comment %} <div class="header2">Member Access List</div>
 <div class="card card--grey">

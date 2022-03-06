@@ -26,15 +26,23 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 
-
+from mgmtApp.forms import *
 from .models import *
-from .querytools import getUsersPlacesAndAmenities
-# Create your views here.
 
 
-def landingpage_view(request):
-    page_title = "Welcome to Bloom"
-    context = {'page_title': page_title, }
-    template_name = 'landingpage.html'
-    return render(request, template_name, context)
+def getUsersPlacesAndAmenities(request):
+
+    place_relationships = PlaceProfileRelationship.objects.filter(
+        profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
+    places = [i.place for i in place_relationships]
+
+    place_amenity_groupings = {}
+    for place in places:
+        print(place)
+        amenities = place.amenity_set.all()
+        print(amenities)
+
+        place_amenity_groupings[place] = amenities if amenities.count() > 0 else None
+    return places, place_amenity_groupings
+
 

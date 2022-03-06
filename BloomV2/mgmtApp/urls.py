@@ -13,22 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+
 from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+from . import views
+from . import crud_views
+
 
 urlpatterns = [
-    path('', include('mainApp.urls')),
-    path('auth/', include('accountsApp.urls')),
-    path('manage/', include('mgmtApp.urls')),
-    path('book/', include('memberApp.urls')),
+    path('dashboard', views.dashboard_view, name="dashboard"),
+    path('amenities', views.amenities_view, name="amenities"),
+    path('amenities/<str:pk>/', views.amenity_view, name="amenity"),
+    # path('amenities/amenity', views.amenityobject_view, name="amenity"),
 
-    path('admin/', admin.site.urls),
-    path('__debug__/', include('debug_toolbar.urls')),
+    # path('members', views.memberhub_view, name="memberhub"),
+    # path('members/member', views.memberobject_view, name="member"),
 
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # CRUD views
+    path('newamenity/<str:place_id>/', crud_views.new_amenity_view, name="new-amenity"),
+    path('newplace', crud_views.new_place, name="new-place"),
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+]

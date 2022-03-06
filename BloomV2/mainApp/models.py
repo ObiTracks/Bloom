@@ -41,7 +41,6 @@ class Amenity(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     timeslots = models.JSONField(blank=True, null=True)
 
-
     # availability = ArrayField(
     #     base_field=models.CharField(max_length=100, blank=True), null=True)
     # images = models.JSONField(_(""), encoder=base64, decoder=)
@@ -73,8 +72,8 @@ class Amenity(models.Model):
 
 
 class Place(models.Model):
-    name = models.CharField(max_length=200, blank=False)
-    email = models.CharField(max_length=200, blank=False)
+    name = models.CharField(max_length=200, blank=False, unique=True)
+    email = models.CharField(max_length=200, blank=True, null=True)
     address = models.ForeignKey(
         "mainApp.Address", null=True, blank=True, on_delete=models.DO_NOTHING)
     capacity = models.IntegerField(null=True, blank=True)

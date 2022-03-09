@@ -6,7 +6,7 @@
 {% endblock headers %}
 
 {% block pageheader %}
-<div class="header3">>{{page_subtitle}}</div>
+<div class="header3">{{page_subtitle}}</div>
 <div class="header1">{{page_title}}</div>
 {% endblock pageheader %}
 
@@ -24,9 +24,9 @@
     {% csrf_token %}
     {{amenity_form.as_p}}
     
-    <button>Confirm Changes to Amenity</button>
+    <button>Step 2: Save Changes</button>
 </form>
-<button type="button" id="showresults" value="Spremi" style="height: 26px; margin-top:20px; width: 200px;">Show all selected</button>
+<button type="button" id="showresults" value="Spremi" style="height: 26px; margin-top:20px; width: 200px;">Step 1: Update Changed Timeslots</button>
 <span id="results"></span>
 
 <table id="table">

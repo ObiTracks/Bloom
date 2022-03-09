@@ -34,7 +34,7 @@ from mgmtApp.crud_views import new_place
 
 
 def dashboard_view(request):
-    page_title = "Main Dashboard"
+    page_title = "Your Management Dashboard"
     # # AMENITIES
     # amenity_relationships = AmenityProfileRelationship.objects.filter(
     #     profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
@@ -117,7 +117,9 @@ def amenity_view(request, pk):
             amenity = amenity_form.save()
             # return
             # return redirect(request.META['HTTP_REFERER'])
-            return redirect('dashboard')
+
+            return redirect(request.META['HTTP_REFERER'])
+            # return redirect('dashboard')
         else:
             messages.error(request, "Amenity Form is invalid")
 

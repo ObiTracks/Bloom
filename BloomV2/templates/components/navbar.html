@@ -4,7 +4,7 @@
 {% if "/manage/" in request.path %}
 <div class="navbar">
     
-    <div class="item" onclick="window.location='{% url "member-places" %}';">
+    <div class="item" onclick="window.location='{% url "landingpage" %}';">
         <img src="{% static 'images/Bloom Logo-Transparent-Darker-Blue.png' %}" alt="" class="navbar__logo">
     </div>
 
@@ -13,10 +13,6 @@
         <div class="header3">Dashboard</div>
     </div>
 
-    <div class="item" onclick="window.location='{% url "amenities" %}';">
-        <img src="{% static 'images/DashboardIcon-V2.png'  %}" alt="" class="navbar__icon">
-        <div class="header3">Amenity Hub</div>
-    </div>
 {% comment %} 
     <div class="item" onclick="window.location='{% url "memberhub" %}';">
         <img src="{% static 'images/MemberIcon-V1.png'  %}" alt="" class="navbar__icon">

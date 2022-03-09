@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'mainApp',
+    'siteApp',
     'accountsApp',
     'phonenumber_field',
     'debug_toolbar',
@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-    'mainApp.middleware.RequestMiddleware',
+    'siteApp.middleware.RequestMiddleware',
 ]
 
 ROOT_URLCONF = 'BloomV2.urls'

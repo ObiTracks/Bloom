@@ -1,9 +1,9 @@
 from django.apps import AppConfig
 
 
-class mainAppConfig(AppConfig):
+class siteAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'mainApp'
+    name = 'siteApp'
 
     def ready(self):
-        import mainApp.signals
+        import siteApp.signals

@@ -4,8 +4,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from accountsApp.models import CustomUser
 
-from mainApp.middleware import RequestMiddleware
-from mainApp.models import Amenity, AmenityProfileRelationship, Place, PlaceProfileRelationship
+from siteApp.middleware import RequestMiddleware
+from siteApp.models import Amenity, AmenityProfileRelationship, Place, PlaceProfileRelationship
 
 
 @receiver(post_save, sender=Amenity)

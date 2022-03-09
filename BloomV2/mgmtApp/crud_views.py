@@ -27,8 +27,8 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 
 from .forms import *
-from mainApp.models import *
-from mainApp.querytools import getUsersPlacesAndAmenities
+from siteApp.models import *
+from siteApp.querytools import getUsersPlacesAndAmenities
 # Create your views here.
 
 

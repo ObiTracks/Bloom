@@ -13,9 +13,7 @@
         {% csrf_token %}
         {{place_form.as_p}}
         <button>Create Place</button>
-    </form>
-
-    
+    </form>    
 </div>
 
 {% if amenity_groupings %}
@@ -28,7 +26,7 @@
         <div class="card">
             {% if amenities %}
                 {% for amenity in amenities %}
-                    {% include 'components/card--amenity.html' with amenity=amenity%}
+                    {% include 'components/card--amenity.html' with amenity=amenity type="manage"%}
                     {% comment %} {{amenity}} {% endcomment %}
                 {% endfor %}
             {% else %}

@@ -37,10 +37,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
       crossorigin="anonymous"></script>
-<script> //Loading json timeslots from object into the page for the js to interact
+{% comment %} <script> //Loading json timeslots from object into the page for the js to interact
     var timeslotJson = {{ jsonTimeslots | safe }};
     console.log(timeslotJson);
-</script>
+</script> {% endcomment %} 
+
 <script src="{% static 'js/script1.js' %}" type="text/javascript" charset="utf-8"></script>
 <script src="{% static 'js/script2.js' %}" type="text/javascript" charset="utf-8"></script>
 <script src="{% static 'js/script3.js' %}" type="text/javascript" charset="utf-8"></script>

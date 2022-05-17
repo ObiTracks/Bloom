@@ -154,6 +154,26 @@ body {
     }
 }
 
+.grid-style1x2 {
+    height: fit-content;
+    // min-height: 70vh;
+    grid-gap: 10px;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: minmax(200px, fit-content);
+    // justify-items: center;
+    grid-template-areas:
+        "one two"
+    ;
+
+    >div:nth-child(1) {
+        grid-area: one;
+    }
+
+    >div:nth-child(2) {
+        grid-area: two;
+    }
+}
+
 .grid-style3x2 {
     min-height: 300px;
     grid-gap: 10px;

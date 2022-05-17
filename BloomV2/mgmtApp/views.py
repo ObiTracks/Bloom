@@ -111,7 +111,8 @@ def amenity_view(request, pk):
 
     amenity_form = AmenityForm(request.user, instance=amenity)
     if request.method == 'POST':
-        amenity_form = AmenityForm(request.user, request.POST, request.FILES, instance=amenity)
+        amenity_form = AmenityForm(
+            request.user, request.POST, request.FILES, instance=amenity)
 
         if amenity_form.is_valid():
             amenity = amenity_form.save()

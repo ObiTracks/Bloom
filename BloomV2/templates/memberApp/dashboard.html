@@ -1,0 +1,66 @@
+{% extends 'components/grids/grid-style1x2.html' %}
+{% load static %}
+
+{% block pageheader %}
+<div class="header1">{{page_title}}</div>
+{% endblock pageheader %}
+
+
+
+
+
+{% block cell1 %}
+{% if place_amenity_groupings %}
+    {% for place, amenities in place_amenity_groupings.items %}
+        <div class="header2">{{place}}</div>
+        <a href="{% url "new-amenity" place.id %}" class="button">
+            <div class="button__text">+ New Amenity</div>
+        </a>
+
+        <div class="card">
+            {% if amenities %}
+                {% for amenity in amenities %}
+                    {% include 'components/card--amenity.html' with amenity=amenity type="member"%}
+                    {% comment %} {{amenity}} {% endcomment %}
+                {% endfor %}
+            {% else %}
+                <div class="header2">Create an amenity! 🏝</div>
+            {% endif %}
+            {% comment %} <div class="card card--white">
+                <form action="{% url "new-amenity" %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{amenity_form.as_p}}
+                    <button>Create New Amenity</button>
+                </form>
+            </div> {% endcomment %}
+        </div>
+
+    {% endfor %}
+{% else %}
+    <div class="header2">You have no places or amenities! Make one above!</div>
+
+    <div class="card">
+        <div class="header2">Join Places Yet 😢 Make one ^</div>
+    </div>
+{% endif %}
+
+{% endblock cell1 %}
+
+
+{% block cell2 %}
+
+    <a href="{% url "community" %}" class="button button--cardsize">
+        <div class="header1">Search</div>
+    </a>
+
+    <div class="card card--grey">
+        <div class="header2">Upcoming Reservations</div>
+        <div class="card">
+
+            {% include 'components/rowstrip.html' %}
+            {% for reservation in reservations %}
+                {% include 'components/rowstrip.html' %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock cell2 %}

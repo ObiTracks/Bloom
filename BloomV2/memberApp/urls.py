@@ -17,15 +17,15 @@ Including another URLconf
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from . import views
+import mgmtApp
 
 
 urlpatterns = [
     path('', views.dashboard_view, name="member-dashboard"),
-    path('places', views.places_view, name="member-places"),
+    path('community', views.community_view, name="community"),
     # path('amenity', views.amenity_view, name="member-amenity"),
-    path('amenity/<str:pk>', views.amenity_view, name="member-amenity"),
-
+    path('amenity/<str:pk>', views.amenity_view, name="amenity-member"),
+    
     # Form views
     path('places/join_request', views.send_joinrequest, name="joinrequestform"),
-
 ]

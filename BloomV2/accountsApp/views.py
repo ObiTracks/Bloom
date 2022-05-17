@@ -28,6 +28,10 @@ from .models import *
 
 
 def login_view(request):
+    if request.user.is_authenticated:
+        print("User is already logged in")
+        return redirect('management-dashboard')
+
     page_title = "Login"
     login_form = AuthenticationForm(request)
     register_form = CustomUserCreationForm()
@@ -43,7 +47,7 @@ def login_view(request):
 def login_request(request):
     if request.user.is_authenticated:
         print("User is already logged in")
-        return redirect('dashboard')
+        return redirect('management-dashboard')
 
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -53,7 +57,7 @@ def login_request(request):
         if user is not None:
             login(request, user)
             print("User logged In")
-            return redirect('dashboard')
+            return redirect('management-dashboard')
         else:
             messages.error(request, 'Username OR password is incorrect')
 

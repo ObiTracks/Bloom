@@ -7,8 +7,13 @@
 </a>  {% endcomment %}
 
 {% comment %} <a class="card card--amenity" > {% endcomment %}
-<a class="card card--amenity" onclick="window.location='{% url "amenity" amenity.id %}';">
-    {% comment %} Card {% endcomment %}
+    
+{% if type == 'manage' %}
+<a class="card card--amenity" onclick="window.location='{% url "amenity-manage" amenity.id %}';">
+{% elif type == 'member'%}
+<a class="card card--amenity" onclick="window.location='{% url "amenity-member" amenity.id %}';">
+{% endif %}
+
     <div class="card--amenity__info">
         <div class="header3">{{amenity.name}}</div>
     </div>

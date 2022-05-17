@@ -1,23 +1,32 @@
 {% load static %}
 
 
-{% if "/manage/" in request.path %}
 <div class="navbar">
     
     <div class="item" onclick="window.location='{% url "landingpage" %}';">
         <img src="{% static 'images/Bloom Logo-Transparent-Darker-Blue.png' %}" alt="" class="navbar__logo">
     </div>
 
-    <div class="item" onclick="window.location='{% url "dashboard" %}';">
+    <div class="item" onclick="window.location='{% url "management-dashboard" %}';">
         <img src="{% static 'images/DashboardIcon-V3.png'  %}" alt="" class="navbar__icon">
-        <div class="header3">Dashboard</div>
+        {% comment %} <div class="header3">Dashboard</div> {% endcomment %}
     </div>
+
+    <a href="{% url 'member-dashboard' %}">
+        Member
+        <img src="{% static 'images/ProfileIcon-V1.png'  %}" alt="" class="navbar__icon">
+    </a>
+
+    <a href="{% url 'management-dashboard' %}">
+        Manage
+        <img src="{% static 'images/MemberIcon-V1.png'  %}" alt="" class="navbar__icon">
+    </a>
 
 {% comment %} 
     <div class="item" onclick="window.location='{% url "memberhub" %}';">
         <img src="{% static 'images/MemberIcon-V1.png'  %}" alt="" class="navbar__icon">
         <div class="header3">Member Hub</div>
-    </div>
+    </div>,
 
     <div class="item" onclick="window.location='{% url "dashboard" %}';">
         <img src="{% static 'images/ProfileIcon-V1.png'  %}" alt="" class="navbar__icon">
@@ -29,28 +38,3 @@
         <div class="header3" style="color: blue;">Member Dashboard</div>
     </div> {% endcomment %}
 </div>
-{% endif %}
-
-{% if "/member/" in request.path %}
-<div class="navbar">
-    
-    <a href="">
-        <img src="{% static 'images/Bloom Logo-Transparent-Darker-Blue.png' %}" alt="" class="navbar__logo">
-    </a>
-
-    <a href="{% url 'dashboard' %}">
-        <img src="{% static 'images/DashboardIcon-V3.png'  %}" alt="" class="navbar__icon">
-    </a>
-
-    <a href="{% url 'amenities' %}">
-        <img src="{% static 'images/DashboardIcon-V2.png'  %}" alt="" class="navbar__icon">
-    </a>
-
-    <a href="{% url 'memberhub' %}">
-        <img src="{% static 'images/MemberIcon-V1.png'  %}" alt="" class="navbar__icon">
-    </a>
-
-    <a href="">
-        <img src="{% static 'images/ProfileIcon-V1.png'  %}" alt="" class="navbar__icon"></a>
-</div>
-{% endif %}

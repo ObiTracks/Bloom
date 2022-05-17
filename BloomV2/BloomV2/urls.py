@@ -22,7 +22,7 @@ urlpatterns = [
     path('', include('siteApp.urls')),
     path('auth/', include('accountsApp.urls')),
     path('manage/', include('mgmtApp.urls')),
-    path('book/', include('memberApp.urls')),
+    path('member/', include('memberApp.urls')),
 
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),

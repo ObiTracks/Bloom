@@ -21,9 +21,9 @@ from . import crud_views
 
 
 urlpatterns = [
-    path('dashboard', views.dashboard_view, name="dashboard"),
+    path('', views.dashboard_view, name="management-dashboard"),
     path('amenities', views.amenities_view, name="amenities"),
-    path('amenities/<str:pk>/', views.amenity_view, name="amenity"),
+    path('amenities/<str:pk>/', views.amenity_view, name="amenity-manage"),
     # path('amenities/amenity', views.amenityobject_view, name="amenity"),
 
     # path('members', views.memberhub_view, name="memberhub"),

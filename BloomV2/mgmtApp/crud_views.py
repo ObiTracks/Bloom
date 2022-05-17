@@ -52,7 +52,7 @@ def new_amenity_view(request, place_id):
                 amenity=amenity, profile=request.user.profile, profile_type="3")
             amenityprofile_relationship.save()
 
-            return redirect('dashboard')
+            return redirect('')
         else:
             messages.error(request, "Amenity Form is invalid")
 

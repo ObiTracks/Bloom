@@ -27,76 +27,83 @@ from django.core.paginator import Paginator
 
 from .forms import *
 from siteApp.models import *
+from siteApp.querytools import getUsersPlacesAndAmenities
 # Create your views here.
 
 
 def dashboard_view(request):
     page_title = "Your Personal Dashboard"
-    # AMENITIES
+    # AMENITIES Belonging to the Logged in User
 
-    place_relationships = PlaceProfileRelationship.objects.filter(
-        profile=request.user.profile, profile_type__in=['5', ])
-    places = [i.place for i in place_relationships]
-    recent_amenities = Reservation.objects.filter(
-        amenity_profile_relationship__amenity__place__in=places)[:4]
+    # place_relationships = PlaceProfileRelationship.objects.filter(
+    #     profile=request.user.profile, profile_type__in=['5', ])
+    # places = [i.place for i in place_relationships]
+    # recent_amenities = Reservation.objects.filter(
+    #     amenity_profile_relationship__amenity__place__in=places)[:4]
+
+    places = Place.objects.all()
+    
+    place_amenity_groupings = {}
+    for place in places:
+        print(place)
+        amenities = place.amenity_set.all()
+        print(amenities)
+
+        place_amenity_groupings[place] = amenities if amenities.count(
+        ) > 0 else None
+
 
     context = {
         'page_title': page_title,
-        'recent_amenities': recent_amenities,
+        'place_amenity_groupings': place_amenity_groupings,
     }
 
-    template_name = 'pages/member/memberdashboard.html'
+    template_name = 'memberApp/dashboard.html'
     return render(request, template_name, context)
 
 
-def places_view(request):
-    # AMENITIES
-    amenity_relationships = AmenityProfileRelationship.objects.filter(
-        profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
-    amenities = [i.amenity for i in amenity_relationships]
+def community_view(request):
+    page_title = "Browse the Community"
+    page_subtitle = "Join a Community"
 
-    # Grouping Amenities by Place
-    amenity_groupings = {}
-    for amenity in amenities:
-        if amenity.place not in amenity_groupings:
-            amenity_groupings[amenity.place] = [amenity]
-        else:
-            amenity_groupings[amenity.place].append(amenity)
+    places = Place.objects.all()
 
-    # Object data
-    page_title = "Places"
-    page_subtitle = "Your Places"
+    place_amenity_groupings = {}
+    for place in places:
+        print(place)
+        amenities = place.amenity_set.all()
+        print(amenities)
 
-    place_relationships = PlaceProfileRelationship.objects.filter(
-        profile=request.user.profile, profile_type__in=['5', ])
-    places = [i.place for i in place_relationships]
-    recent_amenities = Reservation.objects.filter(
-        amenity_profile_relationship__amenity__place__in=places)[:3]
-    if recent_amenities:
-        print(recent_amenities[0])
+        place_amenity_groupings[place] = amenities if amenities.count(
+        ) > 0 else None
+
+    print(place_amenity_groupings)
 
     context = {
         'page_title': page_title,
         'page_subtitle': page_subtitle,
-        'recent_amenities': recent_amenities,
-        'amenity_groupings': amenity_groupings,
+        'place_amenity_groupings': place_amenity_groupings,
     }
-    template_name = 'pages/member/places.html'
+    template_name = 'memberApp/community.html'
     return render(request, template_name, context)
 
 
 def amenity_view(request, pk):
-    # pk = 1
-    amenity = Amenity.objects.get(id=pk)
     # Object data
+    amenity = Amenity.objects.get(id=pk)
+    jsonTimeslots = amenity.timeslots
+
     page_title = amenity.name
-    page_subtitle = "{} - Amenity".format(amenity.place.name)
+    page_subtitle = amenity.place.name
 
     context = {
         'page_title': page_title,
         'page_subtitle': page_subtitle,
+        'amenity':amenity,
+        'jsonTimeslots':jsonTimeslots,
     }
-    template_name = 'pages/member/amenity.html'
+
+    template_name = 'memberApp/amenity.html'
     return render(request, template_name, context)
 
 

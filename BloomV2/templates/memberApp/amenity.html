@@ -1,20 +1,42 @@
-{% extends 'grids/grid-style1x3-Member.html' %}
+{% extends 'base.html' %}
 {% load static %}
+
+{% block headers %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/timeslots.css' %}">
+{% endblock headers %}
 
 {% block pageheader %}
 <div class="header3">{{page_subtitle}}</div>
 <div class="header1">{{page_title}}</div>
 {% endblock pageheader %}
 
-{% block cell1 %}
-<div class="card card--grey" style="height: fit-content;">
-    <div class="header2">Today</div>
-    {% include 'components/timeslot.html' %}
-    {% include 'components/timeslot.html' %}
+{% block content %}
 
+<div class="header2">Amenity Timeslots </div>
+
+<span>{{amenity.timeslot}}</span>
+
+
+<div class="card" id="available-timeslots">
+
+    {% comment %} <div class="card card--white">
+        <form action="{% url "new-amenity" %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{amenity_form.as_p}}
+            <button>Create New Amenity</button>
+        </form>
+    </div> {% endcomment %}
 </div>
-<div class="card card--grey" style="height: fit-content;">
-    <div class="header2">Tomorrow</div>
-    
-</div>
-{% endblock cell1 %}
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"></script>
+<script> //Loading json timeslots from object into the page for the js to interact
+    var jsonTimeslots = {{ jsonTimeslots | safe }};
+    console.log(jsonTimeslots);
+</script>
+
+<script src="{% static 'js/loadTimeslots.js' %}" type="text/javascript" charset="utf-8"></script>
+
+{% endblock content %}

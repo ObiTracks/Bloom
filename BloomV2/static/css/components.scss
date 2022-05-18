@@ -1,6 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
 
 // Variables
+$dominant: #ffffff;
+$secondary: #f2f2f2;
+$accent: #0487ff;
+
+$white-shade: #ffffff;
+$dark-shade: #061221;
+$grey-shade: #e9e9e9;
+
+$dominant-gradient: linear-gradient(90deg, #f4f4f4 0%, #fcfcfc 100%);
+$secondary-gradient: linear-gradient(90deg, $accent 0%, #ffffff 100%);
+$accent-gradient: linear-gradient(to right);
+
+$feedback-active: #008CFF;
+$feedback-success: #26A420;
+$feedback-error: #E20C0C;
+
 $blue: #2457e4;
 $green: #0dce83;
 $turquoise: #10e5d9;

@@ -22,13 +22,15 @@
         {% comment %} <a href="" class="button">
             <div class="logout"><a href="{% url 'logout' %}">Logout</a></div>
         </a> {% endcomment %}
-        <div class="side-container">
+        <div class="side-container" id="side-container--left">
             
             {% comment %} {{ request.path }} {% endcomment %}
         </div>
         
         <div class="main-container">
+
             <div class="main-container__header">
+                {% include 'components/navbar.html' %}
                 {% block pageheader %}
                 {% endblock pageheader %}
             </div>
@@ -39,7 +41,7 @@
             </div>
         </div>
 
-        <div class="side-container">
+        <div class="side-container" id="side-container--right">
             {% if request.path != "/login" %}
                 {{request.user.first_name}}
             {% endif %}

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
 // Variables
 $blue: #2457e4;
 $green: #0dce83;
@@ -109,81 +111,33 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 
 .link_text {
     /* Link Text */
-
     font-family: "Montserrat";
     font-style: normal;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 15px;
     /* identical to box height, or 115% */
 
     color: #000000;
+
+    &:hover {
+        color: #0bc7d8;
+        cursor: pointer;
+    }
 }
 
 .navbar {
-    position: sticky;
-    top: 7rem;
-    left: 0;
-    width: fit-content;
+    width: 100%;
     height: fit-content;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     align-items: center;
-    // background-color: red;
-    // height: 100vh;
-    // background: maroon;
 
-    &:hover {
-        .header1 {
-            z-index: 20;
-            pointer-events: auto;
-            background-color: pink;
-        }
-    }
-
-    .navbar__logo {
-        width: 50px;
-        height: auto;
-        margin-bottom: 50px;
-        // background-color: blue;
-    }
-
-    .navbar__icon {
-        width: 40px;
-        height: auto;
-        height: fit-content;
-        margin-bottom: 30px;
-
-        // -webkit-filter: brightness(60%);
-        // opacity: 50%;
-        transition: all 0.05s ease-in;
-
-        &:hover {
-            cursor: pointer;
-            // -webkit-filter: brightness(100%);
-            // opacity: 100%;
-        }
-    }
-
-    .item {
-        position: relative;
-        height: fit-content;
-        max-width: 60px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        // background-color: yellow;
-        // border: solid black 2px;
-
-        .header3 {
-            // background-color: greenyellow;
-            position: absolute;
-            top: 5%;
-            left: 50px;
-            pointer-events: none;
-            z-index: 1000;
-        }
+    > div {
+        width: fit-content;
+        margin: 0 20px 0 0;
     }
 }
 

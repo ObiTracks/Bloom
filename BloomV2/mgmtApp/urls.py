@@ -22,7 +22,7 @@ from . import crud_views
 
 urlpatterns = [
     path('', views.dashboard_view, name="management-dashboard"),
-    path('amenities', views.amenities_view, name="amenities"),
+    path('amenities', views.amenities_view, name="places"),
     path('amenities/<str:pk>/', views.amenity_view, name="amenity-manage"),
     # path('amenities/amenity', views.amenityobject_view, name="amenity"),
 

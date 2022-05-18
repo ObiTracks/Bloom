@@ -11,8 +11,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/components.css' %}">
     {% block headers %} {% endblock headers %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Outfit&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Outfit&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,800&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -23,9 +23,7 @@
             <div class="logout"><a href="{% url 'logout' %}">Logout</a></div>
         </a> {% endcomment %}
         <div class="side-container">
-            {% if request.path != "/login" %}
-                {% include 'components/navbar.html' %}
-            {% endif %}
+            
             {% comment %} {{ request.path }} {% endcomment %}
         </div>
         
@@ -50,6 +48,8 @@
             {% comment %} {% include 'components/badge.html' with value='222' title='title' %} {% endcomment %}
         </div>
     </div>
+
+    {% block scripts %}{% endblock scripts %}
 </body>
 
 </html>

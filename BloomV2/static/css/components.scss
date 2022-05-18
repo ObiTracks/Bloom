@@ -1,23 +1,19 @@
-// Variables 
-$blue: #2457E4;
-$green: #0DCE83;
-$turquoise: #10E5D9;
-$brightred: #F03D10;
-$darkgrey: #A0A0A0;
-$grey: #E0E0E0;
-$lightgrey: #F2F2F2;
+// Variables
+$blue: #2457e4;
+$green: #0dce83;
+$turquoise: #10e5d9;
+$brightred: #f03d10;
+$darkgrey: #a0a0a0;
+$grey: #e0e0e0;
+$lightgrey: #f2f2f2;
 
-$poppins: 'Poppins',
-sans-serif;
-$open-sans: 'Open Sans',
-sans-serif;
-$montserrat: 'Montserrat',
-sans-serif;
-$nunito: 'Nunito',
-sans-serif;
+$poppins: "Poppins", sans-serif;
+$open-sans: "Open Sans", sans-serif;
+$montserrat: "Montserrat", sans-serif;
+$nunito: "Nunito", sans-serif;
 
 $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
-$tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
+$tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 
 // Components
 * {
@@ -25,24 +21,103 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
 }
 
 .header1 {
-    font: 500 36px $poppins;
-    color: black;
+    /* Heading 1 */
+
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 76px;
+    /* identical to box height, or 210% */
+
+    color: #000000;
 }
 
 .header2 {
-    font: 500 25px $poppins;
-    padding: 0 0 10px 0;
-    color: $darkgrey;
+    /* Heading 2 */
+
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    /* identical to box height, or 119% */
+
+    color: #000000;
 }
 
 .header3 {
-    font: 500 18px $poppins;
+    /* Heading 3 */
 
-    color: $grey;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 41px;
+    /* identical to box height, or 315% */
+
+    color: #000000;
 }
 
+.body1 {
+    /* Body 1 */
+
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 40px;
+    /* identical to box height, or 190% */
+
+    letter-spacing: 0.5px;
+
+    color: #000000;
+}
+
+.body2 {
+    /* Body 2 */
+
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    /* identical to box height, or 160% */
+
+    letter-spacing: 0.5px;
+
+    color: #000000;
+}
 .body {
     font: 300 18px $open-sans;
+}
+
+.button_text {
+    /* Button Text */
+
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 18px;
+    /* identical to box height, or 100% */
+
+    letter-spacing: 0.5px;
+
+    color: #000000;
+}
+
+.link_text {
+    /* Link Text */
+
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    /* identical to box height, or 115% */
+
+    color: #000000;
 }
 
 .navbar {
@@ -178,9 +253,6 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
         background: $lightgrey;
         // background: linear-gradient(180deg, #36CAE6 0%, #3545DF 100%);
     }
-
-
-
 }
 
 .badge {
@@ -190,7 +262,7 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
     // height: 100px;
     height: 100%;
     width: 100%;
-    background: #FCFCFC;
+    background: #fcfcfc;
     box-shadow: $box-shadow--light;
     padding: 25px;
     display: flex;
@@ -248,7 +320,6 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
         color: black;
     }
 
-
     .strip__accent {
         height: 100%;
         width: 10px;
@@ -267,7 +338,7 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
     flex-basis: 0;
     // background: green;
 
-    >div {
+    > div {
         display: flex;
         align-items: center;
     }
@@ -300,7 +371,6 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
     width: 100%;
     height: fit-content;
     border-spacing: 0;
-
 
     .table__tr {
         position: relative;
@@ -347,7 +417,6 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
     }
 }
 
-
 .card {
     position: relative;
     width: 100%;
@@ -391,11 +460,9 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
         background: red;
         background: $tealgradient;
 
-
         &:hover {
             cursor: pointer;
         }
-
 
         .card--amenity__info {
             height: fit-content;
@@ -407,7 +474,7 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
             border-top-left-radius: 40px;
             background: white;
 
-            >div {
+            > div {
                 color: $darkgrey;
                 text-align: right;
             }
@@ -415,15 +482,17 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
     }
 }
 
-
 .progressbar {
-    .progressbar__title {}
+    .progressbar__title {
+    }
 
-    .progressbar__capacity {}
+    .progressbar__capacity {
+    }
 }
 
 .progressbar__bar {
-    .progressbar__bar__slider {}
+    .progressbar__bar__slider {
+    }
 }
 
 .rowstrip {
@@ -436,7 +505,7 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
     align-items: center;
     justify-content: space-between;
     border-radius: 10px;
-    background: linear-gradient(to bottom right, #F1F9FF 10%, #ffffff);
+    background: linear-gradient(to bottom right, #f1f9ff 10%, #ffffff);
     padding: 5px 20px 5px 20px;
     // margin-bottom: 4px;
     transition: all 0.1s;
@@ -457,7 +526,7 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
         justify-content: space-between;
         align-items: center;
 
-        >div {
+        > div {
             margin-left: 8px;
         }
     }
@@ -487,7 +556,6 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
     color: $lightgrey;
     letter-spacing: 1px;
 
-
     &:hover {
         // border: solid $grey 2px;
         cursor: text;
@@ -497,7 +565,6 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
         border: solid $grey 2px;
         background: white;
         font: 300 20px $poppins;
-
     }
 }
 
@@ -513,7 +580,7 @@ $tealgradient: linear-gradient(90deg, #36CAE6 0%, #3545DF 100%);
     background: $grey;
     margin-bottom: 10px;
 
-    >div:nth-child(3) {
+    > div:nth-child(3) {
         color: red;
         font: 300 20px $poppins;
     }

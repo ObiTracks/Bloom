@@ -32,30 +32,16 @@ from siteApp.querytools import getUsersPlacesAndAmenities
 
 
 def dashboard_view(request):
-    page_title = "Your Personal Dashboard"
-    # AMENITIES Belonging to the Logged in User
-
-    # place_relationships = PlaceProfileRelationship.objects.filter(
-    #     profile=request.user.profile, profile_type__in=['5', ])
-    # places = [i.place for i in place_relationships]
-    # recent_amenities = Reservation.objects.filter(
-    #     amenity_profile_relationship__amenity__place__in=places)[:4]
-
-    places = Place.objects.all()
-    
-    place_amenity_groupings = {}
-    for place in places:
-        print(place)
-        amenities = place.amenity_set.all()
-        print(amenities)
-
-        place_amenity_groupings[place] = amenities if amenities.count(
-        ) > 0 else None
+    # Object data
+    page_title = "Personal Dashboard"
+    page_subtitle = "Book"
+    places, amenity_groupings = getUsersPlacesAndAmenities(request)
 
 
     context = {
         'page_title': page_title,
-        'place_amenity_groupings': place_amenity_groupings,
+        'page_subtitle':page_subtitle,
+        'amenity_groupings': amenity_groupings,
     }
 
     template_name = 'memberApp/dashboard.html'
@@ -68,21 +54,10 @@ def community_view(request):
 
     places = Place.objects.all()
 
-    place_amenity_groupings = {}
-    for place in places:
-        print(place)
-        amenities = place.amenity_set.all()
-        print(amenities)
-
-        place_amenity_groupings[place] = amenities if amenities.count(
-        ) > 0 else None
-
-    print(place_amenity_groupings)
-
     context = {
         'page_title': page_title,
         'page_subtitle': page_subtitle,
-        'place_amenity_groupings': place_amenity_groupings,
+        'places':places
     }
     template_name = 'memberApp/community.html'
     return render(request, template_name, context)

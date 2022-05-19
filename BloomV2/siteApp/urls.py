@@ -21,6 +21,5 @@ from . import views
 
 urlpatterns = [
     path('',  views.landingpage_view, name="landingpage"),
-    path('profile',  views.landingpage_view, name="profilepage"),
 
 ]

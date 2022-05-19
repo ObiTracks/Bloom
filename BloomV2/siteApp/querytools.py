@@ -30,7 +30,7 @@ from mgmtApp.forms import *
 from .models import *
 
 
-def getUsersPlacesAndAmenities(request, number_of_amenities_each):
+def getUsersPlacesAndAmenities(request, number_of_amenities_each = None):
 
     place_relationships = PlaceProfileRelationship.objects.filter(
         profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])

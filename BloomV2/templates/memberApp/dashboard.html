@@ -1,66 +1,22 @@
-{% extends 'components/grids/grid-style1x2.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block pageheader %}
+<div class="header2 color-shade-grey">{{page_subtitle}}</div>
 <div class="header1">{{page_title}}</div>
 {% endblock pageheader %}
 
 
+{% block content %}
 
-
-
-{% block cell1 %}
-{% if place_amenity_groupings %}
-    {% for place, amenities in place_amenity_groupings.items %}
-        <div class="header2">{{place}}</div>
-        <a href="{% url "new-amenity" place.id %}" class="button">
-            <div class="button__text">+ New Amenity</div>
-        </a>
-
-        <div class="card">
-            {% if amenities %}
-                {% for amenity in amenities %}
-                    {% include 'components/card--amenity.html' with amenity=amenity type="member"%}
-                    {% comment %} {{amenity}} {% endcomment %}
-                {% endfor %}
-            {% else %}
-                <div class="header2">Create an amenity! 🏝</div>
-            {% endif %}
-            {% comment %} <div class="card card--white">
-                <form action="{% url "new-amenity" %}" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{amenity_form.as_p}}
-                    <button>Create New Amenity</button>
-                </form>
-            </div> {% endcomment %}
-        </div>
-
+{% if amenity_groupings %}
+    {% for place, amenities in amenity_groupings.items %}
+        {% include 'components/card.html' with name="container-card style2" place=place amenities=amenities%}
     {% endfor %}
+
 {% else %}
-    <div class="header2">You have no places or amenities! Make one above!</div>
-
-    <div class="card">
-        <div class="header2">Join Places Yet 😢 Make one ^</div>
-    </div>
+    <div class="header2">You have no places or amenities yet!</div>
 {% endif %}
+    
+{% endblock content %}
 
-{% endblock cell1 %}
-
-
-{% block cell2 %}
-
-    <a href="{% url "community" %}" class="button button--cardsize">
-        <div class="header1">Search</div>
-    </a>
-
-    <div class="card card--grey">
-        <div class="header2">Upcoming Reservations</div>
-        <div class="card">
-
-            {% include 'components/rowstrip.html' %}
-            {% for reservation in reservations %}
-                {% include 'components/rowstrip.html' %}
-            {% endfor %}
-        </div>
-    </div>
-{% endblock cell2 %}

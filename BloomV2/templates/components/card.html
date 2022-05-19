@@ -1,17 +1,18 @@
 {% load static %} 
 {% if name == 'container-card style1' %}
 <div class="container-card style1" id="place-{{place.id}}">
-    <div class="header2 color-shade-grey">{{place.name}}</div>
+    <div class="header2 ">{{place.name}}</div>
     <div class="rectangle">
         <div>
             {% include 'components/card.html' with name="place-card" place=place %}
         </div>
         
         <div>
-            {% include 'components/card.html' with name="info-card" %}
-            {% include 'components/card.html' with name="info-card" %}
-            {% include 'components/card.html' with name="info-card" %}
-            {% include 'components/card.html' with name="info-card" %}
+
+            {% include 'components/card.html' with name="info-card" title="Email" value=place.email %}
+            {% include 'components/card.html' with name="info-card" title="Phone Number" value=place.phone_number %}
+            {% include 'components/card.html' with name="info-card" title="Address" value=place.address %}
+            {% include 'components/card.html' with name="info-card" title="Description" value=place.description %}
         </div>
 
         <div class="header2">Quick Access</div>
@@ -36,6 +37,31 @@
         {% include 'components/button.html' with name="button style3" text="+ Create an Amenity"%}
     </div>
 </div>
+
+{% elif name == 'container-card style3' %}
+<div class="container-card style3" id="place-{{place.id}}">
+        {% for place in places %}
+            {% include 'components/card.html' with name="place-card" place=place %}
+            {% include 'components/card.html' with name="place-card" place=place verified="verified" %}
+        {% endfor %}
+</div>
+
+{% elif name == 'container-card style4' %}
+<div class="container-card style4" id="place-{{place.id}}">
+
+    {% include 'components/card.html' with name="availability-card" %}
+    {% include 'components/card.html' with name="availability-card" %}
+    {% include 'components/card.html' with name="availability-card" %}
+    {% include 'components/card.html' with name="availability-card" %}
+    {% include 'components/card.html' with name="availability-card" %}
+</div>
+
+{% elif name == 'info-card' %}
+<div class="info-card">
+    <div class="header3">{{title}}</div>
+    <div class="header3 color-shade-grey">{{value}}</div>
+</div>
+
 {% elif name == 'info-card' %}
 <div class="info-card">
     <div class="header3">Title</div>
@@ -44,7 +70,13 @@
 
 {% elif name == 'place-card' %}
 
-<div class="place-card {{verified}}" onclick="window.location='{% url "manage-places"%}#place-{{place.id}}';">
+<div class="place-card {{verified}}" 
+    {% if "manage" in request.path %} 
+    onclick="window.location='{% url "manage-places"%}#place-{{place.id}}';"
+    {% elif "member" in request.path %}
+    onclick="window.location='{% url "member-dashboard"%}#place-{{place.id}}';"
+    {% endif %}>
+
     <div class="info">
         <div class="header2 color-shade-white">{{place.name}}</div>
     </div>
@@ -58,12 +90,12 @@
 {% elif name == 'availability-card' %}
 <div class="availability-card">
     <div class="header2 color-shade-grey">Day Name</div>
-    <div class="header3 color-shade-grey">MM/DD/YYYY</div>
+    <div class="body1 color-shade-grey">MM/DD/YYYY</div>
     <div class="rectangle">
-        <div class="timeslot selectable">
+        <div class="timeslot ">
             <div class="body2">00:00-03:00</div>
         </div>
-        <div class="timeslot selected selectable">
+        <div class="timeslot selected ">
             <div class="body2">00:00-03:00</div>
         </div>
         <div class="timeslot reserved">
@@ -76,7 +108,14 @@
 </div>
 
 {% elif name == 'amenity-card' %}
-<div class="amenity-card" id="amenity-{{amenity.id}}" onclick="window.location='{% url "manage-amenity" amenity.id %}';">
+<div class="amenity-card" id="amenity-{{amenity.id}}" 
+    {% if "manage" in request.path %} 
+    onclick="window.location='{% url "manage-amenity" amenity.id %}';"
+    {% elif "member" in request.path %}
+    onclick="window.location='{% url "member-amenity" amenity.id %}';"
+    {% endif %}>
+
+
     <div class="info">
         <div class="header3">{{amenity.name}}</div>
     </div>

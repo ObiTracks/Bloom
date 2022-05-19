@@ -20,7 +20,6 @@
         <div class="side-container" id="side-container--left">
             {% block sidecontainer-left %}
                 <img src="{% static 'images/Bloom Logo-Transparent-Darker-Blue.png'%}" style="width: 40px; margin-bottom: 20px;" alt="">
-                {% include 'components/button.html' with name="button style2" text="+ Place"%}
                 
             {% endblock sidecontainer-left %}
             {% comment %} {{ request.path }} {% endcomment %}
@@ -44,15 +43,18 @@
         </div>
 
         <div class="side-container" id="side-container--right">
-            {% if request.path != "/login" %}
-            <div class="body1">
-                {{request.user.first_name}}
-            </div>
-            {% endif %}
+            
             {% block sidecontainer-right %}
                 <img src="{{ request.user.profile.image.url }}" alt="" style="height: 100px; width: 100px; border-radius: 50%;">
+                {% if request.path != "/login" %}
+                    <div class="body1">
+                        {{request.user.first_name}}
+                    </div>
+                {% endif %}
 
                 {% include 'components/button-logout.html' with link='logout' text='logout' %}
+                {% include 'components/button.html' with name='button site-toggle' state=0 %}
+
             {% endblock sidecontainer-right %}
             {% comment %} {% include 'components/badge.html' with value='222' title='title' %} {% endcomment %}
         </div>

@@ -10,35 +10,10 @@
 {% block content %}
 
 
-{% comment %} <div class="header2">Create New Place +</div>
-<div class="card card--dotted" style="margin-bottom: 20px;">
-    <form action="{% url "new-place" %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{place_form.as_p}}
-        <button>Create Place</button>
-    </form>    
-</div> {% endcomment %}
-
 {% if amenity_groupings %}
+    {% include 'components/button.html' with name="button style1" text="+ Place"%}
     {% for place, amenities in amenity_groupings.items %}
-
         {% include 'components/card.html' with name="container-card style1" verified="verified" place=place amenities=amenities%}
-
-        {% comment %} <div class="header2">{{place}}</div>
-        <a href="{% url "new-amenity" place.id %}" class="button">
-            <div class="button__text">+ New Amenity</div>
-        </a> {% endcomment %}
-
-        {% comment %} <div class="card">
-            {% if amenities %}
-                {% for amenity in amenities %}
-                    {% include 'components/card--amenity.html' with amenity=amenity type="manage"%}
-                {% endfor %}
-            {% else %}
-                <div class="header2">Create an amenity! 🏝</div>
-            {% endif %}
-        </div> {% endcomment %}
-
     {% endfor %}
 {% else %}
     <div class="header2">You have no places or amenities! Make one above!</div>

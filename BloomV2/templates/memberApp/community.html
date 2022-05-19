@@ -2,36 +2,18 @@
 {% load static %}
 
 {% block pageheader %}
-<div class="header3">{{page_subtitle}}</div>
+<div class="header2 card-shade-grey">{{page_subtitle}}</div>
 <div class="header1">{{page_title}}</div>
 {% endblock pageheader %}
 
 {% block content %}
 {% include "components/searchbar.html" %}
 
-<div class="card card--grey">
-{% if place_amenity_groupings %}
-    {% for place, amenities in place_amenity_groupings.items %}
-        <div class="header2">{{place}}</div>
-        <a href="" class="button">
-            <div class="button__text">+ Join Place</div>
-        </a>
-
-        <div class="card card--white">
-            {% if amenities %}
-                {% for amenity in amenities %}
-                    {% include 'components/card--amenity.html' with amenity=amenity%}
-                {% endfor %}
-            {% else %}
-                <div class="header2">Nothing here yet</div>
-            {% endif %}
-        </div>
-
-    {% endfor %}
+{% if places %}
+    {% include 'components/card.html' with name="container-card style3" places=places amenities=amenities %}
 {% else %}
-    <div class="header2">No Communities... Yet - So make one !</div>
+    <div class="header2">There are no places to reserve from just yet! Make one!</div>
 {% endif %}
-</div>
 
 {% endblock content %}
 

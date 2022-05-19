@@ -17,6 +17,7 @@ Including another URLconf
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from . import views
+from siteApp.views import landingpage_view
 from . import crud_views
 
 
@@ -24,6 +25,7 @@ urlpatterns = [
     path('', views.dashboard_view, name="manage-dashboard"),
     path('amenities', views.amenities_view, name="manage-places"),
     path('amenities/<str:pk>/', views.amenity_view, name="manage-amenity"),
+    path('profile',  landingpage_view, name="manage-profilepage"),
     # path('amenities/amenity', views.amenityobject_view, name="amenity"),
 
     # path('members', views.memberhub_view, name="memberhub"),

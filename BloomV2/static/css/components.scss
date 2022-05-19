@@ -16,7 +16,7 @@ $shade-grey--light: #e9e9e9;
 
 $feedback-active: #008cff;
 $feedback-success: #26a420;
-$feedback-error: #e20c0c;
+$feedback-error: #ff0000;
 
 $feedback-active-gradient: linear-gradient(
     to left,
@@ -34,6 +34,8 @@ $feedback-error-gradient: linear-gradient(
     #ff979c 100%
 );
 
+$tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
+
 $blue: #2457e4;
 $green: #0dce83;
 $turquoise: #10e5d9;
@@ -48,7 +50,6 @@ $montserrat: "Montserrat", sans-serif;
 $nunito: "Nunito", sans-serif;
 
 $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
-$tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 // Style classes
 
 .color {
@@ -75,6 +76,9 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     &-gradient {
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        &-teal {
+            background: $tealgradient;
+        }
         &-active {
             background: linear-gradient(to right, $feedback-active, white);
         }
@@ -197,7 +201,7 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     font-style: normal;
     font-weight: 300;
     font-size: 14px;
-    line-height: auto;
+    padding: 0 0 6px 0;
     /* identical to box height, or 190% */
 
     letter-spacing: 0.5px;
@@ -326,6 +330,61 @@ button {
         &:hover {
             .overlay {
                 background: rgba(0, 0, 0, 0.622);
+            }
+        }
+    }
+    &.site-toggle {
+        position: relative;
+        max-width: 200px;
+        width: 100%;
+        height: fit-content;
+        display: flex;
+        flex-direction: row;
+
+        border-radius: 12px;
+        // overflow: hidden;
+        text-decoration: none !important;
+        background: $shade-white;
+
+        outline: solid 1px $shade-grey;
+        outline-offset: -2px;
+        transition: none !important;
+        padding: 0;
+        color: $shade-grey;
+
+        &:hover {
+            transform: none;
+            cursor: default;
+        }
+
+        .half {
+            height: fit-content;
+            width: 50%;
+            border-radius: 12px;
+            padding: 20px 0;
+            text-align: center;
+            transform: scale(1.001);
+
+            &.left {
+                background: $feedback-error;
+            }
+            &.right {
+                background: $feedback-active;
+            }
+
+            &.toggled {
+                color: $shade-white;
+                pointer-events: none;
+                cursor: default;
+            }
+            &:not(.toggled) {
+                background: none;
+                &:hover {
+                    cursor: pointer;
+                    border-width: 2px;
+                    transform: scale(1.03);
+                    color: $shade-dark;
+                }
             }
         }
     }
@@ -520,7 +579,7 @@ button {
             display: grid;
             grid-gap: 15px;
             grid-template-columns: 300px 1fr;
-            grid-template-rows: fit-content 30px 1fr;
+            grid-template-rows: fit-content 10px 1fr;
             grid-template-areas:
                 "a b"
                 "a c"
@@ -533,7 +592,7 @@ button {
                 display: flex;
                 flex-wrap: wrap;
 
-                > div {
+                > .info-card {
                     margin-right: 10px;
                 }
             }
@@ -551,6 +610,7 @@ button {
                         auto-fill,
                         minmax(300px, 1fr)
                     );
+                    // grid-template-rows: 200px;
                 }
             }
         }
@@ -560,15 +620,32 @@ button {
         .rectangle {
             display: grid;
             grid-gap: 15px;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-auto-rows: 150px;
         }
+    }
+    &.style3 {
+        display: grid;
+        grid-gap: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-auto-rows: 150px;
+
+        padding-top: 50px;
+    }
+    &.style4 {
+        display: grid;
+        padding: 0;
+        grid-gap: 15px;
+        grid-auto-columns: 250px;
+        grid-template-columns: repeat(auto-fill, 200px);
     }
 }
 
 // REGULAR CARDS
 .amenity-card {
     position: relative;
-    height: 200px;
+    height: 100%;
+    min-height: 150px;
     width: 100%;
     display: flex;
     align-items: flex-end;
@@ -634,6 +711,7 @@ button {
 
     &.verified {
         outline: solid $feedback-success 6px;
+
         .overlay {
             display: none;
         }
@@ -700,6 +778,8 @@ button {
     border-radius: 10px;
     outline: solid 2px rgba(0, 0, 0, 0);
 
+    margin-bottom: 10px;
+
     > div:nth-child(1) {
         user-select: none;
     }
@@ -720,7 +800,6 @@ button {
 
     .rectangle {
         width: 100%;
-        min-height: 300px;
         height: fit-content;
         border-radius: 20px;
         overflow: hidden;
@@ -729,35 +808,47 @@ button {
         padding: 15px;
         text-decoration: none;
         transition: all ease-in-out 0.2s;
+
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
     }
 }
 
 .timeslot {
     width: 100%;
     height: fit-content;
-    padding: 4px;
+    padding: 13px 10px;
+    margin-bottom: 10px;
 
-    border-radius: 15px;
+    background: $shade-white;
+    border-radius: 30px;
     text-align: center;
-    border: $shade-grey 2px solid;
+    cursor: pointer;
 
     &.selected {
-        border: $feedback-active 2px solid;
-        color: $feedback-active;
+        color: $shade-white;
+        background: $feedback-active-gradient;
     }
     &.reserved {
         border: none;
         background: $feedback-success-gradient;
         color: $shade-white;
+        pointer-events: none;
+        cursor: default;
+    }
+    &:hover {
+        &,
+        &.selected {
+            transform: scale(1.02);
+        }
     }
     &.unavailable {
         border: none;
         background: $shade-grey;
         color: $shade-white;
-    }
-
-    &.selectable {
-        cursor: pointer;
+        pointer-events: none;
+        cursor: default;
     }
 }
 
@@ -897,15 +988,18 @@ button {
     width: 100%;
     height: 60px;
     border-radius: 30px;
-    padding: 4px 20px;
+    padding: 4px 30px;
     outline: none;
-    border: solid $grey 2px;
-    background: $lightgrey;
+    border: none;
+    background: $shade-grey--light;
 
-    margin: 0;
-    font: 500 20px $poppins;
-    color: $lightgrey;
-    letter-spacing: 1px;
+    width: 100%;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    color: $shade-grey;
+    /* identical to box height, or 315% */
 
     &:hover {
         // border: solid $grey 2px;
@@ -913,9 +1007,8 @@ button {
     }
 
     &:focus {
-        border: solid $grey 2px;
-        background: white;
-        font: 300 20px $poppins;
+        color: $shade-dark;
+        // border: solid $shade-grey 1px;
     }
 }
 

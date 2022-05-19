@@ -1,4 +1,111 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+.color-dominant {
+  color: #ffffff;
+}
+
+.color-secondary {
+  color: #f2f2f2;
+}
+
+.color-accent {
+  color: #0487ff;
+}
+
+.color-active {
+  color: #008cff;
+}
+
+.color-success {
+  color: #26a420;
+}
+
+.color-error {
+  color: #e20c0c;
+}
+
+.color-gradient {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.color-gradient-active {
+  background: -webkit-gradient(linear, left top, right top, from(#008cff), to(white));
+  background: linear-gradient(to right, #008cff, white);
+}
+
+.color-gradient-success {
+  background: -webkit-gradient(linear, left top, right top, from(#26a420), to(white));
+  background: linear-gradient(to right, #26a420, white);
+}
+
+.color-gradient-error {
+  background: -webkit-gradient(linear, left top, right top, from(#e20c0c), to(white));
+  background: linear-gradient(to right, #e20c0c, white);
+}
+
+.color-shade-white {
+  color: #ffffff;
+}
+
+.color-shade-dark {
+  color: #061221;
+}
+
+.color-shade-grey {
+  color: #e0e0e0;
+}
+
+.background-dominant {
+  background: #ffffff;
+}
+
+.background-secondary {
+  background: #f2f2f2;
+}
+
+.background-accent {
+  background: #0487ff;
+}
+
+.background-active {
+  background: #008cff;
+}
+
+.background-success {
+  background: #26a420;
+}
+
+.background-error {
+  background: #e20c0c;
+}
+
+.background-gradient-active {
+  background: -webkit-gradient(linear, left top, right top, from(#008cff), to(white));
+  background: linear-gradient(to right, #008cff, white);
+}
+
+.background-gradient-success {
+  background: -webkit-gradient(linear, left top, right top, from(#26a420), to(white));
+  background: linear-gradient(to right, #26a420, white);
+}
+
+.background-gradient-error {
+  background: -webkit-gradient(linear, left top, right top, from(#e20c0c), to(white));
+  background: linear-gradient(to right, #e20c0c, white);
+}
+
+.background-shade-white {
+  background: #ffffff;
+}
+
+.background-shade-dark {
+  background: #061221;
+}
+
+.background-shade-grey {
+  background: #e0e0e0;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;

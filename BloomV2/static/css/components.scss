@@ -13,9 +13,9 @@ $dominant-gradient: linear-gradient(90deg, #f4f4f4 0%, #fcfcfc 100%);
 $secondary-gradient: linear-gradient(90deg, $accent 0%, #ffffff 100%);
 $accent-gradient: linear-gradient(to right);
 
-$feedback-active: #008CFF;
-$feedback-success: #26A420;
-$feedback-error: #E20C0C;
+$feedback-active: #008cff;
+$feedback-success: #26a420;
+$feedback-error: #e20c0c;
 
 $blue: #2457e4;
 $green: #0dce83;
@@ -32,6 +32,95 @@ $nunito: "Nunito", sans-serif;
 
 $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
 $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
+// Style classes
+
+.color {
+    &-dominant {
+        color: $dominant;
+    }
+    &-secondary {
+        color: $secondary;
+    }
+    &-accent {
+        color: $accent;
+    }
+
+    &-active {
+        color: $feedback-active;
+    }
+    &-success {
+        color: $feedback-success;
+    }
+    &-error {
+        color: $feedback-error;
+    }
+
+    &-gradient {
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        &-active {
+            background: linear-gradient(to right, $feedback-active, white);
+        }
+        &-success {
+            background: linear-gradient(to right, $feedback-success, white);
+        }
+        &-error {
+            background: linear-gradient(to right, $feedback-error, white);
+        }
+    }
+
+    &-shade-white {
+        color: $white-shade;
+    }
+    &-shade-dark {
+        color: $dark-shade;
+    }
+    &-shade-grey {
+        color: $grey;
+    }
+}
+
+.background {
+    &-dominant {
+        background: $dominant;
+    }
+    &-secondary {
+        background: $secondary;
+    }
+    &-accent {
+        background: $accent;
+    }
+
+    &-active {
+        background: $feedback-active;
+    }
+    &-success {
+        background: $feedback-success;
+    }
+    &-error {
+        background: $feedback-error;
+    }
+
+    &-gradient-active {
+        background: linear-gradient(to right, $feedback-active, white);
+    }
+    &-gradient-success {
+        background: linear-gradient(to right, $feedback-success, white);
+    }
+    &-gradient-error {
+        background: linear-gradient(to right, $feedback-error, white);
+    }
+
+    &-shade-white {
+        background: $white-shade;
+    }
+    &-shade-dark {
+        background: $dark-shade;
+    }
+    &-shade-grey {
+        background: $grey;
+    }
+}
 
 // Components
 * {

@@ -30,7 +30,7 @@ from mgmtApp.forms import *
 from .models import *
 
 
-def getUsersPlacesAndAmenities(request):
+def getUsersPlacesAndAmenities(request, number_of_amenities_each):
 
     place_relationships = PlaceProfileRelationship.objects.filter(
         profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
@@ -39,7 +39,7 @@ def getUsersPlacesAndAmenities(request):
     place_amenity_groupings = {}
     for place in places:
         print(place)
-        amenities = place.amenity_set.all()
+        amenities = place.amenity_set.all() if not number_of_amenities_each else place.amenity_set.all()[:number_of_amenities_each]
         print(amenities)
 
         place_amenity_groupings[place] = amenities if amenities.count() > 0 else None

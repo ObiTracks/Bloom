@@ -7,7 +7,7 @@ $accent: #0487ff;
 
 $dominant-gradient: linear-gradient(90deg, $dominant 0%, #fcfcfc 100%);
 $secondary-gradient: linear-gradient(90deg, $secondary 0%, #ffffff 100%);
-$accent-gradient: linear-gradient(90deg, $accent 0%, #ffffff 100%);
+$accent-gradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 
 $shade-white: #ffffff;
 $shade-dark: #061221;
@@ -260,10 +260,12 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 
 .button,
 button {
+    position: relative;
     width: fit-content;
     height: fit-content;
     padding: 8px 15px;
     border-radius: 30px;
+    overflow: hidden;
     text-decoration: none !important;
     background: $shade-white;
 
@@ -276,9 +278,8 @@ button {
     &:hover {
         cursor: pointer;
         border-width: 2px;
-        outline: solid 2px black;
         color: black;
-        transform: scale(1.1);
+        transform: scale(1.03);
     }
 
     &.style1 {
@@ -298,11 +299,35 @@ button {
         display: flex;
         justify-content: center;
         align-items: center;
+        text-align: center;
         width: 100%;
-        height: 300px;
+        height: 100%;
+        outline: none;
+        border-radius: 18px;
+        transition: transform linear 0.1s;
 
-        background: $feedback-active-gradient;
+        background: $accent-gradient;
         color: $shade-white;
+
+        .overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-items: center;
+            text-align: center;
+
+            background: rgba(0, 0, 0, 0);
+            transition: opacity ease-out 0.15s;
+        }
+
+        &:hover {
+            .overlay {
+                background: rgba(0, 0, 0, 0.622);
+            }
+        }
     }
 }
 
@@ -473,10 +498,11 @@ button {
     height: fit-content;
     display: flex;
     flex-direction: column;
+    margin: 10px 0 20px 0;
 
     .rectangle {
         width: 100%;
-        min-height: 300px;
+        min-height: 200px;
         height: fit-content;
         border-radius: 20px;
         overflow: hidden;
@@ -484,12 +510,6 @@ button {
         background: $shade-grey--light;
         padding: 15px;
         text-decoration: none;
-        transition: all ease-in-out 0.2s;
-        // div {
-        //     width: 100%;
-        //     height: 100%;
-        //     background-color: green;
-        // }
     }
 
     // CONTAINER CARDS
@@ -557,13 +577,14 @@ button {
     padding: 0;
     overflow: hidden;
     border-radius: 18px;
-    background: red;
     background: $tealgradient;
     transition: box-shadow linear 0.1s;
+    transition: transform linear 0.05s;
 
     &:hover {
         cursor: pointer;
         box-shadow: 0px 0px 6px $shade-grey;
+        transform: scale(1.02);
     }
 
     .info {
@@ -599,11 +620,12 @@ button {
     background: $tealgradient;
     transition: box-shadow linear 0.1s;
     transition: outline linear 0.1s;
-
+    transition: transform linear 0.05s;
     $p: &;
 
     &:hover {
         cursor: pointer;
+        transform: scale(1.02);
     }
 
     img {
@@ -612,7 +634,7 @@ button {
 
     &.verified {
         outline: solid $feedback-success 6px;
-        .overlay{
+        .overlay {
             display: none;
         }
         img {
@@ -678,8 +700,12 @@ button {
     border-radius: 10px;
     outline: solid 2px rgba(0, 0, 0, 0);
 
+    > div:nth-child(1) {
+        user-select: none;
+    }
     > div:nth-child(2) {
-        font-size: 12px;
+        user-select: text;
+        font-size: 13px;
     }
 }
 

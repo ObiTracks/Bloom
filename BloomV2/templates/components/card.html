@@ -1,9 +1,11 @@
 {% load static %} 
 {% if name == 'container-card style1' %}
-<div class="container-card style1">
-    <div class="header2 color-shade-grey">Place Name</div>
+<div class="container-card style1" id="place-{{place.id}}">
+    <div class="header2 color-shade-grey">{{place.name}}</div>
     <div class="rectangle">
-        <div>{% include 'components/card.html' with name="place-card" %}</div>
+        <div>
+            {% include 'components/card.html' with name="place-card" place=place %}
+        </div>
         
         <div>
             {% include 'components/card.html' with name="info-card" %}
@@ -15,19 +17,23 @@
         <div class="header2">Quick Access</div>
         <div>
             <div class="quick-look">
-                {% include 'components/card.html' with name="amenity-card" %} 
-                {% include 'components/card.html' with name="amenity-card" %}
+                {% for amenity in amenities %}
+                    {% include 'components/card.html' with name="amenity-card" %} 
+                {% endfor %}
+                {% comment %} {% include 'components/card.html' with name="amenity-card" %} {% endcomment %}
             </div>
         </div>
     </div>
 </div>
 
 {% elif name == 'container-card style2' %}
-<div class="container-card style2">
-    <div class="header2 color-shade-grey">Place Name</div>
+<div class="container-card style2" id="place-{{place.id}}">
+    <div class="header2 color-shade-grey">{{place.name}}</div>
     <div class="rectangle body1">
-        {% include 'components/card.html' with name="amenity-card" %} {% include
-        'components/card.html' with name="amenity-card" %}
+        {% for amenity in amenities %}
+            {% include 'components/card.html' with name="amenity-card" amenity=amenity %} 
+        {% endfor %}
+        {% include 'components/button.html' with name="button style3" text="+ Create an Amenity"%}
     </div>
 </div>
 {% elif name == 'info-card' %}
@@ -37,19 +43,10 @@
 </div>
 
 {% elif name == 'place-card' %}
-{% comment %} <div class="place-card">
-    <div class="info">
-        <div class="header2 color-shade-white">Place Name{{amenity.name}}</div>
-    </div>
-    <img src="{% static "images/Verified Checkmark.svg" %}" alt="">
 
-    <div class="overlay">
-        <div class="header2 color-shade-white">Send a Join Request</div>
-    </div>
-</div> {% endcomment %}
-<div class="place-card verified">
+<div class="place-card {{verified}}" onclick="window.location='{% url "manage-places"%}#place-{{place.id}}';">
     <div class="info">
-        <div class="header2 color-shade-white">Place Name{{amenity.name}}</div>
+        <div class="header2 color-shade-white">{{place.name}}</div>
     </div>
     <img src="{% static "images/Verified Checkmark.svg" %}" alt="">
 
@@ -79,15 +76,15 @@
 </div>
 
 {% elif name == 'amenity-card' %}
-<div class="amenity-card">
+<div class="amenity-card" id="amenity-{{amenity.id}}" onclick="window.location='{% url "manage-amenity" amenity.id %}';">
     <div class="info">
-        <div class="header3">Amenity Name{{amenity.name}}</div>
+        <div class="header3">{{amenity.name}}</div>
     </div>
 </div>
 {% else %}
 <div class="card">
     <div class="header2 color-shade-grey">Place Name</div>
-    <div class="rectangle body1">{{sdfs}}sdfsfaf</div>
+    <div class="rectangle body1">sdfsfaf</div>
 </div>
 
 {% endif %} 

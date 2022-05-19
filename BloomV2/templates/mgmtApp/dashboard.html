@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block pageheader %}
+<div class="header2 color-shade-grey">{{page_subtitle}}</div>
 <div class="header1">{{page_title}}</div>
 {% endblock pageheader %}
 
@@ -9,43 +10,34 @@
 {% block content %}
 
 
-{% include 'components/button.html' with name="button style2" text="+ Place"%}
-{% include 'components/card.html' with name="container-card style1" %}
-{% include 'components/card.html' with name="container-card style2" %}
-
-<div class="header2">Create New Place +</div>
+{% comment %} <div class="header2">Create New Place +</div>
 <div class="card card--dotted" style="margin-bottom: 20px;">
     <form action="{% url "new-place" %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{place_form.as_p}}
         <button>Create Place</button>
     </form>    
-</div>
+</div> {% endcomment %}
 
 {% if amenity_groupings %}
     {% for place, amenities in amenity_groupings.items %}
-        <div class="header2">{{place}}</div>
+
+        {% include 'components/card.html' with name="container-card style1" verified="verified" place=place amenities=amenities%}
+
+        {% comment %} <div class="header2">{{place}}</div>
         <a href="{% url "new-amenity" place.id %}" class="button">
             <div class="button__text">+ New Amenity</div>
-        </a>
+        </a> {% endcomment %}
 
-        <div class="card">
+        {% comment %} <div class="card">
             {% if amenities %}
                 {% for amenity in amenities %}
                     {% include 'components/card--amenity.html' with amenity=amenity type="manage"%}
-                    {% comment %} {{amenity}} {% endcomment %}
                 {% endfor %}
             {% else %}
                 <div class="header2">Create an amenity! 🏝</div>
             {% endif %}
-            {% comment %} <div class="card card--white">
-                <form action="{% url "new-amenity" %}" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{amenity_form.as_p}}
-                    <button>Create New Amenity</button>
-                </form>
-            </div> {% endcomment %}
-        </div>
+        </div> {% endcomment %}
 
     {% endfor %}
 {% else %}
@@ -55,24 +47,6 @@
         <div class="header2">No Places Yet 😢 Make one ^</div>
     </div>
 {% endif %}
-
-{% comment %} <div class="card card--grey">safds</div> {% endcomment %}
-    <!-- {% if amenity_groupings %}
-        {% for place, amenities in amenity_groupings.items %}
-            <div class="header3">{{place}}</div>
-
-            <div class="card">
-                {% for amenity in amenities %}
-                    {% include 'components/card.html' with title=amenity.name %}
-                    {% comment %} {{amenity}} {% endcomment %}
-                {% endfor %}
-            </div>
-
-        {% endfor %}
-    {% else %}
-
-    {% endif %} -->
-
     
 {% endblock content %}
 

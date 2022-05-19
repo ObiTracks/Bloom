@@ -34,21 +34,9 @@ from mgmtApp.crud_views import new_place
 
 
 def dashboard_view(request):
-    page_title = "Your Management Dashboard"
-    # # AMENITIES
-    # amenity_relationships = AmenityProfileRelationship.objects.filter(
-    #     profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
-    # amenities = [i.amenity for i in amenity_relationships]
-
-    # # Grouping Amenities by Place
-    # amenity_groupings = {}
-    # for amenity in amenities:
-    #     if amenity.place not in amenity_groupings:
-    #         amenity_groupings[amenity.place] = [amenity]
-    #     else:
-    #         amenity_groupings[amenity.place].append(amenity)
-
-    places, amenity_groupings = getUsersPlacesAndAmenities(request)
+    page_title = "Dashboard"
+    page_subtitle = "Manage"
+    places, amenity_groupings = getUsersPlacesAndAmenities(request, 2)
 
     # print(amenity_groupings)
 
@@ -56,11 +44,13 @@ def dashboard_view(request):
     # amenity_form = AmenityForm(request.user)
     new_place(request)
 
-    context = {'page_title': page_title,
-               'amenity_groupings': amenity_groupings,
-               'place_form': place_form,
-               #    'amenity_form': amenity_form,
-               }
+    context = {
+        'page_title': page_title,
+        'page_subtitle':page_subtitle,
+        'amenity_groupings': amenity_groupings,
+        'place_form': place_form,
+        #    'amenity_form': amenity_form,
+    }
 
     template_name = 'mgmtApp/dashboard.html'
     return render(request, template_name, context)
@@ -68,33 +58,21 @@ def dashboard_view(request):
 
 def amenities_view(request):
     # Object data
-    page_title = "Amenity Hub"
-    page_subtitle = "Places and Amenities"
+    page_title = "Places & Amenities"
+    page_subtitle = "Manage"
+    places, amenity_groupings = getUsersPlacesAndAmenities(request, 2)
 
-    # PLACES MANAGED
-    try:
-        place_relationships = PlaceProfileRelationship.objects.filter(
-            profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
-        places_managed = [i.place for i in place_relationships]
-    except:
-        places_managed = None
-
-    amenity_groupings = {}
-    for place in places_managed:
-        amenities = Amenity.objects.filter(
-            place=place)
-        if place not in amenity_groupings:
-            amenity_groupings[place] = amenities
 
     # Forms & Interactions
     amenity_form = AmenityForm(request.user)
-    new_amenity(request)
+    # new_amenity(request)
 
     place_form = PlaceForm()
     new_place(request)
 
     context = {
         'page_title': page_title,
+        'page_subtitle':page_subtitle,
         'amenity_form': amenity_form,
         'place_form': place_form,
         'amenity_groupings': amenity_groupings,

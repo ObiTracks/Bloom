@@ -18,9 +18,13 @@
 <body>
     <div class="platform-base">
         <div class="side-container" id="side-container--left">
-            
+            {% block sidecontainer-left %}
+                <img src="{% static 'images/Bloom Logo-Transparent-Darker-Blue.png'%}" style="width: 40px; margin-bottom: 20px;" alt="">
+                {% include 'components/button.html' with name="button style2" text="+ Place"%}
+                
+            {% endblock sidecontainer-left %}
             {% comment %} {{ request.path }} {% endcomment %}
-            <img src="{% static 'images/Bloom Logo-Transparent-Darker-Blue.png'%}" style="width: 40px;" alt="">
+            
         </div>
         
         <div class="main-container">
@@ -29,6 +33,7 @@
             <div class="main-container__header">
                 
                 {% block pageheader %}
+                
                 {% endblock pageheader %}
             </div>
 
@@ -44,9 +49,9 @@
                 {{request.user.first_name}}
             </div>
             {% endif %}
-            {% block sidecontainer %}
+            {% block sidecontainer-right %}
                 {% include 'components/button-logout.html' with link='logout' text='logout' %}
-            {% endblock sidecontainer %}
+            {% endblock sidecontainer-right %}
             {% comment %} {% include 'components/badge.html' with value='222' title='title' %} {% endcomment %}
         </div>
     </div>

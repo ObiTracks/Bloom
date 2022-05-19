@@ -24,25 +24,17 @@
     </form>
 </div> {% endcomment %}
 
-    
 
-
-{% block grid %}
+{% block content %}
     {% if amenity_groupings %}
         {% for place, amenities in amenity_groupings.items %}
-            <div class="header2">{{place}}</div>
-
-            <div class="card card--grey">
-                {% for amenity in amenities %}
-                    {% include 'components/card--amenity.html' with title=amenity.name %}
-                {% endfor %}
-            </div>
+            {% include 'components/card.html' with name="container-card style2" place=place amenities=amenities%}
         {% endfor %}
 
     {% else %}
         <div class="header2">You have no places or amenities yet!</div>
     {% endif %}
-{% endblock grid %}
+{% endblock content %}
 
 
 

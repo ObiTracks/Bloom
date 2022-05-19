@@ -50,6 +50,8 @@
             </div>
             {% endif %}
             {% block sidecontainer-right %}
+                <img src="{{ request.user.profile.image.url }}" alt="" style="height: 100px; width: 100px; border-radius: 50%;">
+
                 {% include 'components/button-logout.html' with link='logout' text='logout' %}
             {% endblock sidecontainer-right %}
             {% comment %} {% include 'components/badge.html' with value='222' title='title' %} {% endcomment %}

@@ -30,7 +30,7 @@ from .models import *
 def login_view(request):
     if request.user.is_authenticated:
         print("User is already logged in")
-        return redirect('management-dashboard')
+        return redirect('manage-dashboard')
 
     page_title = "Login"
     login_form = AuthenticationForm(request)
@@ -57,7 +57,7 @@ def login_request(request):
         if user is not None:
             login(request, user)
             print("User logged In")
-            return redirect('management-dashboard')
+            return redirect('manage-dashboard')
         else:
             messages.error(request, 'Username OR password is incorrect')
 

@@ -6,6 +6,9 @@ import base64
 import datetime
 import json
 
+
+from .utilities import user_upload_directory_path
+
 # Signals
 import inspect
 import os
@@ -22,7 +25,8 @@ class Profile(models.Model):
         settings.AUTH_USER_MODEL, null=False, on_delete=models.CASCADE, related_name="profile")
     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
     bio = models.TextField(max_length=200, blank=True)
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
+    image = models.ImageField(upload_to=user_upload_directory_path, null=True, blank=True)
+
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -40,6 +44,8 @@ class Amenity(models.Model):
     description = models.CharField(max_length=200, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     timeslots = models.JSONField(blank=True, null=True)
+    image = models.ImageField(upload_to=user_upload_directory_path, null=True, blank=True)
+
 
     # availability = ArrayField(
     #     base_field=models.CharField(max_length=100, blank=True), null=True)
@@ -74,11 +80,12 @@ class Amenity(models.Model):
 class Place(models.Model):
     name = models.CharField(max_length=200, blank=False, unique=True)
     email = models.CharField(max_length=200, blank=True, null=True)
+    phone_number = PhoneNumberField(null=True, blank=True, unique=False)
     address = models.ForeignKey(
         "siteApp.Address", null=True, blank=True, on_delete=models.DO_NOTHING)
     capacity = models.IntegerField(null=True, blank=True)
     description = models.TextField(max_length=500, blank=True)
-    phone_number = PhoneNumberField(null=True, blank=True, unique=False)
+    image = models.ImageField(upload_to=user_upload_directory_path, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     # images = ArrayField(base_field=models.ImageField(null=True), null=True)
 

@@ -7,6 +7,12 @@
 
 
 {% block content %}
+
+
+{% include 'components/button.html' with name="button style2" text="+ Place"%}
+{% include 'components/card.html' with name="container-card style1" %}
+{% include 'components/card.html' with name="container-card style2" %}
+
 <div class="header2">Create New Place +</div>
 <div class="card card--dotted" style="margin-bottom: 20px;">
     <form action="{% url "new-place" %}" method="POST" enctype="multipart/form-data">

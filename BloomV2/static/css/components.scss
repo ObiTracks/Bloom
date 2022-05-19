@@ -258,25 +258,37 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     }
 }
 
-.button {
+.button,
+button {
     width: fit-content;
     height: fit-content;
     padding: 8px 15px;
     border-radius: 30px;
     text-decoration: none !important;
     background: $shade-white;
-    border: solid $shade-grey--light 0.5px;
-    color: black;
+
+    outline: solid 2px $shade-grey;
+    outline-offset: -2px;
+    transition: outline ease 0.01s;
+    transition: transform linear 0.1s;
+    color: $shade-grey;
 
     &:hover {
         cursor: pointer;
+        border-width: 2px;
+        outline: solid 2px black;
+        color: black;
+        transform: scale(1.1);
     }
 
     &.style1 {
+        outline: none;
         background: $feedback-active-gradient;
         color: white;
     }
+
     &.style2 {
+        outline: none;
         background: $feedback-success-gradient;
         color: white;
     }
@@ -488,12 +500,11 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
             display: grid;
             grid-gap: 15px;
             grid-template-columns: 300px 1fr;
-            grid-template-rows: 1fr fit-content 1fr;
+            grid-template-rows: fit-content 30px 1fr;
             grid-template-areas:
                 "a b"
                 "a c"
-                "a d"
-                ;
+                "a d";
             :nth-child(1) {
                 grid-area: a;
             }
@@ -593,9 +604,24 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 
     &:hover {
         cursor: pointer;
-        // border: solid $feedback-success 6px;
+    }
+
+    img {
+        opacity: 0;
+    }
+
+    &.verified {
         outline: solid $feedback-success 6px;
-        box-shadow: 0px 0px 6px $shade-grey;
+        .overlay{
+            display: none;
+        }
+        img {
+            opacity: 100%;
+        }
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0px 0px 6px $shade-grey;
+        }
     }
 
     .info {
@@ -706,6 +732,78 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 
     &.selectable {
         cursor: pointer;
+    }
+}
+
+// FORMS
+
+.form {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    background: green;
+
+    form {
+        width: 100%;
+        min-height: 300px;
+        height: fit-content;
+        border-radius: 20px;
+        overflow: hidden;
+        // box-shadow: $box-shadow--light;
+        background: $shade-grey--light;
+        padding: 15px;
+        text-decoration: none;
+        transition: all ease-in-out 0.2s;
+        // div {
+        //     width: 100%;
+        //     height: 100%;
+        //     background-color: green;
+        // }
+    }
+
+    &.style1 {
+        .rectangle {
+            // heig
+            position: relative;
+            display: grid;
+            grid-gap: 15px;
+            grid-template-columns: 300px 1fr;
+            grid-template-rows: fit-content 30px 1fr;
+            grid-template-areas:
+                "a b"
+                "a c"
+                "a d";
+            :nth-child(1) {
+                grid-area: a;
+            }
+            :nth-child(2) {
+                grid-area: b;
+                display: flex;
+                flex-wrap: wrap;
+
+                > div {
+                    margin-right: 10px;
+                }
+            }
+            :nth-child(4) {
+                // background: red;
+                position: relative;
+                grid-area: d;
+                .quick-look {
+                    width: 100%;
+                    height: fit-content;
+
+                    display: flex;
+                    grid-gap: 15px;
+                    grid-template-columns: repeat(
+                        auto-fill,
+                        minmax(300px, 1fr)
+                    );
+                }
+            }
+        }
     }
 }
 

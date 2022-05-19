@@ -231,7 +231,8 @@
   margin: 0 20px 0 0;
 }
 
-.button {
+.button,
+button {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -242,27 +243,46 @@
   border-radius: 30px;
   text-decoration: none !important;
   background: #ffffff;
-  border: solid #e9e9e9 0.5px;
-  color: black;
+  outline: solid 2px #b0b0b0;
+  outline-offset: -2px;
+  -webkit-transition: outline ease 0.01s;
+  transition: outline ease 0.01s;
+  -webkit-transition: -webkit-transform linear 0.1s;
+  transition: -webkit-transform linear 0.1s;
+  transition: transform linear 0.1s;
+  transition: transform linear 0.1s, -webkit-transform linear 0.1s;
+  color: #b0b0b0;
 }
 
-.button:hover {
+.button:hover,
+button:hover {
   cursor: pointer;
+  border-width: 2px;
+  outline: solid 2px black;
+  color: black;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
-.button.style1 {
+.button.style1,
+button.style1 {
+  outline: none;
   background: -webkit-gradient(linear, right top, left top, from(#008cff), to(#7ab7f0));
   background: linear-gradient(to left, #008cff 0%, #7ab7f0 100%);
   color: white;
 }
 
-.button.style2 {
+.button.style2,
+button.style2 {
+  outline: none;
   background: -webkit-gradient(linear, left top, right top, from(#26a420), to(#43e13b));
   background: linear-gradient(90deg, #26a420 0%, #43e13b 100%);
   color: white;
 }
 
-.button.style3, .button.style4 {
+.button.style3, .button.style4,
+button.style3,
+button.style4 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -540,9 +560,9 @@
   grid-gap: 15px;
   -ms-grid-columns: 300px 1fr;
       grid-template-columns: 300px 1fr;
-  -ms-grid-rows: 1fr fit-content 1fr;
-      grid-template-rows: 1fr -webkit-fit-content 1fr;
-      grid-template-rows: 1fr fit-content 1fr;
+  -ms-grid-rows: fit-content 30px 1fr;
+      grid-template-rows: -webkit-fit-content 30px 1fr;
+      grid-template-rows: fit-content 30px 1fr;
       grid-template-areas: "a b" "a c" "a d";
 }
 
@@ -677,7 +697,26 @@
 
 .place-card:hover {
   cursor: pointer;
+}
+
+.place-card img {
+  opacity: 0;
+}
+
+.place-card.verified {
   outline: solid #26a420 6px;
+}
+
+.place-card.verified .overlay {
+  display: none;
+}
+
+.place-card.verified img {
+  opacity: 100%;
+}
+
+.place-card.verified:hover {
+  cursor: pointer;
   -webkit-box-shadow: 0px 0px 6px #b0b0b0;
           box-shadow: 0px 0px 6px #b0b0b0;
 }
@@ -826,6 +865,92 @@
 
 .timeslot.selectable {
   cursor: pointer;
+}
+
+.form {
+  position: relative;
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: green;
+}
+
+.form form {
+  width: 100%;
+  min-height: 300px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #e9e9e9;
+  padding: 15px;
+  text-decoration: none;
+  -webkit-transition: all ease-in-out 0.2s;
+  transition: all ease-in-out 0.2s;
+}
+
+.form.style1 .rectangle {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 15px;
+  -ms-grid-columns: 300px 1fr;
+      grid-template-columns: 300px 1fr;
+  -ms-grid-rows: fit-content 30px 1fr;
+      grid-template-rows: -webkit-fit-content 30px 1fr;
+      grid-template-rows: fit-content 30px 1fr;
+      grid-template-areas: "a b" "a c" "a d";
+}
+
+.form.style1 .rectangle :nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+  grid-area: a;
+}
+
+.form.style1 .rectangle :nth-child(2) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.form.style1 .rectangle :nth-child(2) > div {
+  margin-right: 10px;
+}
+
+.form.style1 .rectangle :nth-child(4) {
+  position: relative;
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: d;
+}
+
+.form.style1 .rectangle :nth-child(4) .quick-look {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  grid-gap: 15px;
+  -ms-grid-columns: (minmax(300px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 .rowstrip {

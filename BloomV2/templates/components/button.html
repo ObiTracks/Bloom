@@ -1,20 +1,28 @@
 {% load static %}
+
+{% if name == 'button' %}
 <div class="button">
-    <div class="button_text">Button Text</div>
+    <div class="button_text">{{text}}</div>
 </div>
 
+{% elif name == 'button style1' %}
 <div class="button style1">
-    <div class="button_text">Button Text</div>
+    <div class="button_text">{{text}}</div>
 </div>
 
+{% elif name == 'button style2' %}
 <div class="button style2">
-    <div class="button_text">Button Text</div>
+    <div class="button_text">{{text}}</div>
 </div>
 
+{% elif name == 'button style3' %}
 <div class="button style3">
-    <div class="header2">Button Text</div>
+    <div class="header2">{{text}}</div>
 </div>
 
+{% else %}
 <div class="button style4">
     <div class="header2">+</div>
 </div>
+
+{% endif %}

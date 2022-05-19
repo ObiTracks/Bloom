@@ -31,7 +31,8 @@
 
             <div class="main-container__header">
                 {% include 'components/navbar.html' %}
-                {% include 'components/card.html' %}
+                {% include 'components/card.html' with name="container-card style1" %}
+                {% include 'components/card.html' with name="container-card style2" %}
                 {% block pageheader %}
                 {% endblock pageheader %}
             </div>

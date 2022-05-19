@@ -1,25 +1,19 @@
 {% load static %}
 <table class="table">
-    {% for key, values in dictionary.items %}
-    {% if values %}
-        <tr class="table__tr table__tr--header">
-            <td>
-                <div class="header3">{{key}}</div>
-            </td>
-        </tr>
-        {% comment %} 
-        // Tables are implemented this way because its easier to list the items
-        // just as a list instead of as table items. Styling difficulties means
-        // This is the best solution 
-        {% endcomment %}
-
-        {% for item in values %}
-        <tr class="table__tr">
-            <td class="table__td">
-                {% include 'components/rowstrip.html' with name=item %}
-            </td>
-        </tr>
-        {% endfor %}
-    {% endif %}
-    {% endfor %}
+    <tr class="row-header">
+        <th class="header3">Table Header</th>
+        <th class="header4">Table Header</th>
+        <th class="header4">Table Header</th>
+        <th class="header4">Table Header</th>
+        <th class="header4">Table Header</th>
+        <th class="header4">Table Header</th>
+    </tr>
+    <tr class="row">
+        <td class="body1 selected">Cell</td>
+        <td class="body1 selected">Cell</td>
+        <td class="body1 selected">Cell</td>
+        <td class="body1">Cell</td>
+        <td class="body1">Cell</td>
+        <td class="body1">Cell</td>
+    </tr>
 </table>

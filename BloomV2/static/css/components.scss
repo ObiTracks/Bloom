@@ -5,18 +5,34 @@ $dominant: #ffffff;
 $secondary: #f2f2f2;
 $accent: #0487ff;
 
+$dominant-gradient: linear-gradient(90deg, $dominant 0%, #fcfcfc 100%);
+$secondary-gradient: linear-gradient(90deg, $secondary 0%, #ffffff 100%);
+$accent-gradient: linear-gradient(90deg, $accent 0%, #ffffff 100%);
+
 $shade-white: #ffffff;
 $shade-dark: #061221;
 $shade-grey: #b0b0b0;
 $shade-grey--light: #e9e9e9;
 
-$dominant-gradient: linear-gradient(90deg, #f4f4f4 0%, #fcfcfc 100%);
-$secondary-gradient: linear-gradient(90deg, $accent 0%, #ffffff 100%);
-$accent-gradient: linear-gradient(to right);
-
 $feedback-active: #008cff;
 $feedback-success: #26a420;
 $feedback-error: #e20c0c;
+
+$feedback-active-gradient: linear-gradient(
+    to left,
+    $feedback-active 0%,
+    #7ab7f0 100%
+);
+$feedback-success-gradient: linear-gradient(
+    90deg,
+    $feedback-success 0%,
+    #43e13b 100%
+);
+$feedback-error-gradient: linear-gradient(
+    90deg,
+    $feedback-error 0%,
+    #ff979c 100%
+);
 
 $blue: #2457e4;
 $green: #0dce83;
@@ -131,22 +147,24 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 .header1 {
     /* Heading 1 */
 
+    width: 100%;
     font-family: "Poppins";
     font-style: normal;
     font-weight: 500;
     font-size: 36px;
-    line-height: 76px;
+    line-height: auto;
     /* identical to box height, or 210% */
 }
 
 .header2 {
     /* Heading 2 */
 
+    width: 100%;
     font-family: "Poppins";
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 18px;
-    line-height: 22px;
+    line-height: auto;
     padding: 5px 0 5px 0;
     /* identical to box height, or 119% */
 }
@@ -154,10 +172,21 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 .header3 {
     /* Heading 3 */
 
+    width: 100%;
     font-family: "Poppins";
     font-style: normal;
-    font-weight: 600;
-    font-size: 13px;
+    font-weight: 500;
+    font-size: 14px;
+    /* identical to box height, or 315% */
+}
+.header4 {
+    /* Heading 3 */
+
+    width: 100%;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
     /* identical to box height, or 315% */
 }
 
@@ -166,9 +195,9 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 
     font-family: "Montserrat";
     font-style: normal;
-    font-weight: 500;
-    font-size: 13px;
-    line-height: 40px;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: auto;
     /* identical to box height, or 190% */
 
     letter-spacing: 0.5px;
@@ -181,28 +210,22 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 32px;
+    line-height: auto;
     /* identical to box height, or 160% */
 
     letter-spacing: 0.5px;
-}
-.body {
-    font: 300 18px $open-sans;
 }
 
 .button_text {
     /* Button Text */
 
-    font-family: "Roboto";
+    font-family: "Poppins";
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 12px;
     line-height: 18px;
-    /* identical to box height, or 100% */
-
     letter-spacing: 0.5px;
-
-    color: #000000;
+    /* identical to box height, or 180% */
 }
 
 .link_text {
@@ -213,8 +236,6 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     font-size: 15px;
     line-height: 15px;
     /* identical to box height, or 115% */
-
-    color: #000000;
 
     &:hover {
         color: #0bc7d8;
@@ -238,70 +259,38 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 }
 
 .button {
+    width: fit-content;
+    height: fit-content;
+    padding: 8px 15px;
+    border-radius: 30px;
     text-decoration: none !important;
+    background: $shade-white;
+    border: solid $shade-grey--light 0.5px;
+    color: black;
 
     &:hover {
         cursor: pointer;
     }
 
-    .button__text {
-        height: fit-content;
-        width: fit-content;
-        padding: 5px 10px;
-        font: 500 10px $open-sans;
-        background: $blue;
+    &.style1 {
+        background: $feedback-active-gradient;
         color: white;
-        border-radius: 7px;
-
-        &.button__text--white {
-            box-shadow: $box-shadow--light;
-            background: white;
-            color: $blue;
-        }
-
-        &.button__text--grey {
-            box-shadow: $box-shadow--light;
-            background: $grey;
-            color: $darkgrey;
-            text-transform: lowercase;
-        }
-
-        &.button__text--small {
-            box-shadow: $box-shadow--light;
-            background: white;
-            color: $blue;
-        }
-
-        &.button__text--logout {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 15px;
-            box-shadow: none;
-            background: none;
-            font-family: $poppins;
-            color: rgb(3, 151, 151);
-        }
+    }
+    &.style2 {
+        background: $feedback-success-gradient;
+        color: white;
     }
 
-    &.button--cardsize {
-        position: relative;
-        width: 100%;
-        height: fit-content;
-        height: 200px;
-        border-radius: 20px;
-        overflow: hidden;
-        background: red;
-        padding: 20px;
-        text-decoration: none;
-        transition: all ease-in-out 0.2s;
-
-        text-decoration: none;
+    &.style3,
+    &.style4 {
         display: flex;
         justify-content: center;
         align-items: center;
-        background: $lightgrey;
-        // background: linear-gradient(180deg, #36CAE6 0%, #3545DF 100%);
+        width: 100%;
+        height: 300px;
+
+        background: $feedback-active-gradient;
+        color: $shade-white;
     }
 }
 
@@ -417,28 +406,27 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 }
 
 .table {
-    position: relative;
     width: 100%;
     height: fit-content;
-    border-spacing: 0;
-
-    .table__tr {
-        position: relative;
-        transform: scale(1); //allows position relative to work
-        height: fit-content;
+    border-collapse: collapse;
+    grid-gap: 0;
+    th {
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.5px;
     }
+    td {
+        padding: 3px 3px;
+        align-items: center;
+        letter-spacing: 0.5px;
+        text-align: center;
 
-    .table__th {
-        color: $darkgrey;
-        border: solid $lightgrey 1px;
+        &:hover {
+            cursor: pointer;
+        }
     }
-
-    .table__td {
-        // height: fit-content;
-        // padding: 0 10px;
-        // color: $darkgrey;
-        // border: solid $lightgrey 1px;
-        padding-bottom: 3px;
+    .selected {
+        background: $feedback-active;
     }
 }
 
@@ -485,31 +473,54 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
         padding: 15px;
         text-decoration: none;
         transition: all ease-in-out 0.2s;
-        div {
-            width: 100%;
-            height: 100%;
-            background-color: green;
-        }
+        // div {
+        //     width: 100%;
+        //     height: 100%;
+        //     background-color: green;
+        // }
     }
 
     // CONTAINER CARDS
     &.style1 {
         .rectangle {
             // heig
+            position: relative;
             display: grid;
             grid-gap: 15px;
             grid-template-columns: 300px 1fr;
+            grid-template-rows: 1fr fit-content 1fr;
             grid-template-areas:
                 "a b"
-                "a c";
+                "a c"
+                "a d"
+                ;
             :nth-child(1) {
                 grid-area: a;
             }
             :nth-child(2) {
                 grid-area: b;
+                display: flex;
+                flex-wrap: wrap;
+
+                > div {
+                    margin-right: 10px;
+                }
             }
-            :nth-child(3) {
-                grid-area: c;
+            :nth-child(4) {
+                // background: red;
+                position: relative;
+                grid-area: d;
+                .quick-look {
+                    width: 100%;
+                    height: fit-content;
+
+                    display: flex;
+                    grid-gap: 15px;
+                    grid-template-columns: repeat(
+                        auto-fill,
+                        minmax(300px, 1fr)
+                    );
+                }
             }
         }
     }
@@ -527,7 +538,7 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
 .amenity-card {
     position: relative;
     height: 200px;
-    width: 300px;
+    width: 100%;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -547,15 +558,154 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     .info {
         height: fit-content;
         width: fit-content;
-        // max-width: 50px;
         padding: 10px 15px 10px 15px;
         border-top-left-radius: 25px;
         background: white;
-
         > div {
             color: $shade-grey;
             text-align: right;
         }
+    }
+}
+
+.place-card {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    padding: 0;
+    overflow: hidden;
+    outline: solid rgba(255, 255, 255, 0) 6px;
+    // outline: solid $feedback-success 6px;
+    outline-offset: -6px;
+
+    background-clip: padding-box;
+    mask-clip: padding-box;
+    border-radius: 18px;
+    background: $tealgradient;
+    transition: box-shadow linear 0.1s;
+    transition: outline linear 0.1s;
+
+    $p: &;
+
+    &:hover {
+        cursor: pointer;
+        // border: solid $feedback-success 6px;
+        outline: solid $feedback-success 6px;
+        box-shadow: 0px 0px 6px $shade-grey;
+    }
+
+    .info {
+        position: absolute;
+        bottom: 40px;
+        right: 20px;
+
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        width: 90%;
+        height: fit-content;
+        // padding: 10px 15px 10px 0px;
+        // border: solid black 1px;
+        > div {
+            text-align: right;
+            line-height: normal;
+        }
+    }
+    > img {
+        position: absolute;
+        height: 25px;
+        width: 25px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+
+        opacity: 0;
+        align-items: center;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.622);
+        transition: opacity ease-out 0.15s;
+    }
+
+    &:hover .overlay {
+        opacity: 100%;
+    }
+}
+
+.info-card {
+    width: fit-content;
+    height: fit-content;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    background: $shade-white;
+    border-radius: 10px;
+    outline: solid 2px rgba(0, 0, 0, 0);
+
+    > div:nth-child(2) {
+        font-size: 12px;
+    }
+}
+
+.availability-card {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    outline: solid 2px rgba(0, 0, 0, 0);
+    text-align: center;
+
+    .rectangle {
+        width: 100%;
+        min-height: 300px;
+        height: fit-content;
+        border-radius: 20px;
+        overflow: hidden;
+        // box-shadow: $box-shadow--light;
+        background: $shade-grey--light;
+        padding: 15px;
+        text-decoration: none;
+        transition: all ease-in-out 0.2s;
+    }
+}
+
+.timeslot {
+    width: 100%;
+    height: fit-content;
+    padding: 4px;
+
+    border-radius: 15px;
+    text-align: center;
+    border: $shade-grey 2px solid;
+
+    &.selected {
+        border: $feedback-active 2px solid;
+        color: $feedback-active;
+    }
+    &.reserved {
+        border: none;
+        background: $feedback-success-gradient;
+        color: $shade-white;
+    }
+    &.unavailable {
+        border: none;
+        background: $shade-grey;
+        color: $shade-white;
+    }
+
+    &.selectable {
+        cursor: pointer;
     }
 }
 
@@ -645,20 +795,20 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     }
 }
 
-.timeslot {
-    width: 100%;
-    height: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 30px;
-    border-radius: 50px;
-    font: 300 20px $poppins;
-    background: $grey;
-    margin-bottom: 10px;
+// .timeslot {
+//     width: 100%;
+//     height: 60px;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding: 0 30px;
+//     border-radius: 50px;
+//     font: 300 20px $poppins;
+//     background: $grey;
+//     margin-bottom: 10px;
 
-    > div:nth-child(3) {
-        color: red;
-        font: 300 20px $poppins;
-    }
-}
+//     > div:nth-child(3) {
+//         color: red;
+//         font: 300 20px $poppins;
+//     }
+// }

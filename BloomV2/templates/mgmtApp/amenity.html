@@ -1,73 +1,83 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block headers %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/timeslots.css' %}">
-{% endblock headers %}
-
-{% block pageheader %}
+{% extends 'base.html' %} {% load static %} {% block headers %}
+{% comment %} <link
+    rel="stylesheet"
+    type="text/css"
+    href="{% static 'css/timeslots.css' %}"
+/> {% endcomment %}
+{% endblock headers %} {% block pageheader %}
 <div class="header2 color-shade-grey">{{page_subtitle}}</div>
 <div class="header1">{{page_title}}</div>
-{% endblock pageheader %}
+{% endblock pageheader %} {% block content %}
 
-{% block content %}
-
-<div class="header2">Info and Gallery </div>
+<div class="header2">Info and Gallery</div>
 
 <span>{{amenity.name}}</span>
 <span>{{amenity.place}}</span>
 <span>{{amenity.timeslot}}</span>
 
-
-
 <form action="" method="POST">
-    {% csrf_token %}
-    {{amenity_form.as_p}}
-    
+    {% csrf_token %} {{amenity_form.as_p}}
+
     <button>Step 2: Save Changes</button>
 </form>
-<button type="button" id="showresults" value="Spremi" style="height: 26px; margin-top:20px; width: 200px;">Step 1: Update Changed Timeslots</button>
+<button
+    type="button"
+    id="showresults"
+    value="Spremi"
+    style="height: 26px; margin-top: 20px; width: 200px"
+>
+    Step 1: Update Changed Timeslots
+</button>
 <span id="results"></span>
 
-<table id="table">
+<table class="table" id="table">
     <!-- table timeslots injected here -->
 </table>
 
-
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-      crossorigin="anonymous"></script>
-{% comment %} <script> //Loading json timeslots from object into the page for the js to interact
-    var timeslotJson = {{ jsonTimeslots | safe }};
-    console.log(timeslotJson);
-</script> {% endcomment %} 
-
-
-{% endblock content %}
-
-{% block scripts %}
-<script src="{% static 'js/script1.js' %}" type="text/javascript" charset="utf-8"></script>
-<script src="{% static 'js/script2.js' %}" type="text/javascript" charset="utf-8"></script>
-<script src="{% static 'js/script3.js' %}" type="text/javascript" charset="utf-8"></script>
-{% endblock scripts %}
-{% comment %} <script src="script2.js" type="text/javascript" charset="utf-8"></script> {% endcomment %}
-{% comment %} <div class="header2">Member Access List</div>
+<script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"
+></script>
+{% comment %}
+<script>
+    //Loading json timeslots from object into the page for the js to interact
+       var timeslotJson = {{ jsonTimeslots | safe }};
+       console.log(timeslotJson);
+</script>
+{% endcomment %} {% endblock content %} {% block scripts %}
+<script
+    src="{% static 'js/manage/generateTable.js' %}"
+    type="text/javascript"
+    charset="utf-8"
+></script>
+<script
+    src="{% static 'js/manage/tableInteraction.js' %}"
+    type="text/javascript"
+    charset="utf-8"
+></script>
+<script
+    src="{% static 'js/manage/preloadTable.js' %}"
+    type="text/javascript"
+    charset="utf-8"
+></script>
+{% endblock scripts %} {% comment %}
+<script src="script2.js" type="text/javascript" charset="utf-8"></script>
+{% endcomment %} {% comment %}
+<div class="header2">Member Access List</div>
 <div class="card card--grey">
     <div class="body">
-        {% include 'components/rowstrip.html' %}
-        {% include 'components/rowstrip.html' %}
-        
+        {% include 'components/rowstrip.html' %} {% include
+        'components/rowstrip.html' %}
     </div>
 </div>
 
-
-<div class="header2 ">Statistics</div>
+<div class="header2">Statistics</div>
 <div class="card card--grey">
-        <div class="grid grid-style-evensquaregrid">
-            {% include 'components/badge.html' %}
-            {% include 'components/badge.html' %}
-            {% include 'components/badge.html' %}
-            {% include 'components/badge.html' %}
-        </div>
-</div> {% endcomment %}
-
+    <div class="grid grid-style-evensquaregrid">
+        {% include 'components/badge.html' %} {% include 'components/badge.html'
+        %} {% include 'components/badge.html' %} {% include
+        'components/badge.html' %}
+    </div>
+</div>
+{% endcomment %}

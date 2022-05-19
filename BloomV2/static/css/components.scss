@@ -506,10 +506,17 @@ button {
     height: fit-content;
     border-collapse: collapse;
     grid-gap: 0;
+
+
     th {
         align-items: center;
         text-align: center;
-        letter-spacing: 0.5px;
+        // letter-spacing: 0.5px;
+
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
     }
     td {
         padding: 3px 3px;
@@ -517,12 +524,36 @@ button {
         letter-spacing: 0.5px;
         text-align: center;
 
+        
+
+        &.rowheader {
+            font-family: "Montserrat";
+            font-style: normal;
+            font-weight: 300;
+            font-size: 14px;
+        }
+
+        &.selected {
+            background: $feedback-active;
+        }
         &:hover {
-            cursor: pointer;
+            opacity: 80%;
         }
     }
-    .selected {
-        background: $feedback-active;
+    tr {
+        &.rowhour {
+            font-size: 15px;
+            color: black;
+            height: 20px;
+            background-color: $shade-grey--light;
+            /* margin: 10px; */
+
+            td.selected {
+                background: #0082ec;
+            }
+        }
+
+        
     }
 }
 

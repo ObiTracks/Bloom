@@ -52,7 +52,7 @@
 }
 
 .color-shade-grey {
-  color: #e0e0e0;
+  color: #b0b0b0;
 }
 
 .background-dominant {
@@ -119,7 +119,6 @@
   font-size: 36px;
   line-height: 76px;
   /* identical to box height, or 210% */
-  color: #000000;
 }
 
 .header2 {
@@ -129,8 +128,8 @@
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
+  padding: 5px 0 5px 0;
   /* identical to box height, or 119% */
-  color: #000000;
 }
 
 .header3 {
@@ -139,9 +138,7 @@
   font-style: normal;
   font-weight: 600;
   font-size: 13px;
-  line-height: 41px;
   /* identical to box height, or 315% */
-  color: #000000;
 }
 
 .body1 {
@@ -149,11 +146,10 @@
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
-  font-size: 21px;
+  font-size: 13px;
   line-height: 40px;
   /* identical to box height, or 190% */
   letter-spacing: 0.5px;
-  color: #000000;
 }
 
 .body2 {
@@ -161,11 +157,10 @@
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 12px;
   line-height: 32px;
   /* identical to box height, or 160% */
   letter-spacing: 0.5px;
-  color: #000000;
 }
 
 .body {
@@ -529,45 +524,79 @@
   overflow: hidden;
 }
 
-.card {
+.container-card {
   position: relative;
   width: 100%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.container-card .rectangle {
+  width: 100%;
+  min-height: 300px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   border-radius: 20px;
   overflow: hidden;
-  background: #e0e0e0;
-  padding: 10px;
+  background: #e9e9e9;
+  padding: 15px;
   text-decoration: none;
   -webkit-transition: all ease-in-out 0.2s;
   transition: all ease-in-out 0.2s;
 }
 
-.card.card--dotted {
-  background: none;
-  border: solid #e0e0e0 3px;
-  border-style: dotted;
+.container-card .rectangle div {
+  width: 100%;
+  height: 100%;
+  background-color: green;
 }
 
-.card.card--white {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  background: white;
-  min-height: -webkit-fit-content;
-  min-height: -moz-fit-content;
-  min-height: fit-content;
+.container-card.style1 .rectangle {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 15px;
+  -ms-grid-columns: 300px 1fr;
+      grid-template-columns: 300px 1fr;
+      grid-template-areas: "a b" "a c";
 }
 
-.card.card--outline {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  background: none;
-  border: solid #e0e0e0 4px;
-  border-radius: 10px;
+.container-card.style1 .rectangle :nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: a;
 }
 
-.card.card--amenity {
+.container-card.style1 .rectangle :nth-child(2) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: b;
+}
+
+.container-card.style1 .rectangle :nth-child(3) {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: c;
+}
+
+.container-card.style2 .rectangle {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 15px;
+  -ms-grid-columns: (minmax(300px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.amenity-card {
   position: relative;
   height: 200px;
   width: 300px;
@@ -581,32 +610,37 @@
       -ms-flex-pack: end;
           justify-content: flex-end;
   padding: 0;
+  overflow: hidden;
+  border-radius: 18px;
   background: red;
   background: -webkit-gradient(linear, left top, right top, from(#36cae6), to(#3545df));
   background: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
+  -webkit-transition: -webkit-box-shadow linear 0.1s;
+  transition: -webkit-box-shadow linear 0.1s;
+  transition: box-shadow linear 0.1s;
+  transition: box-shadow linear 0.1s, -webkit-box-shadow linear 0.1s;
 }
 
-.card.card--amenity:hover {
+.amenity-card:hover {
   cursor: pointer;
+  -webkit-box-shadow: 0px 0px 6px #b0b0b0;
+          box-shadow: 0px 0px 6px #b0b0b0;
 }
 
-.card.card--amenity .card--amenity__info {
+.amenity-card .info {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  min-height: 40px;
-  width: 0;
-  min-width: 0px;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 10px 20px 10px 30px;
-  border-top-left-radius: 40px;
+  padding: 10px 15px 10px 15px;
+  border-top-left-radius: 25px;
   background: white;
 }
 
-.card.card--amenity .card--amenity__info > div {
-  color: #a0a0a0;
+.amenity-card .info > div {
+  color: #b0b0b0;
   text-align: right;
 }
 

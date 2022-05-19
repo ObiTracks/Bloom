@@ -5,9 +5,10 @@ $dominant: #ffffff;
 $secondary: #f2f2f2;
 $accent: #0487ff;
 
-$white-shade: #ffffff;
-$dark-shade: #061221;
-$grey-shade: #e9e9e9;
+$shade-white: #ffffff;
+$shade-dark: #061221;
+$shade-grey: #b0b0b0;
+$shade-grey--light: #e9e9e9;
 
 $dominant-gradient: linear-gradient(90deg, #f4f4f4 0%, #fcfcfc 100%);
 $secondary-gradient: linear-gradient(90deg, $accent 0%, #ffffff 100%);
@@ -70,13 +71,13 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     }
 
     &-shade-white {
-        color: $white-shade;
+        color: $shade-white;
     }
     &-shade-dark {
-        color: $dark-shade;
+        color: $shade-dark;
     }
     &-shade-grey {
-        color: $grey;
+        color: $shade-grey;
     }
 }
 
@@ -112,10 +113,10 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     }
 
     &-shade-white {
-        background: $white-shade;
+        background: $shade-white;
     }
     &-shade-dark {
-        background: $dark-shade;
+        background: $shade-dark;
     }
     &-shade-grey {
         background: $grey;
@@ -136,8 +137,6 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     font-size: 36px;
     line-height: 76px;
     /* identical to box height, or 210% */
-
-    color: #000000;
 }
 
 .header2 {
@@ -148,9 +147,8 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
+    padding: 5px 0 5px 0;
     /* identical to box height, or 119% */
-
-    color: #000000;
 }
 
 .header3 {
@@ -160,10 +158,7 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     font-style: normal;
     font-weight: 600;
     font-size: 13px;
-    line-height: 41px;
     /* identical to box height, or 315% */
-
-    color: #000000;
 }
 
 .body1 {
@@ -172,13 +167,11 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     font-family: "Montserrat";
     font-style: normal;
     font-weight: 500;
-    font-size: 21px;
+    font-size: 13px;
     line-height: 40px;
     /* identical to box height, or 190% */
 
     letter-spacing: 0.5px;
-
-    color: #000000;
 }
 
 .body2 {
@@ -187,13 +180,11 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     font-family: "Montserrat";
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 12px;
     line-height: 32px;
     /* identical to box height, or 160% */
 
     letter-spacing: 0.5px;
-
-    color: #000000;
 }
 .body {
     font: 300 18px $open-sans;
@@ -476,67 +467,94 @@ $tealgradient: linear-gradient(90deg, #36cae6 0%, #3545df 100%);
     }
 }
 
-.card {
+.container-card {
     position: relative;
     width: 100%;
     height: fit-content;
-    border-radius: 20px;
-    overflow: hidden;
-    // box-shadow: $box-shadow--light;
-    background: $grey;
-    padding: 10px;
-    text-decoration: none;
-    transition: all ease-in-out 0.2s;
+    display: flex;
+    flex-direction: column;
 
-    &.card--dotted {
-        background: none;
-        border: solid $grey 3px;
-        border-style: dotted;
-    }
-
-    &.card--white {
-        box-shadow: none;
-        background: white;
-        min-height: fit-content;
-        // height: 100%;
-    }
-
-    &.card--outline {
-        box-shadow: none;
-        background: none;
-        border: solid $grey 4px;
-        border-radius: 10px;
-    }
-
-    &.card--amenity {
-        position: relative;
-        height: 200px;
-        width: 300px;
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-end;
-        padding: 0;
-        background: red;
-        background: $tealgradient;
-
-        &:hover {
-            cursor: pointer;
+    .rectangle {
+        width: 100%;
+        min-height: 300px;
+        height: fit-content;
+        border-radius: 20px;
+        overflow: hidden;
+        // box-shadow: $box-shadow--light;
+        background: $shade-grey--light;
+        padding: 15px;
+        text-decoration: none;
+        transition: all ease-in-out 0.2s;
+        div {
+            width: 100%;
+            height: 100%;
+            background-color: green;
         }
+    }
 
-        .card--amenity__info {
-            height: fit-content;
-            min-height: 40px;
-            width: 0;
-            min-width: 0px;
-            width: fit-content;
-            padding: 10px 20px 10px 30px;
-            border-top-left-radius: 40px;
-            background: white;
-
-            > div {
-                color: $darkgrey;
-                text-align: right;
+    // CONTAINER CARDS
+    &.style1 {
+        .rectangle {
+            // heig
+            display: grid;
+            grid-gap: 15px;
+            grid-template-columns: 300px 1fr;
+            grid-template-areas:
+                "a b"
+                "a c";
+            :nth-child(1) {
+                grid-area: a;
             }
+            :nth-child(2) {
+                grid-area: b;
+            }
+            :nth-child(3) {
+                grid-area: c;
+            }
+        }
+    }
+
+    &.style2 {
+        .rectangle {
+            display: grid;
+            grid-gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+    }
+}
+
+// REGULAR CARDS
+.amenity-card {
+    position: relative;
+    height: 200px;
+    width: 300px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+
+    padding: 0;
+    overflow: hidden;
+    border-radius: 18px;
+    background: red;
+    background: $tealgradient;
+    transition: box-shadow linear 0.1s;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 0px 6px $shade-grey;
+    }
+
+    .info {
+        height: fit-content;
+        width: fit-content;
+        // max-width: 50px;
+        padding: 10px 15px 10px 15px;
+        border-top-left-radius: 25px;
+        background: white;
+
+        > div {
+            color: $shade-grey;
+            text-align: right;
         }
     }
 }

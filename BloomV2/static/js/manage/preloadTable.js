@@ -40,10 +40,6 @@ function preLoadTable(tableHeaders, tableRows) {
                 }
             })
         }
-        // ([key, value]) => (console.log(key, value))
-        // value.forEach(x => {
-
-        // })
     );
 }
 

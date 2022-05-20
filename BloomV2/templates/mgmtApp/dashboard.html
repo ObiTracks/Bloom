@@ -12,6 +12,8 @@
 
 {% if amenity_groupings %}
     {% include 'components/button.html' with name="button style1" text="+ Place"%}
+    {% include 'components/card.html' with name="container-card style1" verified="verified" place=place amenities=amenities%}
+
     {% for place, amenities in amenity_groupings.items %}
         {% include 'components/card.html' with name="container-card style1" verified="verified" place=place amenities=amenities%}
     {% endfor %}

@@ -1,18 +1,25 @@
-{% extends 'base.html' %} {% load static %} {% block headers %}
+{% extends 'base.html' %} {% load static %}
+
+{% block headers %}
 <link
     rel="stylesheet"
     type="text/css"
     href="{% static 'css/timeslots.css' %}"
 />
-{% endblock headers %} {% block pageheader %}
+{% endblock headers %} 
+
+{% block pageheader %}
 <div class="header2 card-shade-grey">{{page_subtitle}}</div>
 <div class="header1">{{page_title}}</div>
-{% endblock pageheader %} {% block content %}
+{% endblock pageheader %} 
 
-<span>{{amenity.timeslot}}</span>
+{% block content %}
+<span>{{jsonTimeslots}}</span>
 
 
-{% include 'components/card.html' with name="container-card style4" %}
+
+
+{% include 'components/card.html' with name="container-card style4" jsonTimeslots=jsonTimeslots%}
 
 
 
@@ -27,3 +34,17 @@
 <script src="{% static 'js/loadTimeslots.js' %}" type="text/javascript" charset="utf-8"></script> -->
 
 {% endblock content %}
+
+
+{% block scripts %}
+
+<script> //Loading json timeslots from object into the page for the js to interact
+    var jsonTimeslots = {{ jsonTimeslots | safe }};
+    console.log(jsonTimeslots);
+</script>
+<script
+    src="{% static 'js/member/makeReservations.js' %}"
+    type="text/javascript"
+    charset="utf-8"
+></script>
+{% endblock scripts %}

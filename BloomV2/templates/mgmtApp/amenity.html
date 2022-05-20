@@ -1,13 +1,11 @@
-{% extends 'base.html' %} {% load static %} {% block headers %}
-{% comment %} <link
-    rel="stylesheet"
-    type="text/css"
-    href="{% static 'css/timeslots.css' %}"
-/> {% endcomment %}
-{% endblock headers %} {% block pageheader %}
+{% extends 'base.html' %} {% load static %} 
+
+{% block pageheader %}
 <div class="header2 color-shade-grey">{{page_subtitle}}</div>
 <div class="header1">{{page_title}}</div>
-{% endblock pageheader %} {% block content %}
+{% endblock pageheader %} 
+
+{% block content %}
 
 <div class="header2">Info and Gallery</div>
 
@@ -34,18 +32,15 @@
     <!-- table timeslots injected here -->
 </table>
 
-<script
-    src="https://code.jquery.com/jquery-3.6.0.js"
-    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"
-></script>
+
 {% comment %}
 <script>
     //Loading json timeslots from object into the page for the js to interact
        var timeslotJson = {{ jsonTimeslots | safe }};
        console.log(timeslotJson);
 </script>
-{% endcomment %} {% endblock content %} {% block scripts %}
+{% endcomment %} 
+{% endblock content %} {% block scripts %}
 <script
     src="{% static 'js/manage/generateTable.js' %}"
     type="text/javascript"

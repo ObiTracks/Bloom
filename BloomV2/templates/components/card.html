@@ -48,8 +48,10 @@
 
 {% elif name == 'container-card style4' %}
 <div class="container-card style4" id="place-{{place.id}}">
-
-    {% include 'components/card.html' with name="availability-card" %}
+    {% for day, timeslots in jsonTimeslots.items %}
+        {% include 'components/card.html' with name="availability-card" day=day timeslots=timeslots %}
+    {% endfor %}
+    
     {% include 'components/card.html' with name="availability-card" %}
     {% include 'components/card.html' with name="availability-card" %}
     {% include 'components/card.html' with name="availability-card" %}
@@ -89,12 +91,15 @@
 
 {% elif name == 'availability-card' %}
 <div class="availability-card">
-    <div class="header2 color-shade-grey">Day Name</div>
+    <div class="header2 color-shade-grey">{{day}}</div>
     <div class="body1 color-shade-grey">MM/DD/YYYY</div>
     <div class="rectangle">
+
+        {% for timeslot in timeslots %}
         <div class="timeslot ">
-            <div class="body2">00:00-03:00</div>
+            <div class="body2">{{timeslot}}</div>
         </div>
+        {% endfor %}
         <div class="timeslot selected ">
             <div class="body2">00:00-03:00</div>
         </div>

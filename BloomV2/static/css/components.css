@@ -1001,6 +1001,15 @@ button.site-toggle .half:not(.toggled):hover {
   border-radius: 10px;
   outline: solid 2px rgba(0, 0, 0, 0);
   text-align: center;
+  -webkit-transition: -webkit-transform linear 0.1s;
+  transition: -webkit-transform linear 0.1s;
+  transition: transform linear 0.1s;
+  transition: transform linear 0.1s, -webkit-transform linear 0.1s;
+}
+
+.availability-card:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .availability-card .rectangle {

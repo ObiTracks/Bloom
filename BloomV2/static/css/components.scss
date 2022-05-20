@@ -828,6 +828,10 @@ button {
     border-radius: 10px;
     outline: solid 2px rgba(0, 0, 0, 0);
     text-align: center;
+    transition: transform linear 0.1s;
+    &:hover{
+        transform: scale(1.1);
+    }
 
     .rectangle {
         width: 100%;

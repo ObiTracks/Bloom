@@ -340,6 +340,66 @@ button.style4:hover .overlay {
   background: rgba(0, 0, 0, 0.622);
 }
 
+.button.style5,
+button.style5 {
+  width: 100%;
+  height: 45px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  outline: none;
+  border-radius: 8px;
+  border: none;
+  background: -webkit-gradient(linear, right top, left top, from(#008cff), to(#7ab7f0));
+  background: linear-gradient(to left, #008cff 0%, #7ab7f0 100%);
+  font-size: 12px;
+  color: white;
+}
+
+.button.style5:hover,
+button.style5:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.button.style6,
+button.style6 {
+  width: 100%;
+  height: 45px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  outline: none;
+  border-radius: 8px;
+  border: none;
+  background: -webkit-gradient(linear, right top, left top, from(#008cff), to(#7ab7f0));
+  background: linear-gradient(to left, #008cff 0%, #7ab7f0 100%);
+  font-size: 12px;
+  color: white;
+}
+
+.button.style6:hover,
+button.style6:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
 .button.site-toggle,
 button.site-toggle {
   position: relative;
@@ -1076,9 +1136,9 @@ button.site-toggle .half:not(.toggled):hover {
   cursor: default;
 }
 
-.form {
+form {
   position: relative;
-  width: 100%;
+  width: 350px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -1089,77 +1149,125 @@ button.site-toggle .half:not(.toggled):hover {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: green;
+  background: rgba(223, 223, 223, 0.42);
+  -webkit-backdrop-filter: blur(50px);
+          backdrop-filter: blur(50px);
+  border-radius: 18px;
+  padding: 60px 35px 35px 35px;
 }
 
-.form form {
-  width: 100%;
-  min-height: 300px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #e9e9e9;
-  padding: 15px;
-  text-decoration: none;
-  -webkit-transition: all ease-in-out 0.2s;
-  transition: all ease-in-out 0.2s;
+form .header {
+  padding-bottom: 30px;
 }
 
-.form.style1 .rectangle {
-  position: relative;
-  display: -ms-grid;
-  display: grid;
-  grid-gap: 15px;
-  -ms-grid-columns: 300px 1fr;
-      grid-template-columns: 300px 1fr;
-  -ms-grid-rows: fit-content 30px 1fr;
-      grid-template-rows: -webkit-fit-content 30px 1fr;
-      grid-template-rows: fit-content 30px 1fr;
-      grid-template-areas: "a b" "a c" "a d";
+form .header .title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+  color: #061221;
 }
 
-.form.style1 .rectangle :nth-child(1) {
-  -ms-grid-row: 1;
-  -ms-grid-row-span: 3;
-  -ms-grid-column: 1;
-  grid-area: a;
+form .header .subtitle {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: #b0b0b0;
 }
 
-.form.style1 .rectangle :nth-child(2) {
-  -ms-grid-row: 1;
-  -ms-grid-column: 2;
-  grid-area: b;
+form .content > div {
+  margin-bottom: 15px;
+}
+
+form .content p {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 
-.form.style1 .rectangle :nth-child(2) > div {
-  margin-right: 10px;
+form .content label {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  padding-bottom: 3px;
+  color: #061221;
+  text-transform: lowercase;
 }
 
-.form.style1 .rectangle :nth-child(4) {
-  position: relative;
-  -ms-grid-row: 3;
-  -ms-grid-column: 2;
-  grid-area: d;
-}
-
-.form.style1 .rectangle :nth-child(4) .quick-look {
+form .content input {
+  height: 45px;
   width: 100%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  grid-gap: 15px;
-  -ms-grid-columns: (minmax(300px, 1fr))[auto-fill];
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  padding: 10px 15px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  background: #ffffff;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: #061221;
+}
+
+form .content input::-webkit-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 1;
+  /* Firefox */
+  color: #e9e9e9;
+  font-weight: 300;
+  text-transform: lowercase;
+}
+
+form .content input:-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 1;
+  /* Firefox */
+  color: #e9e9e9;
+  font-weight: 300;
+  text-transform: lowercase;
+}
+
+form .content input::-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 1;
+  /* Firefox */
+  color: #e9e9e9;
+  font-weight: 300;
+  text-transform: lowercase;
+}
+
+form .content input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 1;
+  /* Firefox */
+  color: #e9e9e9;
+  font-weight: 300;
+  text-transform: lowercase;
+}
+
+form .content input:focus {
+  color: #061221;
+  border: solid 3px #008cff;
+}
+
+form .content .button {
+  margin-bottom: 10px;
+}
+
+form hr {
+  border: solid #e0e0e0 1px;
+  margin-bottom: 15px;
 }
 
 .rowstrip {

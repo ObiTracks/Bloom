@@ -1,11 +1,58 @@
 {% load static %} 
 
-<div class="form style1">
-    <div class="header2 color-shade-grey">Form Name</div>
+{% if name == 'loginform' %}
+<form method="POST" class="form" id="form" action="{% url 'login_request' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="header">
+        <div class="title">Form Name</div>
+        <div class="subtitle">Subtitle</div>
+    </div>
 
-    <form action="{% url "new-place" %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{place_form}}
-        <button>Create Place</button>
-    </form>
+    <div class="content">
+        {{form}}
+
+        {% for field in form.fields %}
+
+        <label  for="">{{field.label}}</label>
+        {{field}}
+        
+        {% endfor %}
+        <p>
+            <label  for="">Label</label>
+            <input placeholder="Hello" type="text">
+        </p>
+
+        <hr>
+
+        {% include 'components/button.html' with name="button style5" text="login" type="submit"%}
+
 </div>
+    
+
+</form>
+
+{% else %}
+<form method="POST" class="form" id="form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="header">
+        <div class="title">Form Name</div>
+        <div class="subtitle">Subtitle</div>
+    </div>
+
+    <div class="content">
+
+        
+        <p>
+            <input placeholder="Hello" type="text">
+        </p>
+
+        <hr>
+
+        {% include 'components/button.html' with name="button style5" text="login" type="submit"%}
+
+</div>
+    
+
+</form>
+
+{% endif %} 

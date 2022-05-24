@@ -64,12 +64,13 @@ def sendjoin_request(request, place_pk=None):
     join_request = JoinRequest.objects.create(profile=profile, place=place)
     join_request.save()
 
-    return
+    return redirect(request.META['HTTP_REFERER'])
+    # return redirect('manage-dashboard')
 
 def approvejoin_request(request, joinrequest_pk):
     if joinrequest_pk == None:
         messages.error(request, 'Join Request id not provided for join request')
-        return
+        return redirect(request.META['HTTP_REFERER'])
 
     try:
         joinrequest = JoinRequest.objects.get(pk=joinrequest_pk)
@@ -77,16 +78,16 @@ def approvejoin_request(request, joinrequest_pk):
         joinrequest.save()
     except JoinRequest.DoesNotExist:
         messages.error(request, 'Join Request does not exist')
-        return
+        return redirect(request.META['HTTP_REFERER'])
 
     #Check if the user has access already - ie existing place profile relationship
     try:
         relationship = PlaceProfileRelationship.objects.get(
-            profle =joinrequest.place,
+            profile =joinrequest.profile,
             place=joinrequest.place
         )
         messages.error(request, 'Already member of the place')
-        return
+        return redirect(request.META['HTTP_REFERER'])
     except PlaceProfileRelationship.DoesNotExist:
         relationship = PlaceProfileRelationship(
             place=joinrequest.place, 
@@ -96,13 +97,13 @@ def approvejoin_request(request, joinrequest_pk):
 
         joinrequest.delete()
         pass
-
-    return
+    messages.success(request, 'Join Request accepted')
+    return redirect(request.META['HTTP_REFERER'])
 
 def rejectjoin_request(request, joinrequest_pk):
     if joinrequest_pk == None:
         messages.error(request, 'Join Request id not provided for join request')
-        return
+        return redirect(request.META['HTTP_REFERER'])
 
     try:
         joinrequest = JoinRequest.objects.get(pk=joinrequest_pk)
@@ -110,4 +111,5 @@ def rejectjoin_request(request, joinrequest_pk):
     except JoinRequest.DoesNotExist:
         messages.error(request, 'Join Request not provided for join request')
 
-    return
+    messages.success(request, 'Join Request not approved')
+    return redirect(request.META['HTTP_REFERER'])

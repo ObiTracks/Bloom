@@ -125,7 +125,7 @@ def joinrequests_view(request):
 
     _, joinrequest_groupings = getUsersPlacesAndJoinRequest(request, 5)
     
-
+    print(joinrequest_groupings)
     context = {
         'page_title': page_title,
         'page_subtitle': page_subtitle,

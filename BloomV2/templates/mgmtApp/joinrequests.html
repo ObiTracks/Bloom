@@ -10,10 +10,8 @@
 {% block content %}
 
 
-{% if amenity_groupings %}
-    {% include 'components/button.html' with name="button style1" text="+ Place"%}
-    {% include 'components/card.html' with name="container-card style1" verified="verified" place=place amenities=amenities%}
-
+{% if joinrequest_groupings %}
+{{joinrequest_groupings}}
     {% for place, joinrequests in joinrequest_groupings.items %}
         {% include 'components/card.html' with name="container-card style1-2" verified="verified" place=place joinrequests=joinrequests%}
     {% endfor %}

@@ -9,14 +9,6 @@
 
 {% block content %}
 
-{% include 'components/button.html' with name="button style1" text="+ Place"%}
-<form action="" method="POST" enctype='multipart/form-data'>
-    {% csrf_token %}
-
-    {{place_form}}
-    <button>Submit</button>
-</form>
-
 {% if amenity_groupings %}
 
     {% for place, amenities in amenity_groupings.items %}
@@ -29,6 +21,15 @@
         <div class="header2">No Places Yet 😢 Make one below</div>
     </div>
 {% endif %}
+
+{% include 'components/button.html' with name="button style1" text="+ Place"%}
+<form action="" method="POST" enctype='multipart/form-data'>
+    {% csrf_token %}
+
+    {{place_form}}
+    <button>Submit</button>
+</form>
+
 
     
 {% endblock content %}

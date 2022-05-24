@@ -6,21 +6,22 @@
 </div>
 
 {% elif name == 'button style2' %}
-<div class="button style2">
+<div class="button style2" onclick="window.location='{{url}}';">
     <div class="button_text">{{text}}</div>
 </div>
 
 {% elif name == 'button style3' %}
-<div class="button style3">
+<div class="button style3" onclick="window.location='{{url}}';">
+    <div class="button_text">{{text}}</div>
+</div>
+
+{% elif name == 'button style4' %}
+<div class="button style4" onclick="window.location='{{url}}';">
     <div class="overlay">
         <div class="header2">{{text}}</div>
     </div>
 </div>
 
-{% elif name == 'button style4' %}
-<div class="button style4">
-    <div class="header2">+</div>
-</div>
 {% elif name == 'button style5' %}
 <button class="button style5">
     <div class="header3">{{text}}</div>

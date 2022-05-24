@@ -25,10 +25,10 @@ SECRET_KEY = 'django-insecure-s1v1v7#&5wanv!njehp*fsxe-e4g77*ct=_l+7-5-7ypbbvkb6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0','bloomreserve.herokuapp.com','https://bloomreserve.herokuapp.com/']
 
 INTERNAL_IPS = [
-    "127.0.0.1", '0.0.0.0','bloomreserve.herokuapp.com','https://bloomreserve.herokuapp.com/'
+    "127.0.0.1", 
 ]
 
 # Application definition

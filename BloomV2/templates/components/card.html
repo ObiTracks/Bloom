@@ -27,6 +27,34 @@
     </div>
 </div>
 
+{% elif name == 'container-card style1-2' %}
+<div class="container-card style1" id="place-{{place.id}}">
+    <div class="header2 ">{{place.name}}</div>
+    <div class="rectangle">
+        <div>
+            {% include 'components/card.html' with name="place-card" place=place %}
+        </div>
+        
+        <div>
+
+            {% include 'components/card.html' with name="info-card" title="Email" value=place.email %}
+            {% include 'components/card.html' with name="info-card" title="Phone Number" value=place.phone_number %}
+            {% include 'components/card.html' with name="info-card" title="Address" value=place.address %}
+            {% include 'components/card.html' with name="info-card" title="Description" value=place.description %}
+        </div>
+
+        <div class="header2">Quick Access</div>
+        <div>
+            <div class="quick-look">
+                {% for amenity in amenities %}
+                    {% include 'components/card.html' with name="amenity-card" %} 
+                {% endfor %}
+                {% comment %} {% include 'components/card.html' with name="amenity-card" %} {% endcomment %}
+            </div>
+        </div>
+    </div>
+</div>
+
 {% elif name == 'container-card style2' %}
 <div class="container-card style2" id="place-{{place.id}}">
     <div class="header2 color-shade-grey">{{place.name}}</div>
@@ -73,11 +101,13 @@
 {% elif name == 'place-card' %}
 
 <div class="place-card {{verified}}" 
+    {% if place.image %} style="background: url({{place.image.url}});" {% endif %}
     {% if "manage" in request.path %} 
     onclick="window.location='{% url "manage-places"%}#place-{{place.id}}';"
     {% elif "member" in request.path %}
     onclick="window.location='{% url "member-dashboard"%}#place-{{place.id}}';"
-    {% endif %}>
+    {% endif %}
+    >
 
     <div class="info">
         <div class="header2 color-shade-white">{{place.name}}</div>

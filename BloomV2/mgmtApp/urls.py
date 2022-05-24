@@ -25,6 +25,7 @@ urlpatterns = [
     path('', views.dashboard_view, name="manage-dashboard"),
     path('amenities', views.amenities_view, name="manage-places"),
     path('amenities/<str:pk>/', views.amenity_view, name="manage-amenity"),
+    path('joinrequests', views.joinrequests_view, name="join-requests"),
     path('profile',  landingpage_view, name="manage-profilepage"),
     # path('amenities/amenity', views.amenityobject_view, name="amenity"),
 

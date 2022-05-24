@@ -85,7 +85,7 @@ class Place(models.Model):
         "siteApp.Address", null=True, blank=True, on_delete=models.DO_NOTHING)
     capacity = models.IntegerField(null=True, blank=True)
     description = models.TextField(max_length=500, blank=True)
-    image = models.ImageField(upload_to=user_upload_directory_path, null=True, blank=True)
+    image = models.ImageField(upload_to='images', null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     # images = ArrayField(base_field=models.ImageField(null=True), null=True)
 

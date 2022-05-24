@@ -9,10 +9,15 @@
 
 {% block content %}
 
+{% include 'components/button.html' with name="button style1" text="+ Place"%}
+<form action="" method="POST" enctype='multipart/form-data'>
+    {% csrf_token %}
+
+    {{place_form}}
+    <button>Submit</button>
+</form>
 
 {% if amenity_groupings %}
-    {% include 'components/button.html' with name="button style1" text="+ Place"%}
-    {% include 'components/card.html' with name="container-card style1" verified="verified" place=place amenities=amenities%}
 
     {% for place, amenities in amenity_groupings.items %}
         {% include 'components/card.html' with name="container-card style1" verified="verified" place=place amenities=amenities%}
@@ -21,9 +26,10 @@
     <div class="header2">You have no places or amenities! Make one above!</div>
 
     <div class="card">
-        <div class="header2">No Places Yet 😢 Make one ^</div>
+        <div class="header2">No Places Yet 😢 Make one below</div>
     </div>
 {% endif %}
+
     
 {% endblock content %}
 

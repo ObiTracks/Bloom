@@ -45,4 +45,18 @@ def getUsersPlacesAndAmenities(request, number_of_amenities_each = None):
         place_amenity_groupings[place] = amenities if amenities.count() > 0 else None
     return places, place_amenity_groupings
 
+def getUsersPlacesAndJoinRequest(request, number_of_joinrequests_each = None):
+    place_relationships = PlaceProfileRelationship.objects.filter(
+        profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
+    places = [i.place for i in place_relationships]
+
+    
+
+    place_request_groupings = {}
+    for place in places:
+        joinrequests = place.joinrequest_set.all()
+        place_request_groupings[place] = joinrequests if joinrequests.count() > 0 else None
+
+    return places, place_request_groupings
+
 

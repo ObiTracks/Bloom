@@ -80,20 +80,3 @@ def amenity_view(request, pk):
 
     template_name = 'memberApp/amenity.html'
     return render(request, template_name, context)
-
-
-def send_joinrequest(request):
-    if request.method == 'POST':
-        amenity_form = AmenityForm(request.user, request.POST, request.FILES)
-
-        if amenity_form.is_valid():
-            amenity = amenity_form.save()
-            amenityprofile_relationship = AmenityProfileRelationship.objects.create(
-                amenity=amenity, profile=request.user.profile, profile_type="3")
-            amenityprofile_relationship.save()
-
-            return redirect('amenityhub')
-        else:
-            messages.error(request, "Amenity Form is invalid")
-
-    return

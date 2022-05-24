@@ -22,4 +22,8 @@ from . import views
 urlpatterns = [
     path('',  views.landingpage_view, name="landingpage"),
 
+    # CRUD views
+    path('joinrequest-accept/<str:joinrequest_pk>',  views.approvejoin_request , name="accept-join-request"),
+    path('joinrequest-reject/<str:joinrequest_pk>',  views.rejectjoin_request, name="reject-join-request"),
+
 ]

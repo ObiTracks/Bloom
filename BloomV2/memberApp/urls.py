@@ -28,6 +28,4 @@ urlpatterns = [
     path('amenity/<str:pk>', views.amenity_view, name="member-amenity"),
     path('profile', landingpage_view, name="member-profilepage"),
     
-    # Form views
-    path('places/join_request', views.send_joinrequest, name="joinrequestform"),
 ]

@@ -147,6 +147,7 @@ AUTH_USER_MODEL = 'accountsApp.CustomUser'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.RemoteUserBackend',
     'django.contrib.auth.backends.ModelBackend',
+    'accountsApp.backends.CustomUserBackend'
 )
 
 # Changing the default user login behaviour and specifying a project level

@@ -681,6 +681,49 @@ button {
             }
         }
     }
+    &.style1-2 {
+        .rectangle {
+            // heig
+            position: relative;
+            display: grid;
+            grid-gap: 15px;
+            grid-template-columns: 300px 1fr;
+            grid-template-rows: fit-content 10px 1fr;
+            grid-template-areas:
+                "a b"
+                "a c"
+                "a d";
+            :nth-child(1) {
+                grid-area: a;
+            }
+            :nth-child(2) {
+                grid-area: b;
+                display: flex;
+                flex-wrap: wrap;
+
+                > .info-card {
+                    margin-right: 10px;
+                }
+            }
+            :nth-child(4) {
+                // background: red;
+                position: relative;
+                grid-area: d;
+                .quick-look {
+                    width: 100%;
+                    height: fit-content;
+
+                    display: flex;
+                    grid-gap: 15px;
+                    grid-template-columns: repeat(
+                        auto-fill,
+                        minmax(300px, 1fr)
+                    );
+                    // grid-template-rows: 200px;
+                }
+            }
+        }
+    }
 
     &.style2 {
         .rectangle {

@@ -22,7 +22,7 @@ def create_amenity(sender, instance, created, **kwargs):
 
 
 @receiver(post_save, sender=Place)
-def create_amenity(sender, instance, created, **kwargs):
+def create_place(sender, instance, created, **kwargs):
     request = RequestMiddleware(get_response=None)
     request = request.thread_local.current_request
     user = request.user
@@ -32,3 +32,4 @@ def create_amenity(sender, instance, created, **kwargs):
                 place=instance, profile=user.profile, profile_type='0')
 
             print("\nYEOOO Place Relationship created\n")
+        

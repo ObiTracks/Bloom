@@ -7,6 +7,7 @@ admin.site.register(Profile)
 admin.site.register(Amenity)
 admin.site.register(Place)
 admin.site.register(Address)
+admin.site.register(JoinRequest)
 admin.site.register(Reservation)
 
 # Relational Models

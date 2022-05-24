@@ -286,8 +286,15 @@ button.style2 {
   color: white;
 }
 
-.button.style3, .button.style4,
-button.style3,
+.button.style3,
+button.style3 {
+  outline: none;
+  background: -webkit-gradient(linear, left top, right top, from(#ff0000), to(#ff979c));
+  background: linear-gradient(90deg, #ff0000 0%, #ff979c 100%);
+  color: white;
+}
+
+.button.style4,
 button.style4 {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -301,6 +308,7 @@ button.style4 {
   text-align: center;
   width: 100%;
   height: 100%;
+  min-height: 150px;
   outline: none;
   border-radius: 18px;
   -webkit-transition: -webkit-transform linear 0.1s;
@@ -312,8 +320,7 @@ button.style4 {
   color: #ffffff;
 }
 
-.button.style3 .overlay, .button.style4 .overlay,
-button.style3 .overlay,
+.button.style4 .overlay,
 button.style4 .overlay {
   position: absolute;
   width: 100%;
@@ -334,8 +341,7 @@ button.style4 .overlay {
   transition: opacity ease-out 0.15s;
 }
 
-.button.style3:hover .overlay, .button.style4:hover .overlay,
-button.style3:hover .overlay,
+.button.style4:hover .overlay,
 button.style4:hover .overlay {
   background: rgba(0, 0, 0, 0.622);
 }
@@ -807,6 +813,61 @@ button.site-toggle .half:not(.toggled):hover {
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
+.container-card.style1-2 .rectangle {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 15px;
+  -ms-grid-columns: 300px 1fr;
+      grid-template-columns: 300px 1fr;
+  -ms-grid-rows: fit-content 10px 1fr;
+      grid-template-rows: -webkit-fit-content 10px 1fr;
+      grid-template-rows: fit-content 10px 1fr;
+      grid-template-areas: "a b" "a c" "a d";
+}
+
+.container-card.style1-2 .rectangle :nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+  grid-area: a;
+}
+
+.container-card.style1-2 .rectangle :nth-child(2) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: b;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.container-card.style1-2 .rectangle :nth-child(2) > .info-card {
+  margin-right: 10px;
+}
+
+.container-card.style1-2 .rectangle :nth-child(4) {
+  position: relative;
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  grid-area: d;
+}
+
+.container-card.style1-2 .rectangle :nth-child(4) .quick-look {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  grid-gap: 15px;
+  -ms-grid-columns: (minmax(300px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
 .container-card.style2 .rectangle {
   display: -ms-grid;
   display: grid;
@@ -976,6 +1037,7 @@ button.site-toggle .half:not(.toggled):hover {
 .place-card .info > div {
   text-align: right;
   line-height: normal;
+  text-shadow: -3px 2px 4px #004d6ec2;
 }
 
 .place-card > img {
@@ -1044,6 +1106,68 @@ button.site-toggle .half:not(.toggled):hover {
       -ms-user-select: text;
           user-select: text;
   font-size: 13px;
+}
+
+.info-card.style2 {
+  width: 100%;
+  min-height: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+}
+
+.info-card.style2 .info {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.info-card.style2 .info > div:nth-child(2) {
+  text-align: right;
+  margin-right: 20px;
+}
+
+.info-card.style2 .buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 50px;
+  background-color: green;
 }
 
 .availability-card {

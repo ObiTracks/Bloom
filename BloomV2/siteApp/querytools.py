@@ -3,6 +3,7 @@
 from datetime import date, datetime, timedelta
 
 import json
+from ntpath import join
 from django.core.serializers.json import DjangoJSONEncoder
 
 # Imports for Django views
@@ -44,5 +45,23 @@ def getUsersPlacesAndAmenities(request, number_of_amenities_each = None):
 
         place_amenity_groupings[place] = amenities if amenities.count() > 0 else None
     return places, place_amenity_groupings
+
+def getUsersPlacesAndJoinRequest(request, number_of_joinrequests_each = None):
+    place_relationships = PlaceProfileRelationship.objects.filter(
+        profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
+    places = [i.place for i in place_relationships]
+
+    
+
+    place_request_groupings = {}
+    for place in places:
+        joinrequests = place.joinrequest_set.exclude(profile=request.user.profile)
+        # joinrequests = JoinRequest.objects.all()
+        print(place)
+        print(joinrequests)
+        if joinrequests.count() > 0:
+            place_request_groupings[place] = joinrequests 
+
+    return places, place_request_groupings
 
 

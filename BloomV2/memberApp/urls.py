@@ -17,7 +17,8 @@ Including another URLconf
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from . import views
-from siteApp.views import landingpage_view
+import siteApp
+from siteApp.views import *
 import mgmtApp
 
 
@@ -26,8 +27,10 @@ urlpatterns = [
     path('community', views.community_view, name="member-community"),
     # path('amenity', views.amenity_view, name="member-amenity"),
     path('amenity/<str:pk>', views.amenity_view, name="member-amenity"),
-    path('profile', landingpage_view, name="member-profilepage"),
+    path('profile', siteApp.views.landingpage_view, name="member-profilepage"),
+
+    # ENDPOINT VIEWS
+    path('joinrequest-send/<int:place_pk>',  siteApp.views.sendjoin_request , name="send-join-request"),
+
     
-    # Form views
-    path('places/join_request', views.send_joinrequest, name="joinrequestform"),
 ]

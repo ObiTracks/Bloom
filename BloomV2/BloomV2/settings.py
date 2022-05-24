@@ -57,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'siteApp.middleware.RequestMiddleware',
 ]
@@ -147,6 +149,7 @@ AUTH_USER_MODEL = 'accountsApp.CustomUser'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.RemoteUserBackend',
     'django.contrib.auth.backends.ModelBackend',
+    'accountsApp.backends.CustomUserBackend'
 )
 
 # Changing the default user login behaviour and specifying a project level

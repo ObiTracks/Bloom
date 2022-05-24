@@ -28,7 +28,7 @@ from django.core.paginator import Paginator
 
 from .forms import *
 from siteApp.models import *
-from siteApp.querytools import getUsersPlacesAndAmenities
+from siteApp.querytools import getUsersPlacesAndAmenities, getUsersPlacesAndJoinRequest
 from mgmtApp.crud_views import new_place
 # Create your views here.
 
@@ -39,10 +39,17 @@ def dashboard_view(request):
     places, amenity_groupings = getUsersPlacesAndAmenities(request, 2)
 
     # print(amenity_groupings)
+    if request.method == "POST":
+        place_form = PlaceForm(
+            request.POST, request.FILES)
+        if place_form.is_valid():
+            place = place_form.save()
+            return redirect(request.META['HTTP_REFERER'])
+        else:
+            messages.error(request, "Amenity Form is invalid")
 
     place_form = PlaceForm()
-    # amenity_form = AmenityForm(request.user)
-    new_place(request)
+    # new_place(request)
 
     context = {
         'page_title': page_title,
@@ -109,4 +116,20 @@ def amenity_view(request, pk):
         'amenity':amenity
     }
     template_name = 'mgmtApp/amenity.html'
+    return render(request, template_name, context)
+
+def joinrequests_view(request):
+    # Object data
+    page_subtitle = "Manage"
+    page_title = "Join Requests"
+
+    _, joinrequest_groupings = getUsersPlacesAndJoinRequest(request, 5)
+    
+    print(joinrequest_groupings)
+    context = {
+        'page_title': page_title,
+        'page_subtitle': page_subtitle,
+        'joinrequest_groupings': joinrequest_groupings
+    }
+    template_name = 'mgmtApp/joinrequests.html'
     return render(request, template_name, context)

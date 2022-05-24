@@ -21,9 +21,32 @@
                 {% for amenity in amenities %}
                     {% include 'components/card.html' with name="amenity-card" %} 
                 {% endfor %}
+                {% include 'components/button.html' with name="button style4" text="+ Create an Amenity"%}
+                
                 {% comment %} {% include 'components/card.html' with name="amenity-card" %} {% endcomment %}
             </div>
         </div>
+    </div>
+</div>
+
+{% elif name == 'container-card style1-2' %}
+<div class="container-card style1" id="place-{{place.id}}">
+    <div class="header2 ">{{place.name}}</div>
+    <div class="rectangle">
+        <div>
+            {% include 'components/card.html' with name="place-card" place=place %}
+        </div>
+        
+        <div>
+
+
+        <div class="header2">Join Requests</div>
+        {% for request in joinrequests %}
+            {% include 'components/card.html' with name="info-card style2" request=request%}
+        {% endfor %}
+
+        </div>
+
     </div>
 </div>
 
@@ -34,7 +57,7 @@
         {% for amenity in amenities %}
             {% include 'components/card.html' with name="amenity-card" amenity=amenity %} 
         {% endfor %}
-        {% include 'components/button.html' with name="button style3" text="+ Create an Amenity"%}
+        {% include 'components/button.html' with name="button style4" text="+ Create an Amenity"%}
     </div>
 </div>
 
@@ -42,7 +65,6 @@
 <div class="container-card style3" id="place-{{place.id}}">
         {% for place in places %}
             {% include 'components/card.html' with name="place-card" place=place %}
-            {% include 'components/card.html' with name="place-card" place=place verified="verified" %}
         {% endfor %}
 </div>
 
@@ -64,27 +86,47 @@
     <div class="header3 color-shade-grey">{{value}}</div>
 </div>
 
-{% elif name == 'info-card' %}
-<div class="info-card">
-    <div class="header3">Title</div>
-    <div class="header3 color-shade-grey">Content</div>
+{% elif name == 'info-card style2' %}
+<div class="info-card style2">
+    <div class="info">
+        <div class="header3">{{request.profile}}</div>
+        <div class="header3 color-shade-grey">{{request.date_created}}</div>
+    </div>
+    <div class="buttons">
+        {% url 'approve-join-request' request.id as accept_url %}
+        {% url 'reject-join-request' request.id as reject_url %}
+        {% include 'components/button.html' with name="button style2" text="Approve" url=accept_url %}
+        {% include 'components/button.html' with name="button style3" text="Reject" url=reject_url %}
+        {% comment %} {% include 'components/button.html' with name="button style2" text="Approve" 
+            url={% url 'approve-join-request' request.id %} %}
+        {% include 'components/button.html' with name="button style2" text="Reject" 
+            url={% url 'reject-join-request' request.id %} %} {% endcomment %}
+    </div>
 </div>
 
 {% elif name == 'place-card' %}
-
+{% comment %} <a href="{% url "send-join-request" place.id %}">Send Request</a> {% endcomment %}
 <div class="place-card {{verified}}" 
+    {% if place.image %} style="
+        background: url({{place.image.url}});
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    " {% endif %}
     {% if "manage" in request.path %} 
     onclick="window.location='{% url "manage-places"%}#place-{{place.id}}';"
     {% elif "member" in request.path %}
     onclick="window.location='{% url "member-dashboard"%}#place-{{place.id}}';"
-    {% endif %}>
+    {% endif %}
+    >
 
     <div class="info">
         <div class="header2 color-shade-white">{{place.name}}</div>
     </div>
     <img src="{% static "images/Verified Checkmark.svg" %}" alt="">
 
-    <div class="overlay">
+    
+    <div class="overlay" >
         <div class="header2 color-shade-white">Send a Join Request</div>
     </div>
 </div>
@@ -114,6 +156,12 @@
 
 {% elif name == 'amenity-card' %}
 <div class="amenity-card" id="amenity-{{amenity.id}}" 
+    {% if amenity.image %} style="
+        background: url({{amenity.image.url}});
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    " {% endif %}
     {% if "manage" in request.path %} 
     onclick="window.location='{% url "manage-amenity" amenity.id %}';"
     {% elif "member" in request.path %}

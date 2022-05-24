@@ -37,13 +37,28 @@
         
         <div>
 
-            {% include 'components/card.html' with name="info-card" title="Email" value=place.email %}
-            {% include 'components/card.html' with name="info-card" title="Phone Number" value=place.phone_number %}
-            {% include 'components/card.html' with name="info-card" title="Address" value=place.address %}
-            {% include 'components/card.html' with name="info-card" title="Description" value=place.description %}
+
+        <div class="header2">Join Requests</div>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Date Sent</th>
+                <th>Approve</th>
+                <th>Reject</th>
+            </tr>
+
+            {% for request in joinrequests %}
+            <tr>
+                <td>request.profile</td>
+                <td>request.date_created</td>
+                <td><a href="{% url 'accept-join-request' request.id %}">Approve</a></td>
+                <td><a href="{% url 'reject-join-request' request.id %}">Reject</a></td>
+            </tr>
+            {% endfor %}
+
+        </table>
         </div>
 
-        <div class="header2">Quick Access</div>
         <div>
             <div class="quick-look">
                 {% for amenity in amenities %}
@@ -70,7 +85,6 @@
 <div class="container-card style3" id="place-{{place.id}}">
         {% for place in places %}
             {% include 'components/card.html' with name="place-card" place=place %}
-            {% include 'components/card.html' with name="place-card" place=place verified="verified" %}
         {% endfor %}
 </div>
 
@@ -100,13 +114,13 @@
 
 {% elif name == 'place-card' %}
 
-<div class="place-card {{verified}}" 
+<div class="place-card {{verified}} onclick="window.location='{% url "send-join-request" place.id %}';"" 
     {% if place.image %} style="background: url({{place.image.url}});" {% endif %}
-    {% if "manage" in request.path %} 
+    <!-- {% if "manage" in request.path %} 
     onclick="window.location='{% url "manage-places"%}#place-{{place.id}}';"
     {% elif "member" in request.path %}
     onclick="window.location='{% url "member-dashboard"%}#place-{{place.id}}';"
-    {% endif %}
+    {% endif %} -->
     >
 
     <div class="info">
@@ -114,7 +128,7 @@
     </div>
     <img src="{% static "images/Verified Checkmark.svg" %}" alt="">
 
-    <div class="overlay">
+    <div class="overlay" >
         <div class="header2 color-shade-white">Send a Join Request</div>
     </div>
 </div>

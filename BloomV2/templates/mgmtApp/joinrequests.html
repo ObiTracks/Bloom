@@ -15,7 +15,7 @@
     {% include 'components/card.html' with name="container-card style1" verified="verified" place=place amenities=amenities%}
 
     {% for place, joinrequests in joinrequest_groupings.items %}
-        {% include 'components/card.html' with name="container-card style1-2" place=place joinrequests=joinrequests%}
+        {% include 'components/card.html' with name="container-card style1-2" verified="verified" place=place joinrequests=joinrequests%}
     {% endfor %}
 {% else %}
     <div class="header2">Nothing Yet!</div>

@@ -48,12 +48,15 @@ def sendjoin_request(request, place_pk=None):
 
     profile = request.user.profile
     place = Place.objects.get(pk=place_pk)
+    print("PLACE FOUND\n")
 
     #Check if the user has access already - ie existing place profile relationship
     exists = PlaceProfileRelationship.objects.filter(
         place=place,
         profile=profile,
     ).exists()
+
+    print("RELATIONSHIP FOUND\n")
     if exists:
         messages.error(request, 'Already member of the place')
         return

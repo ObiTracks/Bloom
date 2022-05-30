@@ -1,18 +1,23 @@
 {% load static %} 
+{% load custom_tags %}
+
 {% if name == 'container-card style1' %}
 <div class="container-card style1" id="place-{{place.id}}">
-    <div class="header2 ">{{place.name}}</div>
+    <div class="header">
+        <div class="header2 ">{{place.name}}</div>
+    </div>
     <div class="rectangle">
         <div>
             {% include 'components/card.html' with name="place-card" place=place %}
         </div>
         
         <div>
-
             {% include 'components/card.html' with name="info-card" title="Email" value=place.email %}
             {% include 'components/card.html' with name="info-card" title="Phone Number" value=place.phone_number %}
             {% include 'components/card.html' with name="info-card" title="Address" value=place.address %}
             {% include 'components/card.html' with name="info-card" title="Description" value=place.description %}
+
+            {% include 'components/button.html' with name="button style1" text="+ Create an Amenity" onclick="showForm('amenityForm')" %}
         </div>
 
         <div class="header2">Quick Access</div>
@@ -21,7 +26,6 @@
                 {% for amenity in amenities %}
                     {% include 'components/card.html' with name="amenity-card" %} 
                 {% endfor %}
-                {% include 'components/button.html' with name="button style4" text="+ Create an Amenity"%}
                 
                 {% comment %} {% include 'components/card.html' with name="amenity-card" %} {% endcomment %}
             </div>
@@ -31,7 +35,9 @@
 
 {% elif name == 'container-card style1-2' %}
 <div class="container-card style1" id="place-{{place.id}}">
-    <div class="header2 ">{{place.name}}</div>
+   <div class="header">
+        <div class="header2 ">{{place.name}}</div>   
+    </div>
     <div class="rectangle">
         <div>
             {% include 'components/card.html' with name="place-card" place=place %}
@@ -52,12 +58,31 @@
 
 {% elif name == 'container-card style2' %}
 <div class="container-card style2" id="place-{{place.id}}">
-    <div class="header2 color-shade-grey">{{place.name}}</div>
+    <div class="header">
+        
+        <div class="header2 color-shade-grey" >{{place.name}}</div>
+        {% comment %} {{ place|serialize_model_to_dict }} {% endcomment %}
+        {% comment %} {{place.serialize_model_to_dict|safe}} 
+        place-{{place.id}}
+        {% endcomment %}
+        
+        {% comment %} {% include 'components/button.html' with name="button style1" text="Manage Place" onclick="window.location='{% url 'manage-place' place.id %}';" %} {% endcomment %}
+
+        {% url 'manage-place' place.id as place_url%}
+        <button class="button style3" onclick="window.location='{{place_url}}';">Manage Place</button>
+    </div>
     <div class="rectangle body1">
         {% for amenity in amenities %}
             {% include 'components/card.html' with name="amenity-card" amenity=amenity %} 
         {% endfor %}
-        {% include 'components/button.html' with name="button style4" text="+ Create an Amenity"%}
+        {% comment %} {% include 'components/button.html' with name="button style4" text="+ Create an Amenity"%} {% endcomment %}
+        
+        <button class="button style4" onclick="showForms()">
+            <div class="overlay">
+                <div class="header2">+ Create Amenity</div>
+            </div>
+        </button>
+
     </div>
 </div>
 
@@ -95,8 +120,8 @@
     <div class="buttons">
         {% url 'approve-join-request' request.id as accept_url %}
         {% url 'reject-join-request' request.id as reject_url %}
-        {% include 'components/button.html' with name="button style2" text="Approve" url=accept_url %}
-        {% include 'components/button.html' with name="button style3" text="Reject" url=reject_url %}
+        {% include 'components/button.html' with name="button style2" text="Approve" onclick="window.location='{{accept_url}}';" %}
+        {% include 'components/button.html' with name="button style3" text="Reject" onclick="window.location='{{reject_url}}';" %}
         {% comment %} {% include 'components/button.html' with name="button style2" text="Approve" 
             url={% url 'approve-join-request' request.id %} %}
         {% include 'components/button.html' with name="button style2" text="Reject" 
@@ -107,12 +132,15 @@
 {% elif name == 'place-card' %}
 {% comment %} <a href="{% url "send-join-request" place.id %}">Send Request</a> {% endcomment %}
 <div class="place-card {{verified}}" 
-    {% if place.image %} style="
-        background: url({{place.image.url}});
+    {% if place.image or place.backup_image_url %} 
+    style="
+        background: url({% if place.image %} {{place.image.url}} {% else %} {{place.backup_image_url}} {% endif %} );
         background-repeat: no-repeat;
         background-size: cover;
-        background-position: center center;
-    " {% endif %}
+        background-position: center center;" 
+    
+    {% endif %}
+
     {% if "manage" in request.path %} 
     onclick="window.location='{% url "manage-places"%}#place-{{place.id}}';"
     {% elif "member" in request.path %}
@@ -156,12 +184,14 @@
 
 {% elif name == 'amenity-card' %}
 <div class="amenity-card" id="amenity-{{amenity.id}}" 
-    {% if amenity.image %} style="
-        background: url({{amenity.image.url}});
+    {% if amenity.image or amenity.backup_image_url %} 
+    style="
+        background: url({% if amenity.image %} {{amenity.image.url}} {% else %} {{amenity.backup_image_url}} {% endif %} );
         background-repeat: no-repeat;
         background-size: cover;
-        background-position: center center;
-    " {% endif %}
+        background-position: center center;" 
+
+    {% endif %}
     {% if "manage" in request.path %} 
     onclick="window.location='{% url "manage-amenity" amenity.id %}';"
     {% elif "member" in request.path %}

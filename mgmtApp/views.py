@@ -63,30 +63,66 @@ def dashboard_view(request):
     return render(request, template_name, context)
 
 
-def amenities_view(request):
+def places_view(request):
     # Object data
     page_title = "Places & Amenities"
     page_subtitle = "Manage"
-    places, amenity_groupings = getUsersPlacesAndAmenities(request, 2)
-
+    places, amenity_groupings = getUsersPlacesAndAmenities(request)
 
     # Forms & Interactions
     amenity_form = AmenityForm(request.user)
-    # new_amenity(request)
+    if request.method == 'POST':
+        amenity_form = AmenityForm(request.user, request.POST, request.FILES)
 
-    place_form = PlaceForm()
+        if amenity_form.is_valid():
+            amenity = amenity_form.save()
+            return redirect(request.META['HTTP_REFERER'])
+            # return redirect('dashboard')
+        else:
+            messages.error(request, "Amenity Form is invalid")
+    
     new_place(request)
 
     context = {
         'page_title': page_title,
         'page_subtitle':page_subtitle,
         'amenity_form': amenity_form,
-        'place_form': place_form,
+        # 'place_form': place_form,
         'amenity_groupings': amenity_groupings,
     }
-    template_name = 'mgmtApp/amenities.html'
+    template_name = 'mgmtApp/places.html'
     return render(request, template_name, context)
 
+def place_view(request, pk):
+    # Object data
+    places, amenity_groupings = getUsersPlacesAndAmenities(request, place_id=pk)
+    place = places
+    page_title = place.name
+    page_subtitle = "Places"
+
+    place_form = PlaceForm(instance=place)
+    if request.method == 'POST':
+        place_form = PlaceForm(request.POST, request.FILES, instance=place)
+
+        if place_form.is_valid():
+            place = place_form.save()
+            # return
+            # return redirect(request.META['HTTP_REFERER'])
+
+            return redirect(request.META['HTTP_REFERER'])
+            # return redirect('dashboard')
+        else:
+            messages.error(request, "Place Form is invalid")
+
+    context = {
+        'page_title': page_title,
+        'page_subtitle': page_subtitle,
+        'place_form': place_form,
+        'place':place,
+        'amenity_groupings':amenity_groupings
+    }
+    template_name = 'mgmtApp/place.html'
+    return render(request, template_name, context)
 
 def amenity_view(request, pk):
     # Object data
@@ -101,11 +137,7 @@ def amenity_view(request, pk):
 
         if amenity_form.is_valid():
             amenity = amenity_form.save()
-            # return
-            # return redirect(request.META['HTTP_REFERER'])
-
             return redirect(request.META['HTTP_REFERER'])
-            # return redirect('dashboard')
         else:
             messages.error(request, "Amenity Form is invalid")
 

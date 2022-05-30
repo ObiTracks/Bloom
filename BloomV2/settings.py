@@ -25,11 +25,13 @@ SECRET_KEY = 'django-insecure-s1v1v7#&5wanv!njehp*fsxe-e4g77*ct=_l+7-5-7ypbbvkb6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0','bloomreserve.herokuapp.com','https://bloomreserve.herokuapp.com/']
+ALLOWED_HOSTS = [
+    '127.0.0.1','0.0.0.0','bloomreserve.herokuapp.com','https://bloomreserve.herokuapp.com/'
+    ]
 
-INTERNAL_IPS = [
-    "127.0.0.1", 
-]
+# INTERNAL_IPS = [
+#     '127.0.0.1',
+# ]
 
 # Application definition
 
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'lib',
     'siteApp',
     'accountsApp',
     'phonenumber_field',
@@ -76,6 +79,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            # 'libraries': {
+            #     'custom_tags': 'templatetags.templatetags.custom_tags',
+            # }
         },
     },
 ]

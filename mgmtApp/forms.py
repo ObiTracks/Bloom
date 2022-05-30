@@ -18,7 +18,14 @@ class PlaceForm(forms.ModelForm):
     class Meta:
         model = models.Place
         fields = "__all__"
-        exclude = ('user',)
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Give the place a name :)'}),
+            'email': forms.TextInput(attrs={'placeholder': 'Enter an email for members to reach you at'}),
+            'phone_number': forms.TextInput(attrs={'placeholder': '+(area code)XXXXXXXXXX - No spaces'}),
+            'address': forms.TextInput(attrs={'placeholder': 'Add an address'}),
+            'capacity': forms.NumberInput(attrs={'placeholder': 'Location capacity'}),
+            'description': forms.TextInput(attrs={'placeholder': 'Add a description to get members aquainted!'}),
+        }
 
 
 class AmenityForm(forms.ModelForm):

@@ -18,7 +18,7 @@ def create_amenity(sender, instance, created, **kwargs):
             AmenityProfileRelationship.objects.create(
                 amenity=instance, profile=user.profile, profile_type='0')
 
-            print("\nYEOOO Amenity Relationship created\n")
+            print("\nSignal: Amenity Relationship created\n")
 
 
 @receiver(post_save, sender=Place)
@@ -31,5 +31,5 @@ def create_place(sender, instance, created, **kwargs):
             PlaceProfileRelationship.objects.create(
                 place=instance, profile=user.profile, profile_type='0')
 
-            print("\nYEOOO Place Relationship created\n")
+            print("\nSignal: Place Relationship created\n")
         

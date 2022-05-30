@@ -8,30 +8,28 @@
 {% block content %}
 
 <div class="header2">Info and Gallery</div>
-
-<span>{{amenity.name}}</span>
-<span>{{amenity.place}}</span>
-<span>{{amenity.timeslot}}</span>
-
-<form action="" method="POST">
-    {% csrf_token %} {{amenity_form.as_p}}
-
-    <button>Step 2: Save Changes</button>
-</form>
-<button
+<button class="button style3" onclick="showForms()">Edit Amenity</button>
+<button class="button style1"
     type="button"
     id="showresults"
-    value="Spremi"
-    style="height: 26px; margin-top: 20px; width: 200px"
->
+    value="Spremi" >
     Step 1: Update Changed Timeslots
 </button>
+<button class="button style2" form='form'>Step 2: Save Changes</button>
 <span id="results"></span>
 
 <table class="table" id="table">
     <!-- table timeslots injected here -->
 </table>
 
+
+{% block forms %}
+<form action="" id="form" method="POST" enctype='multipart/form-data'>
+    {% csrf_token %} 
+    {{amenity_form.as_p}}
+    <button class="button style2">Step 2: Save Changes</button>
+</form>
+{% endblock forms %}
 
 {% comment %}
 <script>
@@ -40,7 +38,9 @@
        console.log(timeslotJson);
 </script>
 {% endcomment %} 
-{% endblock content %} {% block scripts %}
+{% endblock content %} 
+
+{% block scripts %}
 <script
     src="{% static 'js/manage/generateTable.js' %}"
     type="text/javascript"

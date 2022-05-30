@@ -23,12 +23,12 @@ from . import crud_views
 
 urlpatterns = [
     path('', views.dashboard_view, name="manage-dashboard"),
-    path('amenities', views.amenities_view, name="manage-places"),
-    path('amenities/<str:pk>/', views.amenity_view, name="manage-amenity"),
-    path('joinrequests', views.joinrequests_view, name="join-requests"),
     path('profile',  landingpage_view, name="manage-profilepage"),
-    # path('amenities/amenity', views.amenityobject_view, name="amenity"),
+    path('places', views.places_view, name="manage-places"),
+    path('places/place/<str:pk>/', views.place_view, name="manage-place"),
+    path('places/amenity/<str:pk>/', views.amenity_view, name="manage-amenity"),
 
+    path('joinrequests', views.joinrequests_view, name="join-requests"),
     # path('members', views.memberhub_view, name="memberhub"),
     # path('members/member', views.memberobject_view, name="member"),
 

@@ -129,7 +129,6 @@
 
 .header2 {
   /* Heading 2 */
-  width: 100%;
   font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
@@ -250,7 +249,8 @@ button {
   overflow: hidden;
   text-decoration: none !important;
   background: #ffffff;
-  outline: solid 2px #b0b0b0;
+  outline: none;
+  border: none;
   outline-offset: -2px;
   -webkit-transition: outline ease 0.01s;
   transition: outline ease 0.01s;
@@ -409,8 +409,6 @@ button.style6:hover {
 .button.site-toggle,
 button.site-toggle {
   position: relative;
-  max-width: 200px;
-  width: 100%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -421,6 +419,8 @@ button.site-toggle {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   border-radius: 12px;
   text-decoration: none !important;
   background: #ffffff;
@@ -444,9 +444,10 @@ button.site-toggle .half {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  width: 50%;
+  width: 100%;
+  width: 70px;
   border-radius: 12px;
-  padding: 20px 0;
+  padding: 20px 5px;
   text-align: center;
   -webkit-transform: scale(1.001);
           transform: scale(1.001);
@@ -745,6 +746,21 @@ button.site-toggle .half:not(.toggled):hover {
   margin: 10px 0 20px 0;
 }
 
+.container-card .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .container-card .rectangle {
   width: 100%;
   min-height: 200px;
@@ -758,8 +774,25 @@ button.site-toggle .half:not(.toggled):hover {
   text-decoration: none;
 }
 
+.container-card .button {
+  pointer-events: none;
+  opacity: 60%;
+  -webkit-transition: opacity linear 0.25s;
+  transition: opacity linear 0.25s;
+  -webkit-transition-delay: 500ms;
+          transition-delay: 500ms;
+}
+
+.container-card:hover .button {
+  pointer-events: all;
+  opacity: 100%;
+  -webkit-transition-delay: 0ms;
+          transition-delay: 0ms;
+}
+
 .container-card.style1 .rectangle {
   position: relative;
+  overflow: auto;
   display: -ms-grid;
   display: grid;
   grid-gap: 15px;
@@ -801,16 +834,31 @@ button.site-toggle .half:not(.toggled):hover {
 }
 
 .container-card.style1 .rectangle :nth-child(4) .quick-look {
+  position: relative;
   width: 100%;
+  max-height: 400px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  grid-gap: 15px;
-  -ms-grid-columns: (minmax(300px, 1fr))[auto-fill];
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  overflow: auto;
+}
+
+.container-card.style1 .rectangle :nth-child(4) .quick-look > div {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  min-width: 200px;
+  margin: 5px;
 }
 
 .container-card.style1-2 .rectangle {
@@ -860,9 +908,6 @@ button.site-toggle .half:not(.toggled):hover {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   grid-gap: 15px;
   -ms-grid-columns: (minmax(300px, 1fr))[auto-fill];
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -1191,11 +1236,6 @@ button.site-toggle .half:not(.toggled):hover {
   transition: transform linear 0.1s, -webkit-transform linear 0.1s;
 }
 
-.availability-card:hover {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
-}
-
 .availability-card .rectangle {
   width: 100%;
   height: -webkit-fit-content;
@@ -1260,6 +1300,44 @@ button.site-toggle .half:not(.toggled):hover {
   cursor: default;
 }
 
+.modal {
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10%;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(6, 112, 144, 0.407);
+}
+
+.modal > div {
+  max-width: 100%;
+  grid-gap: 15px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-grid-columns: (minmax(350px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
 form {
   position: relative;
   width: 350px;
@@ -1274,8 +1352,8 @@ form {
       -ms-flex-direction: column;
           flex-direction: column;
   background: rgba(223, 223, 223, 0.42);
-  -webkit-backdrop-filter: blur(50px);
-          backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
   border-radius: 18px;
   padding: 60px 35px 35px 35px;
 }

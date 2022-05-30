@@ -171,6 +171,9 @@ $("#showresults").click(
         console.log(json);
         $("#results").text(JSON.stringify(json));
         $("#id_timeslots").text(JSON.stringify(json));
+
+        
+        showForms();
     });
 
 console.log(timeslotsDict);

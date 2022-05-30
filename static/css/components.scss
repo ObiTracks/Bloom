@@ -163,7 +163,7 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
 .header2 {
     /* Heading 2 */
 
-    width: 100%;
+    // width: 100%;
     font-family: "Poppins";
     font-style: normal;
     font-weight: 500;
@@ -273,7 +273,8 @@ button {
     text-decoration: none !important;
     background: $shade-white;
 
-    outline: solid 2px $shade-grey;
+    outline: none;
+    border: none;
     outline-offset: -2px;
     transition: outline ease 0.01s;
     transition: transform linear 0.1s;
@@ -381,11 +382,13 @@ button {
     }
     &.site-toggle {
         position: relative;
-        max-width: 200px;
-        width: 100%;
+        // max-width: 200px;
+        // width: 100%;
+        // width: fit-content;
         height: fit-content;
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
 
         border-radius: 12px;
         // overflow: hidden;
@@ -405,9 +408,10 @@ button {
 
         .half {
             height: fit-content;
-            width: 50%;
+            width: 100%;
+            width: 70px;
             border-radius: 12px;
-            padding: 20px 0;
+            padding: 20px 5px;
             text-align: center;
             transform: scale(1.001);
 
@@ -631,6 +635,12 @@ button {
     flex-direction: column;
     margin: 10px 0 20px 0;
 
+    .header {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+    }
     .rectangle {
         width: 100%;
         min-height: 200px;
@@ -642,12 +652,27 @@ button {
         padding: 15px;
         text-decoration: none;
     }
+    .button {
+        pointer-events: none;
+        opacity: 60%;
+        transition: opacity linear 0.25s;
+        transition-delay: 500ms;
+    }
+
+    &:hover .button {
+        pointer-events: all;
+        opacity: 100%;
+        // transition: opacity linear 0.1s 1s;
+        transition-delay: 0ms;
+    }
 
     // CONTAINER CARDS
     &.style1 {
         .rectangle {
-            // heig
             position: relative;
+            // max-height: 50vh;
+            overflow: auto;
+
             display: grid;
             grid-gap: 15px;
             grid-template-columns: 300px 1fr;
@@ -657,6 +682,7 @@ button {
                 "a c"
                 "a d";
             :nth-child(1) {
+                // max-height: 40vh;
                 grid-area: a;
             }
             :nth-child(2) {
@@ -673,15 +699,22 @@ button {
                 position: relative;
                 grid-area: d;
                 .quick-look {
+                    position: relative;
                     width: 100%;
+                    max-height: 400px;
                     height: fit-content;
+                    box-sizing: border-box;
+                    // padding: 5px;
 
                     display: flex;
-                    grid-gap: 15px;
-                    grid-template-columns: repeat(
-                        auto-fill,
-                        minmax(300px, 1fr)
-                    );
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+                    overflow: auto;
+                    > div {
+                        flex: 1;
+                        min-width: 200px;
+                        margin: 5px;
+                    }
                     // grid-template-rows: 200px;
                 }
             }
@@ -719,7 +752,6 @@ button {
                     width: 100%;
                     height: fit-content;
 
-                    display: flex;
                     grid-gap: 15px;
                     grid-template-columns: repeat(
                         auto-fill,
@@ -951,7 +983,7 @@ button {
     text-align: center;
     transition: transform linear 0.1s;
     &:hover {
-        transform: scale(1.1);
+        // transform: scale(1.01);
     }
 
     .rectangle {
@@ -1009,8 +1041,41 @@ button {
 }
 
 // FORMS
+.modal {
+    display: none;
+    justify-content: center;
+    // align-items: center;
+
+    padding: 10%;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(6, 112, 144, 0.407);
+
+    > div {
+        max-width: 100%;
+        grid-gap: 15px;
+        // width: fit-content;
+        height: fit-content;
+        // display: none;
+        min-width: fit-content;
+        justify-items: center;
+        align-items: center;
+        // width: fit-content;
+        // height: 100%;
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        // overflow: auto;
+    }
+}
 
 form {
+    // display: none;
     position: relative;
     width: 350px;
     // height: 600px;
@@ -1020,7 +1085,7 @@ form {
     flex-direction: column;
     // justify-content: space-between;
     background: rgba(223, 223, 223, 0.42);
-    backdrop-filter: blur(50px);
+    backdrop-filter: blur(15px);
     border-radius: 18px;
     padding: 60px 35px 35px 35px;
 

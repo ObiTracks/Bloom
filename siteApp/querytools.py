@@ -31,19 +31,29 @@ from mgmtApp.forms import *
 from .models import *
 
 
-def getUsersPlacesAndAmenities(request, number_of_amenities_each = None):
-
-    place_relationships = PlaceProfileRelationship.objects.filter(
-        profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
-    places = [i.place for i in place_relationships]
-
+def getUsersPlacesAndAmenities(request, num_amenities=None, place_id=None):
     place_amenity_groupings = {}
-    for place in places:
-        print(place)
-        amenities = place.amenity_set.all() if not number_of_amenities_each else place.amenity_set.all()[:number_of_amenities_each]
-        print(amenities)
 
+    if place_id:
+        place = Place.objects.get(id=place_id)
+        places = place
+        amenities = place.amenity_set.all() if not num_amenities else place.amenity_set.all()[:num_amenities]
         place_amenity_groupings[place] = amenities if amenities.count() > 0 else None
+
+    else:
+        place_relationships = PlaceProfileRelationship.objects.filter(
+            profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
+        places = [i.place for i in place_relationships]
+        
+        for place in places:
+            print(place)
+            amenities = place.amenity_set.all() if not num_amenities else place.amenity_set.all()[:num_amenities]
+            print(amenities)
+
+            place_amenity_groupings[place] = amenities if amenities.count() > 0 else None
+    
+    print(place_amenity_groupings)
+    
     return places, place_amenity_groupings
 
 def getUsersPlacesAndJoinRequest(request, number_of_joinrequests_each = None):

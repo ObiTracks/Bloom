@@ -1,22 +1,22 @@
 {% load static %}
 
 {% if name == 'button style1' %}
-<div class="button style1">
+<div class="button style1" type={{type}} onclick={{onclick}} >
     <div class="button_text">{{text}}</div>
 </div>
 
 {% elif name == 'button style2' %}
-<div class="button style2" onclick="window.location='{{url}}';">
+<div class="button style2" type={{type}} onclick={{onclick}} >
     <div class="button_text">{{text}}</div>
 </div>
 
 {% elif name == 'button style3' %}
-<div class="button style3" onclick="window.location='{{url}}';">
+<div class="button style3" type={{type}} onclick={{onclick}}>
     <div class="button_text">{{text}}</div>
 </div>
 
 {% elif name == 'button style4' %}
-<div class="button style4" onclick="window.location='{{url}}';">
+<div class="button style4" type={{type}} onclick="window.location='{{url}}';">
     <div class="overlay">
         <div class="header2">{{text}}</div>
     </div>

@@ -1,4 +1,5 @@
 {% load static %} 
+{% load custom_tags %}
 
 {% if name == 'loginform' %}
 <form method="POST" class="form" id="form" action="{% url 'login_request' %}" enctype="multipart/form-data">
@@ -32,27 +33,12 @@
 </form>
 
 {% else %}
-<form method="POST" class="form" id="form" enctype="multipart/form-data">
+<form method="POST" class="form" id="{{ form |get_model_name }}" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="header">
-        <div class="title">Form Name</div>
-        <div class="subtitle">Subtitle</div>
-    </div>
+    {{ form|get_model_name }}
+    {{form}}
 
-    <div class="content">
-
-        
-        <p>
-            <input placeholder="Hello" type="text">
-        </p>
-
-        <hr>
-
-        {% include 'components/button.html' with name="button style5" text="login" type="submit"%}
-
-</div>
-    
-
+    <button class="button style2">Save</button>
 </form>
 
 {% endif %} 

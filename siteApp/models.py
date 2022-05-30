@@ -1,13 +1,18 @@
+import os
+import requests
 from django.db import models
 from django.conf import settings
+from django.core.files import File
 from django.db.models.fields.related import ForeignKey
 from phonenumber_field.modelfields import PhoneNumberField
+from siteApp.middleware import RequestMiddleware
+
 import base64
 import datetime
+
 import json
-
-
-from .utilities import user_upload_directory_path
+from django import template
+from django.forms.models import model_to_dict
 
 # Signals
 import inspect
@@ -15,7 +20,7 @@ import os
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from siteApp.middleware import RequestMiddleware
+from .utilities import user_upload_directory_path
 
 # BASE MODELS
 
@@ -42,18 +47,10 @@ class Amenity(models.Model):
         "siteApp.Place", blank=False, on_delete=models.CASCADE)
     subtitle = models.CharField(max_length=200, blank=True)
     description = models.CharField(max_length=200, blank=True)
-    date_created = models.DateTimeField(auto_now_add=True)
     timeslots = models.JSONField(blank=True, null=True)
     image = models.ImageField(upload_to='images', null=True, blank=True)
-
-
-    # availability = ArrayField(
-    #     base_field=models.CharField(max_length=100, blank=True), null=True)
-    # images = models.JSONField(_(""), encoder=base64, decoder=)
-    # https://docs.djangoproject.com/en/4.0/ref/models/fields/#:~:text=or%20TextInput%20otherwise.-,JSONField,-%C2%B6
-    # https://stackoverflow.com/questions/64134687/django-jsonfield-with-default-and-custom-encoder
-    # https://stackoverflow.com/questions/28036404/django-rest-framework-upload-image-the-submitted-data-was-not-a-file/28036805#28036805
-    # https://www.py4u.net/discuss/205629
+    backup_image_url = models.URLField(max_length=400,blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('date_created',)
@@ -64,7 +61,21 @@ class Amenity(models.Model):
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__,
                           sort_keys=True, indent=4)
+    
+    def set_random_backup_image_url(self):
+        random_img_url = 'https://source.unsplash.com/random/?nature-wallpaper,tropical-vegetation'
+        
+        if not self.backup_image_url:
+            response = requests.get(random_img_url)
+            response_url = response.url
+            print(response_url)
 
+            self.backup_image_url = response_url
+            self.save()
+
+    def save(self):
+        self.set_random_backup_image_url()
+        super(Amenity, self).save()
 
 # @receiver(post_save, sender=Amenity)
 # def create_profile(sender, instance, created, **kwargs):
@@ -81,13 +92,48 @@ class Place(models.Model):
     name = models.CharField(max_length=200, blank=False, unique=True)
     email = models.CharField(max_length=200, blank=True, null=True)
     phone_number = PhoneNumberField(null=True, blank=True, unique=False)
-    address = models.ForeignKey(
-        "siteApp.Address", null=True, blank=True, on_delete=models.DO_NOTHING)
+    address = models.CharField(max_length=200, blank=True, null=True)
     capacity = models.IntegerField(null=True, blank=True)
     description = models.TextField(max_length=500, blank=True)
     image = models.ImageField(upload_to='images', null=True, blank=True)
+    backup_image_url = models.URLField(max_length=400, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     # images = ArrayField(base_field=models.ImageField(null=True), null=True)
+
+    @property
+    def image_url(self):
+        from django.contrib.sites.models import Site
+        domain = Site.objects.get_current().domain
+        url = 'http://{domain}'.format(domain=domain)
+
+        if self.image and hasattr(self.image, 'url'):
+            return url + self.image.url
+
+    
+    def serialize_model_to_dict(self):
+        print(self)
+        dict_obj = model_to_dict(self)
+        data = json.dumps(str(dict_obj))
+        # data = dict_obj
+        
+        print(data)
+        return data
+    
+    def set_random_backup_image_url(self):
+        random_img_url = 'https://source.unsplash.com/random/?nature-wallpaper,tropical-vegetation'
+        
+        if not self.backup_image_url:
+            response = requests.get(random_img_url)
+            response_url = response.url
+            print(response_url)
+
+            self.backup_image_url = response_url
+            self.save()
+
+    def save(self):
+        self.set_random_backup_image_url()
+        super(Place, self).save()
+
 
     class Meta:
         ordering = ('date_created',)

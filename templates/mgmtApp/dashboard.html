@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_tags %}
+
 
 {% block pageheader %}
 <div class="header2 color-shade-grey">{{page_subtitle}}</div>
@@ -22,15 +24,11 @@
     </div>
 {% endif %}
 
-{% include 'components/button.html' with name="button style1" text="+ Place"%}
-<form action="" method="POST" enctype='multipart/form-data'>
-    {% csrf_token %}
+<button class="button style1" onclick="showForms()">+ Place</button>
 
-    {{place_form}}
-    <button>Submit</button>
-</form>
-
-
-    
 {% endblock content %}
+
+{% block forms %}
+    {% include 'components/form.html' with form=place_form %}
+{% endblock forms %}
 

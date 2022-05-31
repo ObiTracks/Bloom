@@ -145,7 +145,8 @@ def amenity_view(request, pk):
         'page_title': page_title,
         'page_subtitle': page_subtitle,
         'amenity_form': amenity_form,
-        'amenity':amenity
+        'amenity':amenity,
+        'jsonTimeslots':amenity.timeslots
     }
     template_name = 'mgmtApp/amenity.html'
     return render(request, template_name, context)

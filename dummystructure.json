@@ -1,0 +1,67 @@
+Current Structure
+{
+    "Tues": [
+        ["00:15", "00:30"],
+        ["01:30", "09:00"]
+    ],
+    "Sun": [["00:30", "09:00"]],
+    "Mon": [["00:30", "09:00"]],
+    "Wed": [["00:30", "09:00"]],
+    "Fri": [["00:30", "09:00"]],
+    "Sat": [["00:30", "09:00"]],
+    "Thurs": [["01:30", "09:00"]]
+}
+
+New Structure
+{
+    "Mon": {
+        "date" : "MM/DD/YYYY",
+        "timeslots" : {
+            "current_capacity": "X",
+            "slots":[
+                ["00:00","00:00"],
+                ["00:00","00:00"],
+            ]
+    }
+}
+
+
+Things to know about each Amenity:
+- Max Capacity
+
+Things to know about each Day:
+-Day of the week
+-Calendar Day
+-Timeslots
+
+
+Things to know about each timeslot:
+- Start and end time
+- Current Capacity
+- Max capacity (same as amenity)
+
+
+
+
+
+Steps
+1. Load the reservations that the current user has into the pages javascript for cross-checking which timeslots the user has already reserved and updating their class names to match
+    a. Turn the reservations the user has for the amenity into dictionary then json in the view
+    b. Pass the json to the template globally for the js interaction
+    c. Pass the amenity timeslot json to the template
+
+2. Script 1 - Availabiltity Loading Script: Make a script to generate availability cards from the amenity timeslot data and all the timeslots within
+    a. Generate availability cards
+    b. When looping to generate the timeslots, if the current user has a corresponding reservation already
+
+3. Script 2 - Make script to allow the user to select the timeslots
+    a. When a user selects the timeslot, append the timeslot card away from the availabilty card and into the panel called "selected" on the right
+
+4. Form submission: On saving the selected reservations, if the timeslots submitted are under the timeslot capacity, then create a reservation for each timeslot selected.
+    a. If the timeslot is at capacity, don't make a reservation and produce an error.
+    b. 
+
+5. Celery Tasks: 
+    Every new week, update the date of the timeslot days with the next dates for the week ahead
+
+On timeslot click, if it is selectable

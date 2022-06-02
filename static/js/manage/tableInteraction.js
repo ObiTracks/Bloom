@@ -376,18 +376,20 @@ function summarizeJSON(consolidatedJSON){
         })
         return true;
     }
-    function check_if_slot_exists_and_pop(obj, slot){
+    function check_if_slot_exists(obj, comparison_slot){
         var obj_slots = obj["slots"];
 
-        obj_slots.forEach((item, i) => {
-            if (arrays_are_equal(item, slot)){
+        obj_slots.forEach((slot, i) => {
+            if (arrays_are_equal(slot.window, comparison_slot)){
                 console.log("Slots Equal\n\n");
-                console.log(obj);
-                console.log(slot);
-
-                obj_slots.pop(curr_slot); 
+                window = create_slot(comparison_slot);
                 return true;
             }
+
+            console.log("Slots Not Equal\n\n");
+            console.log(slot.window);
+            console.log(comparison_slot);
+            console.log(slot.window);
         })
         
         return false;
@@ -423,11 +425,10 @@ function summarizeJSON(consolidatedJSON){
         slots = obj["slots"];
         for (i=0; i < collected_slots.length; i++){
             var curr_slot = collected_slots[i];
-            var slot_exists = check_if_slot_exists_and_pop(obj, curr_slot);
+            var slot_exists = check_if_slot_exists(obj, curr_slot);
             var slot;
             
             if (slot_exists == false){
-                
                 slot = create_slot(curr_slot);
             }
             slots.push(slot);

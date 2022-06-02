@@ -3,29 +3,31 @@ var container = $("#container");
 
 $(document).ready(
     function generateAvailabilities() {
+        jsonTimeslots.forEach((obj) => {
+            var timeslotsHTML;
 
-        container.append(`
-            <h2>
-                Helloo
-            </h2>
-        `);
-        
+            obj.slots.forEach(slot => {
+                var window = slot.window;
+                var str = `<div class="timeslot">\n<div class="body2">\n` 
+                + window[0] + ` - ` + window[1] + `\n</div>\n</div>\n\n`
+                console.log(timeslotsHTML);
 
-        Object.entries(jsonTimeslots).forEach(function ([day, windows]) {
+                timeslotsHTML += str;
+            })
 
             cardHTML = `
-            <div class="availability-card" id="${day}">
-                <div class="header2 color-shade-grey">{{day}}</div>
+            <div class="availability-card" id="${obj.day}">
+                <div class="header2 color-shade-grey">${obj.day}</div>
                 <div class="body1 color-shade-grey">MM/DD/YYYY</div>
                 <div class="rectangle">
-            
+                    ${timeslotsHTML}
                     <div class="timeslot ">
                         <div class="body2">{{timeslot}}</div>
                     </div>
                 </div>
             </div>`
 
-            var cardBody = $(`#${day}`);
+            // var cardBody = $(`#${obj}`);
             container.append(cardHTML);
 
 

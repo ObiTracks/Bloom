@@ -12,7 +12,7 @@ $("table").ready(function () {
 
 function preLoadTable(tableHeaders, tableRows) {
     // timeslotJson = JSON.parse($("#id_timeslots").text());
-    timeslotJson = jsonTimeslots;
+    var timeslotJson = jsonTimeslots;
     // console.log("Json timesLots: ", jsonTimeslots);
 
     // GOAL: Prefill the table with the amenity's previous timeslots
@@ -25,7 +25,7 @@ function preLoadTable(tableHeaders, tableRows) {
 
     // console.log("Hello");
     // console.log(Object.entries(timeslotJson));
-
+    console.log(timeslotJson);
     timeslotJson.forEach((obj) => {
         var day = obj.day;
         var slots = obj.slots.map(slot => slot.window);

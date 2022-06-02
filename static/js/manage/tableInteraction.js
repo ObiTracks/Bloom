@@ -186,14 +186,12 @@ $("#showresults").click(
 function updateJSON(){
     console.clear();
     var selectedTimeslots = collectSelectedSlots();
-
     var consolidatedJSON = getSelectedTimeslotIntervals(selectedTimeslots);
+    var finalizedJSON = summarizeJSON(consolidatedJSON);
 
-    console.log("Rough json: ", consolidatedJSON);
-    $("#results").text(JSON.stringify(consolidatedJSON));
-    $("#id_timeslots").text(JSON.stringify(consolidatedJSON));
-
-    summarizeJSON(consolidatedJSON);
+    console.log("Consolidated JSON: ", consolidatedJSON);
+    $("#results").text(JSON.stringify(finalizedJSON));
+    $("#id_timeslots").text(JSON.stringify(finalizedJSON));
     // showForms();
     return
 };
@@ -426,11 +424,12 @@ function summarizeJSON(consolidatedJSON){
         for (i=0; i < collected_slots.length; i++){
             var curr_slot = collected_slots[i];
             var slot_exists = check_if_slot_exists_and_pop(obj, curr_slot);
-
+            var slot;
+            
             if (slot_exists == false){
                 
+                slot = create_slot(curr_slot);
             }
-            slot = create_slot(curr_slot);
             slots.push(slot);
         }
 
@@ -440,37 +439,7 @@ function summarizeJSON(consolidatedJSON){
     }
 
     console.log("Updated Json", updatedJSON);
-
-    // console.log("bawtyymon:", co);
-    // consolidatedJSON.forEach(element => {
-        
-    // });
-
-    // for (let i = 0; i < consolidatedJSON.length; i++){
-    // }
-    
-    // if (!jsonTimeslots.some(item => item.hasOwnProperty(day))){
-    //     dayObj = createDayObject(index, day);
-    //     updatedJSON.push(dayObj);
-    //     temp_slot.push(timestamp)
-        
-    //     // console.log("Wakanda")
-    //     // This code creates the json object for day that there are timeslots selected for
-        
-        
-    //     // if (dayObj['slots'].some(item => !item.hasOwnProperty('current_capacity'))) {
-    //     //     obj['slots']['current_capacity'] = "0";
-    //     // }
-    //     // if (!obj.hasOwnProperty('current_capacity')) {
-    //     //     obj['current_capacity'] = "0";
-    //     // }
-    // }
-    // else{
-    //     var dayObj = get_day_object_or_create_one(jsonArray, key)
-    //     var dayObj = jsonTimeslots.find(item => item.day === day)
-    //     // updatedJSON.push(dayObj);
-    //     temp_slot.push(timestamp)
-    // }
+    return updatedJSON;
 
 }
 

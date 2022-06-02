@@ -22,6 +22,8 @@
     <!-- table timeslots injected here -->
 </table>
 
+{% endblock content %} 
+
 
 {% block forms %}
 <form action="" id="form" method="POST" >
@@ -31,14 +33,6 @@
 </form>
 {% endblock forms %}
 
-{% comment %}
-<script>
-    //Loading json timeslots from object into the page for the js to interact
-       var timeslotJson = {{ jsonTimeslots | safe }};
-       console.log(timeslotJson);
-</script>
-{% endcomment %} 
-{% endblock content %} 
 
 {% block scripts %}
 <script> //Loading json timeslots from object into the page for the js to interact

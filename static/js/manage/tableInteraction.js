@@ -142,114 +142,206 @@ $(document).ready($(document).mouseup(function () {
 }));
 
 
+
 $("#showresults").click(
-    function getTimeslots() {
-        console.clear();
-        timeslotsDict = new Map();
-        var tableHeaders = $("#table thead th");
-        var selectedCells = $("#table td.selected");
+    // function collectSelectedSlots() {
+    //     console.clear();
+    //     timeslotsDict = new Map();
+    //     var tableHeaders = $("#table thead th");
+    //     var selectedCells = $("#table td.selected");
 
-        selectedCells.each(function () {
-            cell = $(this);
-            var day = tableHeaders.eq(cell.index()).text();
-            var timeslot = cell.parent().children().eq(0).text().trim();
-            var test = timeConverter(timeslot, "f")
+    //     selectedCells.each(function () {
+    //         cell = $(this);
+    //         var day = tableHeaders.eq(cell.index()).text();
+    //         var timeslot = cell.parent().children().eq(0).text().trim();
+    //         var test = timeConverter(timeslot, "f")
 
-            if (!timeslotsDict.has(day)) {
-                timeslotsDict.set(day, [timeslot]);
-                var timeslots = timeslotsDict.get(day);
-                // console.log(day, timeslots);
+    //         if (!timeslotsDict.has(day)) {
+    //             timeslotsDict.set(day, [timeslot]);
+    //             var timeslots = timeslotsDict.get(day);
+    //             // console.log(day, timeslots);
 
-            } else {
-                var timeslots = timeslotsDict.get(day);
-                timeslots.push(timeslot);
-                // console.log(day, timeslots);
-            }
-        });
+    //         } else {
+    //             var timeslots = timeslotsDict.get(day);
+    //             timeslots.push(timeslot);
+    //             // console.log(day, timeslots);
+    //         }
+    //     });
 
-        var json = getSelectedTimeslotIntervals(timeslotsDict);
-        console.log(json);
-        $("#results").text(JSON.stringify(json));
-        $("#id_timeslots").text(JSON.stringify(json));
+    //     var json = getSelectedTimeslotIntervals(timeslotsDict);
+    //     console.log(json);
+    //     $("#results").text(JSON.stringify(json));
+    //     $("#id_timeslots").text(JSON.stringify(json));
 
         
-        showForms();
-    });
-
-console.log(timeslotsDict);
-
-function isGap(curr, stack, interval) {
-    result = false;
-    if (stack.length >= 1) {
-        result = (curr - stack[stack.length - 1]) > interval;
+    //     showForms();
+    // });
+    () => {
+        updateJSON();
     }
 
-    // console.log("Checking Gap in Stack: ", stack, stack[stack.length - 1], result);
-    // console.log(result);
-    return result;
+);
+    
+
+function updateJSON(){
+    console.clear();
+    var selectedTimeslots = collectSelectedSlots();
+
+    var consolidatedJSON = getSelectedTimeslotIntervals(selectedTimeslots);
+
+    console.log("Rough json: ", consolidatedJSON);
+    $("#results").text(JSON.stringify(consolidatedJSON));
+    $("#id_timeslots").text(JSON.stringify(consolidatedJSON));
+
+    summarizeJSON(consolidatedJSON);
+    // showForms();
+    return
+};
+
+// STEP 1
+function collectSelectedSlots() {
+    console.log("COLLECTING SELECTED SLOTS\n---------------------\n\n\n");
+    
+    function createDayObject(index, day){
+        obj = {
+            'day' : day,
+            'index' : index,
+            'slots' : [],
+        }
+        return (obj)
+    }
+    function createSlot(index, day){
+        slot = {
+            "current_capacity": 0,
+            "window":[]
+        }
+        return (slot)
+    }
+    
+    timeslotsDict = new Map();
+    var tableHeaders = $("#table thead th");
+    var selectedCells = $("#table td.selected");
+    var temp_slot = [];
+    var updatedJSON = [];
+
+    selectedCells.each(function () {
+        cell = $(this);
+        var index = cell.index()
+        var day = tableHeaders.eq(index).text();
+        var timestamp = cell.parent().children().eq(0).text().trim();
+        var test = timeConverter(timestamp, "f")
+
+        
+
+        // // console.log("timestamp:", timestamp)
+        // if (!jsonTimeslots.some(item => item.hasOwnProperty(day))){
+        //     dayObj = createDayObject(index, day);
+        //     updatedJSON.push(dayObj);
+        //     temp_slot.push(timestamp)
+            
+        //     // console.log("Wakanda")
+        //     // This code creates the json object for day that there are timeslots selected for
+            
+            
+        //     // if (dayObj['slots'].some(item => !item.hasOwnProperty('current_capacity'))) {
+        //     //     obj['slots']['current_capacity'] = "0";
+        //     // }
+        //     // if (!obj.hasOwnProperty('current_capacity')) {
+        //     //     obj['current_capacity'] = "0";
+        //     // }
+        // }
+        // else{
+        //     var dayObj = get_day_object_or_create_one(jsonArray, key)
+        //     var dayObj = jsonTimeslots.find(item => item.day === day)
+        //     // updatedJSON.push(dayObj);
+        //     temp_slot.push(timestamp)
+        // }
+
+        if (!timeslotsDict.has(day)) {
+            timeslotsDict.set(day, [timestamp]);
+            var timeslots = timeslotsDict.get(day);
+            // console.log(day, timeslots);
+
+        } else {
+            var timeslots = timeslotsDict.get(day);
+
+            temp_slot.push(timestamp)
+            timeslots.push(timestamp);
+            // console.log(day, timeslots);
+        }
+    });
+    console.log(timeslotsDict);
+    return(timeslotsDict)
+    
 }
+// STEP 2
+function getSelectedTimeslotIntervals(selectedTimeslots) {
+    console.log("GENERATING TIMESLOT INTERVALS\n-------------------------\n\n\n");
+    console.log("Selected Timeslots: ", selectedTimeslots);
+    function isGap(curr, stack, interval) {
+        result = false;
+        if (stack.length >= 1) {
+            result = (curr - stack[stack.length - 1]) > interval;
+        }
+    
+        // console.log("Checking Gap in Stack: ", stack, stack[stack.length - 1], result);
+        // console.log(result);
+        return result;
+    }
+    
 
-function getSelectedTimeslotIntervals(dict) {
+    selectedTimeslots.forEach((timeslots, day) => { // Going through each day and its selected timeslots
+        console.log("Day & Timeslots", day, timeslots);
+    
+        var windows = []; //Initializing the windows array
+        var stack = []; //Initializing the stack
+        var intervals = timeslots.map((x) =>{
+            x = timeConverter(x, "f");
+            // console.log("YEOOO", x);
+            return x;
+        })
+        var interval = 0.25; // 15 minutes/60minutes
+        var i = 0;
+        var n = timeslots.length;
+        var stack = [];
 
-    dict.forEach(
+        while (i < n) {
+            var curr = intervals[i];
+            is_gap = isGap(curr, stack, interval);
 
-        function (timeslots, day) { // Going through each day and its selected timeslots
-            var windows = []; //Initializing the windows array
-            var stack = []; //Initializing the stack
-            var intervals = timeslots.map(function (x) {
-                x = timeConverter(x, "f");
-                // console.log("YEOOO", x);
-                return x;
-            })
-
-            var interval = 0.25; // 15 minutes/60minutes
-            var i = 0;
-            var n = timeslots.length;
-            var stack = [];
-
-            while (i < n) {
-                var curr = intervals[i];
-                is_gap = isGap(curr, stack, interval);
-
-                if (is_gap) {
-                    if (stack.length == 1) {
-                        stack.push(stack[stack.length - 1])
-                    }
-                    windows.push(stack)
-                    stack = [];
+            if (is_gap) {
+                if (stack.length == 1) {
+                    stack.push(stack[stack.length - 1])
                 }
-
-                if (i == (n - 1)) { //Last index of the array
-                    if (stack.length == 0) {
-                        stack.push(curr);
-                    }
-                    if (stack.length >= 2) {
-                        stack.pop();
-                    }
-
-                    windows.push(stack);
-                }
-
-                while (stack.length >= 2) {
-                    stack.pop();
-                }
-                // console.log(curr);
-                stack.push(curr);
-
-                i++;
+                windows.push(stack)
+                stack = [];
             }
 
+            if (i == (n - 1)) { //Last index of the array
+                if (stack.length == 0) {
+                    stack.push(curr);
+                }
+                if (stack.length >= 2) {
+                    stack.pop();
+                }
 
-            // windows.forEach(function(window){
-            //     return window.forEach(x => {
-            //         x = timeConverter(x, "s");
-            //     })
-            // })
-            resultsDict[day] = windows;
-            // console.log(resultsDict);
-            // console.log("Day: ", day, " Windows: ", windows);
-            console.log("End");
-        })
+                windows.push(stack);
+            }
+
+            while (stack.length >= 2) {
+                stack.pop();
+            }
+            // console.log(curr);
+            stack.push(curr);
+
+            i++;
+        }
+
+        resultsDict[day] = windows;
+        // console.log(resultsDict);
+        // console.log("Day: ", day, " Windows: ", windows);
+        console.log("End");
+    })
 
 
     for (var key in resultsDict) {
@@ -263,17 +355,123 @@ function getSelectedTimeslotIntervals(dict) {
 
             for (var n = 0; n < window_.length; n++) {
                 window_[n] = timeConverter(window_[n], "s");
-                console.log(window_[n]);
             }
         }
 
+    }
+    var consolidatedJSON = JSON.parse(JSON.stringify(resultsDict));
 
-        // for (let window in windows) {
-        //     console.log(window);
-        // }
+    return (consolidatedJSON);
+}
+// STEP 3
+function summarizeJSON(consolidatedJSON){
+    function arrays_are_equal(a, b){
+        if (a === b) return true;
+        if (a == null || b == null) return false;
+        if (a.length !== b.length) return false;
+
+        a.forEach((x, i) => {
+            if(x != b[i]){
+                return false
+            }
+
+        })
+        return true;
+    }
+    function check_if_slot_exists_and_pop(obj, slot){
+        var obj_slots = obj["slots"];
+
+        obj_slots.forEach((item, i) => {
+            if (arrays_are_equal(item, slot)){
+                console.log("Slots Equal\n\n");
+                console.log(obj);
+                console.log(slot);
+
+                obj_slots.pop(curr_slot); 
+                return true;
+            }
+        })
+        
+        return false;
+    }
+    function create_slot(arr){
+        var slot = {
+            "current_capacity": 0,
+            "window":arr
+        }
+        
+        return slot;
     }
 
-    return JSON.parse(JSON.stringify(resultsDict));
+    console.log("SUMMARIZING JSON UPDATES\n-------------------------\n\n\n");
+    // console.log("Consolidated JSON: ", consolidatedJSON);
+    // console.log("Loaded Amenity JSON: ", jsonTimeslots);
+    updatedJSON = [];
+    // console.log(consolidatedJSON);
+
+    for(var day of Object.keys(consolidatedJSON)){
+
+        // 1. Check if the amenity json contains the dame day object
+        //          If not, create a new day object and save in a varaible for building out
+        //          If so, get that object and copy it into a variable
+
+        // 2. Add all the timeslots to the saved object variable's "slot" array
+        //          If the object's "slot" array already contains the timeslot, skip past it
+        //          If not add the timeslot to the object
+
+        var obj = get_object_or_create_one(jsonTimeslots, 'day', day);
+        var collected_slots = consolidatedJSON[day];
+        
+        slots = obj["slots"];
+        for (i=0; i < collected_slots.length; i++){
+            var curr_slot = collected_slots[i];
+            var slot_exists = check_if_slot_exists_and_pop(obj, curr_slot);
+
+            if (slot_exists == false){
+                
+            }
+            slot = create_slot(curr_slot);
+            slots.push(slot);
+        }
+
+        updatedJSON.push(obj);
+
+
+    }
+
+    console.log("Updated Json", updatedJSON);
+
+    // console.log("bawtyymon:", co);
+    // consolidatedJSON.forEach(element => {
+        
+    // });
+
+    // for (let i = 0; i < consolidatedJSON.length; i++){
+    // }
+    
+    // if (!jsonTimeslots.some(item => item.hasOwnProperty(day))){
+    //     dayObj = createDayObject(index, day);
+    //     updatedJSON.push(dayObj);
+    //     temp_slot.push(timestamp)
+        
+    //     // console.log("Wakanda")
+    //     // This code creates the json object for day that there are timeslots selected for
+        
+        
+    //     // if (dayObj['slots'].some(item => !item.hasOwnProperty('current_capacity'))) {
+    //     //     obj['slots']['current_capacity'] = "0";
+    //     // }
+    //     // if (!obj.hasOwnProperty('current_capacity')) {
+    //     //     obj['current_capacity'] = "0";
+    //     // }
+    // }
+    // else{
+    //     var dayObj = get_day_object_or_create_one(jsonArray, key)
+    //     var dayObj = jsonTimeslots.find(item => item.day === day)
+    //     // updatedJSON.push(dayObj);
+    //     temp_slot.push(timestamp)
+    // }
+
 }
 
 function timeConverter(time, convertTotype) {
@@ -292,4 +490,24 @@ function timeConverter(time, convertTotype) {
 
         return time
     }
+}
+
+// UTILITY FUNCTIONS
+function get_object_or_create_one(jsonArray, search_key, search_value){
+    const day_indices = [['Sun',1],['Mon',2],['Tues',3],['Wed',4],['Thurs',5],['Fri',6],['Sat',7]]
+    var jsonArray = JSON.parse(JSON.stringify(jsonArray));
+
+    for(i=0; i < jsonArray.length; i++){
+        obj = jsonArray[i];
+        if(obj[search_key] === search_value){
+            return(obj);
+        }
+    }
+
+    obj = {
+        'day' : search_value,
+        'index' : day_indices.find((item) => {return item[0] === search_value})[1],
+        'slots' : [],
+    }
+    return (obj);
 }

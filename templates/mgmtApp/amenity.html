@@ -43,7 +43,7 @@
 {% block scripts %}
 <script> //Loading json timeslots from object into the page for the js to interact
     var jsonTimeslots = {{ jsonTimeslots | safe }};
-    console.log(jsonTimeslots);
+    {% comment %} console.log(jsonTimeslots); {% endcomment %}
 </script>
 <script
     src="{% static 'js/manage/generateTable.js' %}"

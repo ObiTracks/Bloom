@@ -5,7 +5,7 @@ $("table").ready(function () {
     var tableHeaders = $("#table thead th");
     var tableRows = $(this).find("tbody tr");
     // var selectedCells = $("#table td.selected");
-    console.log("Yeo", tableRows);
+    // console.log("Yeo", tableRows);
     preLoadTable(tableHeaders, tableRows);
 });
 
@@ -27,9 +27,9 @@ function preLoadTable(tableHeaders, tableRows) {
     // console.log(Object.entries(timeslotJson));
 
     timeslotJson.forEach((obj) => {
-        var day = obj['day'];
-        var slots = obj['slots'];
-        var column_index = obj['index'];
+        var day = obj.day;
+        var slots = obj.slots.map(slot => slot.window);
+        var column_index = obj.index;
         console.log(column_index);
 
         // var column_index = tableHeaders.filter((x) => {

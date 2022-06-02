@@ -17,10 +17,15 @@ New Structure
     {
         "index": 2,
         "day":"Mon",
-        "current_capacity": "X",
         "slots":[
-            ["00:30","01:15"],
-            ["01:45","01:45"]
+            {
+                "current_capacity": 0,
+                "window":["00:30","01:15"]
+            },
+            {
+                "current_capacity": 0,
+                "window":["01:45","01:45"]
+            },
         ]
     },
     {
@@ -28,8 +33,14 @@ New Structure
         "day":"Tues",
         "current_capacity": "X",
         "slots":[
-            ["00:30","01:15"],
-            ["01:45","01:45"]
+            {
+                "current_capacity": 0,
+                "window":["00:30","01:15"]
+            },
+            {
+                "current_capacity": 0,
+                "window":["01:45","01:45"]
+            },
         ]
     }
 ]

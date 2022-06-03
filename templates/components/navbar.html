@@ -10,6 +10,7 @@
     <div class="link_text"  onclick="window.location='{% url "manage-places" %}';">Places & Amenities</div>
     <div class="link_text"  onclick="window.location='{% url "join-requests" %}';">Join Request</div>
     <div class="link_text"  onclick="window.location='{% url "manage-profilepage" %}';">Your Profile</div>
+    <div class="link_text"  onclick="window.location='{% url "logout" %}';">Logout</div>
 </div>
 
 {% elif "member" in request.path %} 
@@ -17,6 +18,7 @@
     <div class="link_text" onclick="window.location='{% url "member-dashboard" %}';">Dashboard</div>
     <div class="link_text"  onclick="window.location='{% url "member-community" %}';">Find a Community</div>
     <div class="link_text"  onclick="window.location='{% url "member-profilepage" %}';">Your Profile</div>
+    <div class="link_text"  onclick="window.location='{% url "logout" %}';">Logout</div>
 </div>
 
 {% endif %}

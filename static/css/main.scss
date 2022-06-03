@@ -36,14 +36,16 @@ body {
 
 .side-container {
     // position: sticky;
+    box-sizing: border-box;
     flex: 2;
     height: 100vh;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     
-    padding-top: 70px;
+    padding: 70px 20px;
     // background: green;
 
     >div {

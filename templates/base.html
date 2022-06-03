@@ -43,18 +43,17 @@
         </div>
 
         <div class="side-container" id="side-container--right">
-            
+
+            <img {% if request.user.profile.image %} src="{{ request.user.profile.image.url }}"{% endif %} alt="" 
+            style="height: 60px; width: 60px; border-radius: 50%;">
+            {% if request.path != "/login" %}
+                <div class="body1">
+                    {{request.user.first_name}}
+                </div>
+            {% endif %}
+            {% include 'components/button.html' with name='button site-toggle' state=0 %}
+
             {% block sidecontainer-right %}
-                <img {% if request.user.profile.image %} src="{{ request.user.profile.image.url }}"{% endif %} alt="" style="height: 100px; width: 100px; border-radius: 50%;">
-                {% if request.path != "/login" %}
-                    <div class="body1">
-                        {{request.user.first_name}}
-                    </div>
-                {% endif %}
-
-                {% include 'components/button-logout.html' with link='logout' text='logout' %}
-                {% include 'components/button.html' with name='button site-toggle' state=0 %}
-
             {% endblock sidecontainer-right %}
             {% comment %} {% include 'components/badge.html' with value='222' title='title' %} {% endcomment %}
         </div>

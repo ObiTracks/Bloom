@@ -14,40 +14,33 @@
 {% endblock pageheader %} 
 
 {% block content %}
-<span>{{jsonTimeslots}}</span>
 
 {% comment %} {% include 'components/card.html' with name="container-card style4" jsonTimeslots=jsonTimeslots%} {% endcomment %}
-<div class="container-card style4" id="container">
-    {% for day, timeslots in jsonTimeslots.items %}
-        {% include 'components/card.html' with name="availability-card" day=day timeslots=timeslots %}
-    {% endfor %}
-    
-    {% comment %} <div class="availability-card">
-        <div class="header2 color-shade-grey">{{day}}</div>
-        <div class="body1 color-shade-grey">MM/DD/YYYY</div>
-        <div class="rectangle">
-    
-            {% for timeslot in timeslots %}
-            <div class="timeslot ">
-                <div class="body2">{{timeslot}}</div>
-            </div>
-            {% endfor %}
-            <div class="timeslot selected ">
-                <div class="body2">00:00-03:00</div>
-            </div>
-            <div class="timeslot reserved">
-                <div class="body2">00:00-03:00</div>
-            </div>
-            <div class="timeslot unavailable">
-                <div class="body2">00:00-03:00</div>
-            </div>
-        </div>
-    </div> {% endcomment %}
+<div id="stage">
 
 </div>
 
+
 {% endblock content %}
 
+{% block sidecontainer-right %}
+
+<div class="availability-card">
+    <div class="header2 color-accent">Selected Slots</div>
+    <div class="body1 color-shade-grey"></div>
+    <div class="rectangle" id="selected">
+
+            {% comment %} <div class="body1 header Sun">Sun</div>
+            <div class="body1 header Mon">Mon</div> {% endcomment %}
+
+        </div>
+    </div>
+
+    <button class="button style2">Reserve</button>
+</div>
+
+
+{% endblock sidecontainer-right %}
 
 {% block scripts %}
 
@@ -57,6 +50,11 @@
 </script>
 <script
     src="{% static 'js/member/generateAvailabilities.js' %}"
+    type="text/javascript"
+    charset="utf-8"
+></script>
+<script
+    src="{% static 'js/member/selectSlots.js' %}"
     type="text/javascript"
     charset="utf-8"
 ></script>

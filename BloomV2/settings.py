@@ -92,10 +92,21 @@ WSGI_APPLICATION = 'BloomV2.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd1r5vreq4cb6j6',
+        'HOST': 'ec2-3-228-235-79.compute-1.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'qtkreohnsrgivq',
+        'PASSWORD': 'ff5ae4cef7f61db92831a667795e79bb5026e9ccaa44248c9b7a479361279ba9',
     }
 }
 

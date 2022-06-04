@@ -1,17 +1,14 @@
-// Variables 
-$blue: #2457E4;
-$green: #0DCE83;
-$turquoise: #10E5D9;
-$brightred: #F03D10;
+// Variables
+$blue: #2457e4;
+$green: #0dce83;
+$turquoise: #10e5d9;
+$brightred: #f03d10;
 $grey: #787878;
-$softgrey: #F2F2F2;
+$softgrey: #f2f2f2;
 
-$poppins: 'Poppins',
-sans-serif;
-$montserrat: 'Montserrat',
-sans-serif;
-$nunito: 'Nunito',
-sans-serif;
+$poppins: "Poppins", sans-serif;
+$montserrat: "Montserrat", sans-serif;
+$nunito: "Nunito", sans-serif;
 
 $box-shadow--light: rgba(0, 0, 0, 0.288) 0px 0px 4px;
 
@@ -22,6 +19,12 @@ $box-shadow--light: rgba(0, 0, 0, 0.288) 0px 0px 4px;
 body {
     margin: 0;
     padding: 0;
+    background-image: url("/static/images/backgrounds/whitewallpaper.png");
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
 }
 
 .platform-base {
@@ -38,17 +41,17 @@ body {
     // position: sticky;
     box-sizing: border-box;
     flex: 2;
-    height: 100vh;
+    height: 100%;
     overflow: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    
+
     padding: 70px 20px;
     // background: green;
 
-    >div {
+    > div {
         margin-bottom: 10px;
     }
 }
@@ -72,11 +75,25 @@ body {
 }
 
 .main-container__grid-container {
+    position: relative;
     height: 100%;
     min-height: 70vh;
     width: 100%;
+}
 
-    // background: rgb(85, 21, 122);
+.tabs {
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-bottom: 13px;
+    // border-bottom: solid rgb(0, 0, 0);
+}
+.tabcontent {
+    // display: none;
+    padding: 6px;
+
+    &.active{
+        display: block;
+    }
 }
 
 .grid {
@@ -86,7 +103,7 @@ body {
     height: 100%;
     // background: green;
 
-    >div {
+    > div {
         min-height: 200px;
         min-height: 5vh;
         width: 100%;
@@ -98,14 +115,11 @@ body {
     min-height: 300px;
     grid-gap: 10px;
     justify-items: center;
-    grid-template-areas:
-        "one"
-    ;
+    grid-template-areas: "one";
 
-    >div:nth-child(1) {
+    > div:nth-child(1) {
         grid-area: one;
     }
-
 }
 
 .grid-style3x1 {
@@ -116,20 +130,19 @@ body {
     grid-template-areas:
         "one two three"
         // "one two three"
-    ;
+;
 
-    >div:nth-child(1) {
+    > div:nth-child(1) {
         grid-area: one;
     }
 
-    >div:nth-child(2) {
+    > div:nth-child(2) {
         grid-area: two;
     }
 
-    >div:nth-child(3) {
+    > div:nth-child(3) {
         grid-area: three;
     }
-
 }
 
 .grid-style1x3-Member {
@@ -137,23 +150,25 @@ body {
     // min-height: 70vh;
     grid-gap: 10px;
     grid-template-columns: 1fr;
-    grid-template-rows: 10px minmax(200px, fit-content) minmax(200px, fit-content);
+    grid-template-rows: 10px minmax(200px, fit-content) minmax(
+            200px,
+            fit-content
+        );
     // justify-items: center;
     grid-template-areas:
         "one"
         "two"
-        "three"
-    ;
+        "three";
 
-    >div:nth-child(1) {
+    > div:nth-child(1) {
         grid-area: one;
     }
 
-    >div:nth-child(2) {
+    > div:nth-child(2) {
         grid-area: two;
     }
 
-    >div:nth-child(3) {
+    > div:nth-child(3) {
         grid-area: three;
     }
 }
@@ -165,15 +180,13 @@ body {
     grid-template-columns: 3fr 1fr;
     grid-template-rows: minmax(200px, fit-content);
     // justify-items: center;
-    grid-template-areas:
-        "one two"
-    ;
+    grid-template-areas: "one two";
 
-    >div:nth-child(1) {
+    > div:nth-child(1) {
         grid-area: one;
     }
 
-    >div:nth-child(2) {
+    > div:nth-child(2) {
         grid-area: two;
     }
 }
@@ -186,18 +199,17 @@ body {
     justify-items: center;
     grid-template-areas:
         "one one two"
-        "three three two"
-    ;
+        "three three two";
 
-    >div:nth-child(1) {
+    > div:nth-child(1) {
         grid-area: one;
     }
 
-    >div:nth-child(2) {
+    > div:nth-child(2) {
         grid-area: two;
     }
 
-    >div:nth-child(3) {
+    > div:nth-child(3) {
         grid-area: three;
     }
 }
@@ -212,22 +224,21 @@ body {
     grid-template-areas:
         "one one two"
         "one one three"
-        "four four four"
-    ;
+        "four four four";
 
-    >div:nth-child(1) {
+    > div:nth-child(1) {
         grid-area: one;
     }
 
-    >div:nth-child(2) {
+    > div:nth-child(2) {
         grid-area: two;
     }
 
-    >div:nth-child(3) {
+    > div:nth-child(3) {
         grid-area: three;
     }
 
-    >div:nth-child(4) {
+    > div:nth-child(4) {
         grid-area: four;
     }
 }
@@ -243,30 +254,29 @@ body {
     grid-template-areas:
         "one two three"
         "four four six"
-        "five five six"
-    ;
+        "five five six";
 
-    >div:nth-child(1) {
+    > div:nth-child(1) {
         grid-area: one;
     }
 
-    >div:nth-child(2) {
+    > div:nth-child(2) {
         grid-area: two;
     }
 
-    >div:nth-child(3) {
+    > div:nth-child(3) {
         grid-area: three;
     }
 
-    >div:nth-child(4) {
+    > div:nth-child(4) {
         grid-area: four;
     }
 
-    >div:nth-child(5) {
+    > div:nth-child(5) {
         grid-area: five;
     }
 
-    >div:nth-child(6) {
+    > div:nth-child(6) {
         grid-area: six;
     }
 }
@@ -279,18 +289,17 @@ body {
     justify-items: center;
     grid-template-areas:
         "one two"
-        "three three"
-    ;
+        "three three";
 
-    >div:nth-child(1) {
+    > div:nth-child(1) {
         grid-area: one;
     }
 
-    >div:nth-child(2) {
+    > div:nth-child(2) {
         grid-area: two;
     }
 
-    >div:nth-child(3) {
+    > div:nth-child(3) {
         grid-area: three;
     }
 }
@@ -302,12 +311,10 @@ body {
     justify-items: center;
     // background-color: red;
 
-
-    >div {
+    > div {
         min-height: fit-content;
         width: 100%;
     }
-
 }
 
 .grid-simple-grid {
@@ -325,12 +332,10 @@ body {
     padding: 0;
     // background-color: red;
 
-
-    >div {
+    > div {
         min-height: fit-content;
         width: 100%;
     }
-
 }
 
 .grid-badge-grid {
@@ -347,12 +352,10 @@ body {
     padding: 0;
     // background-color: red;
 
-
-    >div {
+    > div {
         min-height: fit-content;
         width: 100%;
     }
-
 }
 
 .flex {
@@ -372,10 +375,14 @@ body {
     }
 }
 
-.card {}
+.card {
+}
 
-.card--dark {}
+.card--dark {
+}
 
-.card__title {}
+.card__title {
+}
 
-.card__paragraph {}
+.card__paragraph {
+}

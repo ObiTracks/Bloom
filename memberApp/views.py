@@ -33,7 +33,7 @@ from siteApp.querytools import getUsersPlacesAndAmenities
 
 def dashboard_view(request):
     # Object data
-    page_title = "Personal Dashboard"
+    page_title = "Dashboard"
     page_subtitle = "Book"
     places, amenity_groupings = getUsersPlacesAndAmenities(request)
 

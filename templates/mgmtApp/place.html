@@ -9,12 +9,30 @@
 {% endblock pageheader %}
 
 
+{% block tablinks %}
+<button class="button tablinks active" onclick="openTab(event, 'details')">Details</button>
+<button class="button tablinks" onclick="openTab(event, 'amenities')">Amenities</button>
+<button class="button tablinks" onclick="openTab(event, 'members')">Members</button>
+<button class="button tablinks" onclick="openTab(event, 'metrics')">Metrics</button>
+{% endblock tablinks %}
+
 {% block content %}
+<div class="tabcontent" id="details">
     <button class="button style3" onclick="showForms()">Edit Place</button>
     
     {% for place, amenities in amenity_groupings.items %}
         {% include 'components/card.html' with name="container-card style1" verified="verified" place=place amenities=amenities%}
     {% endfor %}
+</div>
+<div class="tabcontent" id="amenities">
+    <h1>Amenities</h1>
+</div>
+<div class="tabcontent" id="members">
+    <h1>Members</h1>
+</div>
+<div class="tabcontent" id="metrics">
+    <h1>Metrics</h1>
+</div>
 {% endblock content %}
 
 {% block forms %}

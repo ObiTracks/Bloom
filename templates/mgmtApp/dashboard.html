@@ -4,31 +4,45 @@
 
 
 {% block pageheader %}
-<div class="header2 color-shade-grey">{{page_subtitle}}</div>
+{% comment %} <div class="header2 color-shade-grey">{{page_subtitle}}</div> {% endcomment %}
 <div class="header1">{{page_title}}</div>
 {% endblock pageheader %}
 
+{% block tablinks %}
+<button class="button tablinks active" onclick="openTab(event, 'overview')">Overview</button>
+<button class="button tablinks" onclick="openTab(event, 'activity')">Activity</button>
+<button class="button tablinks" onclick="openTab(event, 'metrics')">Metrics</button>
+{% endblock tablinks %}
 
 {% block content %}
-<button class="button style1" onclick="showForms()">+ Place</button>
+<div class="tabcontent" id="overview">
+    {% if amenity_groupings %}
+        {% for place, amenities in amenity_groupings.items %}
+            {% include 'components/card.html' with name="container-card style1" verified="verified" place=place amenities=amenities%}
+        {% endfor %}
+    {% else %}
+        <div class="header2">You have no places or amenities! Make one above!</div>
+        <div class="card">
+            <div class="header2">No Places Yet 😢 Make one below</div>
+        </div>
+    {% endif %}
+</div>
 
-{% if amenity_groupings %}
-
-    {% for place, amenities in amenity_groupings.items %}
-        {% include 'components/card.html' with name="container-card style1" verified="verified" place=place amenities=amenities%}
-    {% endfor %}
-{% else %}
-    <div class="header2">You have no places or amenities! Make one above!</div>
-
-    <div class="card">
-        <div class="header2">No Places Yet 😢 Make one below</div>
-    </div>
-{% endif %}
-
-
+<div class="tabcontent" id="activity">
+    <h1>Activity</h1>
+</div>
+<div class="tabcontent" id="metrics">
+    <h1>Metrics</h1>
+</div>
 {% endblock content %}
+
+{% block sidecontainer-right %}
+    <button class="button style1" onclick="showForms()">Create a Place</button>
+{% endblock sidecontainer-right %}
+
 
 {% block forms %}
     {% include 'components/form.html' with form=place_form %}
 {% endblock forms %}
+
 

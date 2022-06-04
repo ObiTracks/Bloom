@@ -6,6 +6,11 @@
 body {
   margin: 0;
   padding: 0;
+  background-image: url("/static/images/backgrounds/whitewallpaper.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 }
 
 .platform-base {
@@ -31,7 +36,7 @@ body {
   -webkit-box-flex: 2;
       -ms-flex: 2;
           flex: 2;
-  height: 100vh;
+  height: 100%;
   overflow: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -81,9 +86,25 @@ body {
 }
 
 .main-container__grid-container {
+  position: relative;
   height: 100%;
   min-height: 70vh;
   width: 100%;
+}
+
+.tabs {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden;
+  margin-bottom: 13px;
+}
+
+.tabcontent {
+  padding: 6px;
+}
+
+.tabcontent.active {
+  display: block;
 }
 
 .grid {

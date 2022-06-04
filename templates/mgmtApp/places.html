@@ -3,19 +3,28 @@
 
 
 {% block pageheader %}
-<div class="header2 color-shade-grey">{{page_subtitle}}</div>
 <div class="header1">{{page_title}}</div>
+{% comment %} <div class="header2 color-shade-grey">{{page_subtitle}}</div> {% endcomment %}
 {% endblock pageheader %}
 
+{% block tablinks %}
+<button class="button tablinks active" onclick="openTab(event, 'places')">All Places</button>
+<button class="button tablinks" onclick="openTab(event, 'table')">Table View</button>
+{% endblock tablinks %}
+
 {% block content %}
+<div class="tabcontent" id="places">
     {% if amenity_groupings %}
         {% for place, amenities in amenity_groupings.items %}
             {% include 'components/card.html' with name="container-card style2" place=place amenities=amenities%}
         {% endfor %}
-
     {% else %}
         <div class="header2">You have no places or amenities yet!</div>
     {% endif %}
+</div>
+<div class="tabcontent" id="table">
+    <h1>table view</h1>
+</div>
 {% endblock content %}
 
 {% block forms %}

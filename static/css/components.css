@@ -195,14 +195,14 @@
   /* Link Text */
   font-family: "Montserrat";
   font-style: normal;
-  font-weight: 500;
-  font-size: 15px;
+  font-weight: 400;
+  font-size: 13px;
   line-height: 15px;
   /* identical to box height, or 115% */
 }
 
 .link_text:hover {
-  color: #0bc7d8;
+  color: #bcbcbc;
   cursor: pointer;
 }
 
@@ -259,6 +259,7 @@ button {
   transition: transform linear 0.1s;
   transition: transform linear 0.1s, -webkit-transform linear 0.1s;
   color: #b0b0b0;
+  /* Style the buttons inside the tab */
 }
 
 .button:hover,
@@ -415,17 +416,16 @@ button.site-toggle {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   border-radius: 12px;
   text-decoration: none !important;
-  background: #ffffff;
+  background: none;
   outline: solid 1px #b0b0b0;
-  outline-offset: -2px;
   -webkit-transition: none !important;
   transition: none !important;
   padding: 0;
@@ -455,12 +455,14 @@ button.site-toggle .half {
 
 .button.site-toggle .half.left,
 button.site-toggle .half.left {
-  background: #ff0000;
+  background: -webkit-gradient(linear, left top, right top, from(#ff0000), to(#ff979c));
+  background: linear-gradient(90deg, #ff0000 0%, #ff979c 100%);
 }
 
 .button.site-toggle .half.right,
 button.site-toggle .half.right {
-  background: #008cff;
+  background: -webkit-gradient(linear, right top, left top, from(#008cff), to(#7ab7f0));
+  background: linear-gradient(to left, #008cff 0%, #7ab7f0 100%);
 }
 
 .button.site-toggle .half.toggled,
@@ -482,6 +484,39 @@ button.site-toggle .half:not(.toggled):hover {
   -webkit-transform: scale(1.03);
           transform: scale(1.03);
   color: #061221;
+}
+
+.button.tablinks,
+button.tablinks {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  border-radius: 0;
+  cursor: pointer;
+  padding: 8px 16px;
+  /*   transition: 0.3s; */
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: #868686;
+}
+
+.button.tablinks:hover,
+button.tablinks:hover {
+  -webkit-transform: none;
+          transform: none;
+}
+
+.button.tablinks.active,
+button.tablinks.active {
+  color: black;
+  border-bottom: solid #008cff 2px;
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
 }
 
 .badge {
@@ -690,16 +725,20 @@ button.site-toggle .half:not(.toggled):hover {
   opacity: 80%;
 }
 
+.table tr {
+  background-color: rgba(255, 255, 255, 0.438);
+}
+
 .table tr.rowhour {
   font-size: 15px;
   color: black;
   height: 20px;
-  background-color: #e9e9e9;
+  background-color: rgba(255, 255, 255, 0.798);
   /* margin: 10px; */
 }
 
 .table tr.rowhour td.selected {
-  background: #0082ec;
+  background: #3fa8ff;
 }
 
 .profileicon {

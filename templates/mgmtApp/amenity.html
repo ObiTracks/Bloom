@@ -1,29 +1,47 @@
 {% extends 'base.html' %} {% load static %} 
 
 {% block pageheader %}
-<div class="header2 color-shade-grey">{{page_subtitle}}</div>
+<div class="header2 color-active">{{page_subtitle}}</div>
 <div class="header1">{{page_title}}</div>
 {% endblock pageheader %} 
 
+{% block tablinks %}
+<button class="button tablinks active" onclick="openTab(event, 'timeslots')">Timeslots</button>
+<button class="button tablinks" onclick="openTab(event, 'details')">Details</button>
+<button class="button tablinks" onclick="openTab(event, 'reservations')">Reservations</button>
+<button class="button tablinks" onclick="openTab(event, 'metrics')">Metrics</button>
+{% endblock tablinks %}
+
+
 {% block content %}
-
-<div class="header2">Info and Gallery</div>
-<button class="button style3" onclick="showForms()">Edit Amenity</button>
-<button class="button style1"
-    type="button"
-    id="showresults"
-    value="Spremi" >
-    Step 1: Update Changed Timeslots
-</button>
-<button class="button style2" form='form'>Step 2: Save Changes</button>
-<span id="results"></span>
-
-<table class="table" id="table">
-    <!-- table timeslots injected here -->
-</table>
+<div class="tabcontent" id="timeslots">
+    <table class="table" id="table">
+        <!-- table timeslots injected here -->
+    </table>
+</div>
+<div class="tabcontent" id="details">
+    <h1>details</h1>
+</div>
+<div class="tabcontent" id="reservations">
+    <h1>reservations</h1>
+</div>
+<div class="tabcontent" id="metrics">
+    <h1>metrics</h1>
+</div>
 
 {% endblock content %} 
 
+{% block sidecontainer-right %}
+    <button class="button style3" onclick="showForms()">Edit Amenity</button>
+    <button class="button style1"
+        type="button"
+        id="showresults"
+        value="Spremi" >
+        Step 1: Update Changed Timeslots
+    </button>
+    <button class="button style2" form='form'>Step 2: Save Changes</button>
+    {% comment %} <span id="results"></span> {% endcomment %}
+{% endblock sidecontainer-right %}
 
 {% block forms %}
 <form action="" id="form" method="POST" >

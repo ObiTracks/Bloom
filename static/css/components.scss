@@ -236,13 +236,13 @@ $box-shadow--light: rgba(126, 126, 126, 0.144) 0px 0px 10px;
     /* Link Text */
     font-family: "Montserrat";
     font-style: normal;
-    font-weight: 500;
-    font-size: 15px;
+    font-weight: 400;
+    font-size: 13px;
     line-height: 15px;
     /* identical to box height, or 115% */
 
     &:hover {
-        color: #0bc7d8;
+        color: rgb(188, 188, 188);
         cursor: pointer;
     }
 }
@@ -387,16 +387,16 @@ button {
         // width: fit-content;
         height: fit-content;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         flex-wrap: wrap;
 
         border-radius: 12px;
         // overflow: hidden;
         text-decoration: none !important;
-        background: $shade-white;
+        background: none;
 
         outline: solid 1px $shade-grey;
-        outline-offset: -2px;
+        // outline-offset: -2px;
         transition: none !important;
         padding: 0;
         color: $shade-grey;
@@ -416,10 +416,20 @@ button {
             transform: scale(1.001);
 
             &.left {
-                background: $feedback-error;
+                // background: $feedback-error;
+                background: linear-gradient(
+                    90deg,
+                    $feedback-error 0%,
+                    #ff979c 100%
+                );
             }
             &.right {
-                background: $feedback-active;
+                // background: $feedback-active;
+                background: linear-gradient(
+                    to left,
+                    $feedback-active 0%,
+                    #7ab7f0 100%
+                );
             }
 
             &.toggled {
@@ -436,6 +446,32 @@ button {
                     color: $shade-dark;
                 }
             }
+        }
+    }
+    /* Style the buttons inside the tab */
+    &.tablinks {
+        box-sizing: content-box;
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        border-radius: 0;
+        cursor: pointer;
+        padding: 8px 16px;
+        /*   transition: 0.3s; */
+        font-size: 12px;
+        font-family: "Montserrat", sans-serif;
+        letter-spacing: 0.2px;
+        text-transform: uppercase;
+        color: rgb(134, 134, 134);
+
+        &:hover {
+            transform: none;
+        }
+        &.active {
+            color: black;
+            border-bottom: solid #008cff 2px;
+            transform: scale(1.01);
         }
     }
 }
@@ -588,15 +624,16 @@ button {
         }
     }
     tr {
+        background-color: rgba(255, 255, 255, 0.438);
         &.rowhour {
             font-size: 15px;
             color: black;
             height: 20px;
-            background-color: $shade-grey--light;
+            background-color: rgba(255, 255, 255, 0.798);
             /* margin: 10px; */
 
             td.selected {
-                background: #0082ec;
+                background: #3fa8ff;
             }
         }
     }

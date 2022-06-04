@@ -4,7 +4,7 @@
 {% if name == 'container-card style1' %}
 <div class="container-card style1" id="place-{{place.id}}">
     <div class="header">
-        <div class="header2 ">{{place.name}}</div>
+        <div class="header2 color-dark">{{place.name}}</div>
     </div>
     <div class="rectangle">
         <div>
@@ -36,7 +36,7 @@
 {% elif name == 'container-card style1-2' %}
 <div class="container-card style1" id="place-{{place.id}}">
    <div class="header">
-        <div class="header2 ">{{place.name}}</div>   
+        <div class="header2 color-dark">{{place.name}}</div>   
     </div>
     <div class="rectangle">
         <div>
@@ -60,16 +60,17 @@
 <div class="container-card style2" id="place-{{place.id}}">
     <div class="header">
         
-        <div class="header2 color-shade-grey" >{{place.name}}</div>
+        <div class="header2 color-dark" >{{place.name}}</div>
         {% comment %} {{ place|serialize_model_to_dict }} {% endcomment %}
         {% comment %} {{place.serialize_model_to_dict|safe}} 
         place-{{place.id}}
         {% endcomment %}
         
         {% comment %} {% include 'components/button.html' with name="button style1" text="Manage Place" onclick="window.location='{% url 'manage-place' place.id %}';" %} {% endcomment %}
-
-        {% url 'manage-place' place.id as place_url%}
-        <button class="button style3" onclick="window.location='{{place_url}}';">Manage Place</button>
+        {% if "manage" in request.path %}
+            {% url 'manage-place' place.id as place_url%}
+            <button class="button style3" onclick="window.location='{{place_url}}';">Manage Place</button>
+        {% endif %}
     </div>
     <div class="rectangle body1">
         {% for amenity in amenities %}

@@ -49,7 +49,7 @@ class Amenity(models.Model):
     description = models.CharField(max_length=200, blank=True)
     timeslots = models.JSONField(blank=True, null=True)
     image = models.ImageField(upload_to='images', null=True, blank=True)
-    backup_image_url = models.URLField(max_length=400,blank=True)
+    backup_image_url = models.URLField(max_length=1000,blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -96,7 +96,7 @@ class Place(models.Model):
     capacity = models.IntegerField(null=True, blank=True)
     description = models.TextField(max_length=500, blank=True)
     image = models.ImageField(upload_to='images', null=True, blank=True)
-    backup_image_url = models.URLField(max_length=400, blank=True)
+    backup_image_url = models.URLField(max_length=1000, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     # images = ArrayField(base_field=models.ImageField(null=True), null=True)
 

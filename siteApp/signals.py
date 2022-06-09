@@ -11,7 +11,11 @@ from siteApp.models import Amenity, AmenityProfileRelationship, Place, PlaceProf
 @receiver(post_save, sender=Amenity)
 def create_amenity(sender, instance, created, **kwargs):
     request = RequestMiddleware(get_response=None)
-    request = request.thread_local.current_request
+    try:
+        request = request.thread_local.current_request
+    except AttributeError as e:
+        return
+
     user = request.user
     if user:
         if created:
@@ -24,12 +28,17 @@ def create_amenity(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Place)
 def create_place(sender, instance, created, **kwargs):
     request = RequestMiddleware(get_response=None)
-    request = request.thread_local.current_request
+    try:
+        request = request.thread_local.current_request
+    except AttributeError as e:
+        return
+
     user = request.user
     if user:
         if created:
             PlaceProfileRelationship.objects.create(
                 place=instance, profile=user.profile, profile_type='0')
+            Amenity.objects.create(place=instance)
 
             print("\nSignal: Place Relationship created\n")
         

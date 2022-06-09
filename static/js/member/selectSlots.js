@@ -3,7 +3,8 @@
 $(document).ready(() => {
     function timeslotClick(){
         var item = this;
-        var day = item.classList.value.split(" ").pop();
+        const item_classes = [...item.classList];
+        const day = item_classes[1];
         console.log("Classes: ", day);
 
         var day_headers = [...selected_container.querySelectorAll(`.body1.header.${day}`)];
@@ -24,7 +25,7 @@ $(document).ready(() => {
 
             var header;
             if (day_headers.length == 0){
-                console.log("No headers found; ");
+                console.log(`No header found for ${day}; `);
                 header = document.createElement("div");
                 header.textContent = day;
                 header.classList.add('body1', 'header', day);
@@ -40,12 +41,12 @@ $(document).ready(() => {
         } 
         else if (selected_container.contains(item)) {
             // alert('Item is a child of selected slots');
-            this.classList.remove("reserved");
-            var original_box = available_container.querySelector(`#${day}`);
-            original_box = original_box.querySelector(".rectangle");
-
-            console.log(original_box)
-            // original_box.appendChild(item);
+            this.classList.remove("selected");
+            console.log("Wagwan Father",item_classes);
+            
+            const og_box = $(`#${day}`).first().find('.rectangle');
+            // og_box = og_box.querySelector(".rectangle");
+            og_box.append(item);
 
             
         }
@@ -65,6 +66,7 @@ $(document).ready(() => {
 
         for (var i = 0; i < elements.length; i++) {
             elements[i].addEventListener('click', timeslotClick);
+            // console.log("Event added to timeslot ", elements[i].classList);
         }
 
     });

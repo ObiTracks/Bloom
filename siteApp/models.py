@@ -28,11 +28,29 @@ from .utilities import user_upload_directory_path
 class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, null=False, on_delete=models.CASCADE, related_name="profile")
+    
+    first_name = models.CharField(max_length=200, blank=False, default="John")
+    last_name = models.CharField(max_length=200, blank=False, default="Doe")
     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
     bio = models.TextField(max_length=200, blank=True)
+    backup_image_url = models.URLField(max_length=1000, blank=True)
     image = models.ImageField(upload_to=user_upload_directory_path, null=True, blank=True)
-
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def set_random_backup_image_url(self):
+        random_img_url = 'https://source.unsplash.com/random/?hd-abstract-renders'
+        
+        if not self.backup_image_url:
+            response = requests.get(random_img_url)
+            response_url = response.url
+            print(response_url)
+
+            self.backup_image_url = response_url
+            self.save()
+
+    def save(self, *args, **kwargs):
+        super(Profile, self).save(*args, **kwargs)
+        self.set_random_backup_image_url()
 
     class Meta:
         ordering = ('date_created',)
@@ -73,9 +91,9 @@ class Amenity(models.Model):
             self.backup_image_url = response_url
             self.save()
 
-    def save(self):
+    def save(self, *args, **kwargs):
+        super(Amenity, self).save(*args, **kwargs)
         self.set_random_backup_image_url()
-        super(Amenity, self).save()
 
 # @receiver(post_save, sender=Amenity)
 # def create_profile(sender, instance, created, **kwargs):
@@ -130,9 +148,9 @@ class Place(models.Model):
             self.backup_image_url = response_url
             self.save()
 
-    def save(self):
+    def save(self, *args, **kwargs):
+        super(Place, self).save(*args, **kwargs)
         self.set_random_backup_image_url()
-        super(Place, self).save()
 
 
     class Meta:

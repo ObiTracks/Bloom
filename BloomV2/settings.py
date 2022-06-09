@@ -164,10 +164,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Setting the CustomUser Model as the auth model to avoid conflicting errors
 # Withouth this line of code, the default AUTH_USER_MODEL will be the default User model.
 AUTH_USER_MODEL = 'accountsApp.CustomUser'
+
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.RemoteUserBackend',
     'django.contrib.auth.backends.ModelBackend',
-    'accountsApp.backends.CustomUserBackend'
 )
 
 # Changing the default user login behaviour and specifying a project level

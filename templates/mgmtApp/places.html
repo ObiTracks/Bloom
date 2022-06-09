@@ -13,7 +13,7 @@
 {% endblock tablinks %}
 
 {% block content %}
-<div class="tabcontent" id="places">
+<div class="tabcontent active" id="places">
     {% if amenity_groupings %}
         {% for place, amenities in amenity_groupings.items %}
             {% include 'components/card.html' with name="container-card style2" place=place amenities=amenities%}

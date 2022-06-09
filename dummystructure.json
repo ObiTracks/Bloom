@@ -1,4 +1,4 @@
-Old Structure
+// Old Structure
 {
     "Tues": [
         ["00:15", "00:30"],
@@ -12,7 +12,7 @@ Old Structure
     "Thurs": [["01:30", "09:00"]]
 }
 
-New Structure
+// New Structure
 [
     {
         "index": 2,
@@ -34,10 +34,12 @@ New Structure
         "current_capacity": "X",
         "slots":[
             {
+                "day":"Tues",
                 "current_capacity": 0,
                 "window":["00:30","01:15"]
             },
             {
+                "day":"Tues",
                 "current_capacity": 0,
                 "window":["01:45","01:45"]
             },

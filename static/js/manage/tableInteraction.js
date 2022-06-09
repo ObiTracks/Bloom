@@ -70,27 +70,6 @@ function selectTo(cell) {
     // console.log("CurrentSelection Set:", currentSelection.size);
 }
 
-function findSetDifferenceAndToggle(set1, set2) {
-    var diff = null; //For finding items that are no longer in the current range but were in the previous larger range
-
-    if (set1.size > set2.size) { // If the range has reduced back in size, toggle the items that left it back to their original state
-        set1Array = [...set1];
-        set1Array_numbers = set1Array.map(x => {
-            return x[0];
-        });
-        set2Array = [...set2];
-        set2Array_numbers = set2Array.map(x => {
-            return x[0];
-        });
-
-        diff = set1Array.filter(x => {
-            var n = x[0];
-            return !set2Array_numbers.includes(n);
-        });
-    }
-    return diff;
-}
-
 
 table.on({ // Binding objects that weren't added to the DOM on the page load to event handle
     "mousedown": function (e) {
@@ -114,6 +93,26 @@ table.on({ // Binding objects that weren't added to the DOM on the page load to 
         return false; // prevent text selection
     },
     "mouseover": function () {
+        function findSetDifferenceAndToggle(set1, set2) {
+            var diff = null; //For finding items that are no longer in the current range but were in the previous larger range
+        
+            if (set1.size > set2.size) { // If the range has reduced back in size, toggle the items that left it back to their original state
+                set1Array = [...set1];
+                set1Array_numbers = set1Array.map(x => {
+                    return x[0];
+                });
+                set2Array = [...set2];
+                set2Array_numbers = set2Array.map(x => {
+                    return x[0];
+                });
+        
+                diff = set1Array.filter(x => {
+                    var n = x[0];
+                    return !set2Array_numbers.includes(n);
+                });
+            }
+            return diff;
+        }
         if (!isMouseDown) {
             return
         };
@@ -142,45 +141,9 @@ $(document).ready($(document).mouseup(function () {
 }));
 
 
-
-$("#showresults").click(
-    // function collectSelectedSlots() {
-    //     console.clear();
-    //     timeslotsDict = new Map();
-    //     var tableHeaders = $("#table thead th");
-    //     var selectedCells = $("#table td.selected");
-
-    //     selectedCells.each(function () {
-    //         cell = $(this);
-    //         var day = tableHeaders.eq(cell.index()).text();
-    //         var timeslot = cell.parent().children().eq(0).text().trim();
-    //         var test = timeConverter(timeslot, "f")
-
-    //         if (!timeslotsDict.has(day)) {
-    //             timeslotsDict.set(day, [timeslot]);
-    //             var timeslots = timeslotsDict.get(day);
-    //             // console.log(day, timeslots);
-
-    //         } else {
-    //             var timeslots = timeslotsDict.get(day);
-    //             timeslots.push(timeslot);
-    //             // console.log(day, timeslots);
-    //         }
-    //     });
-
-    //     var json = getSelectedTimeslotIntervals(timeslotsDict);
-    //     console.log(json);
-    //     $("#results").text(JSON.stringify(json));
-    //     $("#id_timeslots").text(JSON.stringify(json));
-
-        
-    //     showForms();
-    // });
-    () => {
+$("#showresults").click(() => {
         updateJSON();
-    }
-
-);
+});
     
 
 function updateJSON(){
@@ -229,31 +192,6 @@ function collectSelectedSlots() {
         var timestamp = cell.parent().children().eq(0).text().trim();
         var test = timeConverter(timestamp, "f")
 
-        
-
-        // // console.log("timestamp:", timestamp)
-        // if (!jsonTimeslots.some(item => item.hasOwnProperty(day))){
-        //     dayObj = createDayObject(index, day);
-        //     updatedJSON.push(dayObj);
-        //     temp_slot.push(timestamp)
-            
-        //     // console.log("Wakanda")
-        //     // This code creates the json object for day that there are timeslots selected for
-            
-            
-        //     // if (dayObj['slots'].some(item => !item.hasOwnProperty('current_capacity'))) {
-        //     //     obj['slots']['current_capacity'] = "0";
-        //     // }
-        //     // if (!obj.hasOwnProperty('current_capacity')) {
-        //     //     obj['current_capacity'] = "0";
-        //     // }
-        // }
-        // else{
-        //     var dayObj = get_day_object_or_create_one(jsonArray, key)
-        //     var dayObj = jsonTimeslots.find(item => item.day === day)
-        //     // updatedJSON.push(dayObj);
-        //     temp_slot.push(timestamp)
-        // }
 
         if (!timeslotsDict.has(day)) {
             timeslotsDict.set(day, [timestamp]);
@@ -363,51 +301,33 @@ function getSelectedTimeslotIntervals(selectedTimeslots) {
 }
 // STEP 3
 function summarizeJSON(consolidatedJSON){
-    function arrays_are_equal(a, b){
-        if (a === b) return true;
-        if (a == null || b == null) return false;
-        if (a.length !== b.length) return false;
-
-        a.forEach((x, i) => {
-            if(x != b[i]){
-                return false
-            }
-
-        })
-        return true;
+    function create_object(day_name){
+        const day_indices = 
+        {'Sun':1,'Mon':2,'Tues':3,'Wed':4,'Thurs':5,'Fri':6,'Sat':7}
+        // [['Sun',1],['Mon',2],['Tues',3],['Wed',4],['Thurs',5],['Fri',6],['Sat',7]]
+        console.log("Day Name", day_name);
+        obj = {
+            'day' : day_name,
+            'index' : day_indices[day_name],
+            'slots' : [],
+        }
+        return (obj);
     }
-    function check_if_slot_exists(obj, comparison_slot){
-        var obj_slots = obj["slots"];
-
-        obj_slots.forEach((slot, i) => {
-            if (arrays_are_equal(slot.window, comparison_slot)){
-                console.log("Slots Equal\n\n");
-                window = create_slot(comparison_slot);
-                return true;
-            }
-
-            console.log("Slots Not Equal\n\n");
-            console.log(slot.window);
-            console.log(comparison_slot);
-            console.log(slot.window);
-        })
-        
-        return false;
-    }
-    function create_slot(arr){
+    function create_slot(window, day_name){
         var slot = {
+            'day': day_name,
             "current_capacity": 0,
-            "window":arr
+            "window":window
         }
         
         return slot;
     }
 
+
     console.log("SUMMARIZING JSON UPDATES\n-------------------------\n\n\n");
-    // console.log("Consolidated JSON: ", consolidatedJSON);
+    console.log("Consolidated JSON: ", consolidatedJSON);
     // console.log("Loaded Amenity JSON: ", jsonTimeslots);
     updatedJSON = [];
-    // console.log(consolidatedJSON);
 
     for(var day of Object.keys(consolidatedJSON)){
 
@@ -419,18 +339,18 @@ function summarizeJSON(consolidatedJSON){
         //          If the object's "slot" array already contains the timeslot, skip past it
         //          If not add the timeslot to the object
 
-        var obj = get_object_or_create_one(jsonTimeslots, 'day', day);
+        var obj = create_object(day);
         var collected_slots = consolidatedJSON[day];
         
         slots = obj["slots"];
         for (i=0; i < collected_slots.length; i++){
             var curr_slot = collected_slots[i];
-            var slot_exists = check_if_slot_exists(obj, curr_slot);
+            // var slot_exists = check_if_slot_exists(obj, curr_slot);
             var slot;
             
-            if (slot_exists == false){
-                slot = create_slot(curr_slot);
-            }
+            // if (slot_exists == false){
+                slot = create_slot(curr_slot, day);
+            // }
             slots.push(slot);
         }
 
@@ -462,22 +382,3 @@ function timeConverter(time, convertTotype) {
     }
 }
 
-// UTILITY FUNCTIONS
-function get_object_or_create_one(jsonArray, search_key, search_value){
-    const day_indices = [['Sun',1],['Mon',2],['Tues',3],['Wed',4],['Thurs',5],['Fri',6],['Sat',7]]
-    var jsonArray = JSON.parse(JSON.stringify(jsonArray));
-
-    for(i=0; i < jsonArray.length; i++){
-        obj = jsonArray[i];
-        if(obj[search_key] === search_value){
-            return(obj);
-        }
-    }
-
-    obj = {
-        'day' : search_value,
-        'index' : day_indices.find((item) => {return item[0] === search_value})[1],
-        'slots' : [],
-    }
-    return (obj);
-}

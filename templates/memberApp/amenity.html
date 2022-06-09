@@ -14,16 +14,16 @@
 {% endblock pageheader %} 
 
 {% block content %}
+<div class="tabcontent active" id="timeslots">
+    {% comment %} {% include 'components/card.html' with name="container-card style4" jsonTimeslots=jsonTimeslots%} {% endcomment %}
+    <div id="stage">
 
-{% comment %} {% include 'components/card.html' with name="container-card style4" jsonTimeslots=jsonTimeslots%} {% endcomment %}
-<div id="stage">
-
+    </div>
 </div>
-
-
 {% endblock content %}
 
 {% block sidecontainer-right %}
+<span>
 
 <div class="availability-card">
     <div class="header2 color-accent">Selected Slots</div>

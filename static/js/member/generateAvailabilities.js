@@ -13,7 +13,6 @@ $(document).ready(
 
         jsonTimeslots.forEach((obj) => {
             // var timeslotsHTML;
-
             
 
             // cardHTML = `
@@ -31,6 +30,8 @@ $(document).ready(
             var availability_card = document.createElement('div');
             availability_card.classList.add('availability-card');
             availability_card.setAttribute('id', `${obj.day}`);
+            let unwrap = ({day, index}) => ({day, index});
+            availability_card.setAttribute('data', `${JSON.stringify(unwrap(obj))}`);
             availability_card.innerHTML = `
                 <div class="header2 color-shade-grey">${obj.day}</div>
                 <div class="body1 color-shade-grey">MM/DD/YYYY</div>
@@ -49,6 +50,7 @@ $(document).ready(
 
                 var time_slot = document.createElement('div');
                 time_slot.classList.add('timeslot', `${obj.day}`);
+                time_slot.setAttribute('data', `${JSON.stringify(slot)}`);
                 time_slot.innerHTML = `
                 <div class="body2">${window[0]} - ${window[1]}</div>
                `;

@@ -15,15 +15,14 @@
 
 {% block content %}
 <div class="tabcontent active" id="timeslots">
-    {% comment %} {% include 'components/card.html' with name="container-card style4" jsonTimeslots=jsonTimeslots%} {% endcomment %}
-    <div id="stage">
-
+    <div class="container-card style4" id="available">
+        
     </div>
 </div>
 {% endblock content %}
 
 {% block sidecontainer-right %}
-<span>
+
 
 <div class="availability-card">
     <div class="header2 color-accent">Selected Slots</div>
@@ -45,16 +44,26 @@
 {% block scripts %}
 
 <script> //Loading json timeslots from object into the page for the js to interact
-    var jsonTimeslots = {{ jsonTimeslots | safe }};
-    console.log(jsonTimeslots);
+    var AmenityJSON = {{ jsonTimeslots | safe }};
+    console.log(AmenityJSON);
 </script>
-<script
+{% comment %} <script
     src="{% static 'js/member/generateAvailabilities.js' %}"
     type="text/javascript"
     charset="utf-8"
-></script>
+></script> {% endcomment %}
 <script
+    src="{% static 'js/member/LoadActions.js' %}"
+    type="module"
+    charset="utf-8"
+></script>
+{% comment %} <script
     src="{% static 'js/member/selectSlots.js' %}"
+    type="text/javascript"
+    charset="utf-8"
+></script> {% endcomment %}
+<script
+    src="{% static 'js/member/UserActions.js' %}"
     type="text/javascript"
     charset="utf-8"
 ></script>

@@ -10,7 +10,33 @@
 {% include "components/searchbar.html" %}
 
 {% if places %}
-    {% include 'components/card.html' with name="container-card style3" places=places amenities=amenities %}
+    {% comment %} {% include 'components/card.html' with name="container-card style3" places=places amenities=amenities %} {% endcomment %}
+    <div class="container-card style3" id="place-{{place.id}}">
+        
+        {% for place in places %}
+        <div class="place-card {{verified}}" 
+            {% if place.image or place.backup_image_url %} 
+            style="
+                background: url({% if place.image %} {{place.image.url}} {% else %} {{place.backup_image_url}} {% endif %} );
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center center;" 
+            
+            {% endif %}
+            onclick="window.location='{% url "send-join-request" place.id%}';"
+            >
+            <div class="info">
+                <div class="header2 color-shade-white">{{place.name}}</div>
+            </div>
+            <img src="{% static "images/Verified Checkmark.svg" %}" alt="">
+        
+            
+            <div class="overlay" >
+                <div class="header2 color-shade-white">Send a Join Request</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% else %}
     <div class="header2">There are no places to reserve from just yet! Make one!</div>
 {% endif %}

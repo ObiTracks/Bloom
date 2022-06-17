@@ -19,10 +19,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', include('siteApp.urls')),
-    path('auth/', include('accountsApp.urls')),
-    path('manage/', include('mgmtApp.urls')),
-    path('member/', include('memberApp.urls')),
+    path('', include(('externalApp.urls', 'externalApp'), namespace='external')),
+    path('site/', include(('siteApp.urls','siteApp'), namespace='site')),
+    path('auth/', include(('accountsApp.urls', 'accountsApp'), namespace='auth')),
+    path('manage/', include(('mgmtApp.urls', 'mgmtApp'), namespace='manage')),
+    path('member/', include(('memberApp.urls', 'memberApp'), namespace='member')),
 
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),

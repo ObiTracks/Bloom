@@ -27,10 +27,10 @@ from .models import *
 # LOGIN LOGOUT AND SIGNUP VIEWS
 
 
-def login_view(request):
+def auth_view(request):
     if request.user.is_authenticated:
         print("User is already logged in")
-        return redirect('manage-dashboard')
+        return redirect('manage:manage-dashboard')
 
     page_title = "Login"
     login_form = AuthenticationForm(request)
@@ -41,7 +41,7 @@ def login_view(request):
         'login_form': login_form,
         'register_form': register_form
     }
-    return render(request, '../templates/accountsApp/login.html', context)
+    return render(request, '../templates/accountsApp/auth.html', context)
 
 
 def login_request(request):
@@ -62,7 +62,7 @@ def login_request(request):
         if user is not None:
             login(request, user)
             print("User logged In")
-            return redirect('manage-dashboard')
+            return redirect('manage:manage-dashboard')
         else:
             messages.error(request, 'Username OR password is incorrect')
 
@@ -75,15 +75,15 @@ def signup_request(request):
         register_form = CustomUserCreationForm(request.POST)
         if register_form.is_valid():
             user = register_form.save()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(request, f'Welcome to Bloom')
             # print("New user {} created".format(user))
 
-            return redirect('siteApp:dashboard')
+            return redirect('manage:manage-dashboard')
 
     return login_view(request)
 
 
 def logout_request(request):
     logout(request)
-    return redirect('login')
+    return redirect('external:landing')

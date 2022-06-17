@@ -13,24 +13,25 @@ from siteApp.models import *
 def create_profile(sender, instance, created, **kwargs):
     if created:
         profile = Profile.objects.create(user=instance)
-        place = Place.objects.create(
-            name="{}'s Place".format(profile.first_name),
-            email=instance.email
-            )
-        amenity = Amenity.objects.create(
-             name="{}'s Den".format(profile.first_name),
-             place=place
-        )
-        PlaceProfileRelationship.objects.create(
-            place=place,
-            profile=profile,
-            profile_type='0'
-        )
-        AmenityProfileRelationship.objects.create(
-            amenity=amenity,
-            profile=profile,
-            profile_type='0'
-        )
+        name = profile.first_name if profile.first_name != None else instance.email
+        # place = Place.objects.get_or_create (
+        #     name="{}'s Place".format(name),
+        #     email=instance.email
+        #     )
+        # amenity = Amenity.objects.create(
+        #      name="{}'s Den".format(name),
+        #      place=place
+        # )
+        # PlaceProfileRelationship.objects.create(
+        #     place=place,
+        #     profile=profile,
+        #     profile_type='0'
+        # )
+        # AmenityProfileRelationship.objects.create(
+        #     amenity=amenity,
+        #     profile=profile,
+        #     profile_type='0'
+        # )
 
         
 

@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'lib',
     'siteApp',
     'accountsApp',
+    'externalApp',
+    'mgmtApp',
+    'memberApp',
     'phonenumber_field',
     'debug_toolbar',
 

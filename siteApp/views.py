@@ -17,7 +17,7 @@ from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 
 # Imports for django models
-from django.db.models import Count
+from django.db.models import Count, Q
 
 # Django authentication and messaging features
 from django.contrib.auth import authenticate, login, logout
@@ -32,12 +32,6 @@ from .querytools import getUsersPlacesAndAmenities
 # Create your views here.
 
 
-def landingpage_view(request):
-    page_title = "Welcome to Bloom"
-    context = {'page_title': page_title, }
-    template_name = 'landingpage.html'
-    return render(request, template_name, context)
-
 #******************
 # ENDPOINT VIEWS
 #******************
@@ -46,20 +40,17 @@ def sendjoin_request(request, place_pk=None):
         messages.error(request, 'Place not provided for join request')
         return
 
+    
     profile = request.user.profile
     place = Place.objects.get(pk=place_pk)
-    print("PLACE FOUND\n")
 
     #Check if the user has access already - ie existing place profile relationship
-    exists = PlaceProfileRelationship.objects.filter(
-        place=place,
-        profile=profile,
-    ).exists()
+    exists = JoinRequest.objects.filter(place=place, profile=profile).exists()
 
-    print("RELATIONSHIP FOUND\n")
     if exists:
-        messages.error(request, 'Already member of the place')
-        return
+        print("Join Request Cancelling Operation\n")
+        messages.error(request, 'Join Reqest already exists')
+        return redirect(request.META['HTTP_REFERER'])
     
     join_request = JoinRequest.objects.create(profile=profile, place=place)
     join_request.save()
@@ -97,7 +88,7 @@ def approvejoin_request(request, joinrequest_pk):
 
         joinrequest.delete()
         pass
-    messages.success(request, 'Join Request accepted')
+    messages.success(request, 'Join request accepted')
     return redirect(request.META['HTTP_REFERER'])
 
 def rejectjoin_request(request, joinrequest_pk):
@@ -111,5 +102,5 @@ def rejectjoin_request(request, joinrequest_pk):
     except JoinRequest.DoesNotExist:
         messages.error(request, 'Join Request not provided for join request')
 
-    messages.success(request, 'Join Request not approved')
+    messages.error(request, 'Join request rejected')
     return redirect(request.META['HTTP_REFERER'])

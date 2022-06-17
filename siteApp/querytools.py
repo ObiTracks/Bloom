@@ -18,7 +18,7 @@ from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 
 # Imports for django models
-from django.db.models import Count
+from django.db.models import Count, Q
 
 # Django authentication and messaging features
 from django.contrib.auth import authenticate, login, logout
@@ -30,6 +30,11 @@ from django.core.paginator import Paginator
 from mgmtApp.forms import *
 from .models import *
 
+def getUsersPlaces(request, num_amenities=None, place_id=None):
+    place_relationships = PlaceProfileRelationship.objects.filter(
+        profile=request.user.profile, profile_type__in=['0', '1', '2', '3', '4'])
+    places = [i.place for i in place_relationships]
+    return places
 
 def getUsersPlacesAndAmenities(request, num_amenities=None, place_id=None):
     place_amenity_groupings = {}
@@ -73,5 +78,4 @@ def getUsersPlacesAndJoinRequest(request, number_of_joinrequests_each = None):
             place_request_groupings[place] = joinrequests 
 
     return places, place_request_groupings
-
 

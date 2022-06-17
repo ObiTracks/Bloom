@@ -56,11 +56,11 @@ class Profile(models.Model):
         ordering = ('date_created',)
 
     def __str__(self):
-        return "{} {}".format(self.user.first_name, self.user.last_name)
+        return "{} {}".format(self.first_name, self.last_name)
 
 
 class Amenity(models.Model):
-    name = models.CharField(max_length=200, blank=False)
+    name = models.CharField(max_length=200, blank=False, null=False)
     place = models.ForeignKey(
         "siteApp.Place", blank=False, on_delete=models.CASCADE)
     subtitle = models.CharField(max_length=200, blank=True)
@@ -107,7 +107,7 @@ class Amenity(models.Model):
 
 
 class Place(models.Model):
-    name = models.CharField(max_length=200, blank=False, unique=True)
+    name = models.CharField(max_length=200, blank=False, unique=False)
     email = models.CharField(max_length=200, blank=True, null=True)
     phone_number = PhoneNumberField(null=True, blank=True, unique=False)
     address = models.CharField(max_length=200, blank=True, null=True)
@@ -249,7 +249,7 @@ class JoinRequest(models.Model):
         ordering = ('date_created',)
 
     def __str__(self):
-        return "Join Request: User({}) Place({})".format(self.profile, self.profile)
+        return "Place: {} - Profile {}".format(self.place, self.profile)
 
 
 class TimeSlot(models.Model):

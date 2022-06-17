@@ -17,13 +17,12 @@ Including another URLconf
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from . import views
-from siteApp.views import landingpage_view
 from . import crud_views
 
 
 urlpatterns = [
     path('', views.dashboard_view, name="manage-dashboard"),
-    path('profile',  landingpage_view, name="manage-profilepage"),
+    # path('profile',  landingpage_view, name="manage-profilepage"),
     path('places', views.places_view, name="manage-places"),
     path('places/place/<str:pk>/', views.place_view, name="manage-place"),
     path('places/amenity/<str:pk>/', views.amenity_view, name="manage-amenity"),

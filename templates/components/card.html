@@ -68,7 +68,7 @@
         
         {% comment %} {% include 'components/button.html' with name="button style1" text="Manage Place" onclick="window.location='{% url 'manage-place' place.id %}';" %} {% endcomment %}
         {% if "manage" in request.path %}
-            {% url 'manage-place' place.id as place_url%}
+            {% url 'manage:manage-place' place.id as place_url%}
             <button class="button style3" onclick="window.location='{{place_url}}';">Manage Place</button>
         {% endif %}
     </div>
@@ -115,14 +115,14 @@
         <div class="header3 color-shade-grey">{{request.date_created}}</div>
     </div>
     <div class="buttons">
-        {% url 'approve-join-request' request.id as accept_url %}
-        {% url 'reject-join-request' request.id as reject_url %}
-        {% include 'components/button.html' with name="button style2" text="Approve" onclick="window.location='{{accept_url}}';" %}
-        {% include 'components/button.html' with name="button style3" text="Reject" onclick="window.location='{{reject_url}}';" %}
-        {% comment %} {% include 'components/button.html' with name="button style2" text="Approve" 
-            url={% url 'approve-join-request' request.id %} %}
-        {% include 'components/button.html' with name="button style2" text="Reject" 
-            url={% url 'reject-join-request' request.id %} %} {% endcomment %}
+        <button class="button style2" onclick="window.location='{% url 'approve-join-request' request.id  %}';" >
+            <div class="button_text">Approve</div>
+        </button>
+        
+        <button class="button style3" onclick="window.location='{% url 'reject-join-request' request.id %}';" >
+            <div class="button_text">Reject</div>
+        </button>
+        
     </div>
 </div>
 
@@ -139,9 +139,9 @@
     {% endif %}
 
     {% if "manage" in request.path %} 
-    onclick="window.location='{% url "manage-places"%}#place-{{place.id}}';"
+    onclick="window.location='{% url "manage:manage-places"%}#place-{{place.id}}';"
     {% elif "member" in request.path %}
-    onclick="window.location='{% url "member-dashboard"%}#place-{{place.id}}';"
+    onclick="window.location='{% url "member:member-dashboard"%}#place-{{place.id}}';"
     {% endif %}
     >
 
@@ -190,9 +190,9 @@
 
     {% endif %}
     {% if "manage" in request.path %} 
-    onclick="window.location='{% url "manage-amenity" amenity.id %}';"
+    onclick="window.location='{% url "manage:manage-amenity" amenity.id %}';"
     {% elif "member" in request.path %}
-    onclick="window.location='{% url "member-amenity" amenity.id %}';"
+    onclick="window.location='{% url "member:member-amenity" amenity.id %}';"
     {% endif %}>
 
 

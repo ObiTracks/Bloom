@@ -6,19 +6,19 @@
 
 {% if "manage" in request.path %} 
 <div class="navbar">
-    <div class="link_text" onclick="window.location='{% url "manage-dashboard" %}';">Dashboard</div>
-    <div class="link_text"  onclick="window.location='{% url "manage-places" %}';">Places & Amenities</div>
-    <div class="link_text"  onclick="window.location='{% url "join-requests" %}';">Join Request</div>
-    <div class="link_text"  onclick="window.location='{% url "manage-profilepage" %}';">Your Profile</div>
-    <div class="link_text"  onclick="window.location='{% url "logout" %}';">Logout</div>
+    <div class="link_text" onclick="window.location='{% url "manage:manage-dashboard" %}';">Dashboard</div>
+    <div class="link_text"  onclick="window.location='{% url "manage:manage-places" %}';">Places & Amenities</div>
+    <div class="link_text"  onclick="window.location='{% url "manage:join-requests" %}';">Join Request</div>
+    {% comment %} <div class="link_text"  onclick="window.location='{% url "manage:manage-profilepage" %}';">Your Profile</div> {% endcomment %}
+    <div class="link_text"  onclick="window.location='{% url "auth:logout" %}';">Logout</div>
 </div>
 
 {% elif "member" in request.path %} 
 <div class="navbar">
-    <div class="link_text" onclick="window.location='{% url "member-dashboard" %}';">Dashboard</div>
-    <div class="link_text"  onclick="window.location='{% url "member-community" %}';">Find a Community</div>
-    <div class="link_text"  onclick="window.location='{% url "member-profilepage" %}';">Your Profile</div>
-    <div class="link_text"  onclick="window.location='{% url "logout" %}';">Logout</div>
+    <div class="link_text" onclick="window.location='{% url "member:member-dashboard" %}';">Dashboard</div>
+    <div class="link_text"  onclick="window.location='{% url "member:member-community" %}';">Find a Community</div>
+    {% comment %} <div class="link_text"  onclick="window.location='{% url "member:member-profilepage" %}';">Your Profile</div> {% endcomment %}
+    <div class="link_text"  onclick="window.location='{% url "auth:logout" %}';">Logout</div>
 </div>
 
 {% endif %}

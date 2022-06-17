@@ -1,0 +1,40 @@
+{% extends 'externalApp/index.html' %}
+{% load static %}
+
+{% block content %}
+<div class="section" id="hero-section">
+    <h3>Bookings Simplified.</h3>
+    <h1>Bookings made Easy.</h1>
+    <p>
+        <b> Managing community bookings is annoying. Bloom takes the ick out of that.</b>
+        Schedule bookings with freedom and ease.  Decide when and how to book out your amenities with as little as a click and a drag.</p>
+    <a href="{% url 'auth:auth' %}"><button>Get Started</button></a>
+    <div class="vessel">
+        <img src="{% static 'images/mockups/MacbookMockup-PlaceDetails.png' %}" alt="" class="small-img--left">
+        <img src="{% static 'images/mockups/MacbookMockup-AmenityDetails.png' %}" alt="" class="small-img--right">
+        <img src="{% static 'images/mockups/MacbookMockup.png' %}" alt="" class="large-img">
+    </div>
+</div>
+<div class="section">
+    <h2>Features</h2>
+    <div class="banner">
+        <div class="illustration">
+            <img src="" alt="">
+        </div>
+        <div class="description">
+            <h3>Schedule availability for anything with a drag and click</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="description">
+            <h3>Schedule availability for anything with a drag and click</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="illustration">
+            <img src="" alt="">
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

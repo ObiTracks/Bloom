@@ -6,12 +6,12 @@
 </div>
 
 {% elif name == 'button style2' %}
-<div class="button style2" type={{type}} onclick={{onclick}} >
+<button class="button style2" onclick={{onclick}} >
     <div class="button_text">{{text}}</div>
-</div>
+</button>
 
 {% elif name == 'button style3' %}
-<div class="button style3" type={{type}} onclick={{onclick}}>
+<div class="button style3" onclick={{onclick}}>
     <div class="button_text">{{text}}</div>
 </div>
 
@@ -34,10 +34,10 @@
 
 {% elif name == 'button site-toggle' %}
 <div class="button site-toggle">
-    <div class="half left {% if "manage" in request.path %} toggled {% endif %}" onclick="window.location='{% url "manage-dashboard" %}';">
+    <div class="half left {% if "manage" in request.path %} toggled {% endif %}" onclick="window.location='{% url "manage:manage-dashboard" %}';">
         <div class="header3">Manage</div>
     </div>
-    <div class="half right {% if "member" in request.path %} toggled {% endif %}" onclick="window.location='{% url "member-dashboard" %}';">
+    <div class="half right {% if "member" in request.path %} toggled {% endif %}" onclick="window.location='{% url "member:member-dashboard" %}';">
         <div class="header3">Book</div>
     </div>
 </div>

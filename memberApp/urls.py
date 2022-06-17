@@ -27,7 +27,7 @@ urlpatterns = [
     path('community', views.community_view, name="member-community"),
     # path('amenity', views.amenity_view, name="member-amenity"),
     path('amenity/<str:pk>', views.amenity_view, name="member-amenity"),
-    path('profile', siteApp.views.landingpage_view, name="member-profilepage"),
+    # path('profile', siteApp.views.landingpage_view, name="member-profilepage"),
 
     # ENDPOINT VIEWS
     path('joinrequest-send/<int:place_pk>',  siteApp.views.sendjoin_request , name="send-join-request"),

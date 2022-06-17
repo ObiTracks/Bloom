@@ -28,7 +28,7 @@ from django.core.paginator import Paginator
 
 from .forms import *
 from siteApp.models import *
-from siteApp.querytools import getUsersPlacesAndAmenities, getUsersPlacesAndJoinRequest
+from siteApp.querytools import *
 from mgmtApp.crud_views import new_place
 # Create your views here.
 

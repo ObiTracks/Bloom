@@ -16,7 +16,7 @@ from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
 
 # Imports for django models
-from django.db.models import Count
+from django.db.models import Count, Q
 
 # Django authentication and messaging features
 from django.contrib.auth import authenticate, login, logout
@@ -52,8 +52,10 @@ def community_view(request):
     page_title = "Browse the Community"
     page_subtitle = "Join a Community"
 
-    places = Place.objects.all()
-
+    # places = Place.objects.all()
+    places = Place.objects.filter(~Q(place_of__profile=request.user.profile))
+    
+    
     context = {
         'page_title': page_title,
         'page_subtitle': page_subtitle,

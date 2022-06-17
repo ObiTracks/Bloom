@@ -13,8 +13,54 @@
 {% if joinrequest_groupings %}
     {{joinrequest_groupings}}
     {% for place, joinrequests in joinrequest_groupings.items %}
-        {% include 'components/card.html' with name="container-card style1-2" verified="verified" place=place joinrequests=joinrequests%}
+        {% comment %} {% include 'components/card.html' with name="container-card style1-2" verified="verified" place=place joinrequests=joinrequests%} {% endcomment %}
+        <div class="container-card style1" id="place-{{place.id}}">
+            <div class="header">
+                 <div class="header2 color-dark">{{place.name}}</div>   
+             </div>
+             <div class="rectangle">
+                 <div>
+                     {% include 'components/card.html' with name="place-card" place=place %}
+                 </div>
+                 
+                 <div>
+         
+         
+                 <div class="header2">Join Requests</div>
+                 {% for request in joinrequests %}
+                     {% include 'components/card.html' with name="info-card style2" request=request%}
+                     <!-- <div class="info-card style2">
+                        <div class="info">
+                            <div class="header3">{{request.profile}}</div>
+                            <div class="header3 color-shade-grey">{{request.date_created}}</div>
+                        </div>
+                        <div class="buttons">
+                            {% url 'approve-join-request' request.id as accept_url %}
+                            {% url 'reject-join-request' request.id as reject_url %}
+                            {% comment %} {% include 'components/button.html' with name="button style2" text="Approve" onclick="window.location='{{accept_url}}';" %}
+                            {% include 'components/button.html' with name="button style3" text="Reject" onclick="window.location='{{reject_url}}';" %} {% endcomment %}
+                            <div class="button style2" onclick="window.location='{% url 'approve-join-request' request.id  %}';" >
+                                <div class="button_text">Approve</div>
+                            </div>
+                            
+                            <div class="button style3" onclick="window.location='{% url 'reject-join-request' request.id %}';" >
+                                <div class="button_text">Reject</div>
+                            </div>
+                            {% comment %} {% include 'components/button.html' with name="button style2" text="Approve" 
+                                url={% url 'approve-join-request' request.id %} %}
+                            {% include 'components/button.html' with name="button style2" text="Reject" 
+                                url={% url 'reject-join-request' request.id %} %} {% endcomment %}
+                        </div>
+                    </div> -->
+                 {% endfor %}
+         
+                 </div>
+         
+             </div>
+         </div>
     {% endfor %}
+
+    
 {% else %}
     <div class="header2">Nothing Yet!</div>
 

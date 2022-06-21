@@ -7,31 +7,27 @@ from siteApp.middleware import RequestMiddleware
 from accountsApp.models import CustomUser
 from accountsApp.models import Profile
 from siteApp.models import *
-
+import time
 
 @receiver(post_save, sender=CustomUser)
 def create_profile(sender, instance, created, **kwargs):
     if created:
         profile = Profile.objects.create(user=instance)
-        name = profile.first_name if profile.first_name != None else instance.email
-        # place = Place.objects.get_or_create (
-        #     name="{}'s Place".format(name),
-        #     email=instance.email
-        #     )
-        # amenity = Amenity.objects.create(
-        #      name="{}'s Den".format(name),
-        #      place=place
-        # )
-        # PlaceProfileRelationship.objects.create(
-        #     place=place,
-        #     profile=profile,
-        #     profile_type='0'
-        # )
-        # AmenityProfileRelationship.objects.create(
-        #     amenity=amenity,
-        #     profile=profile,
-        #     profile_type='0'
-        # )
-
+        place = Place.objects.create(
+            owner=profile,
+            name="{}'s Place".format(profile.user.first_name),
+            email=instance.email
+            )
         
+        PlaceProfileRelationship.objects.create(
+                place=place, profile=profile, profile_type='0')
+
+        amenity = Amenity.objects.create(name="Home Amenity", place=place)
+        AmenityProfileRelationship.objects.create(
+            amenity=amenity,
+            profile=profile,
+            profile_type='0'
+        )
+        print("New user created ")
+        print("Place added to their account ", place)
 

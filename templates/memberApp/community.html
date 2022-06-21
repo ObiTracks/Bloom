@@ -23,7 +23,7 @@
                 background-position: center center;" 
             
             {% endif %}
-            onclick="window.location='{% url "send-join-request" place.id%}';"
+            onclick="window.location='{% url "siteApp:send-join-request" place.id%}';"
             >
             <div class="info">
                 <div class="header2 color-shade-white">{{place.name}}</div>

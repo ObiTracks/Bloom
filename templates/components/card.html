@@ -115,11 +115,11 @@
         <div class="header3 color-shade-grey">{{request.date_created}}</div>
     </div>
     <div class="buttons">
-        <button class="button style2" onclick="window.location='{% url 'approve-join-request' request.id  %}';" >
+        <button class="button style2" onclick="window.location='{% url 'siteApp:approve-join-request' request.id  %}';" >
             <div class="button_text">Approve</div>
         </button>
         
-        <button class="button style3" onclick="window.location='{% url 'reject-join-request' request.id %}';" >
+        <button class="button style3" onclick="window.location='{% url 'siteApp:reject-join-request' request.id %}';" >
             <div class="button_text">Reject</div>
         </button>
         

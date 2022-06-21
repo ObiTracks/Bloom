@@ -44,10 +44,13 @@ def sendjoin_request(request, place_pk=None):
     profile = request.user.profile
     place = Place.objects.get(pk=place_pk)
 
+    #Check if the user has access already - ie existing join request exists
+    request_exists = JoinRequest.objects.filter(place=place, profile=profile).exists()
     #Check if the user has access already - ie existing place profile relationship
-    exists = JoinRequest.objects.filter(place=place, profile=profile).exists()
+    relationship_exists = PlaceProfileRelationship.objects.filter(place=place, profile=profile).exists()
 
-    if exists:
+
+    if request_exists or relationship_exists:
         print("Join Request Cancelling Operation\n")
         messages.error(request, 'Join Reqest already exists')
         return redirect(request.META['HTTP_REFERER'])

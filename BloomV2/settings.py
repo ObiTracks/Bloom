@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
-import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -52,6 +51,7 @@ INSTALLED_APPS = [
     'memberApp',
     'phonenumber_field',
     'debug_toolbar',
+    'factory'
 
 ]
 
@@ -170,10 +170,10 @@ AUTH_USER_MODEL = 'accountsApp.CustomUser'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.RemoteUserBackend',
-    'django.contrib.auth.backends.ModelBackend',
+    # 'django.contrib.auth.backends.ModelBackend',
+    'accountsApp.backends.EmailBackend'
 )
 
 # Changing the default user login behaviour and specifying a project level
 # templates folder
 LOGIN_REDIRECT_URL = 'dashboard'
-django_heroku.settings(locals())

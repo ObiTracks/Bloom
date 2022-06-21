@@ -27,7 +27,7 @@ from django.core.paginator import Paginator
 
 from .forms import *
 from siteApp.models import *
-from siteApp.querytools import getUsersPlacesAndAmenities
+from siteApp.querytools import getUsersPlacesAndAmenities_member 
 # Create your views here.
 
 
@@ -35,13 +35,13 @@ def dashboard_view(request):
     # Object data
     page_title = "Dashboard"
     page_subtitle = "Book"
-    places, amenity_groupings = getUsersPlacesAndAmenities(request)
+    groups = getUsersPlacesAndAmenities_member(request)
 
 
     context = {
         'page_title': page_title,
         'page_subtitle':page_subtitle,
-        'amenity_groupings': amenity_groupings,
+        'amenity_groupings': groups,
     }
 
     template_name = 'memberApp/dashboard.html'

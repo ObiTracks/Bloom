@@ -30,7 +30,5 @@ urlpatterns = [
     # path('profile', siteApp.views.landingpage_view, name="member-profilepage"),
 
     # ENDPOINT VIEWS
-    path('joinrequest-send/<int:place_pk>',  siteApp.views.sendjoin_request , name="send-join-request"),
-
     
 ]

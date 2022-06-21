@@ -1,10 +1,10 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
-from siteApp.models import Profile
+from siteApp.models import Profile, Place
 
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email, password):
+    def create_user(self, email, username, first_name, last_name, password):
         """
         Creates and saves a User with the given email and password.
         Additionally creates a profile for them and associates them together.
@@ -16,19 +16,26 @@ class CustomUserManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
             password=password
         )
         user.set_password(password)
         user.save()
 
+
         return user
 
-    def create_superuser(self, email, password):
+    def create_superuser(self, email, username, first_name, last_name,password):
         """
         Creates and saves a superuser with the given, email and password.
         """
         user = self.create_user(
             email=email,
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
             password=password
         )
         user.is_staff = True

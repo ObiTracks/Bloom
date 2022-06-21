@@ -1,16 +1,19 @@
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from .models import CustomUser
 
-# class CustomUserBackend(ModelBackend):
+class EmailBackend(ModelBackend):
+    def authenticate(self, request, username=None, password=None, **kwargs):
+        UserModel = get_user_model()
+        try:
+            user = UserModel.objects.get(email=username)
+        except CustomUser.DoesNotExist:
+            return None
+        else:
+            if user.check_password(password):
+                return user
+        return None
 
-#     def authenticate(self, request, **kwargs):
-#         customer_id = kwargs['username']
-#         password = kwargs['password']
-#         try:
-#             user = CustomUser.objects.get(customer_id=customer_id)
-#             if user.user. user.check_password(password) is True:
-#                 return user.user
-#         except CustomUser.DoesNotExist:
-#             pass
+        

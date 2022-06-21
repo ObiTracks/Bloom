@@ -4,18 +4,20 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-psycopg2 = "==2.9.3"
-django-phonenumber-field = "==6.0.0"
-phonenumbers = "==8.12.40"
-django-debug-toolbar = "==3.2.4"
-asgiref = "==3.4.1"
-sqlparse = "==0.4.2"
-Django = "==4.0"
-Pillow = "==9.0.0"
-whitenoise = "*"
+asgiref = "*"
+certifi = "*"
+django = "==4.0"
+django-debug-toolbar = "*"
+django-phonenumber-field = "*"
 gunicorn = "*"
+idna = "*"
+phonenumbers = "*"
+pillow = "*"
 requests = "*"
-django-heroku = "*"
+sqlparse = "*"
+urllib3 = "*"
+whitenoise = "*"
+factory-boy = "*"
 
 [dev-packages]
 

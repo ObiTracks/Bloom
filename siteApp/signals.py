@@ -1,4 +1,5 @@
 # code
+from time import sleep
 from django.db.models.signals import post_save
 # from django.contrib.auth.models import User
 from django.dispatch import receiver
@@ -18,9 +19,24 @@ def create_place(sender, instance, created, **kwargs):
     user = request.user
     if user:
         if created:
+            # Getting the objects
+            profile = user.profile
+            place = instance
+            # Setting the owner
+            place.owner = profile
+            place.save()
+            # Creating the relationshi
             PlaceProfileRelationship.objects.create(
-                place=instance, profile=user.profile, profile_type='0')
-            Amenity.objects.create(name="Home Amenity", place=instance)
+                place=place, profile=profile, profile_type='0')
+            print("Sleeping")
+            sleep(3)
+            print("Done waiting")
+            amenity = Amenity.objects.create(name="Home Amenity", place=place)
+            AmenityProfileRelationship.objects.create(
+                amenity=amenity,
+                profile=profile,
+                profile_type='0'
+            )
 
             print("\nSignal: Place Relationship created\n")
         

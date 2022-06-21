@@ -19,9 +19,11 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 
+
 urlpatterns = [
 
     # CRUD views
+    path('joinrequest-send/<int:place_pk>',  views.sendjoin_request , name="send-join-request"),
     path('joinrequest-approve/<str:joinrequest_pk>',  views.approvejoin_request , name="approve-join-request"),
     path('joinrequest-reject/<str:joinrequest_pk>',  views.rejectjoin_request, name="reject-join-request"),
 

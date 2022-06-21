@@ -126,17 +126,16 @@ def place_view(request, pk):
 
 def amenity_view(request, pk):
     # Object data
-    amenity = Amenity.objects.get(id=pk)
+    amenity = Amenity.objects.filter(id=pk).first()
     page_title = amenity.name
     page_subtitle = amenity.place.name
 
-    amenity_form = AmenityForm(request.user, instance=amenity)
+    form = AmenityForm(request.user, instance=amenity)
     if request.method == 'POST':
-        amenity_form = AmenityForm(
-            request.user, request.POST, request.FILES, instance=amenity)
+        form = AmenityForm(request.user, request.POST, instance=amenity)
 
-        if amenity_form.is_valid():
-            amenity = amenity_form.save()
+        if form.is_valid():
+            amenity = form.save()
             return redirect(request.META['HTTP_REFERER'])
         else:
             messages.error(request, "Amenity Form is invalid")
@@ -144,7 +143,7 @@ def amenity_view(request, pk):
     context = {
         'page_title': page_title,
         'page_subtitle': page_subtitle,
-        'amenity_form': amenity_form,
+        'amenity_form': form,
         'amenity':amenity,
         'jsonTimeslots':amenity.timeslots
     }

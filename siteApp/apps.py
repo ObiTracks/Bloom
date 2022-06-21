@@ -7,3 +7,4 @@ class siteAppConfig(AppConfig):
 
     def ready(self):
         import siteApp.signals
+        import accountsApp.signals

@@ -18,6 +18,7 @@ from django.forms.models import model_to_dict
 import inspect
 import os
 from django.db.models.signals import post_save
+from django.db import connections, transaction, IntegrityError
 from django.dispatch import receiver
 
 from .utilities import user_upload_directory_path
@@ -28,9 +29,6 @@ from .utilities import user_upload_directory_path
 class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, null=False, on_delete=models.CASCADE, related_name="profile")
-    
-    first_name = models.CharField(max_length=200, blank=False, default="John")
-    last_name = models.CharField(max_length=200, blank=False, default="Doe")
     phone_number = PhoneNumberField(null=True, blank=True, unique=True)
     bio = models.TextField(max_length=200, blank=True)
     backup_image_url = models.URLField(max_length=1000, blank=True)
@@ -56,11 +54,11 @@ class Profile(models.Model):
         ordering = ('date_created',)
 
     def __str__(self):
-        return "{} {}".format(self.first_name, self.last_name)
+        return "{}".format(self.user.email)
 
 
 class Amenity(models.Model):
-    name = models.CharField(max_length=200, blank=False, null=False)
+    name = models.CharField(max_length=200, blank=False, null=False, unique=False)
     place = models.ForeignKey(
         "siteApp.Place", blank=False, on_delete=models.CASCADE)
     subtitle = models.CharField(max_length=200, blank=True)
@@ -107,6 +105,7 @@ class Amenity(models.Model):
 
 
 class Place(models.Model):
+    owner = models.ForeignKey("siteApp.Profile", verbose_name=("Owner"), on_delete=models.CASCADE)
     name = models.CharField(max_length=200, blank=False, unique=False)
     email = models.CharField(max_length=200, blank=True, null=True)
     phone_number = PhoneNumberField(null=True, blank=True, unique=False)
@@ -157,7 +156,7 @@ class Place(models.Model):
         ordering = ('date_created',)
 
     def __str__(self):
-        return "{}".format(self.name)
+        return "{} | {}".format(self.name, self.owner)
 
 
 class Address(models.Model):
@@ -196,6 +195,7 @@ class Reservation(models.Model):
 
 # RELATIONAL MODELS
 class AmenityProfileRelationship(models.Model):
+
     amenity = models.ForeignKey("siteApp.Amenity", verbose_name=(
         "Amenity in the relationship"), on_delete=models.CASCADE, related_name="amenity_of")
     profile = models.ForeignKey("siteApp.Profile", verbose_name=(
@@ -217,15 +217,16 @@ class AmenityProfileRelationship(models.Model):
 
 
 class PlaceProfileRelationship(models.Model):
+    PROFILE_TYPES = (('0', 'Owner'), ('1', 'Manager'), ('2', 'Supervisor'),
+                     ('3', 'Staff'), ('4', 'Authorized User'), ('5', 'Member'))
+    profile_type = models.CharField(
+        max_length=100, choices=PROFILE_TYPES, default='Member')
     place = models.ForeignKey("siteApp.Place", verbose_name=(
         "Place in the relationship"), on_delete=models.CASCADE, related_name="place_of")
     profile = models.ForeignKey("siteApp.Profile", verbose_name=(
         "Profile in the relationship"), on_delete=models.CASCADE, related_name="place_profile_of")
 
-    PROFILE_TYPES = (('0', 'Owner'), ('1', 'Manager'), ('2', 'Supervisor'),
-                     ('3', 'Staff'), ('4', 'Authorized User'), ('5', 'Member'))
-    profile_type = models.CharField(
-        max_length=100, choices=PROFILE_TYPES, default='Member')
+    
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:

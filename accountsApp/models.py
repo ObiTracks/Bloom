@@ -20,7 +20,6 @@ class CustomUser(AbstractUser):
     # https://learndjango.com/tutorials/django-custom-user-model
     # email = models.EmailField(verbose_name='Email', unique=True, null=False, blank=False)
     # date_created = models.DateTimeField(auto_now_add=True)
-    
     email = models.EmailField(_("email address"), blank=False, unique=True)
     username = models.CharField(
         _("username"),

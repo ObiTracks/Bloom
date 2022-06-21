@@ -24,6 +24,7 @@ from django.core.paginator import Paginator
 
 from .forms import *
 from .models import *
+import siteApp
 # Create your views here.
 # Create your views here.
 # LOGIN LOGOUT AND SIGNUP VIEWS
@@ -81,25 +82,41 @@ def login_request(request):
 def signup_request(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
+        print("Form filled")
         if form.is_valid():
-            form.save()
+            print("Form is valid")
+            user = form.save()
+            profile = Profile.objects.create(user=user)
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password1')
-            user = authenticate(
-                request, 
-                email=email, 
-                password=password,
-            )            
-            login(request, user)
+            print("Authenitcating user...")
+            # user = authenticate(
+            #     request, 
+            #     email=email, 
+            #     password=password,
+            # )
+
+            login(request, user, backend='accountsApp.backends.EmailBackend')
+            print("Authenitated")
+            print("Logged in.")
+
+            place = siteApp.models.Place.objects.create(
+                owner=profile,
+                name="{}'s Place".format(user.first_name),
+                email=email
+                )
+            amenity = siteApp.models.Amenity.objects.create(name="Home", place=place)
 
             first_name = form.cleaned_data.get('first_name')
-            messages.success(request, f'Welcome to Bloom {first_name}')
+            messages.success(request, f'Welcome to Bloom {first_name}!')
             # print("New user {} created".format(user))
 
+            print("Redirecting to dashboard.")
             return redirect('manage:manage-dashboard')
+        else:
+            messages.error(request, f'Signup failed')
 
-    return
-
+    return redirect(request.META['HTTP_REFERER'])
 
 def logout_request(request):
     logout(request)

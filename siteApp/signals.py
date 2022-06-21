@@ -17,7 +17,9 @@ def create_place(sender, instance, created, **kwargs):
         return
 
     user = request.user
-    if user:
+    
+    if user.is_anonymous == False:
+        # request.session.get('first_login') == False
         if created:
             # Getting the objects
             profile = user.profile
@@ -28,9 +30,6 @@ def create_place(sender, instance, created, **kwargs):
             # Creating the relationshi
             PlaceProfileRelationship.objects.create(
                 place=place, profile=profile, profile_type='0')
-            print("Sleeping")
-            sleep(3)
-            print("Done waiting")
             amenity = Amenity.objects.create(name="Home Amenity", place=place)
             AmenityProfileRelationship.objects.create(
                 amenity=amenity,
@@ -50,7 +49,7 @@ def create_amenity(sender, instance, created, **kwargs):
         return
 
     user = request.user
-    if user:
+    if user.is_anonymous == False:
         if created:
             AmenityProfileRelationship.objects.create(
                 amenity=instance, profile=user.profile, profile_type='0')

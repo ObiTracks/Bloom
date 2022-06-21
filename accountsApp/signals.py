@@ -12,22 +12,7 @@ import time
 @receiver(post_save, sender=CustomUser)
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        profile = Profile.objects.create(user=instance)
-        place = Place.objects.create(
-            owner=profile,
-            name="{}'s Place".format(profile.user.first_name),
-            email=instance.email
-            )
-        
-        PlaceProfileRelationship.objects.create(
-                place=place, profile=profile, profile_type='0')
-
-        amenity = Amenity.objects.create(name="Home Amenity", place=place)
-        AmenityProfileRelationship.objects.create(
-            amenity=amenity,
-            profile=profile,
-            profile_type='0'
-        )
+        # profile = Profile.objects.get_or_create(user=instance)
         print("New user created ")
-        print("Place added to their account ", place)
+        # print("Place added to their account ", place)
 

@@ -16,7 +16,20 @@
         {% endif %}
     </form>
 
-    
+    <div class="header2">Signup</div>
+    <form method="POST" action="{% url 'auth:signup_request' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{register_form.as_p}}
+        <input type="hidden" name="form_type" value="club_event">
+        {% comment %} <input type="text" placeholder="placeholder" class="paragraph_font"> {% endcomment %}
+
+        <button class="">Sign Up</button>
+        {% if messages %}
+          {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        {% endif %}
+    </form>
     
 </div>
 

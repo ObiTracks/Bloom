@@ -20,7 +20,7 @@ class Command(BaseCommand):
         place = Place.objects.create(owner=profile, name="{}'s Place".format(profile))
         PlaceProfileRelationship.objects.create(
             place=place, profile=profile, profile_type='0')
-        amenity = Amenity,.objects.create(name="Home Amenity", place=place)
+        amenity = Amenity.objects.create(name="Home Amenity", place=place)
         AmenityProfileRelationship.objects.create(
             amenity=amenity,
             profile=profile,

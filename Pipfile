@@ -18,6 +18,7 @@ sqlparse = "*"
 urllib3 = "*"
 whitenoise = "*"
 factory-boy = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 

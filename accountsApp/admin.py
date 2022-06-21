@@ -7,7 +7,7 @@ class CustomUserAdmin(UserAdmin):
     # Tutorial that helped build and set this up
     # https://testdriven.io/blog/django-custom-user-model/
     add_form = CustomUserCreationForm
-    form = CustomUserChangeForm
+    form = CustomUserCreationForm
     model = CustomUser
     list_display = ('email', 'is_staff', 'is_active',)
     list_filter = ('email', 'is_staff', 'is_active',)

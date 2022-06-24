@@ -17,7 +17,6 @@ Including another URLconf
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from . import views
-from accountsApp.views import auth_view
 
 urlpatterns = [
     path('', views.landing, name="landing"),

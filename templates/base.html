@@ -66,7 +66,7 @@
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous">
     </script>
-    <script>
+    {% comment %} <script>
         function openTab(e, tabName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
@@ -81,7 +81,9 @@
             document.getElementById(tabName).style.display = "block";
             
           }
-    </script>
+    </script> {% endcomment %}
+    
+    <script src="{% static 'js/tabModal.js' %}"></script>
     <script src="{% static 'js/formModal.js' %}"></script>
     {% block scripts %}{% endblock scripts %}
 </body>

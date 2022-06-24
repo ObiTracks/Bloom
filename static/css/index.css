@@ -31,7 +31,8 @@ h1 {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 700;
-  font-size: 600%;
+  font-size: 90px;
+  line-height: 70px;
   text-align: center;
   letter-spacing: -5px;
   margin: 1rem 1rem;
@@ -63,7 +64,7 @@ p {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 300;
-  font-size: 150%;
+  font-size: 20px;
   line-height: 40px;
   letter-spacing: -1px;
 }
@@ -71,26 +72,154 @@ p {
 button {
   outline: none;
   border: none;
+  font-family: 'Montserrat';
+  -webkit-transition: -webkit-transform ease 0.1s;
+  transition: -webkit-transform ease 0.1s;
+  transition: transform ease 0.1s;
+  transition: transform ease 0.1s, -webkit-transform ease 0.1s;
+  margin: 8px 0;
+  z-index: -1;
+}
+
+button:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+}
+
+button.style1 {
   border-radius: 12px;
-  padding: 1.6rem 2.5rem;
-  margin: 2rem;
+  padding: 1.3rem 2rem;
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 700;
   font-size: 100%;
   line-height: 18px;
-  -webkit-transition: -webkit-transform ease 0.1s;
-  transition: -webkit-transform ease 0.1s;
-  transition: transform ease 0.1s;
-  transition: transform ease 0.1s, -webkit-transform ease 0.1s;
+  color: white;
   background: -webkit-gradient(linear, left top, right top, from(#7AB7F0), to(#0085FF));
   background: linear-gradient(90deg, #7AB7F0 0%, #0085FF 100%);
 }
 
-button:hover {
+button.style2, button.style3 {
+  width: 100%;
+  border-radius: 12px;
+  padding: 12px;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 13px;
+  border: solid #555555 1px;
+  color: black;
+  background: white;
+}
+
+button.blue-gradient {
+  border-color: transparent;
+  color: white;
+  background: -webkit-gradient(linear, left top, right top, from(#7AB7F0), to(#0085FF));
+  background: linear-gradient(90deg, #7AB7F0 0%, #0085FF 100%);
+}
+
+button.pink-gradient {
+  border-color: transparent;
+  color: white;
+  background: -webkit-gradient(linear, left top, right top, from(#E35973), to(#FFA8B8));
+  background: linear-gradient(90deg, #E35973 0%, #FFA8B8 100%);
+}
+
+button.tablink {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  border-radius: 0;
+  padding: 8px 16px;
+  /*   transition: 0.3s; */
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+  color: #868686;
+}
+
+button.tablink:hover {
   cursor: pointer;
-  -webkit-transform: scale(1.05);
-          transform: scale(1.05);
+  -webkit-transform: none;
+          transform: none;
+}
+
+button.tablink.active {
+  color: black;
+  border-bottom: solid #008cff 2px;
+  -webkit-transform: scale(1.01);
+          transform: scale(1.01);
+}
+
+form {
+  position: relative;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.511);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  border-radius: 21px;
+}
+
+form hr {
+  border-style: solid #313131 3px;
+}
+
+label {
+  width: 100%;
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.2px;
+  text-align: left;
+  padding: 5px 10px;
+}
+
+input {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  padding: 10px 16px;
+  outline: none;
+  border: solid transparent 2px;
+  border-radius: 13px;
+  margin-bottom: 5px;
+  background: white;
+}
+
+input::-webkit-input-placeholder {
+  color: grey;
+}
+
+input:-ms-input-placeholder {
+  color: grey;
+}
+
+input::-ms-input-placeholder {
+  color: grey;
+}
+
+input::placeholder {
+  color: grey;
+}
+
+input:focus {
+  border: solid 2px #008CFF;
 }
 
 .navbar {
@@ -110,8 +239,26 @@ button:hover {
           align-items: center;
 }
 
+.navbar ul {
+  list-style-type: none;
+}
+
+.navbar li a {
+  color: black;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
 .navbar img {
-  height: 40px;
+  height: 30px;
+}
+
+.navbar img:hover {
+  cursor: pointer;
 }
 
 .navbar ul {
@@ -182,8 +329,10 @@ button:hover {
 }
 
 .section#hero-section p {
-  line-height: 150%;
-  width: 50%;
+  padding: 40px 20px;
+  line-height: 160%;
+  width: 100%;
+  max-width: 600px;
 }
 
 .section .vessel {
@@ -273,5 +422,35 @@ button:hover {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+}
+
+.tabs {
+  position: relative;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden;
+  margin-bottom: 13px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.tabs .tablinks {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+.tabs .tabcontent {
+  position: relative;
+  display: none;
+  padding-top: 20px;
+}
+
+.tabs .tabcontent.active {
+  display: block;
 }
 /*# sourceMappingURL=index.css.map */

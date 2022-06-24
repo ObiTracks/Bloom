@@ -11,17 +11,16 @@
     {% block headers %} {% endblock headers %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&family=Outfit&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&family=Outfit&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,800&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="navbar">
-        <img src="{% static 'images/logos/BloomFullLogo.svg'%}" alt="">
+        <img src="{% static 'images/logos/BloomFullLogo.svg'%}" onclick="location.href='{% url 'external:landing' %}'" alt="">
         <ul class="links">
-            <li><a href="">About</a></li>
-            <li><a href="">Features</a></li>
-            <li><a href="">Contact</a></li>
-            <li><a href="{% url "auth:auth" %}#login">Login</a></li>
+            <li><a href="{% url "external:landing" %}#features">Features</a></li>
+            <li><a href="{% url "auth:auth" %}">Contact</a></li>
+            <li><a href="{% url "auth:auth" %}">Login</a></li>
         </ul>
     </div>
     
@@ -29,6 +28,8 @@
         {% block content %}
         {% endblock content %}
     </div>
+
+    <script src="{% static 'js/tabModal.js' %}"></script>
 </body>
 
 </html>

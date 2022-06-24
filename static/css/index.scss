@@ -13,6 +13,7 @@ body{
     align-items: flex-start;
     justify-content: center;
 }
+
 h1, h2, h3, p {
     margin: 0;
 }
@@ -21,8 +22,8 @@ h1 {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
-    font-size: 600%;
-    // line-height: 76px;
+    font-size: 90px;
+    line-height: 70px;
     text-align: center;
     letter-spacing: -5px;
 
@@ -59,7 +60,7 @@ p {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 300;
-    font-size: 150%;
+    font-size: 20px;
     line-height: 40px;
     letter-spacing: -1px;
 }
@@ -67,21 +68,123 @@ p {
 button{
     outline: none;
     border: none;
-    border-radius: 12px;
-    padding: 1.6rem 2.5rem;
-    margin: 2rem;
-
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 100%;
-    line-height: 18px;
+    font-family: 'Montserrat';
     transition: transform ease 0.1s;
-    background: linear-gradient(90deg, #7AB7F0 0%, #0085FF 100%);
-
+    margin: 8px 0;
+    z-index: -1;
     &:hover{
         cursor: pointer;
-        transform: scale(1.05);
+        transform: scale(1.02);
+    }
+
+    &.style1{
+        border-radius: 12px;
+        padding: 1.3rem 2rem;
+        // margin: 2rem;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 100%;
+        line-height: 18px;
+        color: white;
+        background: linear-gradient(90deg, #7AB7F0 0%, #0085FF 100%);
+    }
+
+    &.style2, &.style3{
+        width: 100%;
+        border-radius: 12px;
+        padding: 12px;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 13px;
+        border: solid rgb(85, 85, 85) 1px;
+        color: black;
+        background: white;
+        
+    }
+    &.blue-gradient{
+        border-color: transparent;
+        color: white;
+        background: linear-gradient(90deg, #7AB7F0 0%, #0085FF 100%);}
+    &.pink-gradient{
+        border-color: transparent;
+        color: white;
+        background: linear-gradient(90deg, #E35973 0%, #FFA8B8 100%);
+    }
+    
+    &.tablink{
+        box-sizing: content-box;
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        border-radius: 0;
+        padding: 8px 16px;
+        /*   transition: 0.3s; */
+        font-size: 12px;
+        font-family: "Montserrat", sans-serif;
+        letter-spacing: 0.2px;
+        text-transform: uppercase;
+        color: rgb(134, 134, 134);
+
+        &:hover {
+            cursor: pointer;
+            transform: none;
+        }
+        &.active {
+            color: black;
+            border-bottom: solid #008cff 2px;
+            transform: scale(1.01);
+        }
+    }
+
+    
+}
+
+form{
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.511);
+    backdrop-filter: blur(4px);
+    border-radius: 21px;
+    hr{
+        border-style: solid rgb(49, 49, 49) 3px;
+    }
+}
+label{
+    width: 100%;
+    font-size: 12px;
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 0.2px;
+    text-align: left;
+    padding: 5px 10px;
+}
+input{
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 12px;
+    font-family: "Montserrat", sans-serif;
+    padding: 10px 16px;
+    outline: none;
+    border: solid transparent 2px;
+    border-radius: 13px;
+    margin-bottom: 5px;
+
+    background: white;
+
+    // &:-internal-autofill-selected {
+    //     background-color: rgb(65, 201, 255);
+    // }
+    &::placeholder {
+        color: grey;
+      }
+      
+    &:focus {
+        border: solid 2px #008CFF;
     }
 }
 
@@ -92,8 +195,23 @@ button{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    ul{
+        list-style-type: none;
+    }
+   li a{
+       color: black;
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        text-decoration: none;
+        margin-right: 20px;
+    }
     img{
-        height: 40px;
+        height: 30px;
+        &:hover{
+            cursor: pointer;
+        }
     }
     ul{
         display: flex;
@@ -136,8 +254,10 @@ button{
             text-fill-color: transparent;
         }
         p{
-            line-height: 150%;
-            width: 50%;
+            padding: 40px 20px;
+            line-height: 160%;
+            width: 100%;
+            max-width: 600px;
         }
     }
     .vessel {
@@ -216,4 +336,35 @@ button{
         }
 
     }
+}
+
+
+.tabs {
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin-bottom: 13px;
+    // width: 30%;
+    width: 100%;
+    max-width: 400px;
+    // border-bottom: solid rgb(0, 0, 0);
+
+    .tablinks{
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .tabcontent {
+        position: relative;
+        display: none;
+        padding-top: 20px;
+
+        &.active{
+            display: block;
+        }
+    }
+
+
 }

@@ -86,7 +86,7 @@ def signup_request(request):
         if form.is_valid():
             print("Form is valid")
             user = form.save()
-            profile = Profile.objects.create(user=user)
+            profile = Profile.objects.get(user=user)
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password1')
             print("Authenitcating user...")
@@ -105,7 +105,6 @@ def signup_request(request):
                 name="{}'s Place".format(user.first_name),
                 email=email
                 )
-            amenity = siteApp.models.Amenity.objects.create(name="Home", place=place)
 
             first_name = form.cleaned_data.get('first_name')
             messages.success(request, f'Welcome to Bloom {first_name}!')

@@ -12,7 +12,12 @@ import time
 @receiver(post_save, sender=CustomUser)
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        # profile = Profile.objects.get_or_create(user=instance)
+        user = instance
+        profile = Profile.objects.create(user=user)
+        time.sleep(0.1)
+        # place = Place.objects.create(owner=profile, name=f"{user.first_name}'s Place")
+        # post_save.send(Place, instance=place, created=True)
+        print("\n\nPlace Created")
         print("New user created ")
         # print("Place added to their account ", place)
 

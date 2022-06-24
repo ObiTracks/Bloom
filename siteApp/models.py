@@ -41,7 +41,7 @@ class Profile(models.Model):
         if not self.backup_image_url:
             response = requests.get(random_img_url)
             response_url = response.url
-            print(response_url)
+            # print(response_url)
 
             self.backup_image_url = response_url
             self.save()
@@ -84,7 +84,7 @@ class Amenity(models.Model):
         if not self.backup_image_url:
             response = requests.get(random_img_url)
             response_url = response.url
-            print(response_url)
+            # print(response_url)
 
             self.backup_image_url = response_url
             self.save()
@@ -128,12 +128,12 @@ class Place(models.Model):
 
     
     def serialize_model_to_dict(self):
-        print(self)
+        # print(self)
         dict_obj = model_to_dict(self)
         data = json.dumps(str(dict_obj))
         # data = dict_obj
         
-        print(data)
+        # print(data)
         return data
     
     def set_random_backup_image_url(self):
@@ -142,7 +142,7 @@ class Place(models.Model):
         if not self.backup_image_url:
             response = requests.get(random_img_url)
             response_url = response.url
-            print(response_url)
+            # print(response_url)
 
             self.backup_image_url = response_url
             self.save()

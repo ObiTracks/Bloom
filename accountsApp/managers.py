@@ -23,6 +23,7 @@ class CustomUserManager(BaseUserManager):
         )
         user.set_password(password)
         user.save()
+        # Profile.objects.get_or_create(user=user)
 
 
         return user

@@ -31,11 +31,6 @@ def create_place(sender, instance, created, **kwargs):
             PlaceProfileRelationship.objects.create(
                 place=place, profile=profile, profile_type='0')
             amenity = Amenity.objects.create(name="Home Amenity", place=place)
-            AmenityProfileRelationship.objects.create(
-                amenity=amenity,
-                profile=profile,
-                profile_type='0'
-            )
 
             print("\nSignal: Place Relationship created\n")
         

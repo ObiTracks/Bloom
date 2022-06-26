@@ -195,7 +195,6 @@ class Reservation(models.Model):
 
 # RELATIONAL MODELS
 class AmenityProfileRelationship(models.Model):
-
     amenity = models.ForeignKey("siteApp.Amenity", verbose_name=(
         "Amenity in the relationship"), on_delete=models.CASCADE, related_name="amenity_of")
     profile = models.ForeignKey("siteApp.Profile", verbose_name=(

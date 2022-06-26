@@ -15,16 +15,24 @@ class ProfileForm(forms.ModelForm):
 
 
 class PlaceForm(forms.ModelForm):
+    # def __init__(self, user, *args, **kwargs):
+    #     # user = kwargs.pop('user', None)
+    #     super(PlaceForm, self).__init__(
+    #         *args, **kwargs)
+        # profile = user.profile
+        # self.fields['owner'].initial = profile
+
     class Meta:
         model = models.Place
         fields = "__all__"
+        exclude = ("owner",)
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': 'Give the place a name :)'}),
-            'email': forms.TextInput(attrs={'placeholder': 'Enter an email for members to reach you at'}),
-            'phone_number': forms.TextInput(attrs={'placeholder': '+(area code)XXXXXXXXXX - No spaces'}),
-            'address': forms.TextInput(attrs={'placeholder': 'Add an address'}),
+            'name': forms.TextInput(attrs={'placeholder': 'Name'}),
+            'email': forms.TextInput(attrs={'placeholder': 'Email for members to reach'}),
+            'phone_number': forms.TextInput(attrs={'placeholder': '+(X)XXXXXXXXXX'}),
+            'address': forms.TextInput(attrs={'placeholder': 'Address'}),
             'capacity': forms.NumberInput(attrs={'placeholder': 'Location capacity'}),
-            'description': forms.TextInput(attrs={'placeholder': 'Add a description to get members aquainted!'}),
+            'description': forms.Textarea(attrs={'placeholder': 'Get people acquainted with a description'}),
         }
 
 

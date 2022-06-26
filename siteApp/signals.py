@@ -17,6 +17,7 @@ def create_place(sender, instance, created, **kwargs):
         return
 
     user = request.user
+    print("\n\n\n Place created \n\n\n\n")
     
     if user.is_anonymous == False:
         # request.session.get('first_login') == False

@@ -16,8 +16,6 @@
             {% include 'components/card.html' with name="info-card" title="Phone Number" value=place.phone_number %}
             {% include 'components/card.html' with name="info-card" title="Address" value=place.address %}
             {% include 'components/card.html' with name="info-card" title="Description" value=place.description %}
-
-            {% include 'components/button.html' with name="button style1" text="+ Create an Amenity" onclick="showForm('amenityForm')" %}
         </div>
 
         <div class="header2">Quick Access</div>
@@ -69,7 +67,7 @@
         {% comment %} {% include 'components/button.html' with name="button style1" text="Manage Place" onclick="window.location='{% url 'manage-place' place.id %}';" %} {% endcomment %}
         {% if "manage" in request.path %}
             {% url 'manage:manage-place' place.id as place_url%}
-            <button class="button style3" onclick="window.location='{{place_url}}';">Manage Place</button>
+            <button class="button style1" onclick="window.location='{{place_url}}';">Manage Place</button>
         {% endif %}
     </div>
     <div class="rectangle body1">
@@ -116,7 +114,7 @@
     </div>
     <div class="buttons">
         <button class="button style2" onclick="window.location='{% url 'siteApp:approve-join-request' request.id  %}';" >
-            <div class="button_text">Approve</div>
+            <div class="button_text">Accept</div>
         </button>
         
         <button class="button style3" onclick="window.location='{% url 'siteApp:reject-join-request' request.id %}';" >
@@ -139,7 +137,7 @@
     {% endif %}
 
     {% if "manage" in request.path %} 
-    onclick="window.location='{% url "manage:manage-places"%}#place-{{place.id}}';"
+    onclick="window.location='{% url "manage:manage-place" place.id %}';"
     {% elif "member" in request.path %}
     onclick="window.location='{% url "member:member-dashboard"%}#place-{{place.id}}';"
     {% endif %}

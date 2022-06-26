@@ -23,12 +23,15 @@ body {
           justify-content: center;
 }
 
-h1, h2, h3, p {
+h1,
+h2,
+h3,
+p {
   margin: 0;
 }
 
 h1 {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
   font-size: 90px;
@@ -39,7 +42,7 @@ h1 {
 }
 
 h2 {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
   font-size: 500%;
@@ -48,7 +51,7 @@ h2 {
 }
 
 h3 {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
   font-size: 200%;
@@ -61,7 +64,7 @@ h3 {
 }
 
 p {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 300;
   font-size: 20px;
@@ -72,7 +75,7 @@ p {
 button {
   outline: none;
   border: none;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   -webkit-transition: -webkit-transform ease 0.1s;
   transition: -webkit-transform ease 0.1s;
   transition: transform ease 0.1s;
@@ -90,14 +93,14 @@ button:hover {
 button.style1 {
   border-radius: 12px;
   padding: 1.3rem 2rem;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
   font-size: 100%;
   line-height: 18px;
   color: white;
-  background: -webkit-gradient(linear, left top, right top, from(#7AB7F0), to(#0085FF));
-  background: linear-gradient(90deg, #7AB7F0 0%, #0085FF 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#7ab7f0), to(#0085ff));
+  background: linear-gradient(90deg, #7ab7f0 0%, #0085ff 100%);
 }
 
 button.style2, button.style3 {
@@ -115,15 +118,15 @@ button.style2, button.style3 {
 button.blue-gradient {
   border-color: transparent;
   color: white;
-  background: -webkit-gradient(linear, left top, right top, from(#7AB7F0), to(#0085FF));
-  background: linear-gradient(90deg, #7AB7F0 0%, #0085FF 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#7ab7f0), to(#0085ff));
+  background: linear-gradient(90deg, #7ab7f0 0%, #0085ff 100%);
 }
 
 button.pink-gradient {
   border-color: transparent;
   color: white;
-  background: -webkit-gradient(linear, left top, right top, from(#E35973), to(#FFA8B8));
-  background: linear-gradient(90deg, #E35973 0%, #FFA8B8 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#e35973), to(#ffa8b8));
+  background: linear-gradient(90deg, #e35973 0%, #ffa8b8 100%);
 }
 
 button.tablink {
@@ -179,7 +182,7 @@ form hr {
   border-style: solid #313131 3px;
 }
 
-label {
+form label {
   width: 100%;
   font-size: 12px;
   font-family: "Montserrat", sans-serif;
@@ -188,7 +191,7 @@ label {
   padding: 5px 10px;
 }
 
-input {
+form input {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
@@ -202,24 +205,24 @@ input {
   background: white;
 }
 
-input::-webkit-input-placeholder {
+form input::-webkit-input-placeholder {
   color: grey;
 }
 
-input:-ms-input-placeholder {
+form input:-ms-input-placeholder {
   color: grey;
 }
 
-input::-ms-input-placeholder {
+form input::-ms-input-placeholder {
   color: grey;
 }
 
-input::placeholder {
+form input::placeholder {
   color: grey;
 }
 
-input:focus {
-  border: solid 2px #008CFF;
+form input:focus {
+  border: solid 2px #008cff;
 }
 
 .navbar {
@@ -245,7 +248,7 @@ input:focus {
 
 .navbar li a {
   color: black;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
@@ -313,15 +316,18 @@ input:focus {
   padding: 0;
 }
 
-.section#hero-section h1, .section#hero-section h2, .section#hero-section h3, .section#hero-section p {
+.section#hero-section h1,
+.section#hero-section h2,
+.section#hero-section h3,
+.section#hero-section p {
   text-align: center;
 }
 
 .section#hero-section h3 {
   margin-top: 2%;
   margin-bottom: 0;
-  background: -webkit-gradient(linear, left top, right top, from(#7AB7F0), to(#0085FF));
-  background: linear-gradient(90deg, #7AB7F0 0%, #0085FF 100%);
+  background: -webkit-gradient(linear, left top, right top, from(#7ab7f0), to(#0085ff));
+  background: linear-gradient(90deg, #7ab7f0 0%, #0085ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

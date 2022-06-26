@@ -9,6 +9,6 @@ function openTab(e, tabName) {
         tablinks[i].classList.remove("active");
     }
     e.target.classList.add("active");
-    document.getElementById(tabName).style.display = "block";
+    document.getElementById(tabName).style.display = "flex";
     
     }

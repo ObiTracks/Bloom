@@ -6,26 +6,62 @@
 {% endblock pageheader %} 
 
 {% block tablinks %}
-<button class="button tablinks active" onclick="openTab(event, 'timeslots')">Timeslots</button>
-<button class="button tablinks" onclick="openTab(event, 'details')">Details</button>
-<button class="button tablinks" onclick="openTab(event, 'reservations')">Reservations</button>
-<button class="button tablinks" onclick="openTab(event, 'metrics')">Metrics</button>
+<button class="button tablink active" onclick="openTab(event, 'timeslots')">Timeslots</button>
+<button class="button tablink" onclick="openTab(event, 'details')">Details</button>
+<button class="button tablink" onclick="openTab(event, 'reservations')">Reservations</button>
+<button class="button tablink" onclick="openTab(event, 'metrics')">Metrics</button>
 {% endblock tablinks %}
 
 
 {% block content %}
-<span id="#results"></span>
 
 <div class="tabcontent active" id="timeslots">
+
+    <span id="#results"></span>
     <table class="table" id="table">
         <!-- table timeslots injected here -->
     </table>
 </div>
-<div class="tabcontent" id="details">
-    <h1>details</h1>
+<div class="tabcontent amenity-details" id="details">
+    <div class="details">
+        <img style="
+        background: url({% if amenity.image %} {{amenity.image.url}} {% else %} {{amenity.backup_image_url}} {% endif %});" alt="">
+        <div class="info">
+            {% include 'components/card.html' with name="info-card" title="Place" value=amenity.place %}
+            {% include 'components/card.html' with name="info-card" title="Description" value=amenity.description %}
+            {% include 'components/card.html' with name="info-card" title="Date Created" value=amenity.date_created %}
+        </div>
+    </div>
+
+    <div>
+        <form action="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{amenity_form}}
+            <hr>
+            <button class="style7 blue-gradient">Save Changes</button>
+        </form>
+    </div>
+    
 </div>
-<div class="tabcontent" id="reservations">
-    <h1>reservations</h1>
+<div class="tabcontent amenity-details" id="reservations">
+    {% for reservation in reservations %}
+    <div class="info-card style2">
+        <div class="info">
+            <div class="header3 ">{{reservation.profile.user}}</div>
+            <div class="header3 color-shade-grey">{{reservation.date_created}}</div>
+        </div>
+        <div class="buttons">
+            <button class="button style1" >
+                <div class="button_text">Change Access</div>
+            </button>
+            
+            <button class="button style3" >
+                <div class="button_text">Remove</div>
+            </button>
+            
+        </div>
+    </div>
+    {% endfor %}
 </div>
 <div class="tabcontent" id="metrics">
     <h1>metrics</h1>

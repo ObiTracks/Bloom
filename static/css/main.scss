@@ -27,6 +27,8 @@ body {
     background-position: center;
 }
 
+
+
 .platform-base {
     width: 100%;
     height: fit-content;
@@ -89,10 +91,11 @@ body {
 }
 .tabcontent {
     display: none;
+    flex-wrap: wrap;
     padding: 6px;
 
     &.active{
-        display: block;
+        display: flex;
     }
 }
 
@@ -386,3 +389,4 @@ body {
 
 .card__paragraph {
 }
+

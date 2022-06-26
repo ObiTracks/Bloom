@@ -5,30 +5,69 @@
 
 {% block pageheader %}
 <div class="header2 color-shade-grey">{{page_subtitle}}</div>
-<div class="header1">{{page_title}}</div>
+<div class="header1">{{place.name}}</div>
 {% endblock pageheader %}
 
 
 {% block tablinks %}
-<button class="button tablinks active" onclick="openTab(event, 'details')">Details</button>
-<button class="button tablinks" onclick="openTab(event, 'amenities')">Amenities</button>
-<button class="button tablinks" onclick="openTab(event, 'members')">Members</button>
-<button class="button tablinks" onclick="openTab(event, 'metrics')">Metrics</button>
+<button class="button tablink active" onclick="openTab(event, 'details')">Details</button>
+<button class="button tablink" onclick="openTab(event, 'amenities')">Amenities</button>
+<button class="button tablink" onclick="openTab(event, 'members')">Members</button>
+<button class="button tablink" onclick="openTab(event, 'metrics')">Metrics</button>
 {% endblock tablinks %}
 
 {% block content %}
-<div class="tabcontent" id="details">
-    <button class="button style3" onclick="showForms()">Edit Place</button>
+<div class="tabcontent place-details" id="details">
+    <div class="details">
+        <img style="
+        background: url({% if place.image %} {{place.image.url}} {% else %} {{place.backup_image_url}} {% endif %});" alt="">
+        <div class="info">
+            {% include 'components/card.html' with name="info-card" title="Email" value=place.email %}
+            {% include 'components/card.html' with name="info-card" title="Phone Number" value=place.phone_number %}
+            {% include 'components/card.html' with name="info-card" title="Address" value=place.address %}
+            {% include 'components/card.html' with name="info-card" title="Description" value=place.description %}
+        </div>
+    </div>
+
+    <div>
+        <form action="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{place_form}}
+            <hr>
+            <button class="style7 blue-gradient">Save Changes</button>
+        </form>
+    </div>
     
-    {% for place, amenities in amenity_groupings.items %}
-        {% include 'components/card.html' with name="container-card style1" verified="verified" place=place amenities=amenities%}
+</div>
+<div class="tabcontent place-amenities" id="amenities">
+    {% for amenity in amenities %}
+        {% include 'components/card.html' with name="amenity-card" amenity=amenity%}
+        {% include 'components/card.html' with name="amenity-card" amenity=amenity%}
+        {% include 'components/card.html' with name="amenity-card" amenity=amenity%}
+        {% include 'components/card.html' with name="amenity-card" amenity=amenity%}
+        {% include 'components/card.html' with name="amenity-card" amenity=amenity%}
+        {% include 'components/card.html' with name="amenity-card" amenity=amenity%}
     {% endfor %}
 </div>
-<div class="tabcontent" id="amenities">
-    <h1>Amenities</h1>
-</div>
-<div class="tabcontent" id="members">
-    <h1>Members</h1>
+<div class="tabcontent place-members" id="members">
+    {% for relationship in relationships %}
+    <div class="info-card style2">
+        <div class="info">
+            <div class="header3 ">{{relationship.profile.user}}</div>
+            <div class="header3 color-shade-grey">{{relationship.date_created}}</div>
+        </div>
+        <div class="buttons">
+            <button class="button style1" >
+                <div class="button_text">Change Access</div>
+            </button>
+            
+            <button class="button style3" >
+                <div class="button_text">Remove</div>
+            </button>
+            
+        </div>
+    </div>
+    {% endfor %}
 </div>
 <div class="tabcontent" id="metrics">
     <h1>Metrics</h1>

@@ -9,9 +9,9 @@
 {% endblock pageheader %}
 
 {% block tablinks %}
-<button class="button tablinks active" onclick="openTab(event, 'overview')">Overview</button>
-<button class="button tablinks" onclick="openTab(event, 'activity')">Activity</button>
-<button class="button tablinks" onclick="openTab(event, 'metrics')">Metrics</button>
+<button class="button tablink active" onclick="openTab(event, 'overview')">Overview</button>
+<button class="button tablink" onclick="openTab(event, 'activity')">Activity</button>
+<button class="button tablink" onclick="openTab(event, 'metrics')">Metrics</button>
 {% endblock tablinks %}
 
 {% block content %}
@@ -42,7 +42,12 @@
 
 
 {% block forms %}
-    {% include 'components/form.html' with form=place_form %}
+    <div class="header2">New Place</div>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{place_form}}
+        <button class="style2">Create Place</button>
+    </form>
 {% endblock forms %}
 
 

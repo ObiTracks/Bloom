@@ -38,22 +38,28 @@ def dashboard_view(request):
     page_subtitle = "Manage"
     places, amenity_groupings = getUsersPlacesAndAmenities(request, 2)
 
+    print("\n\n\n\nDashboard loaded\n\n\n\n")
     # print(amenity_groupings)
     if request.method == "POST":
-        place_form = PlaceForm(
-            request.POST, request.FILES)
+        place_form = PlaceForm(request.POST, request.FILES)
+        print("\n\nMethod is post (place)\n\n")
         if place_form.is_valid():
             place = place_form.save()
-            return redirect(request.META['HTTP_REFERER'])
+            print("\n\nPlace Supposedly saved\n\n")
+            # place = place_form.save(commit=False)
+            # place.owner = request.user.profile
+            # place.save(commit=True)
+            return redirect('manage:manage-dashboard')
         else:
-            messages.error(request, "Amenity Form is invalid")
+            print("\n\nPlace form is Invalid\n\n")
+            messages.error(request, "Place Form is invalid")
 
     place_form = PlaceForm()
     # new_place(request)
 
     context = {
         'page_title': page_title,
-        'page_subtitle':page_subtitle,
+        'page_subtitle': page_subtitle,
         'amenity_groupings': amenity_groupings,
         'place_form': place_form,
         #    'amenity_form': amenity_form,
@@ -72,7 +78,7 @@ def places_view(request):
     # Forms & Interactions
     amenity_form = AmenityForm(request.user)
     if request.method == 'POST':
-        amenity_form = AmenityForm(request.user, request.POST, request.FILES)
+        amenity_form = AmenityForm(request.POST, request.FILES)
 
         if amenity_form.is_valid():
             amenity = amenity_form.save()
@@ -80,12 +86,12 @@ def places_view(request):
             # return redirect('dashboard')
         else:
             messages.error(request, "Amenity Form is invalid")
-    
+
     new_place(request)
 
     context = {
         'page_title': page_title,
-        'page_subtitle':page_subtitle,
+        'page_subtitle': page_subtitle,
         'amenity_form': amenity_form,
         # 'place_form': place_form,
         'amenity_groupings': amenity_groupings,
@@ -93,36 +99,33 @@ def places_view(request):
     template_name = 'mgmtApp/places.html'
     return render(request, template_name, context)
 
+
 def place_view(request, pk):
     # Object data
-    places, amenity_groupings = getUsersPlacesAndAmenities(request, place_id=pk)
-    place = places
-    page_title = place.name
-    page_subtitle = "Places"
-
+    place = Place.objects.get(id=pk)
+    amenities = place.amenity_set.all()
+    relationships =  PlaceProfileRelationship.objects.filter(place=place, profile_type__in=['4','5'] ).all()
+    # members = [m.profile for m in r]
     place_form = PlaceForm(instance=place)
+
     if request.method == 'POST':
         place_form = PlaceForm(request.POST, request.FILES, instance=place)
 
         if place_form.is_valid():
             place = place_form.save()
-            # return
-            # return redirect(request.META['HTTP_REFERER'])
-
             return redirect(request.META['HTTP_REFERER'])
-            # return redirect('dashboard')
         else:
             messages.error(request, "Place Form is invalid")
 
     context = {
-        'page_title': page_title,
-        'page_subtitle': page_subtitle,
+        'place': place,
+        'amenities': amenities,
+        'relationships':relationships,
         'place_form': place_form,
-        'place':place,
-        'amenity_groupings':amenity_groupings
     }
     template_name = 'mgmtApp/place.html'
     return render(request, template_name, context)
+
 
 def amenity_view(request, pk):
     # Object data
@@ -144,11 +147,12 @@ def amenity_view(request, pk):
         'page_title': page_title,
         'page_subtitle': page_subtitle,
         'amenity_form': form,
-        'amenity':amenity,
-        'jsonTimeslots':amenity.timeslots
+        'amenity': amenity,
+        'jsonTimeslots': amenity.timeslots
     }
     template_name = 'mgmtApp/amenity.html'
     return render(request, template_name, context)
+
 
 def joinrequests_view(request):
     # Object data
@@ -156,7 +160,7 @@ def joinrequests_view(request):
     page_title = "Join Requests"
 
     _, joinrequest_groupings = getUsersPlacesAndJoinRequest(request, 5)
-    
+
     print(joinrequest_groupings)
     context = {
         'page_title': page_title,

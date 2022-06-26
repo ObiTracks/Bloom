@@ -44,11 +44,11 @@ def dashboard_view(request):
         place_form = PlaceForm(request.POST, request.FILES)
         print("\n\nMethod is post (place)\n\n")
         if place_form.is_valid():
-            place = place_form.save()
+            # place = place_form.save()
             print("\n\nPlace Supposedly saved\n\n")
-            # place = place_form.save(commit=False)
-            # place.owner = request.user.profile
-            # place.save(commit=True)
+            place = place_form.save(commit=False)
+            place.owner = request.user.profile
+            place.save()
             return redirect('manage:manage-dashboard')
         else:
             print("\n\nPlace form is Invalid\n\n")
